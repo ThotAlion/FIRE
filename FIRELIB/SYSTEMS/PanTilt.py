@@ -1,6 +1,6 @@
 import System
-import ../Connexion
-import pypot
+import ..Connexion
+import pypot.robot
 
 class PanTilt(System.Sytem):
     """Class concerning a particular pypot robot which is a pan-tilt turret. The first motor is along Z axis, the second along Y axis"""
@@ -42,7 +42,30 @@ class PanTilt(System.Sytem):
         valueMax=90.0))
         
         # starting the pypot robot
-        self._robot = pypot
+        config = {}
+        config['controllers'] = {}
+        config['controllers']['panTilt'] = {
+        'port': 'auto',
+        'sync_read': True,
+        'attached_motors': ['head_z', 'head_y'],
+        'protocol': 1
+        }
+        config['motors'] = {}
+        config['motors']['head_z'] = {
+        'id': 16,
+        'type': 'AX-12',
+        'orientation': 'direct',
+        'offset': 0.0,
+        'angle_limit': (-90.0, 90.0),
+        }
+        config['motors']['head_y'] = {
+        'id': 9,
+        'type': 'AX-12',
+        'orientation': 'direct',
+        'offset': 0.0,
+        'angle_limit': (-90.0, 90.0),
+        }
+        self._robot = pypot.robot.from_config(config)
         
     def read_inputs(self,f):
         for i in self.inputs:
