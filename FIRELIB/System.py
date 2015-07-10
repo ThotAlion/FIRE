@@ -1,4 +1,4 @@
-import ../Connexion
+from Connexion import Connexion
 
 class System:
     """Generic class of a system in FIRE. This class shall be inherited for each system to integrate in FIRE application
@@ -12,13 +12,13 @@ class System:
     
     def __init__(self,name = "generic"):
         """constructor of the system"""
-        self.inputs = []
-        self.outputs = []
-        self.outputs.append(Connexion.Connexion(type=Connexion.OUT,
+        self._name = name
+        self._inputs = []
+        self._outputs = []
+        self._outputs.append(Connexion(type=Connexion.OUT,
         name="time of read_inputs",
-        description="Duration of the read_inputs function of "+self.name+" system.",))
-        self.outputs.append(Connexion.Connexion(type=Connexion.OUT,
+        description="Duration of the read_inputs function of "+self._name+" system.",))
+        self._outputs.append(Connexion(type=Connexion.OUT,
         name="time of write_outputs",
-        description="Duration of the write_outputs function of "+self.name+" system.",))
+        description="Duration of the write_outputs function of "+self._name+" system.",))
         
-    def 

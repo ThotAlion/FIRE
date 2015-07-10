@@ -1,14 +1,14 @@
-import System
-import ..Connexion
+from System import System
+from Connexion import Connexion
 import pypot.robot
 
-class PanTilt(System.Sytem):
+class PanTilt(System):
     """Class concerning a particular pypot robot which is a pan-tilt turret. The first motor is along Z axis, the second along Y axis"""
     
     def __init__(self,name="PanTilt"):
-        self = System.Sytem.__init__(self,name=name)
+        System.__init__(self,name=name)
         # list of Inputs
-        self.inputs.append(Connexion.Connexion(type=Connexion.IN,
+        self._inputs.append(Connexion(type=Connexion.IN,
         name="u head z",
         description="Commanded position along Z axis.",
         unit="deg",
@@ -16,7 +16,7 @@ class PanTilt(System.Sytem):
         valueMin=-90.0,
         valueMax=90.0))
         
-        self.inputs.append(Connexion.Connexion(type=Connexion.IN,
+        self._inputs.append(Connexion(type=Connexion.IN,
         name="u head y",
         description="Commanded position along Y axis.",
         unit="deg",
@@ -25,7 +25,7 @@ class PanTilt(System.Sytem):
         valueMax=90.0))
         
         # list of Outputs
-        self.outputs.append(Connexion.Connexion(type=Connexion.OUT,
+        self._outputs.append(Connexion(type=Connexion.OUT,
         name="q head z",
         description="Angular position along Z axis.",
         unit="deg",
@@ -33,7 +33,7 @@ class PanTilt(System.Sytem):
         valueMin=-90.0,
         valueMax=90.0))
         
-        self.outputs.append(Connexion.Connexion(type=Connexion.OUT,
+        self._outputs.append(Connexion(type=Connexion.OUT,
         name="q head y",
         description="Angular position along Y axis.",
         unit="deg",
@@ -50,6 +50,8 @@ class PanTilt(System.Sytem):
         'attached_motors': ['head_z', 'head_y'],
         'protocol': 1
         }
+        config['motorgroups'] = {}
+        config['motorgroups']['head'] = ['head_z','head_y']
         config['motors'] = {}
         config['motors']['head_z'] = {
         'id': 16,
@@ -68,12 +70,12 @@ class PanTilt(System.Sytem):
         self._robot = pypot.robot.from_config(config)
         
     def read_inputs(self,f):
-        for i in self.inputs:
+        for i in self._inputs:
             if f.has_key(i.connectedTo):
                 i.value = f[i.connectedTo]
     
-    def write_outputs(self,f)
-        for o in self.outputs:
+    def write_outputs(self,f):
+        for o in self._outputs:
             if f.has_key(o.connectedTo):
                 f[o.connectedTo] = o.value
         return f
