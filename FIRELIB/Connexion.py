@@ -135,6 +135,11 @@ class Connexion(object):
             self._valueMin=array(x)
         else:
             self._valueMin=array([x])
+            
+    @property
+    def isConnected(self):
+        return len(connectedTo)>0
+        
     
     
     
