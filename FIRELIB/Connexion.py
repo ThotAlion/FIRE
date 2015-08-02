@@ -2,7 +2,7 @@ from numpy import *
 
 class Connexion(object):
     """ This class defines a connexion of a system. It is defined by :
-    - type : IN or OUT
+    - direction : IN or OUT
     - name : string containing the name of the connexion (can include space)
     - description : description of the connexion for help
     - unit : unit of the connexion to control unity errors
@@ -15,7 +15,8 @@ class Connexion(object):
     IN = "IN"
     OUT = "OUT"
     
-    def __init__(self,description = "empty",unit = "WU",connectedTo="",valueInit = 0.0, valueMin = -Inf, valueMax = Inf):
+    def __init__(self,direction = "IN", description = "empty", unit = "WU", connectedTo="", valueInit = 0.0, valueMin = -Inf, valueMax = Inf):
+        self.direction = direction
         self.description = description
         self.unit = unit
         self.connectedTo = connectedTo
@@ -26,6 +27,16 @@ class Connexion(object):
         
 
     # data protections
+    @property
+    def direction(self):
+        return self._direction
+    @direction.setter
+    def direction(self,x):
+        if x==IN or x==OUT:
+            self._direction = x
+        else:
+            print "set to IN or to OUT only."
+    
     @property        
     def description(self):
         return self._description
@@ -114,6 +125,16 @@ class Connexion(object):
     def isConnected(self):
         return len(connectedTo)>0
         
+    def updateInput(self,f)
+        if self.isConnected and self.direction==IN:
+            eq = self.connectedTo
+            for k in f.keys():
+                eq1 = eq.replace(k,'f[""'+k+'""]')
+            self.value = eval(eq1)
+    
+    def updateOutput(self,f)
+        if self.isConnected and self.direction==OUT:
+            f[self.connectedTo] = self.value
     
     
     
