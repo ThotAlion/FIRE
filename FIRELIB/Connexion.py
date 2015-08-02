@@ -15,9 +15,7 @@ class Connexion(object):
     IN = "IN"
     OUT = "OUT"
     
-    def __init__(self,type=IN,name = "default",description = "empty",unit = "WU",connectedTo="",valueInit = 0.0, valueMin = -Inf, valueMax = Inf):
-        self.type = type
-        self.name = name
+    def __init__(self,description = "empty",unit = "WU",connectedTo="",valueInit = 0.0, valueMin = -Inf, valueMax = Inf):
         self.description = description
         self.unit = unit
         self.connectedTo = connectedTo
@@ -28,30 +26,6 @@ class Connexion(object):
         
 
     # data protections
-    @property
-    def type(self):
-        return self._type
-        
-    @type.setter
-    def type(self, x):
-        if type(x)==str:
-            if x == self.IN or x == self.OUT:
-                self._type = x
-            else:
-                print "Connexion type can only be "+IN+" or "+OUT+" not "+x
-        else:
-            print "Connexion type must be a string Connexion.IN or Connexion.OUT"
-    
-    @property            
-    def name(self):
-        return self._name
-    @name.setter
-    def name(self,x):
-        if type(x)==str:
-            self._name = x
-        else:
-            print "Connexion name must be a string"    
-    
     @property        
     def description(self):
         return self._description
