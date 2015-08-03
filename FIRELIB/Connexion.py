@@ -128,7 +128,10 @@ class Connexion(object):
     def updateInput(self,f)
         if self.isConnected and self.direction==IN:
             eq = self.connectedTo
-            for k in f.keys():
+            listk = f.keys()
+            listk.sort()
+            listk.reverse()
+            for k in listk:
                 eq1 = eq.replace(k,'f[""'+k+'""]')
             self.value = eval(eq1)
     
