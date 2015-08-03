@@ -13,12 +13,12 @@ class Interface:
     def __init__(self,name = "generic"):
         """constructor of the interface"""
         self._name = name
-        self._inputs = []
-        self._outputs = []
+        self._inputs = {}
+        self._outputs = {}
         
-    def write_outputs():
+    def deliverOutputs(self,channels):
         raise NotImplementedError
         
-    def read_inputs():
+    def receiveInputs(self,channels):
         raise NotImplementedError
         

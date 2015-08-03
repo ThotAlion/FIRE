@@ -1,5 +1,7 @@
 from numpy import *
 
+
+
 class Connexion(object):
     """ This class defines a connexion of a system. It is defined by :
     - direction : IN or OUT
@@ -32,7 +34,7 @@ class Connexion(object):
         return self._direction
     @direction.setter
     def direction(self,x):
-        if x==IN or x==OUT:
+        if x==self.IN or x==self.OUT:
             self._direction = x
         else:
             print "set to IN or to OUT only."
@@ -63,7 +65,7 @@ class Connexion(object):
     @connectedTo.setter
     def connectedTo(self,x):
         if type(x)==str:
-            self._unit = x
+            self._connectedTo = x
         else:
             print "Connexion tag must be a string"
     
@@ -123,9 +125,9 @@ class Connexion(object):
             
     @property
     def isConnected(self):
-        return len(connectedTo)>0
+        return len(self.connectedTo)>0
         
-    def updateInput(self,f)
+    def updateInput(self,f):
         if self.isConnected and self.direction==IN:
             eq = self.connectedTo
             listk = f.keys()
@@ -135,7 +137,7 @@ class Connexion(object):
                 eq1 = eq.replace(k,'f[""'+k+'""]')
             self.value = eval(eq1)
     
-    def updateOutput(self,f)
+    def updateOutput(self,f):
         if self.isConnected and self.direction==OUT:
             f[self.connectedTo] = self.value
     
