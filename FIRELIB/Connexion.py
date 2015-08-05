@@ -96,8 +96,9 @@ class Connexion(object):
                 self._value=array(x)
             else:
                 self._value=array([x])
-            self._value = minimum(self._value,self.valueMax)
-            self._value = maximum(self._value,self.valueMin)
+            if isnan(self._value) == False:
+                self._value = minimum(self._value,self.valueMax)
+                self._value = maximum(self._value,self.valueMin)
 
     @property
     def valueMax(self):

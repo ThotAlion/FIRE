@@ -4,7 +4,7 @@ interfaces = []
 systems = []
 channels = {}
 
-interfaces.append(FIRELIB.PanTilt.PanTilt())
+interfaces.append(FIRELIB.LeapMotion.LeapMotion())
 
 while True:
     for int in interfaces:
