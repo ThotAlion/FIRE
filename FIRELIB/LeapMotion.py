@@ -96,7 +96,7 @@ class LeapMotion(Interface):
         frame = self._leap.frame()
         # by default, all is NaN
         for o in self._outputs:
-            self._outputs[o] = NaN
+            self._outputs[o].value = NaN
         
         # fingers
         for f in frame.fingers:
@@ -114,10 +114,14 @@ class LeapMotion(Interface):
                 finger = "ring"
             if f.type == f.TYPE_PINKY:
                 finger = "pinky"
-            self._outputs[hand+"_"+finger+"_tip_position"].value = f.tip_position.to_float_array()*0.001
-            self._outputs[hand+"_"+finger+"_pitch"].value = f.direction.pitch*180/pi
-            self._outputs[hand+"_"+finger+"_yaw"].value = f.direction.yaw*180/pi
-            self._outputs[hand+"_"+finger+"_pointing_vector"].value = f.direction.to_float_array()*0.001
+            self._outputs[hand+"_"+finger+"_tip_position"].value = f.tip_position.to_float_array()
+            self._outputs[hand+"_"+finger+"_pitch"].value = f.direction.pitch
+            self._outputs[hand+"_"+finger+"_yaw"].value = f.direction.yaw
+            self._outputs[hand+"_"+finger+"_pointing_vector"].value = f.direction.to_float_array()
+            
+        for output in self._outputs:
+            if self._outputs[output].isConnected:
+                channels = self._outputs[output].updateOutput(channels)
       
         return channels
         

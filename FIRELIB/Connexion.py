@@ -96,7 +96,7 @@ class Connexion(object):
                 self._value=array(x)
             else:
                 self._value=array([x])
-            if isnan(self._value) == False:
+            if all(isnan(self._value)) == False:
                 self._value = minimum(self._value,self.valueMax)
                 self._value = maximum(self._value,self.valueMin)
 
@@ -129,18 +129,19 @@ class Connexion(object):
         return len(self.connectedTo)>0
         
     def updateInput(self,f):
-        if self.isConnected and self.direction==IN:
+        if self.isConnected and self.direction==self.IN:
             eq = self.connectedTo
             listk = f.keys()
             listk.sort()
             listk.reverse()
             for k in listk:
-                eq1 = eq.replace(k,'f[""'+k+'""]')
-            self.value = eval(eq1)
+                eq = eq.replace(k,'f["'+k+'"]')
+            self.value = eval(eq)
     
     def updateOutput(self,f):
-        if self.isConnected and self.direction==OUT:
+        if self.isConnected and self.direction==self.OUT:
             f[self.connectedTo] = self.value
+        return f
     
     
     
