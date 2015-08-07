@@ -126,9 +126,9 @@ class PypotCreature(Interface):
                         robot[motor][reg] = 0.0
                     else:
                         robot[motor]["compliant"] = False
-                        robot[motor][reg] = value.tolist()
+                        robot[motor][reg] = value[0]
                 else:
-                    robot[motor][reg] = value.tolist()
+                    robot[motor][reg] = value[0]
                 
         self._clientThread._robotOut = robot
             
