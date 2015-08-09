@@ -10,8 +10,7 @@ class LeapMotion(Interface):
         """constructor of LeapMotion"""
         Interface.__init__(self,name=name)
         
-        # instanciate the leap motion
-        self._leap = Leap.Controller()
+        
         
         # list the interface of the Dynamixel motors
         # head_z
@@ -90,7 +89,9 @@ class LeapMotion(Interface):
                 valueMin = -Inf, 
                 valueMax = Inf)
                 
-                
+    def start(self):
+        # instanciate the leap motion
+        self._leap = Leap.Controller()
         
     def deliverOutputs(self,channels):
         frame = self._leap.frame()

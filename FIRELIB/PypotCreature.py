@@ -16,6 +16,8 @@ class PypotCreature(Interface):
         # set the IP address
         self._IP = IP
         self._port = port
+        
+    def indentify(self):
         # setup temporary zmq context
         c = zmq.Context()
         s = c.socket(zmq.REQ)
@@ -93,9 +95,12 @@ class PypotCreature(Interface):
             valueInit = 0, 
             valueMin = -Inf, 
             valueMax = Inf)
+        
+    
+    def start(self):
         self._clientThread = clientThread(self._IP,self._port)
         self._clientThread.start()
-
+    
     def deliverOutputs(self,channels):
         robot = self._clientThread._robotIn
         for motor in robot:

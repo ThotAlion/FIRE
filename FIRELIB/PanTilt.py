@@ -41,20 +41,18 @@ class PanTilt(Interface):
         'offset': 0.0,
         'angle_limit': (-90.0, 90.0),
         }
-        self._robot = pypot.robot.from_config(config)
-        self._robot.start_sync()
+        
         
         # list the interface of the Dynamixel motors
         # head_z
         for motor in ["head_z","head_y"]:
-            m = getattr(self._robot,motor)
             self._outputs[motor+"_present_position"]=Connexion(direction=Connexion.OUT,
             description = "Position of servo "+motor,
             unit = "deg",
             connectedTo="",
             valueInit = 0.0, 
-            valueMin = min(m.angle_limit), 
-            valueMax = max(m.angle_limit))
+            valueMin = -90, 
+            valueMax = 90)
             
             self._outputs[motor+"_present_torque"]=Connexion(direction=Connexion.OUT,
             description = "Torque applied on servo "+motor,
@@ -93,8 +91,8 @@ class PanTilt(Interface):
             unit = "deg",
             connectedTo="",
             valueInit = 0.0, 
-            valueMin = min(m.angle_limit), 
-            valueMax = max(m.angle_limit))
+            valueMin = -90, 
+            valueMax = 90)
             
             self._inputs[motor+"_max_speed"]=Connexion(direction=Connexion.IN,
             description = "Maximal speed of servo "+motor,
@@ -103,7 +101,10 @@ class PanTilt(Interface):
             valueInit = 0.0, 
             valueMin = -Inf, 
             valueMax = Inf)
-        
+    
+    def start(self):
+        self._robot = pypot.robot.from_config(config)
+        self._robot.start_sync()
         
     def deliverOutputs(self,channels):
         for motor in ["head_z","head_y"]:

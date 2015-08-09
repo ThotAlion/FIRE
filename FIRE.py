@@ -6,13 +6,7 @@ class FireGui(QWidget):
     def __init__(self):
         QWidget.__init__(self)
         self.setStyleSheet("background-color: black; color: yellow;")
-        self.main_layout = QHBoxLayout()
-        self.setLayout(self.main_layout)
-        self.treesLayout = QVBoxLayout()
-        self.setLayout.addLayout(self.treesLayout)
-        self.interfaceTree = QTreeView()
-        self.main_layout.addWidget(self.interfaceTree)
-        self.showMaximized()
+        self.showFullScreen()
 
 # widget to control FIRE Interface list
 class InterfaceWidget(QWidget):
@@ -39,6 +33,6 @@ class InterfaceWidget(QWidget):
         
         self.show()
 app = QApplication(sys.argv)
-w = InterfaceWidget()
+w = FireGui()
 sys.exit(app.exec_())
 
