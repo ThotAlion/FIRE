@@ -9,8 +9,6 @@ class PanTilt(Interface):
     def __init__(self,name = "pan-tilt turret",ID_head_z=16, ID_head_y=9):
         """constructor of pan tilt turret"""
         Interface.__init__(self,name=name)
-        # name of the interface
-        self._name = name
         # set the ID of the two servo
         self.ID_head_z = ID_head_z
         self.ID_head_y = ID_head_y

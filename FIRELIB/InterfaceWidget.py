@@ -5,28 +5,38 @@ import PanTilt,LeapMotion,PypotCreature,InterfaceGroup
 
 # widget to control FIRE Interface list
 class InterfaceWidget(QWidget):
+    """
+    This class is the component to manage all the FIRE robotic interfaces.
+    As an interface inherits from a QStandardItem, the list of interfaces to manage is a QStandardModel (interfaceTree).
+    The consequence is that a QTreeView can be plugged directly to this QStandardModel.
+    All is included in a widget with button controls of the interface model.
+    """
     def __init__(self):
         QWidget.__init__(self)
-        # list of Interface
-        self.interfaceList = InterfaceGroup.InterfaceGroup(None,name="Interfaces")
-        self._listInterfaceType = ["PanTilt","PypotCreature","LeapMotion","Group"]
+        # list of models to be available in GUI
+        self.listInterfaceType = ["PanTilt","PypotCreature","LeapMotion","Group"]
+        # Adopt the model/view method to manage interfaces
+        # creation of a Model
+        self.interfaceTree = QStandardItemModel()
+        self.interfaceTree.setColumnCount(1)
+        self.interfaceTree.setHorizontalHeaderLabels(["Name"])
+        
         
         # list of components:
         self.wAddBelowButton = QPushButton("Add below")
+        self.wAddInButton = QPushButton("Add in")
         self.wRemoveButton = QPushButton("Remove")
         self.wMoveUpButton = QPushButton("Move up")
         self.wMoveDnButton = QPushButton("Move dn")
         self.wAddInterfaceList = QListWidget()
-        self.wAddInterfaceList.addItems(self._listInterfaceType)
-        self.wTree = QTreeWidget()
-        self.wTree.setColumnCount(1)
-        self.wTree.setHeaderLabels(["Name"])
-        self.wTree.addTopLevelItem(self.root)
-        self.root.setExpanded(True)
+        self.wAddInterfaceList.addItems(self.listInterfaceType)
+        self.wTree = QTreeView()
+        self.wTree.setModel(self.interfaceTree)
         
         # organise the components in layouts
         buttonslayout = QHBoxLayout()
         buttonslayout.addWidget(self.wAddBelowButton)
+        buttonslayout.addWidget(self.wAddInButton)
         buttonslayout.addWidget(self.wRemoveButton)
         buttonslayout.addWidget(self.wMoveUpButton)
         buttonslayout.addWidget(self.wMoveDnButton)
@@ -38,32 +48,12 @@ class InterfaceWidget(QWidget):
         
         # connect the signals
         self.connect(self.wAddBelowButton,SIGNAL("pressed()"),self.addInterfaceBelow)
+        self.connect(self.wAddInButton,SIGNAL("pressed()"),self.addInterfaceIn)
         self.connect(self.wRemoveButton,SIGNAL("pressed()"),self.removeInterface)
         self.connect(self.wMoveUpButton,SIGNAL("pressed()"),self.moveUpInterface)
         self.connect(self.wMoveDnButton,SIGNAL("pressed()"),self.moveDnInterface)
-        
-        self.show()
     
-    @property
-    def interfaceList(self):
-        return self._interfaceList
-    @interfaceList.setter
-    def interfaceList(self,value):
-        self._interfaceList = value
-        self.root = QTreeWidgetItem([self._interfaceList._name])
-        self.addNode(self.root,self._interfaceList.children)
-    
-    def addNode(self,root,list):
-        for c in list:
-            if hasattr(c,'children'):
-                a=QTreeWidgetItem(root,[c._name,c])
-                addNode(a,c.children)
-            else:
-                QTreeWidgetItem(root,[c._name,c])
-    
-    def addInterfaceBelow(self):
-        # create the new interface
-        InterfaceType = self.wAddInterfaceList.currentItem().text()
+    def createInterface(self,InterfaceType):
         if InterfaceType == "PanTilt":
             newitem = PanTilt.PanTilt()
         elif InterfaceType == "PypotCreature":
@@ -74,54 +64,68 @@ class InterfaceWidget(QWidget):
             newitem = InterfaceGroup.InterfaceGroup()
         else:
             newitem = None
-        print newitem    
+        return newitem
+    
+    def addInterfaceBelow(self):
+        # create the new interface
+        InterfaceType = self.wAddInterfaceList.currentItem().text()
+        newitem = self.createInterface(InterfaceType)
         if not newitem is None:
-            item=self.wTree.currentItem()
+            i=self.wTree.currentIndex()
+            parent = self.interfaceTree.itemFromIndex(i.parent())
             # if no item is selected, place at the end
-            if item is None:
-                self.interfaceList.addInterface(newitem)
-                self.interfaceList=self.interfaceList
+            if i.row() == -1:
+                self.interfaceTree.invisibleRootItem().appendRow(newitem)
             else:
-                parent = item.parent()
-                
                 if parent is None:
-                    QTreeWidgetItem(item,[InterfaceType.text()])
-                else:
-                    t = QTreeWidgetItem(parent,item)
-                    t.setText(0,InterfaceType.text())
+                    parent = self.interfaceTree.invisibleRootItem()
+                parent.insertRow(i.row()+1,newitem)
+            self.wTree.setCurrentIndex(newitem.index())
+            
+    def addInterfaceIn(self):
+        # create the new interface
+        InterfaceType = self.wAddInterfaceList.currentItem().text()
+        newitem = self.createInterface(InterfaceType)
+        if not newitem is None:
+            i=self.wTree.currentIndex()
+            if not i.row()==-1:
+                parent = self.interfaceTree.itemFromIndex(i)
+                # if no item is selected, place at the end
+                if parent._isGroup:
+                    parent.appendRow(newitem)
+                self.wTree.setCurrentIndex(newitem.index())
                     
     def removeInterface(self):
-        item=self.wTree.currentItem()
-        if not item is None:
-            parent = item.parent()
-            if not parent is None:
-                i = parent.indexOfChild(item)
-                parent.takeChild(i)
+        i=self.wTree.currentIndex()
+        if not i.row() == -1:
+            parent = self.interfaceTree.itemFromIndex(i.parent())
+            if parent is None:
+                parent = self.interfaceTree.invisibleRootItem()
+            parent.takeRow(i.row())
                 
     def moveUpInterface(self):
-        item=self.wTree.currentItem()
-        if not item is None:
-            parent = item.parent()
-            if not parent is None:
-                i = parent.indexOfChild(item)
-                if i>0:
-                    item = parent.takeChild(i)
-                    parent.insertChild(i-1,item)
-                    self.wTree.setCurrentItem(item)
-    
+        i=self.wTree.currentIndex()
+        if not i.row() == -1 and i.row()>0:
+            parent = self.interfaceTree.itemFromIndex(i.parent())
+            if parent is None:
+                parent = self.interfaceTree.invisibleRootItem()
+            item = parent.takeRow(i.row())[0]
+            parent.insertRow(i.row()-1,item)
+            self.wTree.setCurrentIndex(item.index())
+
     def moveDnInterface(self):
-        item=self.wTree.currentItem()
-        if not item is None:
-            parent = item.parent()
-            if not parent is None:
-                i = parent.indexOfChild(item)
-                if i<parent.childCount()-1:
-                    item = parent.takeChild(i)
-                    parent.insertChild(i+1,item)
-                    self.wTree.setCurrentItem(item)
+        i=self.wTree.currentIndex()
+        if (not i.row() == -1) and i.row()<self.interfaceTree.rowCount()-1:
+            parent = self.interfaceTree.itemFromIndex(i.parent())
+            if parent is None:
+                parent = self.interfaceTree.invisibleRootItem()
+            item = parent.takeRow(i.row())[0]
+            parent.insertRow(i.row()+1,item)
+            self.wTree.setCurrentIndex(item.index())
 
 
-        
+
+# test bench        
 if __name__ == '__main__':
     styleFile = QFile("styleSheet.txt")
     styleFile.open(styleFile.ReadOnly)
@@ -129,5 +133,6 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     app.setStyleSheet(style)
     w = InterfaceWidget()
+    w.show()
     sys.exit(app.exec_())
 

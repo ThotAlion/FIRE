@@ -16,6 +16,7 @@ class Interface(QStandardItem):
         QStandardItem.__init__(self,name)
         self._inputs = {}
         self._outputs = {}
+        self._isGroup = False
         
     def start(self):
         raise NotImplementedError
