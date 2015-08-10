@@ -1,37 +1,38 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys
-import PanTilt,LeapMotion,PypotCreature,InterfaceGroup
+#import 
 
-# widget to control FIRE Interface list
-class InterfaceWidget(QWidget):
+# widget to control FIRE System list
+class SystemWidget(QWidget):
     """
-    This class is the component to manage all the FIRE robotic interfaces.
-    As an interface inherits from a QStandardItem, the list of interfaces to manage is a QStandardModel (interfaceTree).
+    This class is the component to manage all the FIRE robotic system.
+    As an System inherits from a QStandardItem, the list of systems to manage is a QStandardModel (systemTree).
     The consequence is that a QTreeView can be plugged directly to this QStandardModel.
-    All is included in a widget with button controls of the interface model.
+    All is included in a widget with button controls of the system model.
     """
     def __init__(self):
         QWidget.__init__(self)
         # list of models to be available in GUI
-        self.listInterfaceType = ["PanTilt","PypotCreature","LeapMotion","Group"]
-        # Adopt the model/view method to manage interfaces
+        self.listSystemType = [""]
+        # Adopt the model/view method to manage systems
         # creation of a Model
-        self.interfaceTree = QStandardItemModel()
-        self.interfaceTree.setColumnCount(1)
-        self.interfaceTree.setHorizontalHeaderLabels(["Name"])
+        self.systemTree = QStandardItemModel()
+        self.systemTree.setColumnCount(1)
+        self.systemTree.setHorizontalHeaderLabels(["Name"])
         
         
         # list of components:
+        
         self.wAddBelowButton = QPushButton("Add below")
         self.wAddInButton = QPushButton("Add in")
         self.wRemoveButton = QPushButton("Remove")
         self.wMoveUpButton = QPushButton("Move up")
         self.wMoveDnButton = QPushButton("Move dn")
-        self.wAddInterfaceList = QListWidget()
-        self.wAddInterfaceList.addItems(self.listInterfaceType)
+        self.wAddSystemList = QListWidget()
+        self.wAddSystemList.addItems(self.listSystemType)
         self.wTree = QTreeView()
-        self.wTree.setModel(self.interfaceTree)
+        self.wTree.setModel(self.systemTree)
         
         # organise the components in layouts
         buttonslayout = QHBoxLayout()
@@ -40,86 +41,86 @@ class InterfaceWidget(QWidget):
         buttonslayout.addWidget(self.wRemoveButton)
         buttonslayout.addWidget(self.wMoveUpButton)
         buttonslayout.addWidget(self.wMoveDnButton)
-        self.wGroup = QGroupBox("Interfaces",self)
+        self.wGroup = QGroupBox("Systems",self)
         self.mainlayout = QVBoxLayout()
         self.wGroup.setLayout(self.mainlayout)
         self.mainlayout.addLayout(buttonslayout)
-        self.mainlayout.addWidget(self.wAddInterfaceList)
+        self.mainlayout.addWidget(self.wAddSystemList)
         self.mainlayout.addWidget(self.wTree)
         
         # connect the signals
-        self.connect(self.wAddBelowButton,SIGNAL("pressed()"),self.addInterfaceBelow)
-        self.connect(self.wAddInButton,SIGNAL("pressed()"),self.addInterfaceIn)
-        self.connect(self.wRemoveButton,SIGNAL("pressed()"),self.removeInterface)
-        self.connect(self.wMoveUpButton,SIGNAL("pressed()"),self.moveUpInterface)
-        self.connect(self.wMoveDnButton,SIGNAL("pressed()"),self.moveDnInterface)
+        self.connect(self.wAddBelowButton,SIGNAL("pressed()"),self.addSystemBelow)
+        self.connect(self.wAddInButton,SIGNAL("pressed()"),self.addSystemIn)
+        self.connect(self.wRemoveButton,SIGNAL("pressed()"),self.removeSystem)
+        self.connect(self.wMoveUpButton,SIGNAL("pressed()"),self.moveUpSystem)
+        self.connect(self.wMoveDnButton,SIGNAL("pressed()"),self.moveDnSystem)
     
-    def createInterface(self,InterfaceType):
-        if InterfaceType == "PanTilt":
+    def createSystem(self,SystemType):
+        if SystemType == "PanTilt":
             newitem = PanTilt.PanTilt()
-        elif InterfaceType == "PypotCreature":
+        elif SystemType == "PypotCreature":
             newitem = PypotCreature.PypotCreature()
-        elif InterfaceType == "LeapMotion":
+        elif SystemType == "LeapMotion":
             newitem = LeapMotion.LeapMotion()
-        elif InterfaceType == "Group":
-            newitem = InterfaceGroup.InterfaceGroup()
+        elif SystemType == "Group":
+            newitem = SystemGroup.SystemGroup()
         else:
             newitem = None
         return newitem
     
-    def addInterfaceBelow(self):
-        # create the new interface
-        InterfaceType = self.wAddInterfaceList.currentItem().text()
-        newitem = self.createInterface(InterfaceType)
+    def addSystemBelow(self):
+        # create the new system
+        SystemType = self.wAddSystemList.currentItem().text()
+        newitem = self.createSystem(SystemType)
         if not newitem is None:
             i=self.wTree.currentIndex()
-            parent = self.interfaceTree.itemFromIndex(i.parent())
+            parent = self.systemTree.itemFromIndex(i.parent())
             # if no item is selected, place at the end
             if i.row() == -1:
-                self.interfaceTree.invisibleRootItem().appendRow(newitem)
+                self.systemTree.invisibleRootItem().appendRow(newitem)
             else:
                 if parent is None:
-                    parent = self.interfaceTree.invisibleRootItem()
+                    parent = self.systemTree.invisibleRootItem()
                 parent.insertRow(i.row()+1,newitem)
             self.wTree.setCurrentIndex(newitem.index())
             
-    def addInterfaceIn(self):
-        # create the new interface
-        InterfaceType = self.wAddInterfaceList.currentItem().text()
-        newitem = self.createInterface(InterfaceType)
+    def addSystemIn(self):
+        # create the new System
+        SystemType = self.wAddSystemList.currentItem().text()
+        newitem = self.createSystem(SystemType)
         if not newitem is None:
             i=self.wTree.currentIndex()
             if not i.row()==-1:
-                parent = self.interfaceTree.itemFromIndex(i)
+                parent = self.systemTree.itemFromIndex(i)
                 # if no item is selected, place at the end
                 if parent._isGroup:
                     parent.appendRow(newitem)
                 self.wTree.setCurrentIndex(newitem.index())
                     
-    def removeInterface(self):
+    def removeSystem(self):
         i=self.wTree.currentIndex()
         if not i.row() == -1:
-            parent = self.interfaceTree.itemFromIndex(i.parent())
+            parent = self.systemTree.itemFromIndex(i.parent())
             if parent is None:
-                parent = self.interfaceTree.invisibleRootItem()
+                parent = self.systemTree.invisibleRootItem()
             parent.takeRow(i.row())
                 
-    def moveUpInterface(self):
+    def moveUpSystem(self):
         i=self.wTree.currentIndex()
         if not i.row() == -1 and i.row()>0:
-            parent = self.interfaceTree.itemFromIndex(i.parent())
+            parent = self.systemTree.itemFromIndex(i.parent())
             if parent is None:
-                parent = self.interfaceTree.invisibleRootItem()
+                parent = self.systemTree.invisibleRootItem()
             item = parent.takeRow(i.row())[0]
             parent.insertRow(i.row()-1,item)
             self.wTree.setCurrentIndex(item.index())
 
-    def moveDnInterface(self):
+    def moveDnSystem(self):
         i=self.wTree.currentIndex()
-        if (not i.row() == -1) and i.row()<self.interfaceTree.rowCount()-1:
-            parent = self.interfaceTree.itemFromIndex(i.parent())
+        if (not i.row() == -1) and i.row()<self.systemTree.rowCount()-1:
+            parent = self.systemTree.itemFromIndex(i.parent())
             if parent is None:
-                parent = self.interfaceTree.invisibleRootItem()
+                parent = self.systemTree.invisibleRootItem()
             item = parent.takeRow(i.row())[0]
             parent.insertRow(i.row()+1,item)
             self.wTree.setCurrentIndex(item.index())
@@ -133,7 +134,7 @@ if __name__ == '__main__':
     style = str(styleFile.readAll())
     app = QApplication(sys.argv)
     app.setStyleSheet(style)
-    w = InterfaceWidget()
+    w = SystemWidget()
     w.show()
     sys.exit(app.exec_())
 
