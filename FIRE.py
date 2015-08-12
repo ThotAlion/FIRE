@@ -1,38 +1,40 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys
+import FIRELIB
 
 class FireGui(QWidget):
     def __init__(self):
         QWidget.__init__(self)
-        self.setStyleSheet("background-color: black; color: yellow;")
-        self.showFullScreen()
+        self.showMaximized()
+        
+        # widgets
+        self.wInterface = FIRELIB.InterfaceWidget.InterfaceWidget()
+        self.wSystems = FIRELIB.SystemWidget.SystemWidget()
+        self.wConnexion = FIRELIB.ConnexionWidget.ConnexionWidget()
+        
+        # page setup
+        self.mainLayout = QHBoxLayout(self)
+        self.IntSysLayout = QVBoxLayout()
+        self.IntSysLayout.addWidget(self.wInterface)
+        self.IntSysLayout.addWidget(self.wSystems)
+        self.mainLayout.addLayout(self.IntSysLayout)
+        self.mainLayout.addWidget(self.wConnexion)
 
-# widget to control FIRE Interface list
-class InterfaceWidget(QWidget):
-    def __init__(self):
-        QWidget.__init__(self)
-        self.setStyleSheet("background-color: black; color: yellow;")
-        # list of components:
-        self.addButton = QPushButton("Add")
-        self.removeButton = QPushButton("Remove")
-        self.moveUpButton = QPushButton("Move up")
-        self.moveDnButton = QPushButton("Move dn")
-        self.tree = QTreeView()
         
-        # organise the components in layouts
-        buttonslayout = QHBoxLayout()
-        buttonslayout.addWidget(self.addButton)
-        buttonslayout.addWidget(self.removeButton)
-        buttonslayout.addWidget(self.moveUpButton)
-        buttonslayout.addWidget(self.moveDnButton)
-        mainlayout = QVBoxLayout()
-        self.setLayout(mainlayout)
-        mainlayout.addLayout(buttonslayout)
-        mainlayout.addWidget(self.tree)
+        # signals
+        self.connect(self.wInterface.wTree,SIGNAL("clicked(QModelIndex)"),self.updateConnexion)
         
-        self.show()
+    def updateConnexion(self,i):
+        item = self.wInterface.interfaceTree.itemFromIndex(i)
+        self.wConnexion.wTabIn.setModel(item._inputs)
+        self.wConnexion.wTabOut.setModel(item._outputs)
+        
+styleFile = QFile("FIRELIB\styleSheet.txt")
+styleFile.open(styleFile.ReadOnly)
+style = str(styleFile.readAll())
 app = QApplication(sys.argv)
+app.setStyleSheet(style)
 w = FireGui()
 sys.exit(app.exec_())
 

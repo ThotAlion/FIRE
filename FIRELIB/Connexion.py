@@ -1,8 +1,8 @@
 from numpy import *
+from PyQt4.QtGui import QStandardItem
 
 
-
-class Connexion(object):
+class Connexion(QStandardItem):
     """ This class defines a connexion of a system. It is defined by :
     - direction : IN or OUT
     - name : string containing the name of the connexion (can include space)
@@ -17,7 +17,8 @@ class Connexion(object):
     IN = "IN"
     OUT = "OUT"
     
-    def __init__(self,direction = "IN", description = "empty", unit = "WU", connectedTo="", valueInit = 0.0, valueMin = -Inf, valueMax = Inf):
+    def __init__(self,name,direction = "IN", description = "empty", unit = "WU", connectedTo="", valueInit = 0.0, valueMin = -Inf, valueMax = Inf):
+        QStandardItem.__init__(self,name)
         self.direction = direction
         self.description = description
         self.unit = unit
@@ -142,6 +143,7 @@ class Connexion(object):
         if self.isConnected and self.direction==self.OUT:
             f[self.connectedTo] = self.value
         return f
+        
     
     
     

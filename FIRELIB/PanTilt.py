@@ -43,62 +43,64 @@ class PanTilt(Interface):
         
         # list the interface of the Dynamixel motors
         # head_z
+        rootInputs = self._inputs.invisibleRootItem()
+        rootOutputs = self._outputs.invisibleRootItem()
         for motor in ["head_z","head_y"]:
-            self._outputs[motor+"_present_position"]=Connexion(direction=Connexion.OUT,
+            rootOutputs.appendRow(Connexion(motor+"_present_position",direction=Connexion.OUT,
             description = "Position of servo "+motor,
             unit = "deg",
             connectedTo="",
             valueInit = 0.0, 
             valueMin = -90, 
-            valueMax = 90)
+            valueMax = 90))
             
-            self._outputs[motor+"_present_torque"]=Connexion(direction=Connexion.OUT,
+            rootOutputs.appendRow(Connexion(motor+"_present_torque",direction=Connexion.OUT,
             description = "Torque applied on servo "+motor,
             unit = "%",
             connectedTo="",
             valueInit = 0.0, 
             valueMin = -100, 
-            valueMax = 100)
+            valueMax = 100))
             
-            self._outputs[motor+"_present_speed"]=Connexion(direction=Connexion.OUT,
+            rootOutputs.appendRow(Connexion(motor+"_present_speed",direction=Connexion.OUT,
             description = "Speed of servo "+motor,
             unit = "deg/s",
             connectedTo="",
             valueInit = 0.0, 
             valueMin = -Inf, 
-            valueMax = Inf)
+            valueMax = Inf))
             
-            self._outputs[motor+"_present_temperature"]=Connexion(direction=Connexion.OUT,
+            rootOutputs.appendRow(Connexion(motor+"_present_temperature",direction=Connexion.OUT,
             description = "Temperature of servo "+motor,
             unit = "degC",
             connectedTo="",
             valueInit = 0.0, 
             valueMin = -Inf, 
-            valueMax = Inf)
+            valueMax = Inf))
             
-            self._outputs[motor+"_present_voltage"]=Connexion(direction=Connexion.OUT,
+            rootOutputs.appendRow(Connexion(motor+"_present_voltage",direction=Connexion.OUT,
             description = "Voltage of servo "+motor,
             unit = "V",
             connectedTo="",
             valueInit = 0.0, 
             valueMin = -Inf, 
-            valueMax = Inf)
+            valueMax = Inf))
         
-            self._inputs[motor+"_goal_position"]=Connexion(direction=Connexion.IN,
+            rootInputs.appendRow(Connexion(motor+"_goal_position",direction=Connexion.IN,
             description = "Goal position of servo "+motor,
             unit = "deg",
             connectedTo="",
             valueInit = 0.0, 
             valueMin = -90, 
-            valueMax = 90)
+            valueMax = 90))
             
-            self._inputs[motor+"_max_speed"]=Connexion(direction=Connexion.IN,
+            rootInputs.appendRow(Connexion(motor+"_max_speed",direction=Connexion.IN,
             description = "Maximal speed of servo "+motor,
             unit = "deg/s",
             connectedTo="",
             valueInit = 0.0, 
             valueMin = -Inf, 
-            valueMax = Inf)
+            valueMax = Inf))
     
     def start(self):
         self._robot = pypot.robot.from_config(config)

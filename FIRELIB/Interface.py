@@ -1,5 +1,6 @@
 from Connexion import Connexion
-from PyQt4.QtGui import QStandardItem
+from ConnexionWidget import ConnexionTree
+from PyQt4.QtGui import QStandardItem,QStandardItemModel
 
 class Interface(QStandardItem):
     """Generic class of an interface in FIRE. This class shall be inherited for each interface to integrate in FIRE application
@@ -14,8 +15,8 @@ class Interface(QStandardItem):
     def __init__(self,name = "generic"):
         """constructor of the interface"""
         QStandardItem.__init__(self,name)
-        self._inputs = {}
-        self._outputs = {}
+        self._inputs = ConnexionTree()
+        self._outputs = ConnexionTree()
         self._isGroup = False
         
     def start(self):
