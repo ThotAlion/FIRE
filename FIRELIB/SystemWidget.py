@@ -1,7 +1,7 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys
-#import 
+import Hub 
 
 # widget to control FIRE System list
 class SystemWidget(QWidget):
@@ -14,7 +14,7 @@ class SystemWidget(QWidget):
     def __init__(self):
         QWidget.__init__(self)
         # list of models to be available in GUI
-        self.listSystemType = [""]
+        self.listSystemType = ["Hub"]
         # Adopt the model/view method to manage systems
         # creation of a Model
         self.systemTree = QStandardItemModel()
@@ -54,14 +54,8 @@ class SystemWidget(QWidget):
         self.connect(self.wMoveDnButton,SIGNAL("pressed()"),self.moveDnSystem)
     
     def createSystem(self,SystemType):
-        if SystemType == "PanTilt":
-            newitem = PanTilt.PanTilt()
-        elif SystemType == "PypotCreature":
-            newitem = PypotCreature.PypotCreature()
-        elif SystemType == "LeapMotion":
-            newitem = LeapMotion.LeapMotion()
-        elif SystemType == "Group":
-            newitem = SystemGroup.SystemGroup()
+        if SystemType == "Hub":
+            newitem = Hub.Hub()
         else:
             newitem = None
         return newitem

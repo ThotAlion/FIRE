@@ -12,16 +12,13 @@ class FireGui(QWidget):
         self.wInterface = FIRELIB.InterfaceWidget.InterfaceWidget()
         self.wSystem = FIRELIB.SystemWidget.SystemWidget()
         self.wConnexion = FIRELIB.ConnexionWidget.ConnexionWidget()
-        self.wOneClickView1 = QFrame()
-        self.wOneClickView2 = QFrame()
+
         # page setup
         self.mainLayout = QHBoxLayout(self)
         self.IntSysLayout = QVBoxLayout()
         self.OneClickViewLayout = QVBoxLayout()
         self.IntSysLayout.addWidget(self.wInterface)
         self.IntSysLayout.addWidget(self.wSystem)
-        self.OneClickViewLayout.addWidget(self.wOneClickView1)
-        self.OneClickViewLayout.addWidget(self.wOneClickView2)
         self.mainLayout.addLayout(self.IntSysLayout)
         self.mainLayout.addWidget(self.wConnexion)
         self.mainLayout.addLayout(self.OneClickViewLayout)
@@ -37,9 +34,10 @@ class FireGui(QWidget):
         self.wConnexion.wTabOut.setModel(item._outputs)
         
     def updateSystemConnexion(self,i):
-        item = self.wSystem.interfaceTree.itemFromIndex(i)
+        item = self.wSystem.systemTree.itemFromIndex(i)
         self.wConnexion.wTabIn.setModel(item._inputs)
         self.wConnexion.wTabOut.setModel(item._outputs)
+        self.OneClickViewLayout.addWidget(item.controlWidget)
         
 styleFile = QFile("FIRELIB\styleSheet.txt")
 styleFile.open(styleFile.ReadOnly)
