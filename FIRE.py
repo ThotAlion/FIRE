@@ -10,23 +10,34 @@ class FireGui(QWidget):
         
         # widgets
         self.wInterface = FIRELIB.InterfaceWidget.InterfaceWidget()
-        self.wSystems = FIRELIB.SystemWidget.SystemWidget()
+        self.wSystem = FIRELIB.SystemWidget.SystemWidget()
         self.wConnexion = FIRELIB.ConnexionWidget.ConnexionWidget()
-        
+        self.wOneClickView1 = QFrame()
+        self.wOneClickView2 = QFrame()
         # page setup
         self.mainLayout = QHBoxLayout(self)
         self.IntSysLayout = QVBoxLayout()
+        self.OneClickViewLayout = QVBoxLayout()
         self.IntSysLayout.addWidget(self.wInterface)
-        self.IntSysLayout.addWidget(self.wSystems)
+        self.IntSysLayout.addWidget(self.wSystem)
+        self.OneClickViewLayout.addWidget(self.wOneClickView1)
+        self.OneClickViewLayout.addWidget(self.wOneClickView2)
         self.mainLayout.addLayout(self.IntSysLayout)
         self.mainLayout.addWidget(self.wConnexion)
+        self.mainLayout.addLayout(self.OneClickViewLayout)
 
         
         # signals
-        self.connect(self.wInterface.wTree,SIGNAL("clicked(QModelIndex)"),self.updateConnexion)
+        self.connect(self.wInterface.wTree,SIGNAL("clicked(QModelIndex)"),self.updateInterfaceConnexion)
+        self.connect(self.wSystem.wTree,SIGNAL("clicked(QModelIndex)"),self.updateSystemConnexion)
         
-    def updateConnexion(self,i):
+    def updateInterfaceConnexion(self,i):
         item = self.wInterface.interfaceTree.itemFromIndex(i)
+        self.wConnexion.wTabIn.setModel(item._inputs)
+        self.wConnexion.wTabOut.setModel(item._outputs)
+        
+    def updateSystemConnexion(self,i):
+        item = self.wSystem.interfaceTree.itemFromIndex(i)
         self.wConnexion.wTabIn.setModel(item._inputs)
         self.wConnexion.wTabOut.setModel(item._outputs)
         
