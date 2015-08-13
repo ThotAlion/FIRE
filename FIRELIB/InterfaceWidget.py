@@ -3,6 +3,33 @@ from PyQt4.QtCore import *
 import sys
 import PanTilt,LeapMotion,PypotCreature,InterfaceGroup
 
+class InterfaceTree(QStandardItemModel):
+    
+    def __init__(self):
+            QStandardItemModel.__init__(self)
+            self.setHorizontalHeaderLabels(["Name","Execution","Task"])
+    
+    def data(self,i,role):
+        if not i.isValid():
+            return QVariant()
+        else:
+            item = self.item(i.row(),0)
+            if role == Qt.DisplayRole or role == Qt.EditRole:
+                if i.column() == 0:
+                    return QVariant(item.text())
+                elif i.column() == 1:
+                    return QVariant(item.executionState)
+                elif i.column() == 2:
+                    return QVariant(item.taskState)
+                else:
+                    return QVariant()
+            if role == Qt.ToolTipRole:
+                return QVariant(item.text())
+                
+    def flags(self,i):
+        f = Qt.ItemIsEnabled | Qt.ItemIsSelectable
+        return f
+
 # widget to control FIRE Interface list
 class InterfaceWidget(QWidget):
     """
@@ -17,10 +44,7 @@ class InterfaceWidget(QWidget):
         self.listInterfaceType = ["PanTilt","PypotCreature","LeapMotion","Group"]
         # Adopt the model/view method to manage interfaces
         # creation of a Model
-        self.interfaceTree = QStandardItemModel()
-        self.interfaceTree.setColumnCount(1)
-        self.interfaceTree.setHorizontalHeaderLabels(["Name"])
-        
+        self.interfaceTree = InterfaceTree()
         
         # list of components:
         self.wAddBelowButton = QPushButton("Add below")
@@ -67,8 +91,11 @@ class InterfaceWidget(QWidget):
     
     def addInterfaceBelow(self):
         # create the new interface
-        InterfaceType = self.wAddInterfaceList.currentItem().text()
-        newitem = self.createInterface(InterfaceType)
+        InterfaceType = self.wAddInterfaceList.currentItem()
+        if InterfaceType is None:
+            newitem = None
+        else:
+            newitem = self.createInterface(InterfaceType.text())
         if not newitem is None:
             i=self.wTree.currentIndex()
             parent = self.interfaceTree.itemFromIndex(i.parent())

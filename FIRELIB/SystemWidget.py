@@ -3,6 +3,33 @@ from PyQt4.QtCore import *
 import sys
 import Hub 
 
+class SystemTree(QStandardItemModel):
+    
+    def __init__(self):
+            QStandardItemModel.__init__(self)
+            self.setHorizontalHeaderLabels(["Name","Execution","Task"])
+    
+    def data(self,i,role):
+        if not i.isValid():
+            return QVariant()
+        else:
+            item = self.item(i.row(),0)
+            if role == Qt.DisplayRole or role == Qt.EditRole:
+                if i.column() == 0:
+                    return QVariant(item.text())
+                elif i.column() == 1:
+                    return QVariant(item.executionState)
+                elif i.column() == 2:
+                    return QVariant(item.taskState)
+                else:
+                    return QVariant()
+            if role == Qt.ToolTipRole:
+                return QVariant(item.text())
+                
+    def flags(self,i):
+        f = Qt.ItemIsEnabled | Qt.ItemIsSelectable
+        return f
+
 # widget to control FIRE System list
 class SystemWidget(QWidget):
     """
@@ -17,10 +44,7 @@ class SystemWidget(QWidget):
         self.listSystemType = ["Hub"]
         # Adopt the model/view method to manage systems
         # creation of a Model
-        self.systemTree = QStandardItemModel()
-        self.systemTree.setColumnCount(1)
-        self.systemTree.setHorizontalHeaderLabels(["Name"])
-        
+        self.systemTree = SystemTree() 
         
         # list of components:
         
@@ -62,8 +86,11 @@ class SystemWidget(QWidget):
     
     def addSystemBelow(self):
         # create the new system
-        SystemType = self.wAddSystemList.currentItem().text()
-        newitem = self.createSystem(SystemType)
+        SystemType = self.wAddSystemList.currentItem()
+        if SystemType is None:
+            newitem = None
+        else:
+            newitem = self.createISystem(SystemType.text())
         if not newitem is None:
             i=self.wTree.currentIndex()
             parent = self.systemTree.itemFromIndex(i.parent())
