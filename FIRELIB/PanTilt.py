@@ -1,3 +1,5 @@
+from PyQt4.QtGui import *
+from PyQt4.QtCore import *
 from Connexion import Connexion
 from Interface import Interface
 from numpy import *
@@ -8,7 +10,7 @@ class PanTilt(Interface):
     
     def __init__(self,name = "pan-tilt turret",ID_head_z=16, ID_head_y=9):
         """constructor of pan tilt turret"""
-        Interface.__init__(self,name=name)
+        Interface.__init__(self,name=name,icon=QIcon("FIRELIB/icons/pantilt.png"))
         # set the ID of the two servo
         self.ID_head_z = ID_head_z
         self.ID_head_y = ID_head_y
@@ -37,7 +39,7 @@ class PanTilt(Interface):
         'type': 'AX-12',
         'orientation': 'direct',
         'offset': 0.0,
-        'angle_limit': (-90.0, 90.0),
+        'angle_limit': (-120.0, 120.0),
         }
         
         
@@ -51,8 +53,8 @@ class PanTilt(Interface):
             unit = "deg",
             connectedTo="",
             valueInit = 0.0, 
-            valueMin = -90, 
-            valueMax = 90))
+            valueMin = -Inf, 
+            valueMax = Inf))
             
             rootOutputs.appendRow(Connexion(motor+"_present_torque",direction=Connexion.OUT,
             description = "Torque applied on servo "+motor,
@@ -75,7 +77,7 @@ class PanTilt(Interface):
             unit = "degC",
             connectedTo="",
             valueInit = 0.0, 
-            valueMin = -Inf, 
+            valueMin = 0, 
             valueMax = Inf))
             
             rootOutputs.appendRow(Connexion(motor+"_present_voltage",direction=Connexion.OUT,
@@ -83,7 +85,7 @@ class PanTilt(Interface):
             unit = "V",
             connectedTo="",
             valueInit = 0.0, 
-            valueMin = -Inf, 
+            valueMin = 0, 
             valueMax = Inf))
         
             rootInputs.appendRow(Connexion(motor+"_goal_position",direction=Connexion.IN,
@@ -91,8 +93,8 @@ class PanTilt(Interface):
             unit = "deg",
             connectedTo="",
             valueInit = NaN, 
-            valueMin = -90, 
-            valueMax = 90))
+            valueMin = self.config['motors'][motor]['angle_limit'][0], 
+            valueMax = self.config['motors'][motor]['angle_limit'][1]))
             
             rootInputs.appendRow(Connexion(motor+"_max_speed",direction=Connexion.IN,
             description = "Maximal speed of servo "+motor,
@@ -119,39 +121,56 @@ class PanTilt(Interface):
     def deliverOutputs(self,channels):
         for motor in ["head_z","head_y"]:
             m = getattr(self._robot,motor)
-            self._outputs.findItems(motor+"_present_position")[0].value = m.present_position
-            self._outputs.findItems(motor+"_present_torque")[0].value = m.present_load
-            self._outputs.findItems(motor+"_present_speed")[0].value = m.present_speed
-            self._outputs.findItems(motor+"_present_temperature")[0].value = m.present_temperature
-            self._outputs.findItems(motor+"_present_voltage")[0].value = m.present_voltage
-            
-            # update the outputs
-            for i in range(self._outputs.rowCount()):
-                channels = self._outputs.item(i).updateOutput(channels)
+            channels = self._outputs.setConnexion(motor+"_present_position",m.present_position,channels)
+            channels = self._outputs.setConnexion(motor+"_present_torque",m.present_load,channels)
+            channels = self._outputs.setConnexion(motor+"_present_speed",m.present_speed,channels)
+            channels = self._outputs.setConnexion(motor+"_present_temperature",m.present_temperature,channels)
+            channels = self._outputs.setConnexion(motor+"_present_voltage",m.present_voltage,channels)
 
         return channels
+        
         
     def receiveInputs(self,channels):
         
         for motor in ["head_z","head_y"]:
             m = getattr(self._robot,motor)
             
-            if self._inputs.findItems(motor+"_goal_position")[0].isConnected:
-                self._inputs.findItems(motor+"_goal_position")[0].updateInput(channels)
-                if isnan(self._inputs.findItems(motor+"_goal_position")[0].value):
+            goal = self._inputs.getConnexion(motor+"_goal_position",channels)
+            if not goal is None:
+                if isnan(goal):
                     m.compliant = True
                 else:
                     m.compliant = False
-                    m.goal_position = self._inputs.findItems(motor+"_goal_position")[0].value
+                    m.goal_position = goal
             else:
                 m.compliant = True
-            
-            if self._inputs.findItems(motor+"_max_speed")[0].isConnected:
-                self._inputs.findItems(motor+"_max_speed")[0].updateInput(channels)
-                m.moving_speed = self._inputs.findItems(motor+"_max_speed")[0].value
+                
+            maxSpeed = self._inputs.getConnexion(motor+"_max_speed",channels)
+            if not maxSpeed is None:
+                m.moving_speed = maxSpeed
             else:
                 m.moving_speed = 0
                 
         return channels
                     
+class PanTiltWidget(QWidget):
+    
+    def __init__(self,parent):
+        QWidget.__init__(self)
         
+        # list of components
+        self.wIDhead_z = QSpinBox()
+        self.wIDhead_y = QSpinBox()
+        self.wLabelhead_z = QLabel("ID of motor around z axis:")
+        self.wLabelhead_y = QLabel("ID of motor around y axis:")
+        self.wCOMPort = QLabel("Not Connected")
+        
+        
+        # widget setup
+        self.mainlayout = QVBoxLayout(self)
+        self.mainlayout.addWidget(self.wAddConnexion)
+        self.mainlayout.addWidget(self.wRemoveConnexion)
+        self.mainlayout.addWidget(self.wComboConnexion)
+        
+        # connect the signals
+        self.connect(self.wAddConnexion,SIGNAL("pressed()"),parent.addConnexion)       

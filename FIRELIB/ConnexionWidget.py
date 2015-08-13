@@ -48,6 +48,21 @@ class ConnexionTree(QStandardItemModel):
                     return True
         else:
             return False
+    
+    def setConnexion(self,name,value,channels):
+        connexion = self.findItems(name)[0]
+        connexion.value = value
+        if connexion.isConnected:
+            channels = connexion.updateOutput(channels)
+        return channels
+        
+    def getConnexion(self,name,channels):
+        connexion = self.findItems(name)[0]
+        if connexion.isConnected:
+            connection.updateInput(channels)
+            return connection.value
+        else:
+            return connection.initValue
             
     def flags(self,i):
         if i.isValid():
@@ -68,8 +83,8 @@ class ConnexionWidget(QWidget):
     def __init__(self):
         QWidget.__init__(self)
         # list of components:
-        self.wTabIn = QTableView()
-        self.wTabOut = QTableView()
+        self.wTabIn = QTreeView()
+        self.wTabOut = QTreeView()
         self.wTabIn.setEditTriggers(self.wTabIn.AllEditTriggers)
         self.wTabOut.setEditTriggers(self.wTabIn.AllEditTriggers)
         

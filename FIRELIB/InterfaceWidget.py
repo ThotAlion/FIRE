@@ -25,6 +25,8 @@ class InterfaceTree(QStandardItemModel):
                     return QVariant()
             if role == Qt.ToolTipRole:
                 return QVariant(item.text())
+            if role == Qt.DecorationRole and i.column() == 0:
+                return item.icon()
                 
     def flags(self,i):
         f = Qt.ItemIsEnabled | Qt.ItemIsSelectable
@@ -55,6 +57,7 @@ class InterfaceWidget(QWidget):
         self.wAddInterfaceList = QListWidget()
         self.wAddInterfaceList.addItems(self.listInterfaceType)
         self.wTree = QTreeView()
+        self.wTree.setAnimated(True)
         self.wTree.setModel(self.interfaceTree)
         
         # organise the components in layouts

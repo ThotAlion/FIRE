@@ -12,9 +12,9 @@ class Interface(QStandardItem):
     - a read_inputs method
     - a task executed in background to make sampling computations"""
     
-    def __init__(self,name = "generic"):
+    def __init__(self,name = "generic",icon = None):
         """constructor of the interface"""
-        QStandardItem.__init__(self,name)
+        QStandardItem.__init__(self,icon,name)
         self._inputs = ConnexionTree()
         self._outputs = ConnexionTree()
         # types of execution states

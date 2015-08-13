@@ -18,10 +18,12 @@ class Engine(QThread):
     
     def start(self):
         for i in range(self._Interfaces.rowCount()):
-            self._Interfaces.item(i).start()
+            if not self._Interfaces.item(i).executionState == self._Interfaces.item(i).RUNNING:
+                self._Interfaces.item(i).start()
                 
         for i in range(self._Systems.rowCount()):
-            self._Systems.item(i).start()
+            if not self._Systems.item(i).executionState == self._Systems.item(i).RUNNING:
+                self._Systems.item(i).start()
         self._isActive = True
         self._isPaused = False
         QThread.start(self)
