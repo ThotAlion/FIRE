@@ -13,7 +13,12 @@ class InterfaceTree(QStandardItemModel):
         if not i.isValid():
             return QVariant()
         else:
-            item = self.item(i.row(),0)
+            parent = self.itemFromIndex(i.parent())
+            if parent is None:
+                parent = self.invisibleRootItem()
+            item = parent.child(i.row(),0)
+            print i.row()
+            print i.column()
             if role == Qt.DisplayRole or role == Qt.EditRole:
                 if i.column() == 0:
                     return QVariant(item.text())
@@ -58,6 +63,7 @@ class InterfaceWidget(QWidget):
         self.wAddInterfaceList.addItems(self.listInterfaceType)
         self.wTree = QTreeView()
         self.wTree.setAnimated(True)
+        self.wTree.setAlternatingRowColors(True)
         self.wTree.setModel(self.interfaceTree)
         
         # organise the components in layouts
@@ -113,8 +119,11 @@ class InterfaceWidget(QWidget):
             
     def addInterfaceIn(self):
         # create the new interface
-        InterfaceType = self.wAddInterfaceList.currentItem().text()
-        newitem = self.createInterface(InterfaceType)
+        InterfaceType = self.wAddInterfaceList.currentItem()
+        if InterfaceType is None:
+            newitem = None
+        else:
+            newitem = self.createInterface(InterfaceType.text())
         if not newitem is None:
             i=self.wTree.currentIndex()
             if not i.row()==-1:

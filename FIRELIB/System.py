@@ -1,6 +1,6 @@
 from Connexion import Connexion
 from ConnexionWidget import ConnexionTree
-from PyQt4.QtGui import QStandardItem,QStandardItemModel,QLabel
+from PyQt4.QtGui import *
 
 class System(QStandardItem):
     """Generic class of a system in FIRE. This class shall be inherited for each system to integrate in FIRE application
@@ -12,7 +12,7 @@ class System(QStandardItem):
     - a write_outputs method
     - a task executed in background to make sampling computations"""
     
-    def __init__(self,name = "generic",icon = None):
+    def __init__(self,name = "generic",icon = QIcon):
         """constructor of the system"""
         QStandardItem.__init__(self,icon,name)
         self._inputs = ConnexionTree()

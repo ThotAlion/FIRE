@@ -7,6 +7,7 @@ class FireGui(QWidget):
     def __init__(self):
         QWidget.__init__(self)
         self.showMaximized()
+        #self.showFullScreen()
         
         # widgets
         self.wInterface = FIRELIB.InterfaceWidget.InterfaceWidget()

@@ -86,7 +86,11 @@ class ConnexionWidget(QWidget):
         self.wTabIn = QTreeView()
         self.wTabOut = QTreeView()
         self.wTabIn.setEditTriggers(self.wTabIn.AllEditTriggers)
+        self.wTabIn.setAlternatingRowColors(True)
+        self.wTabIn.setAnimated(True)
         self.wTabOut.setEditTriggers(self.wTabIn.AllEditTriggers)
+        self.wTabOut.setAlternatingRowColors(True)
+        self.wTabOut.setAnimated(True)
         
         # organise the components in layouts
         self.mainlayout = QVBoxLayout(self)

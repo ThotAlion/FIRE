@@ -13,7 +13,10 @@ class SystemTree(QStandardItemModel):
         if not i.isValid():
             return QVariant()
         else:
-            item = self.item(i.row(),0)
+            parent = self.itemFromIndex(i.parent())
+            if parent is None:
+                parent = self.invisibleRootItem()
+            item = parent.child(i.row(),0)
             if role == Qt.DisplayRole or role == Qt.EditRole:
                 if i.column() == 0:
                     return QVariant(item.text())
@@ -25,6 +28,8 @@ class SystemTree(QStandardItemModel):
                     return QVariant()
             if role == Qt.ToolTipRole:
                 return QVariant(item.text())
+            if role == Qt.DecorationRole and i.column() == 0:
+                return item.icon()
                 
     def flags(self,i):
         f = Qt.ItemIsEnabled | Qt.ItemIsSelectable
@@ -56,6 +61,8 @@ class SystemWidget(QWidget):
         self.wAddSystemList = QListWidget()
         self.wAddSystemList.addItems(self.listSystemType)
         self.wTree = QTreeView()
+        self.wTree.setAnimated(True)
+        self.wTree.setAlternatingRowColors(True)
         self.wTree.setModel(self.systemTree)
         
         # organise the components in layouts
