@@ -97,7 +97,7 @@ class SystemWidget(QWidget):
         if SystemType is None:
             newitem = None
         else:
-            newitem = self.createISystem(SystemType.text())
+            newitem = self.createSystem(SystemType.text())
         if not newitem is None:
             i=self.wTree.currentIndex()
             parent = self.systemTree.itemFromIndex(i.parent())

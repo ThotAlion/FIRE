@@ -9,9 +9,26 @@ class Hub(System):
     
     def __init__(self,name = "Hub"):
         """constructor"""
-        System.__init__(self,name)
+        System.__init__(self,name=name,icon=QIcon("FIRELIB/icons/hub.png"))
         self._index = 1
         self.controlWidget = hubWidget(self)
+        
+    def start(self):
+        self.executionState = self.RUNNING
+        self.taskState = self.PROGRESS
+        
+    def close(self):
+        self.executionState = self.READY
+        self.taskState = self.STOPPED
+        
+    def deliverOutputs(self,channels):
+        for i in range(self._outputs.rowCount()):
+            # warning, a QString is returned and the replace method is overloaded (and not the same...)
+            outputname = str(self._outputs.invisibleRootItem().child(i,0).text())
+            inputname = outputname.replace("output","input")
+            a = self._inputs.getConnexion(inputname,channels)
+            channels = self._outputs.setConnexion(outputname,a,channels)
+        return channels
         
     def addConnexion(self):
         self._inputs.invisibleRootItem().appendRow(Connexion("input "+str(self._index),direction=Connexion.IN,
@@ -34,6 +51,9 @@ class Hub(System):
     def removeConnexion(self,i):
         self._inputs.invisibleRootItem().takeRow(i)
         self._outputs.invisibleRootItem().takeRow(i)
+        
+        
+    
     
 class hubWidget(QWidget):
     
@@ -43,6 +63,8 @@ class hubWidget(QWidget):
         self.outputs = parent._outputs
         
         # list of components
+        self.wLabelTitle = QLabel("System : Hub")
+        self.setToolTip("This system directly copies an input to the matching output.")
         self.wAddConnexion = QPushButton("Add connexion")
         self.wRemoveConnexion = QPushButton("Remove connexion")
         self.wComboConnexion = QComboBox()
@@ -50,6 +72,7 @@ class hubWidget(QWidget):
         
         # widget setup
         self.mainlayout = QVBoxLayout(self)
+        self.mainlayout.setSizeConstraint(self.mainlayout.SetMinimumSize)
         self.mainlayout.addWidget(self.wAddConnexion)
         self.mainlayout.addWidget(self.wRemoveConnexion)
         self.mainlayout.addWidget(self.wComboConnexion)

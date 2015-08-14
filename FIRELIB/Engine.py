@@ -38,15 +38,15 @@ class Engine(QThread):
                 for i in range(self._Interfaces.rowCount()):
                     if self._Interfaces.item(i).executionState == self._Interfaces.item(i).RUNNING:
                         self._Channels = self._Interfaces.item(i).deliverOutputs(self._Channels)
-                
+               
                 for i in range(self._Systems.rowCount()):
                     if self._Systems.item(i).executionState == self._Systems.item(i).RUNNING:
                         self._Channels = self._Systems.item(i).deliverOutputs(self._Channels)
-                    
+                
                 for i in range(self._Interfaces.rowCount()):
                     if self._Interfaces.item(i).executionState == self._Interfaces.item(i).RUNNING:
                         self._Interfaces.item(i).receiveInputs(self._Channels)
-                    
+                
                 while Tools.getTime()-t0<self.samplingPeriod:
                     a=1
         except:

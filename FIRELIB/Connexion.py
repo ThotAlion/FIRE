@@ -137,7 +137,11 @@ class Connexion(QStandardItem):
             listk.reverse()
             for k in listk:
                 eq = eq.replace(k,'f["'+k+'"]')
-            self.value = eval(eq)
+            try:
+                a = eval(eq)
+            except:
+                a = self.valueInit
+            self.value = a
     
     def updateOutput(self,f):
         if self.isConnected and self.direction==self.OUT:

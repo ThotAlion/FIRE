@@ -50,19 +50,27 @@ class ConnexionTree(QStandardItemModel):
             return False
     
     def setConnexion(self,name,value,channels):
-        connexion = self.findItems(name)[0]
-        connexion.value = value
-        if connexion.isConnected:
-            channels = connexion.updateOutput(channels)
+        connexions = self.findItems(name)
+        if len(connexions)==1:
+            connexion = connexions[0]
+            connexion.value = value
+            if connexion.isConnected:
+                channels = connexion.updateOutput(channels)
+        elif len(connexions)==0:
+            print "connexion "+name+" not set."
         return channels
         
     def getConnexion(self,name,channels):
-        connexion = self.findItems(name)[0]
-        if connexion.isConnected:
-            connection.updateInput(channels)
-            return connection.value
-        else:
-            return connection.initValue
+        connexions = self.findItems(name)
+        if len(connexions)==1:
+            connexion = connexions[0]
+            if connexion.isConnected:
+                connexion.updateInput(channels)
+                return connexion.value
+            else:
+                return connexion.valueInit
+        elif len(connexions)==0:
+            print "connexion "+name+" not get."
             
     def flags(self,i):
         if i.isValid():

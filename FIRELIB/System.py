@@ -12,7 +12,7 @@ class System(QStandardItem):
     - a write_outputs method
     - a task executed in background to make sampling computations"""
     
-    def __init__(self,name = "generic",icon = QIcon):
+    def __init__(self,name = "generic",icon = QIcon()):
         """constructor of the system"""
         QStandardItem.__init__(self,icon,name)
         self._inputs = ConnexionTree()
