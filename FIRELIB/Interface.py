@@ -21,6 +21,7 @@ class Interface(QStandardItem):
         self.READY = "READY"
         self.RUNNING = "RUNNING"
         self.NOTREADY = "NOT READY"
+        self.ERROR = "ERROR"
         # types of task state
         self.PROGRESS = "IN PROGRESS"
         self.FINISHED = "FINISHED"
