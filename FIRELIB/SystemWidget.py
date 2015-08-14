@@ -103,11 +103,11 @@ class SystemWidget(QWidget):
             parent = self.systemTree.itemFromIndex(i.parent())
             # if no item is selected, place at the end
             if i.row() == -1:
-                self.systemTree.invisibleRootItem().appendRow(newitem)
+                self.systemTree.invisibleRootItem().appendRow([newitem,QStandardItem(),QStandardItem()])
             else:
                 if parent is None:
                     parent = self.systemTree.invisibleRootItem()
-                parent.insertRow(i.row()+1,newitem)
+                parent.insertRow(i.row()+1,[newitem,QStandardItem(),QStandardItem()])
             self.wTree.setCurrentIndex(newitem.index())
             
     def addSystemIn(self):
@@ -120,7 +120,7 @@ class SystemWidget(QWidget):
                 parent = self.systemTree.itemFromIndex(i)
                 # if no item is selected, place at the end
                 if parent._isGroup:
-                    parent.appendRow(newitem)
+                    parent.appendRow([newitem,QStandardItem(),QStandardItem()])
                 self.wTree.setCurrentIndex(newitem.index())
                     
     def removeSystem(self):

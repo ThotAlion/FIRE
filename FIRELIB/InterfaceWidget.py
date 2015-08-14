@@ -17,8 +17,6 @@ class InterfaceTree(QStandardItemModel):
             if parent is None:
                 parent = self.invisibleRootItem()
             item = parent.child(i.row(),0)
-            print i.row()
-            print i.column()
             if role == Qt.DisplayRole or role == Qt.EditRole:
                 if i.column() == 0:
                     return QVariant(item.text())
@@ -110,11 +108,11 @@ class InterfaceWidget(QWidget):
             parent = self.interfaceTree.itemFromIndex(i.parent())
             # if no item is selected, place at the end
             if i.row() == -1:
-                self.interfaceTree.invisibleRootItem().appendRow(newitem)
+                self.interfaceTree.invisibleRootItem().appendRow([newitem,QStandardItem(),QStandardItem()])
             else:
                 if parent is None:
                     parent = self.interfaceTree.invisibleRootItem()
-                parent.insertRow(i.row()+1,newitem)
+                parent.insertRow(i.row()+1,[newitem,QStandardItem(),QStandardItem()])
             self.wTree.setCurrentIndex(newitem.index())
             
     def addInterfaceIn(self):
@@ -130,7 +128,7 @@ class InterfaceWidget(QWidget):
                 parent = self.interfaceTree.itemFromIndex(i)
                 # if no item is selected, place at the end
                 if parent._isGroup:
-                    parent.appendRow(newitem)
+                    parent.appendRow([newitem,QStandardItem(),QStandardItem()])
                 self.wTree.setCurrentIndex(newitem.index())
                     
     def removeInterface(self):
