@@ -156,7 +156,7 @@ class PanTilt(Interface):
 class PanTiltWidget(QWidget):
     
     def __init__(self,parent):
-        QWidget.__init__(self)
+        QWidget.__init__(self,parent)
         
         # list of components
         self.wIDhead_z = QSpinBox()

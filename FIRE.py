@@ -24,6 +24,10 @@ class FireGui(QWidget):
         self.mainLayout = QHBoxLayout(self)
         self.IntSysLayout = QVBoxLayout()
         self.OneClickViewLayout = QVBoxLayout()
+        self.configLayout = QStackedLayout()
+        self.controlLayout = QStackedLayout()
+        self.OneClickViewLayout.addLayout(self.configLayout)
+        self.OneClickViewLayout.addLayout(self.controlLayout)
         self.IntSysLayout.addWidget(self.wInterface)
         self.IntSysLayout.addWidget(self.wSystem)
         self.IntSysLayout.addWidget(self.engine.engineWidget)
@@ -45,14 +49,20 @@ class FireGui(QWidget):
             item = self.wInterface.interfaceTree.itemFromIndex(i)
             self.wConnexion.wTabIn.setModel(item._inputs)
             self.wConnexion.wTabOut.setModel(item._outputs)
-            self.OneClickViewLayout.addWidget(item.controlWidget)
+            self.configLayout.addWidget(item.configWidget)
+            self.configLayout.setCurrentWidget(item.configWidget)
+            self.controlLayout.addWidget(item.controlWidget)
+            self.controlLayout.setCurrentWidget(item.controlWidget)
         
     def updateSystemConnexion(self,i):
         if i.column() == 0:
             item = self.wSystem.systemTree.itemFromIndex(i)
             self.wConnexion.wTabIn.setModel(item._inputs)
             self.wConnexion.wTabOut.setModel(item._outputs)
-            self.OneClickViewLayout.addWidget(item.controlWidget)
+            self.configLayout.addWidget(item.configWidget)
+            self.configLayout.setCurrentWidget(item.configWidget)
+            self.controlLayout.addWidget(item.controlWidget)
+            self.controlLayout.setCurrentWidget(item.controlWidget)
         
 styleFile = QFile("FIRELIB\styleSheet.txt")
 styleFile.open(styleFile.ReadOnly)

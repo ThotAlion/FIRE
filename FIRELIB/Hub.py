@@ -61,22 +61,30 @@ class hubWidget(QWidget):
         QWidget.__init__(self)
         self.inputs = parent._inputs
         self.outputs = parent._outputs
-        
+        self.parent = parent
         # list of components
         self.wLabelTitle = QLabel("System : Hub")
         self.setToolTip("This system directly copies an input to the matching output.")
         self.wAddConnexion = QPushButton("Add connexion")
-        self.wRemoveConnexion = QPushButton("Remove connexion")
+        self.wRemoveConnexion = QPushButton("Remove connexion:")
         self.wComboConnexion = QComboBox()
         self.wComboConnexion.setModel(self.inputs)
         
         # widget setup
+        self.setFixedSize(300,100)
         self.mainlayout = QVBoxLayout(self)
-        self.mainlayout.setSizeConstraint(self.mainlayout.SetMinimumSize)
+        self.remLayout = QHBoxLayout()
+        self.remLayout.addWidget(self.wRemoveConnexion)
+        self.remLayout.addWidget(self.wComboConnexion)
+        self.mainlayout.addWidget(self.wLabelTitle)
         self.mainlayout.addWidget(self.wAddConnexion)
-        self.mainlayout.addWidget(self.wRemoveConnexion)
-        self.mainlayout.addWidget(self.wComboConnexion)
+        self.mainlayout.addLayout(self.remLayout)
         
         # connect the signals
         self.connect(self.wAddConnexion,SIGNAL("pressed()"),parent.addConnexion)
+        self.connect(self.wRemoveConnexion,SIGNAL("pressed()"),self.remove)
+        
+    def remove(self):
+        i = self.wComboConnexion.currentIndex()
+        self.parent.removeConnexion(i)
         

@@ -32,7 +32,9 @@ class System(QStandardItem):
         self.executionState = self.READY
         self.taskState = self.STOPPED
         # widget to control the system
-        self.controlWidget = QLabel(name)
+        self.controlWidget = QLabel(name+" system not controllable.")
+        # widget to configure the system
+        self.configWidget = QLabel(name+" system not configurable.")
     
     def start(self):
         raise NotImplementedError
