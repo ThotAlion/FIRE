@@ -1,7 +1,7 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys
-import Hub 
+import Hub,Recorder
 
 class SystemTree(QStandardItemModel):
     
@@ -46,7 +46,7 @@ class SystemWidget(QWidget):
     def __init__(self):
         QWidget.__init__(self)
         # list of models to be available in GUI
-        self.listSystemType = ["Hub"]
+        self.listSystemType = ["Hub","Recorder"]
         # Adopt the model/view method to manage systems
         # creation of a Model
         self.systemTree = SystemTree() 
@@ -87,6 +87,8 @@ class SystemWidget(QWidget):
     def createSystem(self,SystemType):
         if SystemType == "Hub":
             newitem = Hub.Hub()
+        elif SystemType == "Recorder":
+            newitem = Recorder.Recorder()
         else:
             newitem = None
         return newitem
