@@ -16,8 +16,7 @@ class FireGui(QWidget):
         self.channels = {}
         self.engine = FIRELIB.Engine.Engine(self,self.wInterface.interfaceTree,
                             self.wSystem.systemTree,self.channels)
-        self.interfaceTimer = QTimer()
-        self.interfaceTimer.start(100)
+        
         
 
         # page setup
@@ -39,9 +38,9 @@ class FireGui(QWidget):
         # signals
         self.connect(self.wInterface.wTree,SIGNAL("clicked(QModelIndex)"),self.updateInterfaceConnexion)
         self.connect(self.wSystem.wTree,SIGNAL("clicked(QModelIndex)"),self.updateSystemConnexion)
-        self.connect(self.interfaceTimer,SIGNAL("timeout()"),self.wInterface,SLOT("update()"))
-        self.connect(self.interfaceTimer,SIGNAL("timeout()"),self.wSystem,SLOT("update()"))
-        self.connect(self.interfaceTimer,SIGNAL("timeout()"),self.wConnexion,SLOT("update()"))
+        self.connect(self.engine.interfaceTimer,SIGNAL("timeout()"),self.wInterface,SLOT("update()"))
+        self.connect(self.engine.interfaceTimer,SIGNAL("timeout()"),self.wSystem,SLOT("update()"))
+        self.connect(self.engine.interfaceTimer,SIGNAL("timeout()"),self.wConnexion,SLOT("update()"))
         
         
     def updateInterfaceConnexion(self,i):

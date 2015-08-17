@@ -15,6 +15,8 @@ class Engine(QThread):
         self._isActive = True
         self._isPaused = False
         self.engineWidget = EngineWidget(self)
+        self.interfaceTimer = QTimer()
+        
     
     def start(self):
         for i in range(self._Interfaces.rowCount()):
@@ -80,6 +82,12 @@ class Engine(QThread):
     def setSamplingTime(self,T):
         self.samplingPeriod = T/1000
         
+    def toggleAutoUpdate(self,val):
+        if val == Qt.Checked:
+            self.interfaceTimer.start(100)
+        else:
+            self.interfaceTimer.stop()
+        
 class EngineWidget(QWidget):
     
     def __init__(self,parent):
@@ -89,6 +97,7 @@ class EngineWidget(QWidget):
         self.wPauseButton = QPushButton("Pause")
         self.wStopButton = QPushButton("Stop")
         self.wSamplingTime = QDoubleSpinBox()
+        self.wAutoUpdate = QCheckBox("Real-time interface")
         self.wSamplingTime.setMinimum(0)
         self.wSamplingTime.setMaximum(10000)
         self.wSamplingTime.setValue(parent.samplingPeriod*1000)
@@ -104,6 +113,7 @@ class EngineWidget(QWidget):
         samplingLayout = QHBoxLayout()
         samplingLayout.addWidget(self.wSamplingTime)
         samplingLayout.addWidget(self.wSamplingTimeLabel)
+        samplingLayout.addWidget(self.wAutoUpdate)
         mainLayout = QVBoxLayout(self)
         mainLayout.addLayout(buttonLayout)
         mainLayout.addLayout(samplingLayout)
@@ -113,6 +123,8 @@ class EngineWidget(QWidget):
         self.connect(self.wPauseButton,SIGNAL("pressed()"),parent.togglePause)
         self.connect(self.wStopButton,SIGNAL("pressed()"),parent.close)
         self.connect(self.wSamplingTime,SIGNAL("valueChanged(double)"),parent.setSamplingTime)
+        self.connect(self.wAutoUpdate,SIGNAL("stateChanged(int)"),parent.toggleAutoUpdate)
+        
         
         
             

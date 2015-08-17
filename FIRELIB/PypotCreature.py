@@ -24,6 +24,7 @@ class PypotCreature(Interface):
         self.isCompliant = False
         self.isSlimy = False
         self.slimyThr = 30
+        self.motornames = []
         
     def identify(self):
         rootInputs = self._inputs.invisibleRootItem()
