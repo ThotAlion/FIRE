@@ -40,9 +40,19 @@ class PypotCreature(Interface):
         # first request
         req = {"robot":{"get_all_register_values":{}}}
         s.send_json(req)
-        robot = s.recv_json()
+        answer = s.recv_json()
         s.close()
-        self.motornames = robot.keys()
+        self.motornames = answer["name"]
+        robot = {}
+        for i in range(len(answer["name"])):
+            robot[answer["name"][i]] = {}
+            robot[answer["name"][i]]["present_position"] = answer["present_position"][i]
+            robot[answer["name"][i]]["present_load"] = answer["present_load"][i]
+            robot[answer["name"][i]]["present_voltage"] = answer["present_voltage"][i]
+            robot[answer["name"][i]]["present_temperature"] = answer["present_temperature"][i]
+            robot[answer["name"][i]]["present_speed"] = answer["present_speed"][i]
+            robot[answer["name"][i]]["id"] = answer["id"][i]
+            robot[answer["name"][i]]["angle_limit"] = answer["angle_limit"][i]
 
         for motor in robot:
             # get motor parameters
@@ -136,7 +146,7 @@ class PypotCreature(Interface):
             channels = self._outputs.setConnexion(motor+" present_temperature",robot[motor]["present_temperature"],channels)
             channels = self._outputs.setConnexion(motor+" present_speed",robot[motor]["present_speed"],channels)
             channels = self._outputs.setConnexion(motor+" present_voltage",robot[motor]["present_voltage"],channels)
-            channels = self._outputs.setConnexion(motor+" present_goal",robot[motor]["goal_position"],channels)
+            #channels = self._outputs.setConnexion(motor+" present_goal",robot[motor]["goal_position"],channels)
 
         return channels
         
@@ -145,9 +155,9 @@ class PypotCreature(Interface):
         for motor in self.motornames:
             goal = self._inputs.getConnexion(motor+" goal_position",channels)
             maxspeed = self._inputs.getConnexion(motor+" moving_speed",channels)
-            torque = self._inputs.getConnexion(motor+" present_torque",channels)
-            pos = self._inputs.getConnexion(motor+" present_position",channels)
-            present_goal = self._inputs.getConnexion(motor+" present_goal",channels)
+            torque = self._outputs.getConnexion(motor+" present_torque",channels)
+            pos = self._outputs.getConnexion(motor+" present_position",channels)
+            #present_goal = self._outputs.getConnexion(motor+" present_goal",channels)
             if not robot.has_key(motor):
                 robot[motor] = {}
             if self.isCompliant:
@@ -155,10 +165,10 @@ class PypotCreature(Interface):
             elif self.isSlimy:
                 if abs(torque)>self.slimyThr:
                     robot[motor]["compliant"] = False
-                    robot[motor]["goal_position"] = pos
+                    robot[motor]["goal_position"] = pos[0]
                 else:
                     robot[motor]["compliant"] = False
-                    robot[motor]["goal_position"] = present_goal
+                    robot[motor]["goal_position"] = pos[0]
             else:
                 if isnan(goal):
                     robot[motor]["compliant"] = True
@@ -193,7 +203,18 @@ class clientThread(Thread):
             t0 = Tools.getTime()
             req = {"robot":{"get_all_register_values":{}}}
             self._socket.send_json(req)
-            self._robotIn = self._socket.recv_json()
+            answer = self._socket.recv_json()
+            robot = {}
+            for i in range(len(answer["name"])):
+                robot[answer["name"][i]] = {}
+                robot[answer["name"][i]]["present_position"] = answer["present_position"][i]
+                robot[answer["name"][i]]["present_load"] = answer["present_load"][i]
+                robot[answer["name"][i]]["present_voltage"] = answer["present_voltage"][i]
+                robot[answer["name"][i]]["present_temperature"] = answer["present_temperature"][i]
+                robot[answer["name"][i]]["present_speed"] = answer["present_speed"][i]
+                robot[answer["name"][i]]["id"] = answer["id"][i]
+                robot[answer["name"][i]]["angle_limit"] = answer["angle_limit"][i]
+            self._robotIn = robot
 
             req = {"robot":{"set_all_register_values":{"dict":self._robotOut}}}
             self._socket.send_json(req)

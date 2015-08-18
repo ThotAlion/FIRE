@@ -64,11 +64,14 @@ class ConnexionTree(QStandardItemModel):
         connexions = self.findItems(name)
         if len(connexions)==1:
             connexion = connexions[0]
-            if connexion.isConnected:
-                connexion.updateInput(channels)
+            if connexion.direction == connexion.IN:
+                if connexion.isConnected:
+                    connexion.updateInput(channels)
+                    return connexion.value
+                else:
+                    return connexion.valueInit
+            elif connexion.direction == connexion.OUT:
                 return connexion.value
-            else:
-                return connexion.valueInit
         elif len(connexions)==0:
             print "connexion "+name+" not get."
             
