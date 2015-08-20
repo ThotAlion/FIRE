@@ -49,14 +49,21 @@ class Engine(QThread):
                 for i in range(self._Interfaces.rowCount()):
                     if self._Interfaces.item(i).executionState == self._Interfaces.item(i).RUNNING:
                         self._Channels = self._Interfaces.item(i).deliverOutputs(self._Channels)
-               
+                t1 = Tools.getTime()
+
                 for i in range(self._Systems.rowCount()):
                     if self._Systems.item(i).executionState == self._Systems.item(i).RUNNING:
                         self._Channels = self._Systems.item(i).deliverOutputs(self._Channels)
+                t2 = Tools.getTime()        
+                
                 
                 for i in range(self._Interfaces.rowCount()):
                     if self._Interfaces.item(i).executionState == self._Interfaces.item(i).RUNNING:
                         self._Interfaces.item(i).receiveInputs(self._Channels)
+                t3 = Tools.getTime()
+                print "t1:"+str(t1-t0)
+                print "t2:"+str(t2-t1)
+                print "t3:"+str(t3-t2)
                 
                 while Tools.getTime()-t0<self.samplingPeriod:
                     a=1

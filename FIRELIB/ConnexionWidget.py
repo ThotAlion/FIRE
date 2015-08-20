@@ -2,6 +2,7 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys
 from numpy import *
+import Tools
 
 
 class ConnexionTree(QStandardItemModel):
@@ -50,6 +51,8 @@ class ConnexionTree(QStandardItemModel):
             return False
     
     def setConnexion(self,name,value,channels):
+        print name
+        print value
         connexions = self.findItems(name)
         if len(connexions)==1:
             connexion = connexions[0]

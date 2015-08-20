@@ -30,8 +30,6 @@ class PypotCreature(Interface):
         rootInputs = self._inputs.invisibleRootItem()
         rootOutputs = self._outputs.invisibleRootItem()
         
-        
-        
         # setup temporary zmq context
         c = zmq.Context()
         s = c.socket(zmq.REQ)
@@ -40,26 +38,21 @@ class PypotCreature(Interface):
         # first request
         req = {"robot":{"get_all_register_values":{}}}
         s.send_json(req)
-        answer = s.recv_json()
+        robot = s.recv_json()
         s.close()
-        self.motornames = answer["name"]
-        robot = {}
-        for i in range(len(answer["name"])):
-            robot[answer["name"][i]] = {}
-            robot[answer["name"][i]]["present_position"] = answer["present_position"][i]
-            robot[answer["name"][i]]["present_load"] = answer["present_load"][i]
-            robot[answer["name"][i]]["present_voltage"] = answer["present_voltage"][i]
-            robot[answer["name"][i]]["present_temperature"] = answer["present_temperature"][i]
-            robot[answer["name"][i]]["present_speed"] = answer["present_speed"][i]
-            robot[answer["name"][i]]["id"] = answer["id"][i]
-            robot[answer["name"][i]]["angle_limit"] = answer["angle_limit"][i]
+        self.motornames = robot["name"]
+        self.motorhash = {}
+        for i in range(len(self.motornames)):
+            self.motorhash[self.motornames[i]]=i
+        
 
-        for motor in robot:
+        for i in range(len(robot["name"])):
+            motor = robot["name"][i]
             # get motor parameters
             # angle_limit
-            angle_limit = robot[motor]["angle_limit"]
+            angle_limit = robot["angle_limit"][i]
             # ID
-            id = robot[motor]["id"]
+            id = robot["id"][i]
             
             rootOutputs.appendRow(Connexion(motor+" present_position",direction=Connexion.OUT,
             description = "Position of servo "+motor+" ID:"+str(id),
@@ -69,7 +62,7 @@ class PypotCreature(Interface):
             valueMin = -Inf, 
             valueMax = Inf))
             
-            rootOutputs.appendRow(Connexion(motor+" present_torque",direction=Connexion.OUT,
+            rootOutputs.appendRow(Connexion(motor+" present_load",direction=Connexion.OUT,
             description = "Torque applied on servo "+motor+" ID:"+str(id),
             unit = "%",
             connectedTo="",
@@ -140,44 +133,46 @@ class PypotCreature(Interface):
     
     def deliverOutputs(self,channels):
         robot = self._clientThread._robotIn
-        for motor in robot:
-            channels = self._outputs.setConnexion(motor+" present_position",robot[motor]["present_position"],channels)
-            channels = self._outputs.setConnexion(motor+" present_torque",robot[motor]["present_load"],channels)
-            channels = self._outputs.setConnexion(motor+" present_temperature",robot[motor]["present_temperature"],channels)
-            channels = self._outputs.setConnexion(motor+" present_speed",robot[motor]["present_speed"],channels)
-            channels = self._outputs.setConnexion(motor+" present_voltage",robot[motor]["present_voltage"],channels)
-            #channels = self._outputs.setConnexion(motor+" present_goal",robot[motor]["goal_position"],channels)
-
+        for i in range(self._outputs.rowCount()):
+            try:
+                conn = self._outputs.item(i)
+                conn_name = str(conn.text())
+                motor,reg = conn_name.split(" ")
+                imotor = self.motorhash[motor]
+                conn.value = robot[reg][imotor]
+                if conn.isConnected:
+                    channels = conn.updateOutput(channels)
+            except:
+                pass
         return channels
         
     def receiveInputs(self,channels):
+        nmotor = len(self.motornames)
         robot = {}
-        for motor in self.motornames:
-            goal = self._inputs.getConnexion(motor+" goal_position",channels)
-            maxspeed = self._inputs.getConnexion(motor+" moving_speed",channels)
-            torque = self._outputs.getConnexion(motor+" present_torque",channels)
-            pos = self._outputs.getConnexion(motor+" present_position",channels)
-            #present_goal = self._outputs.getConnexion(motor+" present_goal",channels)
-            if not robot.has_key(motor):
-                robot[motor] = {}
-            if self.isCompliant:
-                robot[motor]["compliant"] = True
-            elif self.isSlimy:
-                if abs(torque)>self.slimyThr:
-                    robot[motor]["compliant"] = False
-                    robot[motor]["goal_position"] = pos[0]
-                else:
-                    robot[motor]["compliant"] = False
-                    robot[motor]["goal_position"] = pos[0]
-            else:
-                if isnan(goal):
-                    robot[motor]["compliant"] = True
-                    robot[motor]["goal_position"] = 0.0
-                else:
-                    robot[motor]["compliant"] = False
-                    robot[motor]["goal_position"] = goal[0]
-            robot[motor]["moving_speed"] = maxspeed[0]
-                
+        robot["compliant"] = [True]*nmotor
+        robot["goal_position"] = [0.0]*nmotor
+        robot["moving_speed"] = [0.0]*nmotor
+        robot["name"] = self.motornames
+        if not self.isCompliant:
+            for i in range(self._inputs.rowCount()):
+                try:
+                    conn = self._inputs.item(i)
+                    if conn.isConnected:
+                        conn.updateInput(channels)
+                        conn_name = str(conn.text())
+                        motor,reg = conn_name.split(" ")
+                        imotor = self.motorhash[motor]
+                        if reg == "goal_position":
+                            if isnan(conn.value[0]):
+                                robot["goal_position"][imotor] = 0.0
+                                robot["compliant"][imotor] = True
+                            else:
+                                robot["goal_position"][imotor] = conn.value[0]
+                                robot["compliant"][imotor] = False
+                        else:
+                            robot[reg][imotor] = conn.value[0]
+                except:
+                    pass
         self._clientThread._robotOut = robot
     
 
@@ -203,18 +198,7 @@ class clientThread(Thread):
             t0 = Tools.getTime()
             req = {"robot":{"get_all_register_values":{}}}
             self._socket.send_json(req)
-            answer = self._socket.recv_json()
-            robot = {}
-            for i in range(len(answer["name"])):
-                robot[answer["name"][i]] = {}
-                robot[answer["name"][i]]["present_position"] = answer["present_position"][i]
-                robot[answer["name"][i]]["present_load"] = answer["present_load"][i]
-                robot[answer["name"][i]]["present_voltage"] = answer["present_voltage"][i]
-                robot[answer["name"][i]]["present_temperature"] = answer["present_temperature"][i]
-                robot[answer["name"][i]]["present_speed"] = answer["present_speed"][i]
-                robot[answer["name"][i]]["id"] = answer["id"][i]
-                robot[answer["name"][i]]["angle_limit"] = answer["angle_limit"][i]
-            self._robotIn = robot
+            self._robotIn = self._socket.recv_json()
 
             req = {"robot":{"set_all_register_values":{"dict":self._robotOut}}}
             self._socket.send_json(req)
