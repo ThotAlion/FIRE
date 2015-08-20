@@ -13,6 +13,8 @@ class Recorder(System):
         System.__init__(self,name=name,icon=QIcon("FIRELIB/icons/recorder.png"))
         self.fileName = ""
         self.tInit = 0.0
+        self.time = 0.0
+        self.data = {}
         self.controlWidget = recorderControlWidget(self)
         self.configWidget = recorderConfigWidget(self)
 
@@ -25,13 +27,23 @@ class Recorder(System):
         self.taskState = self.STOPPED
         
     def deliverOutputs(self,channels):
-        for i in range(self._outputs.rowCount()):
-            # warning, a QString is returned and the replace method is overloaded (and not the same...)
-            outputname = str(self._outputs.invisibleRootItem().child(i,0).text())
-            inputname = outputname.replace("output","input")
-            a = self._inputs.getConnexion(inputname,channels)
-            channels = self._outputs.setConnexion(outputname,a,channels)
-        return channels
+        if self.isRecorder:
+            self.time = channels
+            for i in range(self._inputs.rowCount())
+                input = self._inputs.item(i)
+                input.updateInput(channels)
+                inputname = str(input.text())
+                if not self.data.has_key(inputname):
+                    self.data[inputname] = []
+                self.data[inputname].append(input.value[0])
+                
+        elif self.isPlayer:
+            for i in range(self._outputs.rowCount())
+                output = self._outputs.item(i)
+                outname = str(outname.text())
+                try:
+                    val = self.data
+                
         
     def addConnexion(self,name):
         listCon = []
@@ -122,5 +134,24 @@ class recorderControlWidget(QWidget):
     
     def __init__(self,parent):
         QWidget.__init__(self)
+        self.inputs = parent._inputs
+        self.outputs = parent._outputs
+        self.parent = parent
+        # components
+        self.wLabelTitle = QLabel("System : Recorder")
+        self.wRecord = QPushButton("Record")
+        self.wStop = QPushButton("Stop")
+        self.wPlay = QPushButton("Play")
+        self.wPause = QPushButton("Pause")
+        
+        # widget setup
+        self.setFixedSize(300,200)
+        self.mainlayout = QVBoxLayout(self)
+        self.mainlayout.addWidget(self.wLabelTitle)
+        self.mainlayout.addWidget(self.wRecord)
+        self.mainlayout.addWidget(self.wStop)
+        self.mainlayout.addWidget(self.wPlay)
+        self.mainlayout.addWidget(self.wPause)
+        
         return
         
