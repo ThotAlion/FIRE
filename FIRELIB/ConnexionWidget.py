@@ -51,8 +51,6 @@ class ConnexionTree(QStandardItemModel):
             return False
     
     def setConnexion(self,name,value,channels):
-        print name
-        print value
         connexions = self.findItems(name)
         if len(connexions)==1:
             connexion = connexions[0]

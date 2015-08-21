@@ -61,9 +61,9 @@ class Engine(QThread):
                     if self._Interfaces.item(i).executionState == self._Interfaces.item(i).RUNNING:
                         self._Interfaces.item(i).receiveInputs(self._Channels)
                 t3 = Tools.getTime()
-                print "t1:"+str(t1-t0)
-                print "t2:"+str(t2-t1)
-                print "t3:"+str(t3-t2)
+                # print "t1:"+str(t1-t0)
+                # print "t2:"+str(t2-t1)
+                # print "t3:"+str(t3-t2)
                 
                 while Tools.getTime()-t0<self.samplingPeriod:
                     a=1

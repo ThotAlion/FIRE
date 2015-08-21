@@ -1,6 +1,8 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from System import System
+import Tools
+import time
 from Connexion import Connexion
 from numpy import *
 import pickle
@@ -14,7 +16,10 @@ class Recorder(System):
         self.fileName = ""
         self.tInit = 0.0
         self.time = 0.0
+        self.tStartRec = 0
         self.data = {}
+        self.isRecorder = False
+        self.isPlayer = False
         self.controlWidget = recorderControlWidget(self)
         self.configWidget = recorderConfigWidget(self)
 
@@ -28,8 +33,11 @@ class Recorder(System):
         
     def deliverOutputs(self,channels):
         if self.isRecorder:
-            self.time = channels
-            for i in range(self._inputs.rowCount())
+            t = Tools.getTime()-self.tStartRec
+            if not self.data.has_key("time"):
+                self.data["time"] = []
+            self.data["time"].append(t)
+            for i in range(self._inputs.rowCount()):
                 input = self._inputs.item(i)
                 input.updateInput(channels)
                 inputname = str(input.text())
@@ -38,11 +46,25 @@ class Recorder(System):
                 self.data[inputname].append(input.value[0])
                 
         elif self.isPlayer:
-            for i in range(self._outputs.rowCount())
+            for i in range(self._outputs.rowCount()):
                 output = self._outputs.item(i)
-                outname = str(outname.text())
+                outname = str(output.text())
                 try:
                     val = self.data
+                except:
+                    pass
+                    
+        return channels
+                    
+    def startRecord(self):
+        self.tStartRec = Tools.getTime()
+        self.data = {}
+        self.isRecorder = True
+        
+    def endRecord(self):
+        self.isRecorder = False
+        time.sleep(0.5)
+        pickle.dump(self.data,file(str(QDir.currentPath()+"/TAPES/"+self.fileName),'wb'),protocol=-1)
                 
         
     def addConnexion(self,name):
@@ -119,6 +141,7 @@ class recorderConfigWidget(QWidget):
         # connect the signals
         self.connect(self.wAddConnexion,SIGNAL("pressed()"),self.addCon)
         self.connect(self.wRemoveConnexion,SIGNAL("pressed()"),self.removeCon)
+        self.connect(self.wFileName,SIGNAL("editTextChanged(QString)"),self.changeFilename)
         
     def removeCon(self):
         i = self.wComboRemoveConnexion.currentIndex()
@@ -128,6 +151,9 @@ class recorderConfigWidget(QWidget):
         name = str(self.wEditAddConnexion.text())
         if len(name)>0:
             self.parent.addConnexion(name)
+            
+    def changeFilename(self,name):
+        self.parent.fileName = str(name)
         
         
 class recorderControlWidget(QWidget):
@@ -153,5 +179,7 @@ class recorderControlWidget(QWidget):
         self.mainlayout.addWidget(self.wPlay)
         self.mainlayout.addWidget(self.wPause)
         
-        return
+        #signals
+        self.connect(self.wRecord,SIGNAL("pressed()"),parent.startRecord)
+        self.connect(self.wStop,SIGNAL("pressed()"),parent.endRecord)
         

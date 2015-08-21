@@ -2,6 +2,7 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys
 import FIRELIB
+import pickle
 
 class FireGui(QWidget):
     def __init__(self):
@@ -13,6 +14,7 @@ class FireGui(QWidget):
         self.wInterface = FIRELIB.InterfaceWidget.InterfaceWidget()
         self.wSystem = FIRELIB.SystemWidget.SystemWidget()
         self.wConnexion = FIRELIB.ConnexionWidget.ConnexionWidget()
+        self.wSave = QPushButton("Save")
         self.channels = {}
         self.engine = FIRELIB.Engine.Engine(self,self.wInterface.interfaceTree,
                             self.wSystem.systemTree,self.channels)
@@ -30,6 +32,7 @@ class FireGui(QWidget):
         self.IntSysLayout.addWidget(self.wInterface)
         self.IntSysLayout.addWidget(self.wSystem)
         self.IntSysLayout.addWidget(self.engine.engineWidget)
+        self.IntSysLayout.addWidget(self.wSave)
         self.mainLayout.addLayout(self.IntSysLayout)
         self.mainLayout.addWidget(self.wConnexion)
         self.mainLayout.addLayout(self.OneClickViewLayout)
@@ -41,6 +44,7 @@ class FireGui(QWidget):
         self.connect(self.engine.interfaceTimer,SIGNAL("timeout()"),self.wInterface,SLOT("update()"))
         self.connect(self.engine.interfaceTimer,SIGNAL("timeout()"),self.wSystem,SLOT("update()"))
         self.connect(self.engine.interfaceTimer,SIGNAL("timeout()"),self.wConnexion,SLOT("update()"))
+        self.connect(self.wSave,SIGNAL("pressed()"),self.saveConfig)
         
         
     def updateInterfaceConnexion(self,i):
@@ -62,6 +66,15 @@ class FireGui(QWidget):
             self.configLayout.setCurrentWidget(item.configWidget)
             self.controlLayout.addWidget(item.controlWidget)
             self.controlLayout.setCurrentWidget(item.controlWidget)
+            
+    def saveConfig(self):
+        fileName = QFileDialog.getSaveFileName(self,"Save File",QDir.currentPath()+"/CONF/","FIRE Configurations (*.conf)");
+        data = []
+        data.append(self.wInterface)
+        data.append(self.wSystem)
+        print fileName
+        pickle.dump(data,file(str(fileName),'w'))
+        
         
 styleFile = QFile("FIRELIB\styleSheet.txt")
 styleFile.open(styleFile.ReadOnly)
