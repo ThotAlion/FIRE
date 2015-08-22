@@ -102,6 +102,7 @@ class LeapMotion(Interface):
     def start(self):
         # instanciate the leap motion
         self._leap = Leap.Controller()
+        self.taskState = self.PROGRESS
         
     def deliverOutputs(self,channels):
         frame = self._leap.frame()

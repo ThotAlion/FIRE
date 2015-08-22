@@ -5,7 +5,9 @@ import Tools
 import time
 from Connexion import Connexion
 from numpy import *
-import pickle
+import cPickle as pickle
+import os.path
+import pyqtgraph
 
 class Recorder(System):
     """This system is a set of connexions. But it can record the inputs function of time to restore them as outputs"""
@@ -14,18 +16,19 @@ class Recorder(System):
         """constructor"""
         System.__init__(self,name=name,icon=QIcon("FIRELIB/icons/recorder.png"))
         self.fileName = ""
-        self.tInit = 0.0
+        self.tStartPlay = 0.0
         self.time = 0.0
         self.tStartRec = 0
         self.data = {}
         self.isRecorder = False
+        self.RECORDING = "RECORDING"
         self.isPlayer = False
         self.controlWidget = recorderControlWidget(self)
         self.configWidget = recorderConfigWidget(self)
 
     def start(self):
         self.executionState = self.RUNNING
-        self.taskState = self.PROGRESS
+        self.taskState = self.STOPPED
         
     def close(self):
         self.executionState = self.READY
@@ -46,26 +49,58 @@ class Recorder(System):
                 self.data[inputname].append(input.value[0])
                 
         elif self.isPlayer:
-            for i in range(self._outputs.rowCount()):
-                output = self._outputs.item(i)
-                outname = str(output.text())
-                try:
-                    val = self.data
-                except:
-                    pass
-                    
+            # identify the index to pickup the data
+            t = Tools.getTime()-self.tStartPlay
+            time = array(self.data["time"])
+            if t<=max(time):
+                # take the data and copy it on each output
+                for i_output in range(self._outputs.rowCount()):
+                    output = self._outputs.item(i_output)
+                    outname = str(output.text())
+                    vect = array(self.data[outname])
+                    val = interp(t,time,vect)
+                    output.value = val
+                    output.updateOutput(channels)
+            else:
+                self.taskState = self.FINISHED
+
         return channels
                     
     def startRecord(self):
         self.tStartRec = Tools.getTime()
         self.data = {}
         self.isRecorder = True
+        self.taskState = self.RECORDING
         
     def endRecord(self):
-        self.isRecorder = False
-        time.sleep(0.5)
-        pickle.dump(self.data,file(str(QDir.currentPath()+"/TAPES/"+self.fileName),'wb'),protocol=-1)
-                
+        if self.isRecorder == True:
+            self.isRecorder = False
+            self.taskState = self.STOPPED
+            time.sleep(0.5)
+            pickle.dump(self.data,file(str(QDir.currentPath()+"/TAPES/"+self.fileName),'wb'),protocol=-1)
+        elif self.isPlayer == True:
+            self.isPlayer = False
+            self.taskState = self.STOPPED
+            time.sleep(0.5)
+            
+        
+    def startPlay(self):
+        self.tStartPlay = Tools.getTime()
+        self.data = pickle.load(file(str(QDir.currentPath()+"/TAPES/"+self.fileName),'rb'))
+        self.isPlayer = True
+        self.taskState = self.PROGRESS
+    
+    def setFileName(self,name):
+        # try to open the file
+        self.fileName = name
+        path = str(QDir.currentPath()+"/TAPES/"+self.fileName)
+        if os.path.isfile(path):
+            self.data = pickle.load(file(path,'rb'))
+            for field in self.data.keys():
+                if not field == "time":
+                    self.addConnexion(field)
+        else:
+            self.data = {}
         
     def addConnexion(self,name):
         listCon = []
@@ -110,7 +145,7 @@ class recorderConfigWidget(QWidget):
         self.wFileName.setEditable(True)
         self.tapeDir = QFileSystemModel()
         self.tapeDir.setRootPath(QDir.currentPath()+"/TAPES/")
-        #self.tapeDir.setNameFilters(["*.tap"])
+        self.tapeDir.setNameFilters(["*.tap"])
         self.wFileName.setModel(self.tapeDir)
         self.wFileName.setRootModelIndex(self.tapeDir.index(QDir.currentPath()+"/TAPES/"))
         self.wFileName.clearEditText()
@@ -119,9 +154,10 @@ class recorderConfigWidget(QWidget):
         self.wRemoveConnexion = QPushButton("Remove connexion:")
         self.wComboRemoveConnexion = QComboBox()
         self.wComboRemoveConnexion.setModel(self.inputs)
+        self.wplot = pyqtgraph.PlotWidget()
         
         # widget setup
-        self.setFixedSize(300,200)
+        self.setFixedSize(500,500)
         self.mainlayout = QVBoxLayout(self)
         self.filelayout = QHBoxLayout()
         self.filelayout.addWidget(self.wFileNameLabel)
@@ -137,11 +173,13 @@ class recorderConfigWidget(QWidget):
         self.mainlayout.addLayout(self.filelayout)
         self.mainlayout.addLayout(self.addlayout)
         self.mainlayout.addLayout(self.remLayout)
+        self.mainlayout.addWidget(self.wplot)
         
         # connect the signals
         self.connect(self.wAddConnexion,SIGNAL("pressed()"),self.addCon)
         self.connect(self.wRemoveConnexion,SIGNAL("pressed()"),self.removeCon)
-        self.connect(self.wFileName,SIGNAL("editTextChanged(QString)"),self.changeFilename)
+        self.connect(self.wFileName,SIGNAL("editTextChanged(QString)"),parent.setFileName)
+        self.connect(self.wFileName,SIGNAL("editTextChanged(QString)"),self.updatePlot)
         
     def removeCon(self):
         i = self.wComboRemoveConnexion.currentIndex()
@@ -152,8 +190,14 @@ class recorderConfigWidget(QWidget):
         if len(name)>0:
             self.parent.addConnexion(name)
             
-    def changeFilename(self,name):
-        self.parent.fileName = str(name)
+    def updatePlot(self):
+        time.sleep(1)
+        data = self.parent.data
+        if len(data)>0:
+            self.wplot.clear()
+            for v in data:
+                if not v is "time":
+                    self.wplot.plot(data["time"],data[v],'w')
         
         
 class recorderControlWidget(QWidget):
@@ -170,6 +214,7 @@ class recorderControlWidget(QWidget):
         self.wPlay = QPushButton("Play")
         self.wPause = QPushButton("Pause")
         
+        
         # widget setup
         self.setFixedSize(300,200)
         self.mainlayout = QVBoxLayout(self)
@@ -182,4 +227,5 @@ class recorderControlWidget(QWidget):
         #signals
         self.connect(self.wRecord,SIGNAL("pressed()"),parent.startRecord)
         self.connect(self.wStop,SIGNAL("pressed()"),parent.endRecord)
+        self.connect(self.wPlay,SIGNAL("pressed()"),parent.startPlay)
         
