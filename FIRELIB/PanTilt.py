@@ -1,16 +1,16 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from Connexion import Connexion
-from Interface import Interface
+from Interface import Interface as Interface_
 from numpy import *
 import pypot.robot
 
-class PanTilt(Interface):
+class PanTilt(Interface_):
     """Interface for pan-tilt robot"""
     
-    def __init__(self,name = "pan-tilt turret",ID_head_z=16, ID_head_y=9):
+    def __init__(self,name = "PanTilt",ID_head_z=16, ID_head_y=9):
         """constructor of pan tilt turret"""
-        Interface.__init__(self,name=name,icon=QIcon("FIRELIB/icons/pantilt.png"))
+        Interface_.__init__(self,name=name,icon=QIcon("FIRELIB/icons/pantilt.png"))
         # set the ID of the two servo
         self.ID_head_z = ID_head_z
         self.ID_head_y = ID_head_y
@@ -152,11 +152,23 @@ class PanTilt(Interface):
                 m.moving_speed = 0
                 
         return channels
+        
+    def writeConf(self):
+        conf = Interface_.writeConf(self)
+        conf["ID_head_z"] = self.ID_head_z
+        conf["ID_head_y"] = self.ID_head_y
+        return conf
+        
+    def readConf(self,conf):
+        Interface_.readConf(self,conf)
+        self.ID_head_z = conf["ID_head_z"]
+        self.ID_head_y = conf["ID_head_y"]
                     
 class PanTiltWidget(QWidget):
     
     def __init__(self,parent):
         QWidget.__init__(self,parent)
+        
         
         # list of components
         self.wIDhead_z = QSpinBox()

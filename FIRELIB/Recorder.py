@@ -96,9 +96,18 @@ class Recorder(System):
         path = str(QDir.currentPath()+"/TAPES/"+self.fileName)
         if os.path.isfile(path):
             self.data = pickle.load(file(path,'rb'))
+            # add the missing connexions
             for field in self.data.keys():
                 if not field == "time":
                     self.addConnexion(field)
+            # and remove
+            i_input = 0
+            while i_input < self._inputs.rowCount():
+                input = self._inputs.item(i_input)
+                if not str(input.text()) in self.data.keys():
+                    self.removeConnexion(i_input)
+                else:
+                    i_input = i_input+1
         else:
             self.data = {}
         
@@ -126,6 +135,15 @@ class Recorder(System):
     def removeConnexion(self,i):
         self._inputs.invisibleRootItem().takeRow(i)
         self._outputs.invisibleRootItem().takeRow(i)
+        
+    def writeConf(self):
+        conf = System.writeConf(self)
+        conf["fileName"] = self.fileName
+        return conf
+        
+    def readConf(self,conf):
+        System.readConf(self,conf)
+        self.setFileName(conf["fileName"])
         
         
     

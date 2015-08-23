@@ -32,9 +32,9 @@ class Engine(QThread):
             if not self._Systems.item(i).executionState == self._Systems.item(i).RUNNING:
                 try:
                     self._Systems.item(i).start()
-                    self._Systems.item(i).executionState = self._Interfaces.item(i).RUNNING
+                    self._Systems.item(i).executionState = self._Systems.item(i).RUNNING
                 except Exception,e:
-                    self._Systems.item(i).executionState = self._Interfaces.item(i).ERROR
+                    self._Systems.item(i).executionState = self._Systems.item(i).ERROR
         self._isActive = True
         self._isPaused = False
         QThread.start(self)

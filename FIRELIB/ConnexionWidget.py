@@ -3,6 +3,7 @@ from PyQt4.QtCore import *
 import sys
 from numpy import *
 import Tools
+import Connexion
 
 
 class ConnexionTree(QStandardItemModel):
@@ -83,6 +84,19 @@ class ConnexionTree(QStandardItemModel):
             if i.column() in [1]:
                 f = Qt.ItemIsEditable | Qt.ItemIsEnabled | Qt.ItemIsSelectable
             return f
+    
+    def writeConf(self):
+        conf = {}
+        for i in range(self.rowCount()):
+            conn = self.item(i)
+            conf[str(conn.text())] = conn.writeConf()
+        return conf
+        
+    def readConf(self,conf):
+        for connName in conf:
+            conn = Connexion.Connexion(connName)
+            conn.readConf(conf[connName])
+            self.appendRow(conn)
             
 
 # widget to control FIRE connexions

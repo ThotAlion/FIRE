@@ -15,6 +15,7 @@ class FireGui(QWidget):
         self.wSystem = FIRELIB.SystemWidget.SystemWidget()
         self.wConnexion = FIRELIB.ConnexionWidget.ConnexionWidget()
         self.wSave = QPushButton("Save")
+        self.wLoad = QPushButton("Load")
         self.channels = {}
         self.engine = FIRELIB.Engine.Engine(self,self.wInterface.interfaceTree,
                             self.wSystem.systemTree,self.channels)
@@ -33,6 +34,7 @@ class FireGui(QWidget):
         self.IntSysLayout.addWidget(self.wSystem)
         self.IntSysLayout.addWidget(self.engine.engineWidget)
         self.IntSysLayout.addWidget(self.wSave)
+        self.IntSysLayout.addWidget(self.wLoad)
         self.mainLayout.addLayout(self.IntSysLayout)
         self.mainLayout.addWidget(self.wConnexion)
         self.mainLayout.addLayout(self.OneClickViewLayout)
@@ -45,7 +47,7 @@ class FireGui(QWidget):
         self.connect(self.engine.interfaceTimer,SIGNAL("timeout()"),self.wSystem,SLOT("update()"))
         self.connect(self.engine.interfaceTimer,SIGNAL("timeout()"),self.wConnexion,SLOT("update()"))
         self.connect(self.wSave,SIGNAL("pressed()"),self.saveConfig)
-        
+        self.connect(self.wLoad,SIGNAL("pressed()"),self.loadConfig)
         
     def updateInterfaceConnexion(self,i):
         if i.column() == 0:
@@ -69,11 +71,17 @@ class FireGui(QWidget):
             
     def saveConfig(self):
         fileName = QFileDialog.getSaveFileName(self,"Save File",QDir.currentPath()+"/CONF/","FIRE Configurations (*.conf)");
-        data = []
-        data.append(self.wInterface)
-        data.append(self.wSystem)
+        data = {}
+        data["interfaces"] = self.wInterface.interfaceTree.writeConf()
+        data["systems"] = self.wSystem.systemTree.writeConf()
         print fileName
-        pickle.dump(data,file(str(fileName),'w'))
+        pickle.dump(data,file(str(fileName),'wb'),protocol=-1)
+        
+    def loadConfig(self):
+        fileName = QFileDialog.getOpenFileName(self,"Open File",QDir.currentPath()+"/CONF/","FIRE Configurations (*.conf)");
+        a = pickle.load(file(str(fileName),'rb'))
+        self.wInterface.interfaceTree.readConf(a["interfaces"])
+        self.wSystem.systemTree.readConf(a["systems"])
         
         
 styleFile = QFile("FIRELIB\styleSheet.txt")

@@ -1,7 +1,7 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys
-import PanTilt,LeapMotion,PypotCreature,InterfaceGroup
+from Tools import *
 
 class InterfaceTree(QStandardItemModel):
     
@@ -34,6 +34,20 @@ class InterfaceTree(QStandardItemModel):
     def flags(self,i):
         f = Qt.ItemIsEnabled | Qt.ItemIsSelectable
         return f
+        
+    def writeConf(self):
+        conf = {}
+        conf["list"] = []
+        for i in range(self.rowCount()):
+            int = self.item(i)
+            conf["list"].append(int.writeConf())
+        return conf
+        
+    def readConf(self,conf):
+        for a in conf["list"]:
+            int = createInterface(a["name"])
+            int.readConf(a)
+            self.appendRow(int)
 
 # widget to control FIRE Interface list
 class InterfaceWidget(QWidget):
@@ -83,18 +97,7 @@ class InterfaceWidget(QWidget):
         self.connect(self.wMoveUpButton,SIGNAL("pressed()"),self.moveUpInterface)
         self.connect(self.wMoveDnButton,SIGNAL("pressed()"),self.moveDnInterface)
     
-    def createInterface(self,InterfaceType):
-        if InterfaceType == "PanTilt":
-            newitem = PanTilt.PanTilt()
-        elif InterfaceType == "PypotCreature":
-            newitem = PypotCreature.PypotCreature()
-        elif InterfaceType == "LeapMotion":
-            newitem = LeapMotion.LeapMotion()
-        elif InterfaceType == "Group":
-            newitem = InterfaceGroup.InterfaceGroup()
-        else:
-            newitem = None
-        return newitem
+
     
     def addInterfaceBelow(self):
         # create the new interface
@@ -102,7 +105,7 @@ class InterfaceWidget(QWidget):
         if InterfaceType is None:
             newitem = None
         else:
-            newitem = self.createInterface(InterfaceType.text())
+            newitem = createInterface(InterfaceType.text())
         if not newitem is None:
             i=self.wTree.currentIndex()
             parent = self.interfaceTree.itemFromIndex(i.parent())
@@ -121,7 +124,7 @@ class InterfaceWidget(QWidget):
         if InterfaceType is None:
             newitem = None
         else:
-            newitem = self.createInterface(InterfaceType.text())
+            newitem = createInterface(InterfaceType.text())
         if not newitem is None:
             i=self.wTree.currentIndex()
             if not i.row()==-1:

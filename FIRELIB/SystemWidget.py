@@ -1,7 +1,7 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys
-import Hub,Recorder
+from Tools import *
 
 class SystemTree(QStandardItemModel):
     
@@ -34,6 +34,20 @@ class SystemTree(QStandardItemModel):
     def flags(self,i):
         f = Qt.ItemIsEnabled | Qt.ItemIsSelectable
         return f
+        
+    def writeConf(self):
+        conf = {}
+        conf["list"] = []
+        for i in range(self.rowCount()):
+            sys = self.item(i)
+            conf["list"].append(sys.writeConf())
+        return conf
+        
+    def readConf(self,conf):
+        for a in conf["list"]:
+            sys = createSystem(a["name"])
+            sys.readConf(a)
+            self.appendRow(sys)
 
 # widget to control FIRE System list
 class SystemWidget(QWidget):
@@ -84,14 +98,7 @@ class SystemWidget(QWidget):
         self.connect(self.wMoveUpButton,SIGNAL("pressed()"),self.moveUpSystem)
         self.connect(self.wMoveDnButton,SIGNAL("pressed()"),self.moveDnSystem)
     
-    def createSystem(self,SystemType):
-        if SystemType == "Hub":
-            newitem = Hub.Hub()
-        elif SystemType == "Recorder":
-            newitem = Recorder.Recorder()
-        else:
-            newitem = None
-        return newitem
+
     
     def addSystemBelow(self):
         # create the new system
@@ -99,7 +106,7 @@ class SystemWidget(QWidget):
         if SystemType is None:
             newitem = None
         else:
-            newitem = self.createSystem(SystemType.text())
+            newitem = createSystem(SystemType.text())
         if not newitem is None:
             i=self.wTree.currentIndex()
             parent = self.systemTree.itemFromIndex(i.parent())
@@ -115,7 +122,7 @@ class SystemWidget(QWidget):
     def addSystemIn(self):
         # create the new System
         SystemType = self.wAddSystemList.currentItem().text()
-        newitem = self.createSystem(SystemType)
+        newitem = createSystem(SystemType)
         if not newitem is None:
             i=self.wTree.currentIndex()
             if not i.row()==-1:

@@ -1,6 +1,3 @@
-import PanTilt
-import LeapMotion
-import PypotCreature
 import ConnexionWidget
 import InterfaceWidget
 import SystemWidget

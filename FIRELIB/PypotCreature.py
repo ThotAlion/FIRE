@@ -1,5 +1,5 @@
 from Connexion import Connexion
-from Interface import Interface
+from Interface import Interface as Interface_
 from numpy import *
 import zmq
 import Tools
@@ -8,14 +8,12 @@ from threading import Thread
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-class PypotCreature(Interface):
+class PypotCreature(Interface_):
     """Interface for robot piloted by IP"""
     
-    def __init__(self,name = "Pypot creature",IP = '127.0.0.1',port = '8080'):
+    def __init__(self,name = "PypotCreature",IP = '127.0.0.1',port = '8080'):
         """constructor of Pypot creature"""
-        Interface.__init__(self,name=name)
-        # name of the interface
-        self._name = name
+        Interface_.__init__(self,name=name)
         # set the IP address
         self._IP = IP
         self._port = port
@@ -174,6 +172,17 @@ class PypotCreature(Interface):
                 except:
                     pass
         self._clientThread._robotOut = robot
+        
+    def writeConf(self):
+        conf = Interface_.writeConf(self)
+        conf["IP"] = self._IP
+        conf["port"] = self._port
+        return conf
+        
+    def readConf(self,conf):
+        Interface_.readConf(self,conf)
+        self._IP = conf["IP"]
+        self._port = conf["port"]
     
 
             

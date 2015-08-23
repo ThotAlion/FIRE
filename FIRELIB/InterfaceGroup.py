@@ -1,11 +1,11 @@
-from Interface import Interface
+from Interface_ import Interface_
 
-class InterfaceGroup(Interface):
+class InterfaceGroup(Interface_):
     """Interface containing others interfaces"""
     
     def __init__(self,name = "Group"):
         """constructor of the interface"""
-        Interface.__init__(self,name=name)
+        Interface_.__init__(self,name=name)
         self._isGroup = True
     
     def start(self):
@@ -34,3 +34,10 @@ class InterfaceGroup(Interface):
             if self.child(i).executionState == self.child(i).RUNNING:
                 self.child(i).receiveInputs(channels)
         return channels
+        
+    def writeConf(self):
+        conf = Interface_.writeConf(self)
+        return conf
+        
+    def readConf(self,conf):
+        Interface_.readConf(self,conf)

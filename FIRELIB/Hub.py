@@ -52,7 +52,14 @@ class Hub(System):
         self._inputs.invisibleRootItem().takeRow(i)
         self._outputs.invisibleRootItem().takeRow(i)
         
+    def writeConf(self):
+        conf = System.writeConf(self)
+        conf["_index"] = self._index
+        return conf
         
+    def readConf(self,conf):
+        System.readConf(self,conf)
+        self._index = conf["_index"]
     
     
 class hubWidget(QWidget):

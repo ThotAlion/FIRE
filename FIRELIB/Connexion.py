@@ -148,7 +148,28 @@ class Connexion(QStandardItem):
             f[self.connectedTo] = self.value
         return f
         
-    
+    def writeConf(self):
+        conf = {}
+        conf["type"] = "connexion"
+        conf["name"] = self.text()
+        conf["direction"] = self.direction
+        conf["description"] = self.description
+        conf["unit"] = self.unit
+        conf["connectedTo"] = self.connectedTo
+        conf["valueMin"] = self.valueMin
+        conf["valueMax"] = self.valueMax
+        conf["valueInit"] = self.valueInit
+        return conf
+        
+    def readConf(self,conf):
+        self.setText(conf["name"])
+        self.direction = conf["direction"]
+        self.description = conf["description"]
+        self.unit = conf["unit"]
+        self.connectedTo = conf["connectedTo"]
+        self.valueMin = conf["valueMin"]
+        self.valueMax = conf["valueMax"]
+        self.valueInit = conf["valueInit"]
     
     
         

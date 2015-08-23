@@ -1,5 +1,6 @@
 from Connexion import Connexion
-from ConnexionWidget import ConnexionTree
+from ConnexionWidget import ConnexionTree as ConnexionTree_
+from Tools import *
 from PyQt4.QtGui import *
 
 class Interface(QStandardItem):
@@ -15,8 +16,8 @@ class Interface(QStandardItem):
     def __init__(self,name = "generic",icon = QIcon()):
         """constructor of the interface"""
         QStandardItem.__init__(self,icon,name)
-        self._inputs = ConnexionTree()
-        self._outputs = ConnexionTree()
+        self._inputs = ConnexionTree_()
+        self._outputs = ConnexionTree_()
         # types of execution states
         self.READY = "READY"
         self.RUNNING = "RUNNING"
@@ -47,4 +48,25 @@ class Interface(QStandardItem):
         
     def receiveInputs(self,channels):
         raise NotImplementedError
+    
+    def writeConf(self):
+        conf = {}
+        conf["name"] = self.text()
+        conf["_isGroup"] = self._isGroup
+        conf["_inputs"] = self._inputs.writeConf()
+        conf["_outputs"] = self._outputs.writeConf()
+        conf["children"] = []
+        for i in range(self.rowCount()):
+            int = self.child(i)
+            conf["children"].append(int.writeConf())
+        return conf
         
+    def readConf(self,conf):
+        self.setText(conf["name"])
+        self._isGroup = conf["_isGroup"]
+        self._inputs.readConf(conf["_inputs"])
+        self._outputs.readConf(conf["_outputs"])
+        for a in conf["children"]:
+            int = createInterface(None,a["name"])
+            int.readConf(a)
+            self.appendRow(int)
