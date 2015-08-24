@@ -56,6 +56,7 @@ class System(QStandardItem):
         conf["_inputs"] = self._inputs.writeConf()
         conf["_outputs"] = self._outputs.writeConf()
         conf["children"] = []
+        return conf
         
     def readConf(self,conf):
         self.setText(conf["name"])

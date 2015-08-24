@@ -229,8 +229,8 @@ class PypotConfigWidget(QWidget):
         self.wLabelTitle = QLabel("System : Pypot Creature by IP")
         self.IPLabel = QLabel("IP adress of the robot :")
         self.PortLabel = QLabel("Port of the server :")
-        self.IPEdit = QLineEdit("127.0.0.1")
-        self.PortEdit = QLineEdit("8080")
+        self.IPEdit = QLineEdit(parent._IP)
+        self.PortEdit = QLineEdit(parent._port)
         self.identifyButton = QPushButton("Clear and identify the robot")
         
         # widget setup

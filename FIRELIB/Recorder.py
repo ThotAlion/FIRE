@@ -21,6 +21,7 @@ class Recorder(System):
         self.tStartRec = 0
         self.data = {}
         self.RECORDING = "RECORDING"
+        self.isRecording = False
         self.controlWidget = recorderControlWidget(self)
         self.configWidget = recorderConfigWidget(self)
         self.executionState = self.NOTREADY
@@ -30,18 +31,21 @@ class Recorder(System):
         self.executionState = self.READY
         
     def init(self):
-        self.data = pickle.load(file(str(QDir.currentPath()+"/TAPES/"+self.fileName),'rb'))
-        self.tStartPlay = Tools.getTime()
+        path = str(QDir.currentPath()+"/TAPES/"+self.fileName)
+        if os.path.isfile(path):
+            self.data = pickle.load(file(str(QDir.currentPath()+"/TAPES/"+self.fileName),'rb'))
+            self.tStartPlay = Tools.getTime()
+        else:
+            self.data = {}
         
     def close(self):
         self.executionState = self.FINISHED
         
     def deliverOutputs(self,channels):
-        if self.executionState == self.RECORDING:
+        if self.isRecording:
             t = Tools.getTime()-self.tStartRec
             if not self.data.has_key("time"):
                 self.data["time"] = []
-            self.data["time"].append(t)
             for i in range(self._inputs.rowCount()):
                 input = self._inputs.item(i)
                 input.updateInput(channels)
@@ -49,18 +53,21 @@ class Recorder(System):
                 if not self.data.has_key(inputname):
                     self.data[inputname] = []
                 self.data[inputname].append(input.value[0])
+                self.data["time"].append(t)
                 
-        elif self.executionState == self.RUNNING:
+        elif len(self.data)>0:
             # identify the index to pickup the data
             t = Tools.getTime()-self.tStartPlay
             time = array(self.data["time"])
             if t<=max(time):
                 # take the data and copy it on each output
+                
                 for i_output in range(self._outputs.rowCount()):
                     output = self._outputs.item(i_output)
                     outname = str(output.text())
                     vect = array(self.data[outname])
-                    val = interp(t,time,vect)
+                    minlen = min(len(time),len(vect))
+                    val = interp(t,time[0:minlen],vect[0:minlen])
                     output.value = val
                     output.updateOutput(channels)
             else:
@@ -70,22 +77,27 @@ class Recorder(System):
     def startRecord(self):
         self.tStartRec = Tools.getTime()
         self.data = {}
-        self.executionState = self.RECORDING
+        self.isRecording = True
         
     def endRecord(self):
-        if self.executionState == self.RECORDING:
-            self.executionState = self.FINISHED
+        if self.isRecording == True:
             time.sleep(0.5)
+            # securise the data tree
+            # globalLen = Inf
+            # for f in self.data:
+                # globalLen = min(globalLen,len(self.data[f]))
+            # for f in self.data:
+                # self.data[f] = self.data[f][0:globalLen]
+            # save the file
             pickle.dump(self.data,file(str(QDir.currentPath()+"/TAPES/"+self.fileName),'wb'),protocol=-1)
-        elif self.executionState == self.RUNNING:
-            self.executionState = self.FINISHED
-            time.sleep(0.5)
+            self.isRecording = False
             
         
     def startPlay(self):
-        self.tStartPlay = Tools.getTime()
-        self.data = pickle.load(file(str(QDir.currentPath()+"/TAPES/"+self.fileName),'rb'))
-        self.executionState = self.RUNNING
+        if self.isRecording == False:
+            self.tStartPlay = Tools.getTime()
+            self.data = pickle.load(file(str(QDir.currentPath()+"/TAPES/"+self.fileName),'rb'))
+            self.executionState = self.RUNNING
     
     def setFileName(self,name):
         # try to open the file
