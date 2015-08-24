@@ -1,16 +1,16 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from Connexion import Connexion
-from Interface import Interface as Interface_
+from Interface import Interface
 from numpy import *
 import pypot.robot
 
-class PanTilt(Interface_):
+class PanTilt(Interface):
     """Interface for pan-tilt robot"""
     
     def __init__(self,name = "PanTilt",ID_head_z=16, ID_head_y=9):
         """constructor of pan tilt turret"""
-        Interface_.__init__(self,name=name,icon=QIcon("FIRELIB/icons/pantilt.png"))
+        Interface.__init__(self,name=name,icon=QIcon("FIRELIB/icons/pantilt.png"))
         # set the ID of the two servo
         self.ID_head_z = ID_head_z
         self.ID_head_y = ID_head_y
@@ -103,20 +103,17 @@ class PanTilt(Interface_):
             valueInit = 0.0, 
             valueMin = 0, 
             valueMax = Inf))
-        self.executionState = self.READY
-        self.taskState = self.STOPPED
+        self.executionState = self.NOTREADY
     
     def start(self):
         self._robot = pypot.robot.from_config(self.config)
         self._robot.start_sync()
-        self.executionState = self.RUNNING
-        self.taskState = self.PROGRESS
+        self.executionState = self.READY
         
             
     def close(self):
         self._robot.close()
-        self.executionState = self.READY
-        self.taskState = self.STOPPED
+        self.executionState = self.FINISHED
         
     def deliverOutputs(self,channels):
         for motor in ["head_z","head_y"]:
@@ -131,7 +128,6 @@ class PanTilt(Interface_):
         
         
     def receiveInputs(self,channels):
-        
         for motor in ["head_z","head_y"]:
             m = getattr(self._robot,motor)
             
@@ -154,13 +150,13 @@ class PanTilt(Interface_):
         return channels
         
     def writeConf(self):
-        conf = Interface_.writeConf(self)
+        conf = Interface.writeConf(self)
         conf["ID_head_z"] = self.ID_head_z
         conf["ID_head_y"] = self.ID_head_y
         return conf
         
     def readConf(self,conf):
-        Interface_.readConf(self,conf)
+        Interface.readConf(self,conf)
         self.ID_head_z = conf["ID_head_z"]
         self.ID_head_y = conf["ID_head_y"]
                     

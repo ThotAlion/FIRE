@@ -16,27 +16,36 @@ class Engine(QThread):
         self._isPaused = False
         self.engineWidget = EngineWidget(self)
         self.interfaceTimer = QTimer()
-        
     
-    def start(self):
+    def getReady(self):
         for i in range(self._Interfaces.rowCount()):
-            if not self._Interfaces.item(i).executionState == self._Interfaces.item(i).RUNNING:
+            if self._Interfaces.item(i).executionState == self._Interfaces.item(i).NOTREADY:
                 try:
                     self._Interfaces.item(i).start()
-                    self._Interfaces.item(i).executionState = self._Interfaces.item(i).RUNNING
+                    # self._Interfaces.item(i).executionState = self._Interfaces.item(i).READY
                 except Exception,e:
                     self._Interfaces.item(i).executionState = self._Interfaces.item(i).ERROR
                     print e
                 
         for i in range(self._Systems.rowCount()):
-            if not self._Systems.item(i).executionState == self._Systems.item(i).RUNNING:
+            if self._Systems.item(i).executionState == self._Systems.item(i).NOTREADY:
                 try:
                     self._Systems.item(i).start()
-                    self._Systems.item(i).executionState = self._Systems.item(i).RUNNING
+                    # self._Systems.item(i).executionState = self._Systems.item(i).READY
                 except Exception,e:
                     self._Systems.item(i).executionState = self._Systems.item(i).ERROR
         self._isActive = True
         self._isPaused = False
+    
+    def start(self):
+        for i in range(self._Interfaces.rowCount()):
+            if self._Interfaces.item(i).executionState == self._Interfaces.item(i).READY or self._Interfaces.item(i).executionState == self._Interfaces.item(i).FINISHED:
+                self._Interfaces.item(i).init()
+                self._Interfaces.item(i).executionState = self._Interfaces.item(i).RUNNING
+        for i in range(self._Systems.rowCount()):
+            if self._Systems.item(i).executionState == self._Systems.item(i).READY or self._Systems.item(i).executionState == self._Systems.item(i).FINISHED:
+                self._Systems.item(i).init()
+                self._Systems.item(i).executionState = self._Systems.item(i).RUNNING
         QThread.start(self)
     
     def run(self):
@@ -100,6 +109,7 @@ class EngineWidget(QWidget):
     def __init__(self,parent):
         QWidget.__init__(self)
         # components
+        self.wReadyButton = QPushButton("Get ready")
         self.wStartButton = QPushButton("Start")
         self.wPauseButton = QPushButton("Pause")
         self.wStopButton = QPushButton("Stop")
@@ -114,6 +124,7 @@ class EngineWidget(QWidget):
         
         # widget organisation
         buttonLayout = QHBoxLayout()
+        buttonLayout.addWidget(self.wReadyButton)
         buttonLayout.addWidget(self.wStartButton)
         buttonLayout.addWidget(self.wPauseButton)
         buttonLayout.addWidget(self.wStopButton)
@@ -126,6 +137,7 @@ class EngineWidget(QWidget):
         mainLayout.addLayout(samplingLayout)
         
         # connect the signals
+        self.connect(self.wReadyButton,SIGNAL("pressed()"),parent.getReady)
         self.connect(self.wStartButton,SIGNAL("pressed()"),parent.start)
         self.connect(self.wPauseButton,SIGNAL("pressed()"),parent.togglePause)
         self.connect(self.wStopButton,SIGNAL("pressed()"),parent.close)

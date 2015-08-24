@@ -20,22 +20,24 @@ class Recorder(System):
         self.time = 0.0
         self.tStartRec = 0
         self.data = {}
-        self.isRecorder = False
         self.RECORDING = "RECORDING"
-        self.isPlayer = False
         self.controlWidget = recorderControlWidget(self)
         self.configWidget = recorderConfigWidget(self)
+        self.executionState = self.NOTREADY
 
     def start(self):
-        self.executionState = self.RUNNING
-        self.taskState = self.STOPPED
+        
+        self.executionState = self.READY
+        
+    def init(self):
+        self.data = pickle.load(file(str(QDir.currentPath()+"/TAPES/"+self.fileName),'rb'))
+        self.tStartPlay = Tools.getTime()
         
     def close(self):
-        self.executionState = self.READY
-        self.taskState = self.STOPPED
+        self.executionState = self.FINISHED
         
     def deliverOutputs(self,channels):
-        if self.isRecorder:
+        if self.executionState == self.RECORDING:
             t = Tools.getTime()-self.tStartRec
             if not self.data.has_key("time"):
                 self.data["time"] = []
@@ -48,7 +50,7 @@ class Recorder(System):
                     self.data[inputname] = []
                 self.data[inputname].append(input.value[0])
                 
-        elif self.isPlayer:
+        elif self.executionState == self.RUNNING:
             # identify the index to pickup the data
             t = Tools.getTime()-self.tStartPlay
             time = array(self.data["time"])
@@ -62,33 +64,28 @@ class Recorder(System):
                     output.value = val
                     output.updateOutput(channels)
             else:
-                self.taskState = self.FINISHED
-
+                self.executionState = self.FINISHED
         return channels
                     
     def startRecord(self):
         self.tStartRec = Tools.getTime()
         self.data = {}
-        self.isRecorder = True
-        self.taskState = self.RECORDING
+        self.executionState = self.RECORDING
         
     def endRecord(self):
-        if self.isRecorder == True:
-            self.isRecorder = False
-            self.taskState = self.STOPPED
+        if self.executionState == self.RECORDING:
+            self.executionState = self.FINISHED
             time.sleep(0.5)
             pickle.dump(self.data,file(str(QDir.currentPath()+"/TAPES/"+self.fileName),'wb'),protocol=-1)
-        elif self.isPlayer == True:
-            self.isPlayer = False
-            self.taskState = self.STOPPED
+        elif self.executionState == self.RUNNING:
+            self.executionState = self.FINISHED
             time.sleep(0.5)
             
         
     def startPlay(self):
         self.tStartPlay = Tools.getTime()
         self.data = pickle.load(file(str(QDir.currentPath()+"/TAPES/"+self.fileName),'rb'))
-        self.isPlayer = True
-        self.taskState = self.PROGRESS
+        self.executionState = self.RUNNING
     
     def setFileName(self,name):
         # try to open the file

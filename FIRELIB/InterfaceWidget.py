@@ -1,7 +1,7 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import sys
-from Tools import *
+import PanTilt,LeapMotion,PypotCreature,InterfaceGroup
 
 class InterfaceTree(QStandardItemModel):
     
@@ -162,7 +162,18 @@ class InterfaceWidget(QWidget):
             parent.insertRow(i.row()+1,item)
             self.wTree.setCurrentIndex(item.index())
 
-
+def createInterface(InterfaceType):
+    if InterfaceType == "PanTilt":
+        newitem = PanTilt.PanTilt()
+    elif InterfaceType == "PypotCreature":
+        newitem = PypotCreature.PypotCreature()
+    elif InterfaceType == "LeapMotion":
+        newitem = LeapMotion.LeapMotion()
+    elif InterfaceType == "Group":
+        newitem = InterfaceGroup.InterfaceGroup()
+    else:
+        newitem = None
+    return newitem
 
 # test bench        
 if __name__ == '__main__':

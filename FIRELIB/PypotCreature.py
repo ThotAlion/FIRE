@@ -1,5 +1,5 @@
 from Connexion import Connexion
-from Interface import Interface as Interface_
+from Interface import Interface
 from numpy import *
 import zmq
 import Tools
@@ -8,12 +8,12 @@ from threading import Thread
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-class PypotCreature(Interface_):
+class PypotCreature(Interface):
     """Interface for robot piloted by IP"""
     
     def __init__(self,name = "PypotCreature",IP = '127.0.0.1',port = '8080'):
         """constructor of Pypot creature"""
-        Interface_.__init__(self,name=name)
+        Interface.__init__(self,name=name)
         # set the IP address
         self._IP = IP
         self._port = port
@@ -23,6 +23,7 @@ class PypotCreature(Interface_):
         self.isSlimy = False
         self.slimyThr = 30
         self.motornames = []
+        self.executionState = self.NOTREADY
         
     def identify(self):
         rootInputs = self._inputs.invisibleRootItem()
@@ -115,19 +116,17 @@ class PypotCreature(Interface_):
             valueInit = 0.0, 
             valueMin = 0, 
             valueMax = Inf))
-        self.executionState = self.READY
-        self.taskState = self.STOPPED
+        self.executionState = self.NOTREADY
         
     
     def start(self):
         self._clientThread = clientThread(self._IP,self._port)
         self._clientThread.start()
-        self.taskState = self.PROGRESS
+        self.executionState = self.READY
         
     def close(self):
         self._clientThread.close()
-        self.executionState = self.READY
-        self.taskState = self.STOPPED
+        self.executionState = self.FINISHED
     
     def deliverOutputs(self,channels):
         robot = self._clientThread._robotIn
@@ -174,13 +173,13 @@ class PypotCreature(Interface_):
         self._clientThread._robotOut = robot
         
     def writeConf(self):
-        conf = Interface_.writeConf(self)
+        conf = Interface.writeConf(self)
         conf["IP"] = self._IP
         conf["port"] = self._port
         return conf
         
     def readConf(self,conf):
-        Interface_.readConf(self,conf)
+        Interface.readConf(self,conf)
         self._IP = conf["IP"]
         self._port = conf["port"]
     

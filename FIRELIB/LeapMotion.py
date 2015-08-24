@@ -1,14 +1,14 @@
 from Connexion import Connexion
-from Interface import Interface as Interface_
+from Interface import Interface
 from numpy import *
 import Leap
 
-class LeapMotion(Interface_):
+class LeapMotion(Interface):
     """Interface for Leap-Motion device"""
     
     def __init__(self,name = "LeapMotion"):
         """constructor of LeapMotion"""
-        Interface_.__init__(self,name=name)
+        Interface.__init__(self,name=name)
         rootInputs = self._inputs.invisibleRootItem()
         rootOutputs = self._outputs.invisibleRootItem()
         
@@ -98,11 +98,15 @@ class LeapMotion(Interface_):
                 valueInit = NaN, 
                 valueMin = -Inf, 
                 valueMax = Inf))
+        self.executionState = self.NOTREADY
                 
     def start(self):
         # instanciate the leap motion
         self._leap = Leap.Controller()
-        self.taskState = self.PROGRESS
+        self.executionState = self.READY
+    
+    def close(self):
+        self.executionState = self.FINISHED
         
     def deliverOutputs(self,channels):
         frame = self._leap.frame()
@@ -134,11 +138,11 @@ class LeapMotion(Interface_):
         return channels
 
     def writeConf(self):
-        conf = Interface_.writeConf(self)
+        conf = Interface.writeConf(self)
         conf["_inputs"] = {}
         conf["_outputs"] = {}
         return conf
         
     def readConf(self,conf):
-        Interface_.readConf(self,conf)        
+        Interface.readConf(self,conf)        
         

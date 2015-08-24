@@ -12,14 +12,13 @@ class Hub(System):
         System.__init__(self,name=name,icon=QIcon("FIRELIB/icons/hub.png"))
         self._index = 1
         self.controlWidget = hubWidget(self)
+        self.executionState = self.NOTREADY
         
     def start(self):
-        self.executionState = self.RUNNING
-        self.taskState = self.PROGRESS
+        self.executionState = self.READY
         
     def close(self):
-        self.executionState = self.READY
-        self.taskState = self.STOPPED
+        self.executionState = self.FINISHED
         
     def deliverOutputs(self,channels):
         for i in range(self._outputs.rowCount()):
