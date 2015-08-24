@@ -6,99 +6,100 @@ import Leap
 class LeapMotion(Interface):
     """Interface for Leap-Motion device"""
     
-    def __init__(self,name = "LeapMotion"):
+    def __init__(self,name = "LeapMotion",withIO = True):
         """constructor of LeapMotion"""
         Interface.__init__(self,name=name)
         rootInputs = self._inputs.invisibleRootItem()
         rootOutputs = self._outputs.invisibleRootItem()
-        
-        
-        # list the interface of the Dynamixel motors
-        # head_z
-        for hand in ["right","left"]:
-            for finger in ["thumb","index","middle","ring","pinky"]:
-                
-                rootOutputs.appendRow(Connexion(hand+"_"+finger+"_tip_position",
-                direction=Connexion.OUT,
-                description = "Position of the "+hand+" "+finger,
-                unit = "m",
-                connectedTo="",
-                valueInit = NaN, 
-                valueMin = -Inf, 
-                valueMax = Inf))
-                
-                rootOutputs.appendRow(Connexion(hand+"_"+finger+"_pitch",
-                direction=Connexion.OUT,
-                description = "Pitch angle of the "+hand+" "+finger,
-                unit = "deg",
-                connectedTo="",
-                valueInit = NaN, 
-                valueMin = -Inf, 
-                valueMax = Inf))
-                
-                rootOutputs.appendRow(Connexion(hand+"_"+finger+"_yaw",
-                direction=Connexion.OUT,
-                description = "Yaw angle of the "+hand+" "+finger,
-                unit = "deg",
-                connectedTo="",
-                valueInit = NaN, 
-                valueMin = -Inf, 
-                valueMax = Inf))
-                
-                rootOutputs.appendRow(Connexion(hand+"_"+finger+"_pointing_vector",
-                direction=Connexion.OUT,
-                description = "Pointing vector of the "+hand+" "+finger,
-                unit = "m",
-                connectedTo="",
-                valueInit = NaN, 
-                valueMin = -Inf, 
-                valueMax = Inf))
-            
-            rootOutputs.appendRow(Connexion(hand+"_hand_position",
-            direction=Connexion.OUT,
-                description = "Position of the "+hand+" hand",
-                unit = "m",
-                connectedTo="",
-                valueInit = NaN, 
-                valueMin = -Inf, 
-                valueMax = Inf))
-                
-            rootOutputs.appendRow(Connexion(hand+"_hand_pitch",
-            direction=Connexion.OUT,
-                description = "Pitch angle of the "+hand+" hand",
-                unit = "deg",
-                connectedTo="",
-                valueInit = NaN, 
-                valueMin = -Inf, 
-                valueMax = Inf))
-                
-            rootOutputs.appendRow(Connexion(hand+"_hand_yaw",
-            direction=Connexion.OUT,
-                description = "Yaw angle of the "+hand+" hand",
-                unit = "deg",
-                connectedTo="",
-                valueInit = NaN, 
-                valueMin = -Inf, 
-                valueMax = Inf))
-                
-            rootOutputs.appendRow(Connexion(hand+"_hand_roll",
-            direction=Connexion.OUT,
-                description = "Roll angle of the "+hand+" hand",
-                unit = "deg",
-                connectedTo="",
-                valueInit = NaN, 
-                valueMin = -Inf, 
-                valueMax = Inf))
-                
-            rootOutputs.appendRow(Connexion(hand+"_hand_normal_vector",
-            direction=Connexion.OUT,
-                description = "Normal vector of the "+hand+" hand",
-                unit = "deg",
-                connectedTo="",
-                valueInit = NaN, 
-                valueMin = -Inf, 
-                valueMax = Inf))
         self.executionState = self.NOTREADY
+        
+        if withIO:
+            # list the interface of the Dynamixel motors
+            # head_z
+            for hand in ["right","left"]:
+                for finger in ["thumb","index","middle","ring","pinky"]:
+                    
+                    rootOutputs.appendRow(Connexion(hand+"_"+finger+"_tip_position",
+                    direction=Connexion.OUT,
+                    description = "Position of the "+hand+" "+finger,
+                    unit = "m",
+                    connectedTo="",
+                    valueInit = NaN, 
+                    valueMin = -Inf, 
+                    valueMax = Inf))
+                    
+                    rootOutputs.appendRow(Connexion(hand+"_"+finger+"_pitch",
+                    direction=Connexion.OUT,
+                    description = "Pitch angle of the "+hand+" "+finger,
+                    unit = "deg",
+                    connectedTo="",
+                    valueInit = NaN, 
+                    valueMin = -Inf, 
+                    valueMax = Inf))
+                    
+                    rootOutputs.appendRow(Connexion(hand+"_"+finger+"_yaw",
+                    direction=Connexion.OUT,
+                    description = "Yaw angle of the "+hand+" "+finger,
+                    unit = "deg",
+                    connectedTo="",
+                    valueInit = NaN, 
+                    valueMin = -Inf, 
+                    valueMax = Inf))
+                    
+                    rootOutputs.appendRow(Connexion(hand+"_"+finger+"_pointing_vector",
+                    direction=Connexion.OUT,
+                    description = "Pointing vector of the "+hand+" "+finger,
+                    unit = "m",
+                    connectedTo="",
+                    valueInit = NaN, 
+                    valueMin = -Inf, 
+                    valueMax = Inf))
+                
+                rootOutputs.appendRow(Connexion(hand+"_hand_position",
+                direction=Connexion.OUT,
+                    description = "Position of the "+hand+" hand",
+                    unit = "m",
+                    connectedTo="",
+                    valueInit = NaN, 
+                    valueMin = -Inf, 
+                    valueMax = Inf))
+                    
+                rootOutputs.appendRow(Connexion(hand+"_hand_pitch",
+                direction=Connexion.OUT,
+                    description = "Pitch angle of the "+hand+" hand",
+                    unit = "deg",
+                    connectedTo="",
+                    valueInit = NaN, 
+                    valueMin = -Inf, 
+                    valueMax = Inf))
+                    
+                rootOutputs.appendRow(Connexion(hand+"_hand_yaw",
+                direction=Connexion.OUT,
+                    description = "Yaw angle of the "+hand+" hand",
+                    unit = "deg",
+                    connectedTo="",
+                    valueInit = NaN, 
+                    valueMin = -Inf, 
+                    valueMax = Inf))
+                    
+                rootOutputs.appendRow(Connexion(hand+"_hand_roll",
+                direction=Connexion.OUT,
+                    description = "Roll angle of the "+hand+" hand",
+                    unit = "deg",
+                    connectedTo="",
+                    valueInit = NaN, 
+                    valueMin = -Inf, 
+                    valueMax = Inf))
+                    
+                rootOutputs.appendRow(Connexion(hand+"_hand_normal_vector",
+                direction=Connexion.OUT,
+                    description = "Normal vector of the "+hand+" hand",
+                    unit = "deg",
+                    connectedTo="",
+                    valueInit = NaN, 
+                    valueMin = -Inf, 
+                    valueMax = Inf))
+            
                 
     def start(self):
         # instanciate the leap motion
@@ -139,8 +140,6 @@ class LeapMotion(Interface):
 
     def writeConf(self):
         conf = Interface.writeConf(self)
-        conf["_inputs"] = {}
-        conf["_outputs"] = {}
         return conf
         
     def readConf(self,conf):

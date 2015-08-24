@@ -11,7 +11,7 @@ from PyQt4.QtCore import *
 class PypotCreature(Interface):
     """Interface for robot piloted by IP"""
     
-    def __init__(self,name = "PypotCreature",IP = '127.0.0.1',port = '8080'):
+    def __init__(self,name = "PypotCreature",IP = '127.0.0.1',port = '8080',withIO = True):
         """constructor of Pypot creature"""
         Interface.__init__(self,name=name)
         # set the IP address

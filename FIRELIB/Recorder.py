@@ -27,7 +27,6 @@ class Recorder(System):
         self.executionState = self.NOTREADY
 
     def start(self):
-        
         self.executionState = self.READY
         
     def init(self):
@@ -102,6 +101,7 @@ class Recorder(System):
     def setFileName(self,name):
         # try to open the file
         self.fileName = name
+        self.configWidget.wFileName.setEditText(self.fileName)
         path = str(QDir.currentPath()+"/TAPES/"+self.fileName)
         if os.path.isfile(path):
             self.data = pickle.load(file(path,'rb'))
@@ -152,6 +152,7 @@ class Recorder(System):
         
     def readConf(self,conf):
         System.readConf(self,conf)
+        print conf["fileName"]
         self.setFileName(conf["fileName"])
         
         
@@ -170,6 +171,7 @@ class recorderConfigWidget(QWidget):
         self.wFileNameLabel = QLabel("File name :")
         self.wFileName = QComboBox()
         self.wFileName.setEditable(True)
+        self.wFileName.setEditText(parent.fileName)
         self.tapeDir = QFileSystemModel()
         self.tapeDir.setRootPath(QDir.currentPath()+"/TAPES/")
         self.tapeDir.setNameFilters(["*.tap"])

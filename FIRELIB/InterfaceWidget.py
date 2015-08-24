@@ -45,7 +45,7 @@ class InterfaceTree(QStandardItemModel):
         
     def readConf(self,conf):
         for a in conf["list"]:
-            int = createInterface(a["name"])
+            int = createInterface(a["name"],withIO = False)
             int.readConf(a)
             self.appendRow(int)
 
@@ -162,15 +162,15 @@ class InterfaceWidget(QWidget):
             parent.insertRow(i.row()+1,item)
             self.wTree.setCurrentIndex(item.index())
 
-def createInterface(InterfaceType):
+def createInterface(InterfaceType,withIO = True):
     if InterfaceType == "PanTilt":
-        newitem = PanTilt.PanTilt()
+        newitem = PanTilt.PanTilt(withIO = withIO)
     elif InterfaceType == "PypotCreature":
-        newitem = PypotCreature.PypotCreature()
+        newitem = PypotCreature.PypotCreature(withIO = withIO)
     elif InterfaceType == "LeapMotion":
-        newitem = LeapMotion.LeapMotion()
+        newitem = LeapMotion.LeapMotion(withIO = withIO)
     elif InterfaceType == "Group":
-        newitem = InterfaceGroup.InterfaceGroup()
+        newitem = InterfaceGroup.InterfaceGroup(withIO = withIO)
     else:
         newitem = None
     return newitem
