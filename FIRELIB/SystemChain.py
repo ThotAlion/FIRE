@@ -1,5 +1,6 @@
 from System import System
 import Hub,Recorder
+from PyQt4.QtGui import *
 
 class SystemChain(System):
     """System containing a chain of systems. Each system will be executed one after another"""
@@ -54,7 +55,7 @@ class SystemChain(System):
         for a in conf["children"]:
             sys = createSystem(a["name"])
             sys.readConf(a)
-            self.appendRow(sys)
+            self.appendRow([sys,QStandardItem(),QStandardItem()])
             
 def createSystem(SystemType):
     if SystemType == "Hub":
