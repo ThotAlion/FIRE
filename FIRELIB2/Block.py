@@ -1,32 +1,32 @@
 from numpy import *
 
-class Block(Object):
+class Block(object):
     """ this class describes a block """
     
-    def __init__(self,default = 0.0, min = -Inf, max = Inf):
-        self.connectedTo = ""
-        self.default = 0.0
-        self.min = -Inf
-        self.max = Inf
+    def __init__(self):
+        self.inputs = {}
+        self.outputs = {}
+        self._active = False
     
-    def getValue(self,f):
-        eq = self.connectedTo
-        if len(eq)>0:
-            listk = f.keys()
-            listk.sort()
-            listk.reverse()
-            for k in listk:
-                eq = eq.replace(k,'f["'+k+'"]')
-            try:
-                a = eval(eq)
-            except:
-                a = self.default
-        else:
-            a = self.default
-        return a
+    @property
+    def active(self):
+        return self._active
+    @active.setter
+    def active(self, val):
+        if self._active == False and val == True:
+            self.init()
+        self._active = val
+            
+    
+    def start(self):
+        print "This function is launched when the system is started"
         
-    def setValue(self,val,f):
-        val = minimum(val,self.max)
-        val = maximum(val,self.min)
-        f[self.connectedTo] = val
-        return f
+    def init(self):
+        print "This function is launched just before running"
+    
+    def getInputs(self,f):
+        print "get inputs to deliver them in the reality."
+        
+    def setOutputs(self,f):
+        print "set outputs in the data flow."
+        

@@ -1,13 +1,13 @@
 from numpy import *
 
-class Connexion(Object):
+class Connexion(object):
     """ this class describes a connexion (formalism is as simple as possible!) """
     
     def __init__(self,default = 0.0, min = -Inf, max = Inf):
         self.connectedTo = ""
-        self.default = 0.0
-        self.min = -Inf
-        self.max = Inf
+        self.default = default
+        self.min = min
+        self.max = max
     
     def getValue(self,f):
         eq = self.connectedTo
