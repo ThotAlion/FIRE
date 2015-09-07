@@ -17,16 +17,14 @@ class Connexion(object):
             listk.reverse()
             for k in listk:
                 eq = eq.replace(k,'f["'+k+'"]')
-            try:
-                a = eval(eq)
-            except:
-                a = self.default
+            a = eval(eq)
         else:
             a = self.default
         return a
         
     def setValue(self,val,f):
-        val = minimum(val,self.max)
-        val = maximum(val,self.min)
-        f[self.connectedTo] = val
+        if len(self.connectedTo)>0:
+            val = minimum(val,self.max)
+            val = maximum(val,self.min)
+            f[self.connectedTo] = val
         return f

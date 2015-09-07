@@ -49,8 +49,6 @@ class Poppy(Block.Block):
             r['goal_position'].append(self.inputs[art]['goal_position'].getValue(f))
             r['compliant'].append(self.inputs[art]['compliant'].getValue(f))
             r['moving_speed'].append(self.inputs[art]['moving_speed'].getValue(f))
-            
-        print self.inputs[art]['compliant'].default
         self.COM._robotOut = r
         
     def setOutputs(self,f):
