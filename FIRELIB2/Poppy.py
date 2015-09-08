@@ -23,8 +23,7 @@ class Poppy(Block.Block):
         
         for art in arti_list:
             self.inputs[art] = {}
-            self.inputs[art]['goal_position'] = Connexion(default = 0.0)
-            self.inputs[art]['compliant'] = Connexion(default = True)
+            self.inputs[art]['goal_position'] = Connexion(default = NaN)
             self.inputs[art]['moving_speed'] = Connexion(default = 0.0)
             self.outputs[art] = {}
             for output in output_list:
@@ -46,8 +45,13 @@ class Poppy(Block.Block):
         r['moving_speed'] = []
         for art in self.inputs:
             r['name'].append(art)
-            r['goal_position'].append(self.inputs[art]['goal_position'].getValue(f))
-            r['compliant'].append(self.inputs[art]['compliant'].getValue(f))
+            a = self.inputs[art]['goal_position'].getValue(f)
+            if isnan(a):
+                r['goal_position'].append(0.0)
+                r['compliant'].append(True)
+            else:
+                r['goal_position'].append(a)
+                r['compliant'].append(False)
             r['moving_speed'].append(self.inputs[art]['moving_speed'].getValue(f))
         self.COM._robotOut = r
         
