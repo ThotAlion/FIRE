@@ -17,7 +17,10 @@ class Connexion(object):
             listk.reverse()
             for k in listk:
                 eq = eq.replace(k,'f["'+k+'"]')
-            a = eval(eq)
+            try:
+                a = eval(eq)
+            except:
+                a = self.default
         else:
             a = self.default
         return a
