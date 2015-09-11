@@ -20,6 +20,7 @@ class Connexion(object):
             try:
                 a = eval(eq)
             except:
+                print eq+" is not evaluable"
                 a = self.default
         else:
             a = self.default

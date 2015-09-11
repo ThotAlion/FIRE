@@ -22,13 +22,12 @@ systems.children['Record'] = FIRELIB2.Recorder.Recorder(['head_y','head_z',
                      'r_hip_x','r_hip_z','r_hip_y','r_knee_y','r_ankle_y',])
 
 for output in interfaces.children['Poppy'].outputs:
-    interfaces.children['Poppy'].outputs[output]['present_position'].connectedTo = output
-    systems.children['Record'].inputs[output].connectedTo = output
+    interfaces.children['Poppy'].outputs[output]['present_position'].connectedTo = " "+output+" "
+    systems.children['Record'].inputs[output].connectedTo = " "+output+" "
 
 for input in interfaces.children['Poppy'].inputs:
-    interfaces.children['Poppy'].inputs[input]['goal_position'].connectedTo = input+'c'
-    systems.children['Record'].outputs[input].connectedTo = input+'c'
-
+    interfaces.children['Poppy'].inputs[input]['goal_position'].connectedTo = " "+input+"c "
+    systems.children['Record'].outputs[input].connectedTo = " "+input+"c "
 
 channels = {}
 

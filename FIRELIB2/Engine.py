@@ -24,8 +24,8 @@ class Engine(QThread):
     def run(self):
         try:
             while True:
-                f = self.Interfaces.setOutputs(self.Channels)
-                f = self.Systems.setOutputs(self.Channels)
+                self.Channels = self.Interfaces.setOutputs(self.Channels)
+                self.Channels = self.Systems.setOutputs(self.Channels)
                 self.Interfaces.getInputs(self.Channels)
                 time.sleep(self.samplingPeriod)
         except:
