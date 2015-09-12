@@ -4,6 +4,7 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from Connexion import *
 import Tools
+import pickle
 
 class Objectives(QAbstractTableModel):
     
@@ -52,6 +53,12 @@ class Objectives(QAbstractTableModel):
         
     def columnCount(self,parent=QModelIndex()):
         return 3
+        
+    def toDict(self):
+        return self.objectiveList
+    
+    def fromDict(self,a):
+        self.objectiveList = a
             
 class Poses(QAbstractTableModel):
     
@@ -78,6 +85,8 @@ class Poses(QAbstractTableModel):
     def setData(self,i,value,role):
         if i.isValid():
             if role == Qt.EditRole:
+                if i.column() == 0:
+                    self.poseList[i.row()]["name"] = str(value.toString())
                 if i.column() == 1:
                     self.poseList[i.row()]["duration"] = value.toDouble()[0]
                 return True
@@ -97,6 +106,26 @@ class Poses(QAbstractTableModel):
         
     def columnCount(self,parent=QModelIndex()):
         return 2
+        
+    def toDict(self):
+        a = []
+        for pose in self.poseList:
+            b = {}
+            b["name"] = pose["name"]
+            b["duration"] = pose["duration"]
+            b["objectives"] = pose["objectives"].toDict()
+            a.append(b)
+        return a
+    
+    def fromDict(self,a):
+        self.poseList = []
+        for pos in a:
+            b = {}
+            b["name"] = pos["name"]
+            b["duration"] = pos["duration"]
+            b["objectives"] = Objectives()
+            b["objectives"].fromDict(pos["objectives"])
+            self.poseList.append(b)
 
 class Recorder(Block.Block,QWidget):
     """ this class describes a recorder """
@@ -124,28 +153,42 @@ class Recorder(Block.Block,QWidget):
         self.poseTable.setModel(self.poseList)
         self.tapeTable = QTableView()
         self.bInsertPose = QPushButton("Insert pose below")
+        self.bCopyPose = QPushButton("Copy pose below")
         self.bDeletePose = QPushButton("Delete pose")
         self.bPlayPose = QPushButton("Play")
-        self.bAcquireAll = QPushButton("Acquire all")
         self.bAcquireSelected = QPushButton("Acquire selected")
+        self.bSave = QPushButton("Save")
+        self.bLoad = QPushButton("Load")
         
         # composition
         mainlayout = QHBoxLayout(self)
+        tapelayout = QVBoxLayout()
+        tapelayout.addWidget(self.bSave)
+        tapelayout.addWidget(self.bLoad)
+        tapelayout.addWidget(self.tapeTable)
+        mainlayout.addLayout(tapelayout)
         poselayout = QVBoxLayout()
         poselayout.addWidget(self.bInsertPose)
+        poselayout.addWidget(self.bCopyPose)
         poselayout.addWidget(self.bDeletePose)
         poselayout.addWidget(self.bPlayPose)
         poselayout.addWidget(self.poseTable)
-        mainlayout.addWidget(self.tapeTable)
         mainlayout.addLayout(poselayout)
-        mainlayout.addWidget(self.objTable)
+        objlayout = QVBoxLayout()
+        objlayout.addWidget(self.bAcquireSelected)
+        objlayout.addWidget(self.objTable)
+        mainlayout.addLayout(objlayout)
         self.show()
     
         # signals
         self.connect(self.bInsertPose,SIGNAL("pressed()"),self.insertPose)
+        self.connect(self.bCopyPose,SIGNAL("pressed()"),self.copyPose)
         self.connect(self.poseTable,SIGNAL("clicked(QModelIndex)"),self.updateObjective)
         self.connect(self.bDeletePose,SIGNAL("pressed()"),self.deletePose)
         self.connect(self.bPlayPose,SIGNAL("pressed()"),self.togglePlay)
+        self.connect(self.bAcquireSelected,SIGNAL("pressed()"),self.acquireSelected)
+        self.connect(self.bSave,SIGNAL("pressed()"),self.save)
+        self.connect(self.bLoad,SIGNAL("pressed()"),self.load)
 
     def insertPose(self):
         i=self.poseTable.currentIndex().row()
@@ -163,6 +206,23 @@ class Recorder(Block.Block,QWidget):
         self.poseList.emit(SIGNAL("layoutAboutToBeChanged()"))
         self.poseList.poseList.insert(i+1,pose)
         self.poseList.emit(SIGNAL("layoutChanged()"))
+        self.updateObjective(i+1)
+        
+    def copyPose(self):
+        i=self.poseTable.currentIndex().row()
+        pose_model = self.poseList.poseList[i]
+        objs = pose_model["objectives"].objectiveList
+        pose = {}
+        pose["name"] = pose_model["name"]
+        pose["duration"] = pose_model["duration"]
+        pose["objectives"] = Objectives([])
+        for obj in objs:
+            pose["objectives"].objectiveList.append(obj.copy())
+        
+        self.poseList.emit(SIGNAL("layoutAboutToBeChanged()"))
+        self.poseList.poseList.insert(i+1,pose)
+        self.poseList.emit(SIGNAL("layoutChanged()"))
+        self.updateObjective(i+1)
         
     def deletePose(self):
         i=self.poseTable.currentIndex().row()
@@ -172,10 +232,13 @@ class Recorder(Block.Block,QWidget):
             self.poseList.emit(SIGNAL("layoutChanged()"))    
         
     def updateObjective(self,i):
-        self.objTable.setModel(self.poseList.poseList[i.row()]["objectives"])
+        if type(i) is QModelIndex:
+            i = i.row()
+        self.objTable.setModel(self.poseList.poseList[i]["objectives"])
         self.t0 = Tools.getTime()
-        self.iCurrentPose = i.row()
+        self.iCurrentPose = i
         self.initPos = self.robot.copy()
+        self.poseTable.selectRow(i)
         
     def togglePlay(self):
         if self.play == 0:
@@ -184,7 +247,27 @@ class Recorder(Block.Block,QWidget):
         else:
             self.play = 0
             self.bPlayPose.setText("Play")
-
+    
+    def acquireSelected(self):
+        iobj = self.objTable.currentIndex().row()
+        ipose = self.poseTable.currentIndex().row()
+        name = self.poseList.poseList[ipose]["objectives"].objectiveList[iobj]["name"]
+        self.poseList.poseList[ipose]["objectives"].emit(SIGNAL("layoutAboutToBeChanged()"))
+        self.poseList.poseList[ipose]["objectives"].objectiveList[iobj]["consign"] = self.robot[name]
+        self.poseList.poseList[ipose]["objectives"].emit(SIGNAL("layoutChanged()"))
+    
+    def save(self):
+        fileName = QFileDialog.getSaveFileName(self,"Save File",QDir.currentPath(),"move sequence (*.seq)");
+        pickle.dump(self.poseList.toDict(),file(fileName,'wb'))
+        
+    def load(self):
+        fileName = QFileDialog.getOpenFileName(self,"Open File",QDir.currentPath(),"move sequence (*.seq)");
+        self.poseList.emit(SIGNAL("layoutAboutToBeChanged()"))
+        self.poseList.fromDict(pickle.load(file(fileName,'rb')))
+        self.poseList.emit(SIGNAL("layoutChanged()"))
+        self.t0 = Tools.getTime()
+        self.iCurrentPose = 0
+        self.initPos = self.robot.copy()
     
     def start(self):
         self.active = True
