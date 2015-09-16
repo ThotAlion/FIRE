@@ -319,6 +319,9 @@ class Recorder(Block.Block,QWidget):
                     b = 3*delta
                     x = self.initPos[obj["name"]] + a*xt*xt*xt+b*xt*xt
                     self.outputs[obj["name"]].setValue(x,f)
+                elif obj["nature"] == 'K':
+                    x = self.initPos[obj["name"]]
+                    self.outputs[obj["name"]].setValue(x,f)
             if xt == 1 and self.play == 1:
                 if self.iCurrentPose<=len(self.poseList.poseList)-2:
                     self.iCurrentPose = self.iCurrentPose+1
