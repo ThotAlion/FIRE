@@ -157,6 +157,11 @@ class Recorder(Block.Block,QWidget):
         self.bDeletePose = QPushButton("Delete pose")
         self.bPlayPose = QPushButton("Play")
         self.bReverse = QPushButton("Reverse")
+        self.sbTimeScaling = QDoubleSpinBox()
+        self.sbTimeScaling.setPrefix("Time scaling :")
+        self.sbTimeScaling.setValue(1.0)
+        self.sbTimeScaling.setSingleStep(0.1)
+        self.sbTimeScaling.setMinimum(0.1)
         self.bAcquireSelected = QPushButton("Acquire selected")
         self.bSave = QPushButton("Save")
         self.bLoad = QPushButton("Load")
@@ -174,6 +179,7 @@ class Recorder(Block.Block,QWidget):
         poselayout.addWidget(self.bDeletePose)
         poselayout.addWidget(self.bPlayPose)
         poselayout.addWidget(self.bReverse)
+        poselayout.addWidget(self.sbTimeScaling)
         poselayout.addWidget(self.poseTable)
         mainlayout.addLayout(poselayout)
         objlayout = QVBoxLayout()
@@ -296,7 +302,7 @@ class Recorder(Block.Block,QWidget):
         
         if self.iCurrentPose>=0 and self.iCurrentPose<=len(self.poseList.poseList)-1:
             pose = self.poseList.poseList[self.iCurrentPose]
-            xt = (Tools.getTime()-self.t0)/pose["duration"]
+            xt = (Tools.getTime()-self.t0)/(pose["duration"]/self.sbTimeScaling.value())
             xt = min(xt,1)
             for obj in pose["objectives"].objectiveList:
                 if obj["nature"] == 'M':
