@@ -1,4 +1,4 @@
-import ConnexionWidget
-import InterfaceWidget
-import SystemWidget
+import Group
+import Poppy
+import Recorder
 import Engine
