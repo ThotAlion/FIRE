@@ -19,7 +19,8 @@ systems.children['Record'] = FIRELIB2.Recorder.Recorder(['head_y','head_z',
                      'l_shoulder_y','l_shoulder_x','l_arm_z','l_elbow_y',
                      'r_shoulder_y','r_shoulder_x','r_arm_z','r_elbow_y',
                      'l_hip_x','l_hip_z','l_hip_y','l_knee_y','l_ankle_y',
-                     'r_hip_x','r_hip_z','r_hip_y','r_knee_y','r_ankle_y',])
+                     'r_hip_x','r_hip_z','r_hip_y','r_knee_y','r_ankle_y',
+                     'r_wrist_z','r_wrist_x','l_wrist_z','l_wrist_x'])
 
 for output in interfaces.children['Poppy'].outputs:
     interfaces.children['Poppy'].outputs[output]['present_position'].connectedTo = " "+output+" "

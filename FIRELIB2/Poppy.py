@@ -20,7 +20,8 @@ class Poppy(Block.Block,QWidget):
                      'l_shoulder_y','l_shoulder_x','l_arm_z','l_elbow_y',
                      'r_shoulder_y','r_shoulder_x','r_arm_z','r_elbow_y',
                      'l_hip_x','l_hip_z','l_hip_y','l_knee_y','l_ankle_y',
-                     'r_hip_x','r_hip_z','r_hip_y','r_knee_y','r_ankle_y']
+                     'r_hip_x','r_hip_z','r_hip_y','r_knee_y','r_ankle_y',
+                     'r_wrist_z','r_wrist_x','l_wrist_z','l_wrist_x']
         input_list = ['goal_position','compliant','moving_speed']
         output_list = ['present_position','present_speed']
         
@@ -80,8 +81,8 @@ class Poppy(Block.Block,QWidget):
             if isnan(a) or \
                 (art in ['head_y','head_z'] and self.headMou.isChecked()) or \
                 (art in ['abs_x','abs_y','abs_z','bust_y','bust_x'] and self.torsoMou.isChecked()) or \
-                (art in ['l_shoulder_y','l_shoulder_x','l_arm_z','l_elbow_y'] and self.lArmMou.isChecked()) or \
-                (art in ['r_shoulder_y','r_shoulder_x','r_arm_z','r_elbow_y'] and self.rArmMou.isChecked()) or \
+                (art in ['l_shoulder_y','l_shoulder_x','l_arm_z','l_elbow_y','l_wrist_z','l_wrist_x'] and self.lArmMou.isChecked()) or \
+                (art in ['r_shoulder_y','r_shoulder_x','r_arm_z','r_elbow_y','r_wrist_z','r_wrist_x'] and self.rArmMou.isChecked()) or \
                 (art in ['l_hip_x','l_hip_z','l_hip_y','l_knee_y','l_ankle_y'] and self.lLegMou.isChecked()) or \
                 (art in ['r_hip_x','r_hip_z','r_hip_y','r_knee_y','r_ankle_y'] and self.rLegMou.isChecked()):
                 r['goal_position'].append(0.0)
