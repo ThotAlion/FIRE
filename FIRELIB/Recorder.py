@@ -162,6 +162,7 @@ class Recorder(Block.Block,QWidget):
         self.sbTimeScaling.setValue(1.0)
         self.sbTimeScaling.setSingleStep(0.1)
         self.sbTimeScaling.setMinimum(0.1)
+        self.cIsCycle = QCheckBox("is a Cycle ?")
         self.bAcquireSelected = QPushButton("Acquire selected")
         self.bSave = QPushButton("Save")
         self.bLoad = QPushButton("Load")
@@ -180,6 +181,7 @@ class Recorder(Block.Block,QWidget):
         poselayout.addWidget(self.bPlayPose)
         poselayout.addWidget(self.bReverse)
         poselayout.addWidget(self.sbTimeScaling)
+        poselayout.addWidget(self.cIsCycle)
         poselayout.addWidget(self.poseTable)
         mainlayout.addLayout(poselayout)
         objlayout = QVBoxLayout()
@@ -325,6 +327,10 @@ class Recorder(Block.Block,QWidget):
             if xt == 1 and self.play == 1:
                 if self.iCurrentPose<=len(self.poseList.poseList)-2:
                     self.iCurrentPose = self.iCurrentPose+1
+                    self.t0 = Tools.getTime()
+                    self.initPos = self.robot.copy()
+                elif self.cIsCycle.isChecked():
+                    self.iCurrentPose = 0
                     self.t0 = Tools.getTime()
                     self.initPos = self.robot.copy()
         return f
