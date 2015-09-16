@@ -156,6 +156,7 @@ class Recorder(Block.Block,QWidget):
         self.bCopyPose = QPushButton("Copy pose below")
         self.bDeletePose = QPushButton("Delete pose")
         self.bPlayPose = QPushButton("Play")
+        self.bReverse = QPushButton("Reverse")
         self.bAcquireSelected = QPushButton("Acquire selected")
         self.bSave = QPushButton("Save")
         self.bLoad = QPushButton("Load")
@@ -172,6 +173,7 @@ class Recorder(Block.Block,QWidget):
         poselayout.addWidget(self.bCopyPose)
         poselayout.addWidget(self.bDeletePose)
         poselayout.addWidget(self.bPlayPose)
+        poselayout.addWidget(self.bReverse)
         poselayout.addWidget(self.poseTable)
         mainlayout.addLayout(poselayout)
         objlayout = QVBoxLayout()
@@ -185,6 +187,7 @@ class Recorder(Block.Block,QWidget):
         self.connect(self.bCopyPose,SIGNAL("pressed()"),self.copyPose)
         self.connect(self.poseTable,SIGNAL("clicked(QModelIndex)"),self.updateObjective)
         self.connect(self.bDeletePose,SIGNAL("pressed()"),self.deletePose)
+        self.connect(self.bReverse,SIGNAL("pressed()"),self.reverse)
         self.connect(self.bPlayPose,SIGNAL("pressed()"),self.togglePlay)
         self.connect(self.bAcquireSelected,SIGNAL("pressed()"),self.acquireSelected)
         self.connect(self.bSave,SIGNAL("pressed()"),self.save)
@@ -247,6 +250,14 @@ class Recorder(Block.Block,QWidget):
         else:
             self.play = 0
             self.bPlayPose.setText("Play")
+    
+    def reverse(self):
+        self.poseList.emit(SIGNAL("layoutAboutToBeChanged()"))
+        self.poseList.poseList.reverse()
+        self.poseList.emit(SIGNAL("layoutChanged()"))
+        self.t0 = Tools.getTime()
+        self.iCurrentPose = 0
+        self.initPos = self.robot.copy()
     
     def acquireSelected(self):
         iobj = self.objTable.currentIndex().row()
