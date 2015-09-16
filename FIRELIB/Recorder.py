@@ -95,9 +95,9 @@ class Poses(QAbstractTableModel):
     
     def flags(self,i):
         if i.isValid():
-            if i.column() in [0]:
+            if i.column() in []:
                 f = Qt.ItemIsEnabled | Qt.ItemIsSelectable
-            if i.column() in [1]:
+            if i.column() in [0,1]:
                 f = Qt.ItemIsEditable | Qt.ItemIsEnabled | Qt.ItemIsSelectable
             return f
             
