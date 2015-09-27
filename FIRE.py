@@ -11,7 +11,8 @@ app = QApplication(sys.argv)
 app.setStyleSheet(style)
 
 interfaces = FIRELIB.Group.Group()
-interfaces.children['Poppy'] = FIRELIB.Poppy.Poppy("192.168.1.20","8080")
+interfaces.children['Poppy'] = FIRELIB.Poppy.Poppy("10.0.0.3","8080")
+interfaces.children['Leap'] = FIRELIB.LeftIndex.LeftIndex()
 
 systems = FIRELIB.Group.Group()
 systems.children['Record'] = FIRELIB.Recorder.Recorder(['head_y','head_z',
@@ -28,8 +29,16 @@ for output in interfaces.children['Poppy'].outputs:
 
 for input in interfaces.children['Poppy'].inputs:
     interfaces.children['Poppy'].inputs[input]['goal_position'].connectedTo = " "+input+"c "
-    systems.children['Record'].outputs[input].connectedTo = " "+input+"c "
+    interfaces.children['Poppy'].inputs[input]['moving_speed'].connectedTo = " "+input+"vc "
+    systems.children['Record'].outputs[input]['position'].connectedTo = " "+input+"c "
+    systems.children['Record'].outputs[input]['speed'].connectedTo = " "+input+"vc "
 
+interfaces.children['Leap'].outputs["index pitch"].connectedTo = " indexpitch "
+interfaces.children['Leap'].outputs["index yaw"].connectedTo = " indexyaw "
+interfaces.children['Poppy'].inputs["head_z"]['goal_position'].connectedTo = "-2* indexyaw "
+interfaces.children['Poppy'].inputs["head_z"]['moving_speed'].connectedTo = "20"
+interfaces.children['Poppy'].inputs["head_y"]['goal_position'].connectedTo = "- indexpitch "
+interfaces.children['Poppy'].inputs["head_y"]['moving_speed'].connectedTo = "10"
 channels = {}
 
 e = FIRELIB.Engine.Engine(interfaces,systems,channels)

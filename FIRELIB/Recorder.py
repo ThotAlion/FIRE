@@ -136,7 +136,9 @@ class Recorder(Block.Block,QWidget):
         # creation of inputs/outputs
         for ch in channelList:
             self.inputs[ch] = Connexion()
-            self.outputs[ch] = Connexion(default = NaN)
+            self.outputs[ch] = {}
+            self.outputs[ch]["position"] = Connexion(default = NaN)
+            self.outputs[ch]["speed"] = Connexion(default = 0.0)
         
         self.robot = {}
         
@@ -308,22 +310,26 @@ class Recorder(Block.Block,QWidget):
             xt = min(xt,1)
             for obj in pose["objectives"].objectiveList:
                 if obj["nature"] == 'M':
-                    self.outputs[obj["name"]].setValue(NaN,f)
+                    self.outputs[obj["name"]]["position"].setValue(NaN,f)
+                    self.outputs[obj["name"]]["speed"].setValue(0,f)
                 elif obj["nature"] == 'PM':
-                    self.outputs[obj["name"]].setValue(self.robot[obj["name"]],f)
+                    self.outputs[obj["name"]]["position"].setValue(self.robot[obj["name"]],f)
+                    self.outputs[obj["name"]]["speed"].setValue(0,f)
                 elif obj["nature"] == 'L':
                     delta = obj["consign"] - self.initPos[obj["name"]]
-                    x = self.initPos[obj["name"]] + delta*xt
-                    self.outputs[obj["name"]].setValue(x,f)
+                    self.outputs[obj["name"]]["position"].setValue(obj["consign"],f)
+                    self.outputs[obj["name"]]["speed"].setValue(delta/(pose["duration"]/self.sbTimeScaling.value()),f)
                 elif obj["nature"] == 'S':
                     delta = obj["consign"] - self.initPos[obj["name"]]
                     a = -2*delta
                     b = 3*delta
                     x = self.initPos[obj["name"]] + a*xt*xt*xt+b*xt*xt
-                    self.outputs[obj["name"]].setValue(x,f)
+                    self.outputs[obj["name"]]["position"].setValue(x,f)
+                    self.outputs[obj["name"]]["speed"].setValue(0,f)
                 elif obj["nature"] == 'K':
                     x = self.initPos[obj["name"]]
-                    self.outputs[obj["name"]].setValue(x,f)
+                    self.outputs[obj["name"]]["position"].setValue(x,f)
+                    self.outputs[obj["name"]]["speed"].setValue(0,f)
             if xt == 1 and self.play == 1:
                 if self.iCurrentPose<=len(self.poseList.poseList)-2:
                     self.iCurrentPose = self.iCurrentPose+1

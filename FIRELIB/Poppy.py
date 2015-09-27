@@ -6,6 +6,7 @@ from Connexion import *
 import zmq
 from threading import Thread
 import Tools
+import time
 
 class Poppy(Block.Block,QWidget):
     """ this class describes a block """
@@ -115,8 +116,49 @@ class clientThread(Thread):
         self._robotIn = {}
         self._robotOut = {}
         self._active = True
+        self.poll = zmq.Poller()
+        self.poll.register(self._socket,zmq.POLLIN)
         
     def run(self):
+        send = 0
+        while self._active:
+            t0 = Tools.getTime()
+            if send == 0:
+                req = {"robot":{"get_all_register_values":{}}}
+            else:
+                req = {"robot":{"set_all_register_values":{"dict":self._robotOut}}} 
+            self._socket.send_json(req)
+            expect = True
+            while expect:
+                socks = dict(self.poll.poll(100))
+                #print socks.get(self._socket)
+                if socks.get(self._socket) == zmq.POLLIN:
+                    #print "t1"
+                    reply = self._socket.recv_json()
+                    #print reply
+                    if not reply:
+                        break
+                    else:
+                        if send == 0:
+                            self._robotIn = reply
+                        expect = False
+                else:
+                    print "reconnect"
+                    self._socket.setsockopt(zmq.LINGER, 0)
+                    self._socket.close()
+                    self.poll.unregister(self._socket)
+                    self._socket = self._context.socket(zmq.REQ)
+                    self._socket.connect("tcp://"+self._IP+":"+self._port)
+                    self.poll.register(self._socket,zmq.POLLIN)
+                    self._socket.send_json(req)
+            if send == 0:
+                send = 1
+            else:
+                send = 0
+            while Tools.getTime()-t0<0.02:
+                a=1
+    
+    def run_old(self):
         while self._active:
             t0 = Tools.getTime()
             req = {"robot":{"get_all_register_values":{}}}
