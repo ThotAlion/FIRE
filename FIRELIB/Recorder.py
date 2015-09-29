@@ -144,6 +144,7 @@ class Recorder(Block.Block,QWidget):
         
         self.poseList = Poses()
         self.objectiveList = Objectives()
+        self.backPose = Objectives()
         
         self.t0 = Tools.getTime()
         self.iCurrentPose = -1
@@ -156,9 +157,13 @@ class Recorder(Block.Block,QWidget):
         self.tapeTable = QTableView()
         self.tapeDir = QFileSystemModel()
         self.tapeDir.setRootPath(QDir.currentPath()+"/TAPES/")
-        print QDir.currentPath()+"/"
         self.tapeTable.setModel(self.tapeDir)
         self.tapeTable.setRootIndex(self.tapeDir.index(QDir.currentPath()+"/TAPES/"))
+        self.cBackPose = QComboBox()
+        self.cBackPose.setModel(self.tapeDir)
+        self.cBackPose.setRootModelIndex(self.tapeDir.index(QDir.currentPath()+"/TAPES/"))
+        imou = self.tapeDir.index(QDir.currentPath()+"/TAPES/_mou.seq")
+        self.cBackPose.setCurrentIndex(imou.row())
         self.bInsertPose = QPushButton("Insert pose below")
         self.bCopyPose = QPushButton("Copy pose below")
         self.bDeletePose = QPushButton("Delete pose")
@@ -180,6 +185,7 @@ class Recorder(Block.Block,QWidget):
         tapelayout = QVBoxLayout()
         tapelayout.addWidget(self.bSave)
         tapelayout.addWidget(self.bLoad)
+        tapelayout.addWidget(self.cBackPose)
         tapelayout.addWidget(self.tapeTable)
         mainlayout.addLayout(tapelayout)
         poselayout = QVBoxLayout()
@@ -204,6 +210,7 @@ class Recorder(Block.Block,QWidget):
         self.connect(self.bCopyPose,SIGNAL("pressed()"),self.copyPose)
         self.connect(self.poseTable,SIGNAL("clicked(QModelIndex)"),self.updateObjective)
         self.connect(self.tapeTable,SIGNAL("clicked(QModelIndex)"),self.loadSeq)
+        self.connect(self.cBackPose,SIGNAL("currentIndexChanged (QString)"),self.loadBackPose)
         self.connect(self.bDeletePose,SIGNAL("pressed()"),self.deletePose)
         self.connect(self.bReverse,SIGNAL("pressed()"),self.reverse)
         self.connect(self.bPlayPose,SIGNAL("pressed()"),self.togglePlay)
@@ -323,6 +330,11 @@ class Recorder(Block.Block,QWidget):
         if self.cIsCycle.isChecked():
             self.cIsCycle.setCheckState(Qt.Unchecked)
     
+    def loadBackPose(self,filename):
+        a = pickle.load(file(QDir.currentPath()+"/TAPES/"+filename,'rb'))
+        self.backPose.fromDict(a[0])
+        
+    
     def start(self):
         self.active = True
         
@@ -341,7 +353,7 @@ class Recorder(Block.Block,QWidget):
             pose = self.poseList.poseList[self.iCurrentPose]
             xt = (Tools.getTime()-self.t0)/(pose["duration"]/self.sbTimeScaling.value())
             xt = min(xt,1)
-            for obj in pose["objectives"].objectiveList:
+            for obj in self.backPose.objectiveList:
                 if obj["nature"] == 'M':
                     self.outputs[obj["name"]]["position"].setValue(NaN,f)
                     self.outputs[obj["name"]]["speed"].setValue(0,f)
@@ -363,6 +375,27 @@ class Recorder(Block.Block,QWidget):
                     x = self.initPos[obj["name"]]
                     self.outputs[obj["name"]]["position"].setValue(x,f)
                     self.outputs[obj["name"]]["speed"].setValue(0,f)
+                    
+            for obj in pose["objectives"].objectiveList:
+                if obj["nature"] == 'PM':
+                    self.outputs[obj["name"]]["position"].setValue(self.robot[obj["name"]],f)
+                    self.outputs[obj["name"]]["speed"].setValue(0,f)
+                elif obj["nature"] == 'L':
+                    delta = obj["consign"] - self.initPos[obj["name"]]
+                    self.outputs[obj["name"]]["position"].setValue(obj["consign"],f)
+                    self.outputs[obj["name"]]["speed"].setValue(delta/(pose["duration"]/self.sbTimeScaling.value()),f)
+                elif obj["nature"] == 'S':
+                    delta = obj["consign"] - self.initPos[obj["name"]]
+                    a = -2*delta
+                    b = 3*delta
+                    x = self.initPos[obj["name"]] + a*xt*xt*xt+b*xt*xt
+                    self.outputs[obj["name"]]["position"].setValue(x,f)
+                    self.outputs[obj["name"]]["speed"].setValue(0,f)
+                elif obj["nature"] == 'K':
+                    x = self.initPos[obj["name"]]
+                    self.outputs[obj["name"]]["position"].setValue(x,f)
+                    self.outputs[obj["name"]]["speed"].setValue(0,f)        
+                    
             if xt == 1 and self.play == 1:
                 if self.iCurrentPose<=len(self.poseList.poseList)-2:
                     self.iCurrentPose = self.iCurrentPose+1
