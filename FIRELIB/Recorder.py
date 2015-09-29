@@ -154,6 +154,11 @@ class Recorder(Block.Block,QWidget):
         self.poseTable = QTableView()
         self.poseTable.setModel(self.poseList)
         self.tapeTable = QTableView()
+        self.tapeDir = QFileSystemModel()
+        self.tapeDir.setRootPath(QDir.currentPath()+"/TAPES/")
+        print QDir.currentPath()+"/"
+        self.tapeTable.setModel(self.tapeDir)
+        self.tapeTable.setRootIndex(self.tapeDir.index(QDir.currentPath()+"/TAPES/"))
         self.bInsertPose = QPushButton("Insert pose below")
         self.bCopyPose = QPushButton("Copy pose below")
         self.bDeletePose = QPushButton("Delete pose")
@@ -166,6 +171,7 @@ class Recorder(Block.Block,QWidget):
         self.sbTimeScaling.setMinimum(0.1)
         self.cIsCycle = QCheckBox("is a Cycle ?")
         self.bAcquireSelected = QPushButton("Acquire selected")
+        self.bAcquireAll = QPushButton("Acquire All")
         self.bSave = QPushButton("Save")
         self.bLoad = QPushButton("Load")
         
@@ -188,6 +194,7 @@ class Recorder(Block.Block,QWidget):
         mainlayout.addLayout(poselayout)
         objlayout = QVBoxLayout()
         objlayout.addWidget(self.bAcquireSelected)
+        objlayout.addWidget(self.bAcquireAll)
         objlayout.addWidget(self.objTable)
         mainlayout.addLayout(objlayout)
         self.show()
@@ -196,10 +203,12 @@ class Recorder(Block.Block,QWidget):
         self.connect(self.bInsertPose,SIGNAL("pressed()"),self.insertPose)
         self.connect(self.bCopyPose,SIGNAL("pressed()"),self.copyPose)
         self.connect(self.poseTable,SIGNAL("clicked(QModelIndex)"),self.updateObjective)
+        self.connect(self.tapeTable,SIGNAL("clicked(QModelIndex)"),self.loadSeq)
         self.connect(self.bDeletePose,SIGNAL("pressed()"),self.deletePose)
         self.connect(self.bReverse,SIGNAL("pressed()"),self.reverse)
         self.connect(self.bPlayPose,SIGNAL("pressed()"),self.togglePlay)
         self.connect(self.bAcquireSelected,SIGNAL("pressed()"),self.acquireSelected)
+        self.connect(self.bAcquireAll,SIGNAL("pressed()"),self.acquireAll)
         self.connect(self.bSave,SIGNAL("pressed()"),self.save)
         self.connect(self.bLoad,SIGNAL("pressed()"),self.load)
 
@@ -276,6 +285,13 @@ class Recorder(Block.Block,QWidget):
         self.poseList.poseList[ipose]["objectives"].emit(SIGNAL("layoutAboutToBeChanged()"))
         self.poseList.poseList[ipose]["objectives"].objectiveList[iobj]["consign"] = self.robot[name]
         self.poseList.poseList[ipose]["objectives"].emit(SIGNAL("layoutChanged()"))
+        
+    def acquireAll(self):
+        ipose = self.poseTable.currentIndex().row()
+        for obj in self.poseList.poseList[ipose]["objectives"].objectiveList:
+            name = obj["name"]
+            obj["consign"] = self.robot[name]
+            
     
     def save(self):
         fileName = QFileDialog.getSaveFileName(self,"Save File",QDir.currentPath(),"move sequence (*.seq)");
@@ -289,6 +305,23 @@ class Recorder(Block.Block,QWidget):
         self.t0 = Tools.getTime()
         self.iCurrentPose = 0
         self.initPos = self.robot.copy()
+        if self.play == 1:
+            self.togglePlay()
+        if self.cIsCycle.isChecked():
+            self.cIsCycle.setCheckState(Qt.Unchecked)
+    
+    def loadSeq(self,i):
+        fileName = self.tapeDir.filePath(i)
+        self.poseList.emit(SIGNAL("layoutAboutToBeChanged()"))
+        self.poseList.fromDict(pickle.load(file(fileName,'rb')))
+        self.poseList.emit(SIGNAL("layoutChanged()"))
+        self.t0 = Tools.getTime()
+        self.iCurrentPose = 0
+        self.initPos = self.robot.copy()
+        if self.play == 1:
+            self.togglePlay()
+        if self.cIsCycle.isChecked():
+            self.cIsCycle.setCheckState(Qt.Unchecked)
     
     def start(self):
         self.active = True

@@ -41,6 +41,8 @@ class Poppy(Block.Block,QWidget):
         self.lLegMou = QCheckBox("Force left leg mou")
         self.rArmMou = QCheckBox("Force right arm mou")
         self.lArmMou = QCheckBox("Force left arm mou")
+        self.tempLabel = QLabel("Max Temp : 0deg")
+        self.voltLabel = QLabel("Min Voltage : 0V")
         
         # composition
         mainlayout = QVBoxLayout(self)
@@ -51,6 +53,9 @@ class Poppy(Block.Block,QWidget):
         mainlayout.addWidget(self.lLegMou)
         mainlayout.addWidget(self.rArmMou)
         mainlayout.addWidget(self.lArmMou)
+        mainlayout.addWidget(self.tempLabel)
+        mainlayout.addWidget(self.voltLabel)
+        
         # signals
         self.connect(self.allMou,SIGNAL("toggled(bool)"),self.torsoMou,SLOT("setChecked(bool)"))
         self.connect(self.allMou,SIGNAL("toggled(bool)"),self.headMou,SLOT("setChecked(bool)"))
@@ -101,6 +106,8 @@ class Poppy(Block.Block,QWidget):
                 art = r['name'][i]
                 self.outputs[art]['present_position'].setValue(r['present_position'][i],f)
                 self.outputs[art]['present_speed'].setValue(r['present_speed'][i],f)
+            self.tempLabel.setText("Max Temp : "+str(max(r["present_temperature"]))+"deg")
+            self.voltLabel.setText("Min voltage : "+str(min(r["present_voltage"]))+"V")
         return f
         
 class clientThread(Thread):
