@@ -406,5 +406,6 @@ class Recorder(Block.Block,QWidget):
                     self.iCurrentPose = 0
                     self.t0 = Tools.getTime()
                     self.initPos = self.robot.copy()
+                self.updateObjective(self.iCurrentPose)
         return f
         
