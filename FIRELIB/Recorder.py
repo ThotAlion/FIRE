@@ -145,6 +145,7 @@ class Recorder(Block.Block,QWidget):
         self.poseList = Poses()
         self.objectiveList = Objectives()
         self.backPose = Objectives()
+        self.loadBackPose('_mou.seq')
         
         self.t0 = Tools.getTime()
         self.iCurrentPose = -1
@@ -210,7 +211,7 @@ class Recorder(Block.Block,QWidget):
         self.connect(self.bCopyPose,SIGNAL("pressed()"),self.copyPose)
         self.connect(self.poseTable,SIGNAL("clicked(QModelIndex)"),self.updateObjective)
         self.connect(self.tapeTable,SIGNAL("clicked(QModelIndex)"),self.loadSeq)
-        self.connect(self.cBackPose,SIGNAL("currentIndexChanged (QString)"),self.loadBackPose)
+        self.connect(self.cBackPose,SIGNAL("currentIndexChanged(QString)"),self.loadBackPose)
         self.connect(self.bDeletePose,SIGNAL("pressed()"),self.deletePose)
         self.connect(self.bReverse,SIGNAL("pressed()"),self.reverse)
         self.connect(self.bPlayPose,SIGNAL("pressed()"),self.togglePlay)
@@ -332,7 +333,7 @@ class Recorder(Block.Block,QWidget):
     
     def loadBackPose(self,filename):
         a = pickle.load(file(QDir.currentPath()+"/TAPES/"+filename,'rb'))
-        self.backPose.fromDict(a[0])
+        self.backPose.fromDict(a[0]["objectives"])
         
     
     def start(self):
@@ -375,7 +376,7 @@ class Recorder(Block.Block,QWidget):
                     x = self.initPos[obj["name"]]
                     self.outputs[obj["name"]]["position"].setValue(x,f)
                     self.outputs[obj["name"]]["speed"].setValue(0,f)
-                    
+            
             for obj in pose["objectives"].objectiveList:
                 if obj["nature"] == 'PM':
                     self.outputs[obj["name"]]["position"].setValue(self.robot[obj["name"]],f)
