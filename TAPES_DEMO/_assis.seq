@@ -2,7 +2,7 @@
 (dp1
 S'duration'
 p2
-F5.0
+I1
 sS'objectives'
 p3
 (lp4
@@ -406,8 +406,7 @@ S'l_shoulder_y'
 p162
 sg19
 g20
-sasS'name'
-p163
+sasg17
 S'assis'
-p164
+p163
 sa.

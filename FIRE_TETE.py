@@ -33,13 +33,6 @@ for input in interfaces.children['Poppy'].inputs:
     systems.children['Record'].outputs[input]['position'].connectedTo = " "+input+"c "
     systems.children['Record'].outputs[input]['speed'].connectedTo = " "+input+"vc "
 
-interfaces.children['Leap'].outputs["index pitch"].connectedTo = " indexpitch "
-interfaces.children['Leap'].outputs["index yaw"].connectedTo = " indexyaw "
-
-interfaces.children['Poppy'].inputs["r_arm_z"]['goal_position'].connectedTo = interfaces.children['Poppy'].inputs["r_arm_z"]['goal_position'].connectedTo+" -2* indexyaw "
-
-interfaces.children['Poppy'].inputs["r_elbow_y"]['goal_position'].connectedTo = interfaces.children['Poppy'].inputs["r_elbow_y"]['goal_position'].connectedTo+" - indexpitch "
-
 channels = {}
 
 e = FIRELIB.Engine.Engine(interfaces,systems,channels)
