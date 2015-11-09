@@ -116,9 +116,9 @@ class clientThread(Thread):
         while self._active:
             t0 = Tools.getTime()
             if send == 0:
-                req = {"robot":{"get_primitive_property":{"primitive":"lutin","property":"robot"}}}
+                req = {"robot":{"get_primitive_property":{"primitive":"lutin","property":"present_pose"}}}
             else:
-                req = {"robot":{"set_primitive_property":{"primitive":"lutin","property":"pose","value":self._robotOut}}} 
+                req = {"robot":{"set_primitive_property":{"primitive":"lutin","property":"goal_pose","value":self._robotOut}}} 
             self._socket.send_json(req)
             expect = True
             while expect:
