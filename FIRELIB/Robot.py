@@ -4,6 +4,7 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from Connexion import *
 import zmq
+import json
 from threading import Thread
 import Tools
 import time
@@ -118,7 +119,7 @@ class clientThread(Thread):
             if send == 0:
                 req = {"robot":{"get_primitive_property":{"primitive":"lutin","property":"present_pose"}}}
             else:
-                req = {"robot":{"set_primitive_property":{"primitive":"lutin","property":"goal_pose","value":self._robotOut}}} 
+                req = {"robot":{"set_primitive_property":{"primitive":"lutin","property":"goal_pose","value":json.dumps(self._robotOut)}}} 
             self._socket.send_json(req)
             expect = True
             while expect:
