@@ -14,6 +14,7 @@ class Group(Block.Block):
         
     def init(self):
         for b in self.children:
+            self.children[b].init()
             self.children[b].active==True
     
     def getInputs(self,f):

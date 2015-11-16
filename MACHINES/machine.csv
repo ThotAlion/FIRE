@@ -1,0 +1,11 @@
+Name;sig1;sig2;sig3;SPACE;trans1;trans2;trans3
+premier;0;0;toto;;1;1;2
+deuxieme;1;0;titi;;2;2;3
+troisieme;0;1;tata;;3;5;4
+quatrieme;1;1;special;;4;5;5
+cinquieme;1;1;special;;4;5;5
+sixieme;1;1;special;;4;5;5
+septieme;1;1;special;;4;5;5
+huitieme;1;1;special;;4;5;5
+neuvieme;1;1;special;;4;5;5
+error;1;0;autre;;5;5;1

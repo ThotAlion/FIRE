@@ -23,11 +23,15 @@ class Engine(QThread):
         
     def run(self):
         try:
+            self.Interfaces.init()
+            self.Systems.init()
             while True:
+                t0 = Tools.getTime()
                 self.Channels = self.Interfaces.setOutputs(self.Channels)
                 self.Channels = self.Systems.setOutputs(self.Channels)
                 self.Interfaces.getInputs(self.Channels)
-                time.sleep(self.samplingPeriod)
+                while Tools.getTime()-t0 <= self.samplingPeriod:
+                    a=1
         except:
             (type,value,traceback) = sys.exc_info()
             sys.excepthook(type, value, traceback)

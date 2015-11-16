@@ -18,29 +18,31 @@ class CSVPlayer(Block.Block):
             self.outputs[name] = Connexion(default = NaN)
         self.outputs["Number"] = Connexion(default = "-1")
         self.index = 0
-        self.number = -1
+        self.number = 0
         
 
     def start(self):
-        self.t0 = Tools.getTime()
         self.active = True
         
     def init(self):
         self.index = 0
+        self.t0 = Tools.getTime()
     
     def getInputs(self,f):
         a=1
         
     def setOutputs(self,f):
         t = Tools.getTime()
-        duration = self.tape[self.index]["Duration"]
-        if t-self.t0>=duration and self.index<=len(self.tape)-1:
+        duration = float(self.tape[self.index]["Duration"])
+        #print [t,self.t0,duration,self.index]
+        if (t-self.t0)>=duration and self.index<=len(self.tape)-2:
             self.index = self.index+1
-            self.t0 = Tools.getTime()
+            self.t0 = t
             self.number = self.number+1
-        for name in r.fieldnames:
+        
+        for name in self.tape[self.index]:
             self.outputs[name].setValue(self.tape[self.index][name],f)
-        self.outputs[Number].setValue(str(self.number),f)
+        self.outputs["Number"].setValue(str(self.number),f)
         return f
            
     def close(self):

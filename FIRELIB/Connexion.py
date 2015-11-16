@@ -28,7 +28,10 @@ class Connexion(object):
         
     def setValue(self,val,f):
         if len(self.connectedTo)>0:
-            val = minimum(val,self.max)
-            val = maximum(val,self.min)
-            f[self.connectedTo] = val
+            if type(val) == str:
+                f[self.connectedTo] = val
+            else:
+                val = minimum(val,self.max)
+                val = maximum(val,self.min)
+                f[self.connectedTo] = val
         return f
