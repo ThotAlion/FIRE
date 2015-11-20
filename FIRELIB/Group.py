@@ -13,18 +13,14 @@ class Group(Block.Block):
             self.children[b].start()
         
     def init(self):
-        for b in self.children:
-            self.children[b].init()
-            self.children[b].active==True
+        a=1
     
     def getInputs(self,f):
         for b in self.children:
-            if self.children[b].active:
-                self.children[b].getInputs(f)
+            self.children[b]._getInputs(f)
         
     def setOutputs(self,f):
         for b in self.children:
-            if self.children[b].active:
-                f = self.children[b].setOutputs(f)
+            f = self.children[b]._setOutputs(f)
         return f
         

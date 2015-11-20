@@ -307,12 +307,13 @@ class CSVRecorder(Block.Block,QWidget):
         pose["name"] = "toto"
         pose["duration"] = 1
         pose["objectives"] = Objectives([])
-        for ch in self.inputs:
-            obj = {}
-            obj['name'] = ch
-            obj['nature'] = 'L'
-            obj['consign'] = self.robot[ch]
-            pose["objectives"].objectiveList.append(obj)
+        for member in self.members:
+            for ch in self.members[member]:
+                obj = {}
+                obj['name'] = ch
+                obj['nature'] = 'L'
+                obj['consign'] = float(self.robot[ch])
+                pose["objectives"].objectiveList.append(obj)
         
         self.poseList.emit(SIGNAL("layoutAboutToBeChanged()"))
         self.poseList.poseList.insert(i+1,pose)
@@ -387,6 +388,7 @@ class CSVRecorder(Block.Block,QWidget):
         self.objTable.setModel(self.poseList.poseList[i]["objectives"])
         self.t0 = Tools.getTime()
         self.iCurrentPose = i
+        self.number = self.number+1
         self.initPos = self.robot.copy()
         self.poseTable.selectRow(i)
         
@@ -441,7 +443,17 @@ class CSVRecorder(Block.Block,QWidget):
         fileName = QFileDialog.getOpenFileName(self,"Open File",QDir.currentPath(),"move sequence (*.seq *.csv)");
         if fileName[-3:] == 'seq':
             self.poseList.emit(SIGNAL("layoutAboutToBeChanged()"))
-            self.poseList.fromDict(pickle.load(file(fileName,'rb')))
+            # transformation for shoulder_x
+            a = pickle.load(file(fileName,'rb'))
+            for p in a:
+                for m in p["objectives"]:
+                    if m["name"] == "r_shoulder_x":
+                        m["consign"] = m["consign"]+90.0
+                    if m["name"] == "l_shoulder_x":
+                        m["consign"] = m["consign"]-90.0
+                    if m["nature"] == "L":
+                        m["nature"] = "S"
+            self.poseList.fromDict(a)
             self.poseList.emit(SIGNAL("layoutChanged()"))
         elif fileName[-3:] == 'csv':
             a = []
@@ -464,7 +476,17 @@ class CSVRecorder(Block.Block,QWidget):
         fileName = self.tapeDir.filePath(i)
         if fileName[-3:] == 'seq':
             self.poseList.emit(SIGNAL("layoutAboutToBeChanged()"))
-            self.poseList.fromDict(pickle.load(file(fileName,'rb')))
+            # transformation for shoulder_x
+            a = pickle.load(file(fileName,'rb'))
+            for p in a:
+                for m in p["objectives"]:
+                    if m["name"] == "r_shoulder_x":
+                        m["consign"] = m["consign"]+90.0
+                    if m["name"] == "l_shoulder_x":
+                        m["consign"] = m["consign"]-90.0
+                    if m["nature"] == "L":
+                        m["nature"] = "S"
+            self.poseList.fromDict(a)
             self.poseList.emit(SIGNAL("layoutChanged()"))
         elif fileName[-3:] == 'csv':
             a = []
@@ -489,7 +511,7 @@ class CSVRecorder(Block.Block,QWidget):
         
     
     def start(self):
-        self.active = True
+        a=1
         
     def init(self):
         print "This function is launched just before running"
@@ -499,9 +521,9 @@ class CSVRecorder(Block.Block,QWidget):
         
     def setOutputs(self,f):
         # recup the position of the robot
-        for ch in self.inputs:
-            self.robot[ch] = self.inputs[ch].getValue(f)
-        
+        for member in self.members:
+            for ch in self.members[member]:
+                self.robot[ch] = self.inputs[ch].getValue(f)
         if self.iCurrentPose>=0 and self.iCurrentPose<=len(self.poseList.poseList)-1:
             t = Tools.getTime()
             tape = self.poseList.toDictCSV()
@@ -519,7 +541,10 @@ class CSVRecorder(Block.Block,QWidget):
                     self.number = self.number+1
                 self.poseTable.selectRow(self.iCurrentPose)
             for name in tape[self.iCurrentPose]:
-                self.outputs[name].setValue(tape[self.iCurrentPose][name],f)
+                if name == "Duration":
+                    self.outputs["Duration"].setValue(str(round(duration*100)/100),f)
+                else:
+                    self.outputs[name].setValue(tape[self.iCurrentPose][name],f)
             self.outputs["Number"].setValue(str(self.number),f)
         return f
         

@@ -400,7 +400,7 @@ class Recorder(Block.Block,QWidget):
         
     
     def start(self):
-        self.active = True
+        a=1
         
     def init(self):
         print "This function is launched just before running"

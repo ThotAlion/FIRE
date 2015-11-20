@@ -19,7 +19,7 @@ class xboxPad(Block.Block):
 
     def start(self):
         self.j = pygame.joystick.Joystick(0)
-        self.active = True
+        
         
     def init(self):
         a=1

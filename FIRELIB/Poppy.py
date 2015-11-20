@@ -73,7 +73,6 @@ class Poppy(Block.Block,QWidget):
     def start(self):
         self.COM = clientThread(self.IP,self.port)
         self.COM.start()
-        self.active = True
         
     def init(self):
         a=1

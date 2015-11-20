@@ -22,7 +22,7 @@ class CSVPlayer(Block.Block):
         
 
     def start(self):
-        self.active = True
+        a=1
         
     def init(self):
         self.index = 0

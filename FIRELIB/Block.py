@@ -1,4 +1,5 @@
 from numpy import *
+import Connexion
 
 class Block(object):
     """ this class describes a block """
@@ -6,27 +7,36 @@ class Block(object):
     def __init__(self):
         self.inputs = {}
         self.outputs = {}
+        self.inputs["activate"] = Connexion.Connexion("0")
+        self.outputs["finished"] = Connexion.Connexion("0")
         self._active = False
-    
-    @property
-    def active(self):
-        return self._active
-    @active.setter
-    def active(self, val):
-        if self._active == False and val == True:
-            self.init()
-        self._active = val
-            
-    
+
     def start(self):
         print "This function is launched when the system is started"
         
     def init(self):
         print "This function is launched just before running"
     
+    
+    def _getInputs(self,f):
+        if self._active == True:
+            self.getInputs(f)
+    
     def getInputs(self,f):
         print "get inputs to deliver them in the reality."
         
+    def _setOutputs(self,f):
+        if self._active == False and self.inputs["activate"].getValue(f) == 1:
+            self.init()
+            self._active = True
+        elif self.inputs["activate"].getValue(f) == 0:
+            self._active = False
+            
+        if self._active == True:
+            f = self.setOutputs(f)
+        return f
+        
     def setOutputs(self,f):
         print "set outputs in the data flow."
+        return f
         

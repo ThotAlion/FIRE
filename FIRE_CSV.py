@@ -21,11 +21,16 @@ members["right leg"] = ['r_hip_x','r_hip_z','r_hip_y','r_knee_y','r_ankle_y']
 
 
 interfaces = FIRELIB.Group.Group()
-interfaces.children['Poppy'] = FIRELIB.Robot.Robot(members,"10.0.0.3","8080")
+interfaces.inputs["activate"].connectedTo = "1"
+interfaces.children['Poppy'] = FIRELIB.Robot.Robot(members,"10.0.0.2","8080")
+interfaces.children['Poppy'].inputs["activate"].connectedTo = "1"
 
 systems = FIRELIB.Group.Group()
+systems.inputs["activate"].connectedTo = "1"
 systems.children['Machine'] = FIRELIB.FiniteStateMachine.FiniteStateMachine("MACHINES/machine.csv")
+
 systems.children['CSVRecorder'] = FIRELIB.CSVRecorder.CSVRecorder(members)
+systems.children['CSVRecorder'].inputs["activate"].connectedTo = "1"
 
 for member in members:
     for art in members[member]:
