@@ -28,16 +28,22 @@ It gives to the robot an order via a meta-order using pose language :
  - "S80" : the motor goes to the consign (here 80) and finishes at a zero speed with the initial speed taken from the previous pose
  - "K" : the motor is blocked to its current position
  - "I50" : the motor is set to the consign (here 50) instantaneously
+ - 
 ### Poppy (and uniPoppy)
 This is an old version of the Robot block dedicated to Poppy robot.
+
 ### CSVRecorder (Recorder is an old version)
 This block is a player and an editor of choregraphies to produce CSV files editable in Excel.
+
 ### FiniteStateMachine
 This block is designed to manage all the other blocks using a mosaic screen. It is useful to have visibility during a show.
+
 ### LeftIndex
 This block is an interface with the Leap Motion to recup the left index pitch and yaw.
+
 ### CSVPlayer
 This block is a simplification of CSVRecorder the editor and graphic interface are remove. The block just plays a CSV when activated.
+
 ### xboxPad
 This block is an interface to xbox pad (under construction)
 
