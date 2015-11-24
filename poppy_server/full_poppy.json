@@ -40,7 +40,7 @@
 			"type": "MX-28",
 			"orientation": "indirect",
 			"offset": 0,
-			"angle_limit": [-170,5]
+			"angle_limit": [-100,100]
 		},
 		"l_arm_z": {
 			"id": 9,
@@ -82,7 +82,7 @@
 			"type": "MX-28",
 			"orientation": "indirect",
 			"offset": 0,
-			"angle_limit": [-5,170]
+			"angle_limit": [-100,100]
 		},
 		"r_arm_z": {
 			"id": 2,
