@@ -8,3 +8,5 @@ import UniPoppy
 import Recorder
 import Engine
 import LeftIndex
+import xboxPad
+import SoundPlayer

@@ -76,7 +76,9 @@ class Robot(Block.Block,QWidget):
         r["Number"] = self.inputs['Number'].getValue(f)
         for member in self.members:
             for art in self.members[member]:
-                if self.inputs["Emergency"].getValue(f) == "1" or self.dict_checkbox[member].isChecked():
+                if self.inputs["Emergency"].getValue(f) == "1":
+                    a = "M"
+                elif self.dict_checkbox[member].isChecked():
                     a = "M"
                 else:
                     a = self.inputs[art].getValue(f)
