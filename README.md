@@ -6,6 +6,42 @@ The purpose of FIRE is to program a robot as if it was a cartoon character by po
 FIRE is dataflow synchronous control program. That is to say, several function are executed 50 times a second to deliver data in channels. Each function is named block since the interface is made by connexions to the channels.
 The architecture is made as simple as possible.
 
+## Main files
+In the FIRELIB, are three main files : Block.py (41 lines), Connexion.py (37 lines) and Engine.py (35 lines)
+The philosophy is "less code lines, less errors".
+A block is a system which reads inputs to create outputs, like a function, but the inputs and outputs are connexions. The purpose of a connexion is to link blocks between them using channels.
+The Engine is the structure which makes live the blocks.
+All the other files in FIRELIB are inherited objects from blocks.
+Notice there are two types of blocks : Interfaces and Systems.
+An interface is a block which is connected to the real world. It reads sensors to create channels that can be read by the others blocks
+A system is a block which operates its inputs to creates outputs.
+
+## Blocks
+### Group
+The group is a block which can contain others blocks. This block has a list of "children" which are called in the order of declaration. Notice the list of Interfaces and Systems are Groups
+### Robot
+This block is an interface with a robot connected via ZMQ server to the BRAIN server (see poppy server folder)
+It gives to the robot an order via a meta-order using pose language :
+ - "M" : the motor is shutdown but within its limits
+ - "P" : the motor is shutdown but sluggish and within its limits
+ - "L-10" : the motor goes to the consign (here -10) with the initial speed taken from the previous pose
+ - "S80" : the motor goes to the consign (here 80) and finishes at a zero speed with the initial speed taken from the previous pose
+ - "K" : the motor is blocked to its current position
+ - "I50" : the motor is set to the consign (here 50) instantaneously
+### Poppy (and uniPoppy)
+This is an old version of the Robot block dedicated to Poppy robot.
+### CSVRecorder (Recorder is an old version)
+This block is a player and an editor of choregraphies to produce CSV files editable in Excel.
+### FiniteStateMachine
+This block is designed to manage all the other blocks using a mosaic screen. It is useful to have visibility during a show.
+### LeftIndex
+This block is an interface with the Leap Motion to recup the left index pitch and yaw.
+### CSVPlayer
+This block is a simplification of CSVRecorder the editor and graphic interface are remove. The block just plays a CSV when activated.
+### xboxPad
+This block is an interface to xbox pad (under construction)
+
+
 ## How to use FIRE with Poppy
 To pilot Poppy with FIRE, Poppy must be connected to the controlling computer by IP protocol (WIFI or Ethernet).
 On Poppy computer, a server must be installed for remote purpose.
