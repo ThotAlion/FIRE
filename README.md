@@ -28,7 +28,7 @@ It gives to the robot an order via a meta-order using pose language :
  - "S80" : the motor goes to the consign (here 80) and finishes at a zero speed with the initial speed taken from the previous pose
  - "K" : the motor is blocked to its current position
  - "I50" : the motor is set to the consign (here 50) instantaneously
- - 
+
 ### Poppy (and uniPoppy)
 This is an old version of the Robot block dedicated to Poppy robot.
 
