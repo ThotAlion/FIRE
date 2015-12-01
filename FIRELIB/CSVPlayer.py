@@ -24,9 +24,11 @@ class CSVPlayer(Block.Block):
     def start(self):
         a=1
         
-    def init(self):
+    def init(self,f):
         self.index = 0
         self.t0 = Tools.getTime()
+        self.outputs["finished"].setValue(0,f)
+        return f
     
     def getInputs(self,f):
         a=1
@@ -39,6 +41,9 @@ class CSVPlayer(Block.Block):
             self.index = self.index+1
             self.t0 = t
             self.number = self.number+1
+            print self.index
+        elif self.index==len(self.tape)-2:
+            self.outputs["finished"].setValue(1,f)
         
         for name in self.tape[self.index]:
             self.outputs[name].setValue(self.tape[self.index][name],f)

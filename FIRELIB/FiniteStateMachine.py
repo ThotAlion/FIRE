@@ -12,7 +12,7 @@ import csv
 class FiniteStateMachine(Block.Block,QWidget):
     """ this class describes a block """
     
-    def __init__(self,CSVFile,IP = '127.0.0.1',port = '8080'):
+    def __init__(self,CSVFile):
         Block.Block.__init__(self)
         QWidget.__init__(self)
         self.CSVFile = CSVFile
@@ -30,11 +30,11 @@ class FiniteStateMachine(Block.Block,QWidget):
             for trans in r.fieldnames[ispace+1:]:
                 self.trans[row["Name"]][trans]=row[trans]
         for trans in r.fieldnames[ispace+1:]:
-            self.inputs[trans] = Connexion(default = "0")
+            self.inputs[trans] = Connexion(default = 0)
         for state in r.fieldnames[1:ispace]:
-            self.outputs[state] = Connexion(default = "0")
-        self.inputs["active"] = Connexion(default = "0")
-        self.outputs["finished"] = Connexion(default = "0")
+            self.outputs[state] = Connexion(default = 0)
+        self.inputs["active"] = Connexion(default = 0)
+        self.outputs["finished"] = Connexion(default = 0)
         
         self._currentState = ''
         
@@ -74,16 +74,19 @@ class FiniteStateMachine(Block.Block,QWidget):
     def currentState(self,x):
         self._currentState = x
         for s in self.statenames:
-            self.dict_buttons[s].setStyleSheet("color: #b1b1b1;background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #565656, stop: 0.1 #525252, stop: 0.5 #4e4e4e, stop: 0.9 #4a4a4a, stop: 1 #464646);font-size: 24px;")
+            self.dict_buttons[s].setText(s)
+            # self.dict_buttons[s].setStyleSheet("color: #b1b1b1;background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #565656, stop: 0.1 #525252, stop: 0.5 #4e4e4e, stop: 0.9 #4a4a4a, stop: 1 #464646);font-size: 24px;")
         if self.dict_buttons.has_key(self._currentState):
-            self.dict_buttons[self._currentState].setStyleSheet("color: black;\
-    background-color: orange;font-size: 24px;")
+            self.dict_buttons[self._currentState].setText("*"+self._currentState+"*")
+            # self.dict_buttons[self._currentState].setStyleSheet("color: black;\
+    # background-color: orange;font-size: 24px;")
     
     def start(self):
         a=1
         
-    def init(self):
+    def init(self,f):
         self.currentState = self.statenames[0]
+        return f
     
     def getInputs(self,f):
         a=1
@@ -91,12 +94,12 @@ class FiniteStateMachine(Block.Block,QWidget):
     def setOutputs(self,f):
         # compute transition function of inputs
         for t in self.trans[self.currentState]:
-            if self.inputs[t].getValue(f) == "1":
+            if self.inputs[t].getValue(f) == 1:
                 self.currentState = self.trans[self.currentState][t]
         
         # generate outputs
         for b in self.state[self.currentState]:
-            self.outputs[b].setValue(self.state[self.currentState][b],f)
+            self.outputs[b].setValue(int(self.state[self.currentState][b]),f)
         return f
         
 

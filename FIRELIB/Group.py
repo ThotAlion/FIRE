@@ -12,8 +12,8 @@ class Group(Block.Block):
         for b in self.children:
             self.children[b].start()
         
-    def init(self):
-        a=1
+    def init(self,f):
+        return f
     
     def getInputs(self,f):
         for b in self.children:

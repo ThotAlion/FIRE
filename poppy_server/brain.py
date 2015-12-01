@@ -38,9 +38,8 @@ class listener(Thread):
                     self._socket.send_json("{}")
 
 if __name__ == "__main__":
-    # addresses = netifaces.ifaddresses('wlan4')
-    # ip = addresses[netifaces.AF_INET][0]["addr"]
-    ip = "127.0.0.1"
+    addresses = netifaces.ifaddresses('wlan4')
+    ip = addresses[netifaces.AF_INET][0]["addr"]
     robot = pypot.robot.from_json("full_poppy.json")
     task = listener(ip,'8080')
     task.start()
@@ -72,6 +71,9 @@ if __name__ == "__main__":
                 voltage = min(voltage,mot.present_voltage)
         a["Temperature"] = str(tempc)
         a["Voltage"] = str(voltage)
+        if len(p0)==0:
+            p0 = p.copy()
+            t0 = t        
         task._robotOut = a
         
         # pilot robot function of goal_pose register

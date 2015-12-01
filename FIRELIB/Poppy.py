@@ -74,8 +74,8 @@ class Poppy(Block.Block,QWidget):
         self.COM = clientThread(self.IP,self.port)
         self.COM.start()
         
-    def init(self):
-        a=1
+    def init(self,f):
+        return f
     
     def getInputs(self,f):
         r = {}

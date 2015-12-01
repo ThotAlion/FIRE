@@ -75,8 +75,8 @@ class UniPoppy(Block.Block,QWidget):
         self.COM.start()
         self.active = True
         
-    def init(self):
-        a=1
+    def init(self,f):
+        return f
     
     def getInputs(self,f):
         r = {}

@@ -16,8 +16,9 @@ class LeftIndex(Block.Block):
     def start(self):
         self.leap = Leap.Controller()
         
-    def init(self):
+    def init(self,f):
         a=1
+        return f
     
     def getInputs(self,f):
         a=1

@@ -402,8 +402,8 @@ class Recorder(Block.Block,QWidget):
     def start(self):
         a=1
         
-    def init(self):
-        print "This function is launched just before running"
+    def init(self,f):
+        return f
     
     def getInputs(self,f):
         print "get inputs to deliver them in the reality."

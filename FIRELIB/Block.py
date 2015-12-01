@@ -7,14 +7,14 @@ class Block(object):
     def __init__(self):
         self.inputs = {}
         self.outputs = {}
-        self.inputs["activate"] = Connexion.Connexion("0")
-        self.outputs["finished"] = Connexion.Connexion("0")
+        self.inputs["activate"] = Connexion.Connexion(0)
+        self.outputs["finished"] = Connexion.Connexion(0)
         self._active = False
 
     def start(self):
         print "This function is launched when the system is started"
         
-    def init(self):
+    def init(self,f):
         print "This function is launched just before running"
     
     
@@ -27,7 +27,7 @@ class Block(object):
         
     def _setOutputs(self,f):
         if self._active == False and self.inputs["activate"].getValue(f) == 1:
-            self.init()
+            f = self.init(f)
             self._active = True
         elif self.inputs["activate"].getValue(f) == 0:
             self._active = False

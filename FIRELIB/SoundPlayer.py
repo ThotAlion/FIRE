@@ -19,8 +19,8 @@ class SoundPlayer(Block.Block):
     def start(self):
         a=1
         
-    def init(self):
-        a=1
+    def init(self,f):
+        return f
     
     def getInputs(self,f):
         a=1

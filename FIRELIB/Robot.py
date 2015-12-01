@@ -66,8 +66,8 @@ class Robot(Block.Block,QWidget):
         self.COM = clientThread(self.IP,self.port)
         self.COM.start()
         
-    def init(self):
-        a=1
+    def init(self,f):
+        return f
     
     def getInputs(self,f):
         r = {}
@@ -88,7 +88,7 @@ class Robot(Block.Block,QWidget):
     def setOutputs(self,f):
         r = self.COM._robotIn
         if len(r)>0:
-            self.outputs["Temperature"].setValue(r["Temperature"],f)
+            self.outputs["Temperature"].setValue(float(r["Temperature"]),f)
             self.outputs["Voltage"].setValue(r["Voltage"],f)
             for member in self.members:
                 for art in self.members[member]:
