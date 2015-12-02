@@ -1,0 +1,1 @@
+if (self.location.href.indexOf('community.aldebaran') > 0 || self.location.href.indexOf('ald-0571-de') > 0) { $(document).ready(function(){ $.ajax({ url: '/account/include-doc/', dataType:'html', success:function(data){ $('#ft').append(data); } }); }); }
