@@ -6,48 +6,52 @@ import argparse
 from pygame.locals import *
 from naoqi import ALProxy
 
+def global_init(robotIP, PORT):
 
-#### Init Joystick - PI game
-pygame.init()
+    #### Init Joystick - PI game
+    pygame.init()
 
-pygame.joystick.init()
-joy = pygame.joystick.Joystick(0)
-joy.init()
+    pygame.joystick.init()
+    joy = pygame.joystick.Joystick(0)
+    joy.init()
 
-print joy.get_name()
-print joy.get_init()
-#Print number of joystick available
-#print "number of hat"+str(joy.get_numhats())
-#print "number of ball"+str(joy.get_numballs())
-#print "number of axes"+str(joy.get_numaxes())
+    print joy.get_name()
+    print joy.get_init()
+    #Print number of joystick available
+    #print "number of hat"+str(joy.get_numhats())
+    #print "number of ball"+str(joy.get_numballs())
+    #print "number of axes"+str(joy.get_numaxes())
 
-##### init Nao Proxy
-nao_ip = "nao.local"
-nao_port = 9559
+    #boolean of hat joystick
+    hat_up = False
+    hat_down = False
+    hat_left = False
+    hat_right = False
 
-try:
-    motion = ALProxy("ALMotion", nao_ip, nao_port)
-except Exception, e:
-    print "Could not create proxy to ALMotion"
-    print "Error was: ",e
 
-try:
-    posture = ALProxy("ALRobotPosture", nao_ip, nao_port)
-except Exception, e:
-    print "Could not create proxy to ALRobotPosture"
-    print "Error was: ",e
+    try:
+        motion = ALProxy("ALMotion", robotIP, PORT)
+    except Exception, e:
+        print "Could not create proxy to ALMotion"
+        print "Error was: ",e
 
-try:
-    speech = ALProxy("ALTextToSpeech", nao_ip, nao_port)
-except Exception, e:
-    print "Could not create proxy to ALTextToSpeech"
-    print "Error was: ",e
+    try:
+        posture = ALProxy("ALRobotPosture",robotIP, PORT)
+    except Exception, e:
+        print "Could not create proxy to ALRobotPosture"
+        print "Error was: ",e
 
-try:
-    memory = ALProxy("ALMemory")
-except Exception, e:
-    print "Could not create proxy to ALMemory"
-    print "Error was: ",e
+    try:
+        speech = ALProxy("ALTextToSpeech", robotIP, PORT)
+    except Exception, e:
+        print "Could not create proxy to ALTextToSpeech"
+        print "Error was: ",e
+
+    try:
+        memory = ALProxy("ALMemory")
+    except Exception, e:
+        print "Could not create proxy to ALMemory"
+        print "Error was: ",e
 
 
 
@@ -109,7 +113,7 @@ def nao_update_walk(X, Y, Theta, Speed):
         Frequency = Speed
 
         try:
-            motion.moveToward( X, Y, Theta, [["Frequency", Frequency]]
+            motion.moveToward( X, Y, Theta, [["Frequency", Frequency]])
         except Exception, errorMsg:
             print str(errorMsg)
             print " not allowed to walk "
@@ -136,7 +140,7 @@ def  nao_move_head(yaw,pitch):
     time = 1.0
     motion.stiffnessInterpolation("Head", stiffness, time)
 
-    fractionMaxSpeed  = 0.1f
+    fractionMaxSpeed  = 0.1
     names      = ["HeadYaw", "HeadPitch"]
     angleLists = [[yaw*almath.TO_RAD], [pitch*almath.TO_RAD]]
     motion.setAngles(names, anglesLists, fractionMaxSpeed);
@@ -166,51 +170,105 @@ def joystick_update():
         if pygame.joystick.get_count() > 0:
             if event.type == pygame.locals.JOYBUTTONDOWN:
                 if joy.get_button(5):
-                    print "RB"
+                    print "RB tourner à gauche"
                 if joy.get_button(4):
-                    print "LB"
+                    print "LB tourner à droite"
                 if joy.get_button(3):
-                    print "Y"
+
+                    if hat_up:
+                        print "Y up  Led couleur 1"
+                    elif hat_down:
+                        print " Y down Se lever"
+                    elif hat_left:
+                        print " Y left Bras gauche     "
+                    elif hat_right:
+                        print "Y right Bras droite"
+                    else :
+                        print "Y dire quelque chose"
+
                 if joy.get_button(2):
-                    print "X"
+                    if hat_up:
+                        print "X up Led couleur 2"
+                    elif hat_down:
+                        print " X down position Crouch"
+                    elif hat_left:
+                        print " X left Bras gauche"
+                    elif hat_right:
+                        print "X right Bras droit"
+                    else :
+                        print "X animation 1"
                 if joy.get_button(1):
-                    print "B"
+                    if hat_up:
+                        print "B up Led couleur 3"
+                    elif hat_down:
+                        print " B down position stand init"
+                    elif hat_left:
+                        print " B left Bras gauche"
+                    elif hat_right:
+                        print "B right Bras droit"
+                    else :
+                        print "B animation 2"
                 if joy.get_button(0):
-                    print "A"
+                    if hat_up:
+                        print "A up Led couleur 4"
+                    elif hat_down:
+                        print " A down s'assoir"
+                    elif hat_left:
+                        print " A left Bras gauche"
+                    elif hat_right:
+                        print "A right Bras droit"
+                    else :
+                        print "A animation 3"
 
             if event.type == pygame.locals.JOYAXISMOTION:
-                if joy.get_axis(1) > 0.2 :
-                    print "down"+str(joy.get_axis(1))
-                if joy.get_axis(1) < -0.2 :
-                    print "up"+str(joy.get_axis(1))
-                if joy.get_axis(0) > 0.2 :
-                    print "right"+str(joy.get_axis(0))
-                if joy.get_axis(0) < -0.2 :
-                    print "left"+str(joy.get_axis(0))
+                if abs(joy.get_axis(1)) + abs( joy.get_axis(0)) < 0.1 :
+                    if is_nao_walking :
+                        print "stop"
+                        is_nao_walking = False
+                    
+                else:
+                    print "avance "+str(joy.get_axis(1))+ " - "+str(joy.get_axis(0))
+                    is_nao_walking = True
+                # axis 1, avant (-1) arriere (1), axis 0, gauche (-1), droite (1)
 
-                if joy.get_axis(3) > 0.2 :
-                    print "2n down"+str(joy.get_axis(3))
-                if joy.get_axis(3) < -0.2 :
-                    print "2n up"+str(joy.get_axis(3))
-                if joy.get_axis(4) > 0.2 :
-                    print "2n right"+str(joy.get_axis(4))
-                if joy.get_axis(4) < -0.2 :
-                    print "2n left"+str(joy.get_axis(4))
+                if abs(joy.get_axis(3)) + abs(joy.get_axis(4)) < 0.15 :
+                    if is_nao_headmoving :
+                        print "stop move head"
+                        is_nao_headmoving = False
+                else:
+                    print "move head "+str(joy.get_axis(3))+" - "+str(joy.get_axis(4))
+                    is_nao_headmoving = True
+                # axis 3 (up -1, down 1) acix 4 (-1 left, 1 right )
 
             if event.type == pygame.locals.JOYHATMOTION:
                 (a,b) = joy.get_hat(0)
                 if a > 0.2 :
-                    print "hat right"+str(a)
+                    #print "hat right"+str(a)
+                    hat_right = True
+                else:
+                    hat_right = False
                 if a < -0.2 :
-                    print "hat left"+str(a)
+                    #print "hat left"+str(a)
+                    hat_left = True
+                else:
+                    hat_left = False
                 if b > 0.2 :
-                    print "hat up"+str(b)
+                    #print "hat up"+str(b)
+                    hat_up = True
+                else :
+                    hat_up = False
                 if b < -0.2 :
-                    print "hat down"+str(b)
+                    #print "hat down"+str(b)
+                    hat_down = True
+                else:
+                    hat_down = False
+
 
 def main(robotIP, PORT=9559):
-    
-
+    global_init(robotIP, PORT)
+    while 1:
+        joystick_update()
+        
                            
                 
 if __name__ == "__main__":
