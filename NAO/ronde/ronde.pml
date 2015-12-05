@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Package name="ronde" format_version="4">
+<Package name="RONDE" format_version="4">
     <Manifest src="manifest.xml" />
     <BehaviorDescriptions>
         <BehaviorDescription name="behavior" src="behavior_1" xar="behavior.xar" />
@@ -7,5 +7,7 @@
     <Dialogs />
     <Resources />
     <Topics />
-    <IgnoredPaths />
+    <IgnoredPaths>
+        <Path src="ronde -chore- 3 secondes.mov" />
+    </IgnoredPaths>
 </Package>
