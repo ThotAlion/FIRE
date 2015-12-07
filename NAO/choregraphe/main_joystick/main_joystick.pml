@@ -7,5 +7,9 @@
     <Dialogs />
     <Resources />
     <Topics />
-    <IgnoredPaths />
+    <IgnoredPaths>
+        <Path src="behavior_1" />
+        <Path src=".metadata" />
+        <Path src="behavior_1/behavior.xar" />
+    </IgnoredPaths>
 </Package>
