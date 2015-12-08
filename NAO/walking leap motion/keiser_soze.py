@@ -12,16 +12,18 @@ from naoqi import ALProxy
 import Leap
 from numpy import *
 
-def main(robotIP, PORT=9559):
+def main(robotIP1,robotIP2, PORT=9559):
 
-    motionProxy  = ALProxy("ALMotion", robotIP, PORT)
-    postureProxy = ALProxy("ALRobotPosture", robotIP, PORT)
-
+    motionProxy1  = ALProxy("ALMotion", robotIP1, PORT)
+    postureProxy1 = ALProxy("ALRobotPosture", robotIP1, PORT)
+    motionProxy2  = ALProxy("ALMotion", robotIP2, PORT)
+    postureProxy2 = ALProxy("ALRobotPosture", robotIP2, PORT)
     # Wake up robot
-    motionProxy.wakeUp()
-
+    motionProxy1.wakeUp()
+    motionProxy2.wakeUp()
     # Send robot to Stand Init
-    postureProxy.goToPosture("StandInit", 0.5)
+    postureProxy1.goToPosture("StandInit", 0.5)
+    postureProxy2.goToPosture("StandInit", 0.5)
     lm = Leap.Controller()
     
     while True:
@@ -40,7 +42,8 @@ def main(robotIP, PORT=9559):
         Frequency = 4
 
         try:
-            motionProxy.moveToward(X, Y, Theta)
+            motionProxy1.moveToward(X, Y, Theta)
+            motionProxy2.moveToward(X, Y, Theta)
         except Exception, errorMsg:
             print str(errorMsg)
             print "This example is not allowed on this robot."
@@ -50,10 +53,12 @@ def main(robotIP, PORT=9559):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--ip", type=str, default="10.0.0.3",
+    parser.add_argument("--ip1", type=str, default="10.0.0.12",
                         help="Robot ip address")
+    parser.add_argument("--ip2", type=str, default="10.0.0.5",
+                        help="Robot ip address")                    
     parser.add_argument("--port", type=int, default=9559,
                         help="Robot port number")
 
     args = parser.parse_args()
-    main(args.ip, args.port)
+    main(args.ip1,args.ip2, args.port)

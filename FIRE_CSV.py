@@ -22,7 +22,7 @@ members["right leg"] = ['r_hip_x','r_hip_z','r_hip_y','r_knee_y','r_ankle_y']
 
 interfaces = FIRELIB.Group.Group()
 interfaces.inputs["activate"].connectedTo = "1"
-interfaces.children['Poppy'] = FIRELIB.Robot.Robot(members,"10.0.0.3","8080")
+interfaces.children['Poppy'] = FIRELIB.Robot.Robot(members,"10.0.0.4","8080")
 interfaces.children['Poppy'].inputs["activate"].connectedTo = "1"
 interfaces.children['Index'] = FIRELIB.LeftIndex.LeftIndex()
 interfaces.children['Index'].inputs["activate"].connectedTo = "1"

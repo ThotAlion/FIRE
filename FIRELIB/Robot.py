@@ -92,7 +92,8 @@ class Robot(Block.Block,QWidget):
             self.outputs["Voltage"].setValue(r["Voltage"],f)
             for member in self.members:
                 for art in self.members[member]:
-                    self.outputs[art].setValue(r[art],f)
+                    if r.has_key(art):
+                        self.outputs[art].setValue(r[art],f)
             self.tempLabel.setText("Max Temp : "+r["Temperature"]+"deg")
             self.voltLabel.setText("Min voltage : "+r["Voltage"]+"V")
         return f

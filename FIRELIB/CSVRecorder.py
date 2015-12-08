@@ -144,7 +144,6 @@ class Poses(QAbstractTableModel):
         return a
     
     def fromDictCSV(self,a):
-        print a
         self.poseList = []
         for pos in a:
             b = {}
@@ -311,7 +310,7 @@ class CSVRecorder(Block.Block,QWidget):
             for ch in self.members[member]:
                 obj = {}
                 obj['name'] = ch
-                obj['nature'] = 'L'
+                obj['nature'] = 'S'
                 obj['consign'] = float(self.robot[ch])
                 pose["objectives"].objectiveList.append(obj)
         
@@ -414,7 +413,7 @@ class CSVRecorder(Block.Block,QWidget):
         ipose = self.poseTable.currentIndex().row()
         name = self.poseList.poseList[ipose]["objectives"].objectiveList[iobj]["name"]
         self.poseList.poseList[ipose]["objectives"].emit(SIGNAL("layoutAboutToBeChanged()"))
-        self.poseList.poseList[ipose]["objectives"].objectiveList[iobj]["consign"] = self.robot[name]
+        self.poseList.poseList[ipose]["objectives"].objectiveList[iobj]["consign"] = float(self.robot[name])
         self.poseList.poseList[ipose]["objectives"].emit(SIGNAL("layoutChanged()"))
         
     def acquireAll(self):
@@ -422,7 +421,7 @@ class CSVRecorder(Block.Block,QWidget):
         self.poseList.poseList[ipose]["objectives"].emit(SIGNAL("layoutAboutToBeChanged()"))
         for obj in self.poseList.poseList[ipose]["objectives"].objectiveList:
             name = obj["name"]
-            obj["consign"] = self.robot[name]
+            obj["consign"] = float(self.robot[name])
         self.poseList.poseList[ipose]["objectives"].emit(SIGNAL("layoutChanged()"))
     
     def saveCSV(self):
