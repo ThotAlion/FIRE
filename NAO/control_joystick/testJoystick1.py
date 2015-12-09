@@ -101,7 +101,7 @@ def nao_init_pos():
 def nao_go_posture(posture_name):
 
     if posture_name != "Rest":    
-        posture.goToPosture(posture_name, 1.0)
+        posture.goToPosture(posture_name, 0.65)
 
     else:
         motion.rest()
@@ -129,10 +129,11 @@ def nao_update_walk(X, Y, Theta, Speed):
    
     if Speed > 0.01 :
     
-        Frequency = Speed
+        Frequency = abs(Speed)
 
         try:
-            motion.moveToward( X, Y, Theta, [["Frequency", Frequency]])
+            #motion.moveToward( X, Y, Theta, [["Frequency", Frequency]])
+            motion.setWalkTargetVelocity( X, Y, Theta, Frequency)
         except Exception, errorMsg:
             print str(errorMsg)
             print " not allowed to walk "
@@ -211,7 +212,7 @@ def nao_leds(name, value):
                            
 def nao_say(toSay):
 
-    speech.say("I need money, money is what i need")
+    speech.say("Dance, dance, dance! How are You?")
                 
 
 def joystick_update():
@@ -286,7 +287,7 @@ def joystick_update():
                         nao_leds("ear",0 )
                     elif hat_down:
                         print " A down s'assoir"
-                        nao_go_posture("Sit")
+                        nao_go_posture("LyingBack")
                     elif hat_left:
                         print " A left Bras gauche"
                     elif hat_right:
@@ -379,12 +380,14 @@ def main(robotIP, PORT=9559):
     time.sleep(2)
     while 1:
         joystick_update()
+        time.sleep(0.02)
+
         
                            
                 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--ip", type=str, default="10.0.1.13",
+    parser.add_argument("--ip", type=str, default="10.0.1.12",
                         help="Robot ip address")
     parser.add_argument("--port", type=int, default=9559,
                         help="Robot port number")
