@@ -32,8 +32,9 @@ def global_init():
     joy_state["joy_head"] = False
     joy_state["joy_turn"] = False
 
-    current_nao = 0
+    ### Init list_of_nao according to the Ip and Name ###
 
+    current_nao = 0
     list_of_nao.append( Nao("10.0.1.11", "Lucas"))
     list_of_nao.append( Nao("10.0.1.12", "MaMa"))
     list_of_nao.append( Nao("10.0.1.13", "Lycie"))
@@ -49,6 +50,7 @@ def nao_init():
     for nao in list_of_nao:
         nao.init_pos()
 
+    #turn on light on activated nao
     nao_activate()
 
 
@@ -232,12 +234,14 @@ def joystick_update():
 
 def nao_go_posture(posture_name):
     global current_nao, list_of_nao
+    #posture using choregraphe, to avoid waiting time.
+    # using memoryEvent, instead of go_to_posture method
     
     if current_nao>-1:
-        list_of_nao[current_nao].go_posture(posture_name)
+        list_of_nao[current_nao].memoryEvent("PostureAsked",posture_name)
     else:
         for nao in list_of_nao:
-            nao.go_posture(posture_name)
+            nao.memoryEvent("PostureAsked",posture_name)
         
 
 def nao_update_walk(X, Y, Theta, Speed):

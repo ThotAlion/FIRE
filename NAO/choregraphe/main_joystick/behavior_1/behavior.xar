@@ -17,7 +17,7 @@
             <BehaviorLayer name="behavior_layer1">
                 <BehaviorKeyframe name="keyframe1" index="1">
                     <Diagram scale="70.7107">
-                        <Box name="sw anim" id="2" localization="8" tooltip="" x="123" y="81">
+                        <Box name="sw anim" id="2" localization="8" tooltip="" x="136" y="104">
                             <bitmap>media/images/box/box-python-script.png</bitmap>
                             <script language="4">
                                 <content>
@@ -702,7 +702,7 @@ class MyClass(GeneratedClass):
                                 </ActuatorList>
                             </Timeline>
                         </Box>
-                        <Box name="ronde" id="1" localization="8" tooltip="" x="454" y="233">
+                        <Box name="ronde" id="1" localization="8" tooltip="" x="447" y="239">
                             <bitmap>media/images/box/box-diagram.png</bitmap>
                             <script language="4">
                                 <content>
@@ -6718,7 +6718,7 @@ class MyClass(GeneratedClass):
                                 </BehaviorLayer>
                             </Timeline>
                         </Box>
-                        <Box name="sw posture" id="4" localization="8" tooltip="" x="119" y="431">
+                        <Box name="sw posture" id="4" localization="8" tooltip="" x="148" y="431">
                             <bitmap>media/images/box/box-python-script.png</bitmap>
                             <script language="4">
                                 <content>
@@ -6736,12 +6736,14 @@ class MyClass(GeneratedClass):
 
     def onInput_onStart(self, p):
         #self.onStopped() #activate the output of the box
-        if p==1:
+        if p=="Stand":
             self.anim1()
-        if p==2:
+        if p=="Rest":
             self.anim2()
-        if p==3:
+        if p=="Sit":
             self.anim3()
+        if p=="StandInit":
+            self.anim4()
 
         pass
 
@@ -6752,7 +6754,7 @@ class MyClass(GeneratedClass):
 </content>
                             </script>
                             <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
-                            <Input name="onStart" type="2" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStart" type="3" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
                             <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
                             <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
                             <Output name="anim1" type="1" type_size="1" nature="2" inner="0" tooltip="" id="5" />
@@ -6952,7 +6954,7 @@ class MyClass(GeneratedClass):
                             <Resource name="All motors" type="Lock" timeout="0" />
                             <Resource name="Stiffness" type="Lock" timeout="0" />
                         </Box>
-                        <Box name="Sound Loc." id="9" localization="8" tooltip="Every time a sound is detected, this box sends on its outputs:&#x0A;- the location of the sound source in relation to robot&apos;s head position.&#x0A;- robot&apos;s head position in relation to the rest of the body in the robot&apos;s space.&#x0A;&#x0A;V1.1.0" x="71" y="795">
+                        <Box name="Sound Loc." id="9" localization="8" tooltip="Every time a sound is detected, this box sends on its outputs:&#x0A;- the location of the sound source in relation to robot&apos;s head position.&#x0A;- robot&apos;s head position in relation to the rest of the body in the robot&apos;s space.&#x0A;&#x0A;V1.1.0" x="133" y="821">
                             <bitmap>media/images/box/interaction/target_sound.png</bitmap>
                             <script language="4">
                                 <content>
@@ -7026,7 +7028,7 @@ class MyClass(GeneratedClass):
                                 </BehaviorLayer>
                             </Timeline>
                         </Box>
-                        <Box name="Basic Awareness" id="10" localization="8" tooltip="This box is an interface to the module ALBasicAwareness.&#x0A;&#x0A;It is a simple way to make the robot establish and keep eye contact with people.&#x0A;&#x0A;V1.1.0" x="67" y="659">
+                        <Box name="Basic Awareness" id="10" localization="8" tooltip="This box is an interface to the module ALBasicAwareness.&#x0A;&#x0A;It is a simple way to make the robot establish and keep eye contact with people.&#x0A;&#x0A;V1.1.0" x="142" y="654">
                             <bitmap>media/images/box/tracker/basicawareness.png</bitmap>
                             <script language="4">
                                 <content>
@@ -7162,6 +7164,10 @@ class MyClass(GeneratedClass):
                         <Link inputowner="5" indexofinput="2" outputowner="4" indexofoutput="6" />
                         <Link inputowner="7" indexofinput="2" outputowner="4" indexofoutput="7" />
                         <Link inputowner="8" indexofinput="2" outputowner="4" indexofoutput="8" />
+                        <Link inputowner="2" indexofinput="3" outputowner="0" indexofoutput="5" />
+                        <Link inputowner="1" indexofinput="3" outputowner="2" indexofoutput="4" />
+                        <Link inputowner="30" indexofinput="3" outputowner="2" indexofoutput="4" />
+                        <Link inputowner="3" indexofinput="3" outputowner="2" indexofoutput="4" />
                     </Diagram>
                 </BehaviorKeyframe>
             </BehaviorLayer>

@@ -68,7 +68,7 @@ class Nao:
 
     
 
-
+    ### NOT use . Use of memoryEvent("PostureAsked", name ) instead
     def go_posture(self, posture_name):
 
         if posture_name != "Rest":    
