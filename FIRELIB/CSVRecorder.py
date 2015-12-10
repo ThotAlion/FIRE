@@ -148,7 +148,6 @@ class Poses(QAbstractTableModel):
         for pos in a:
             b = {}
             b["objectives"] = Objectives([])
-            print b["objectives"].objectiveList
             for f in pos:
                 if f == "Name":
                     b["name"] = pos[f]
@@ -191,7 +190,7 @@ class Poses(QAbstractTableModel):
 class CSVRecorder(Block.Block,QWidget):
     """ this class describes a recorder """
     
-    def __init__(self,members):
+    def __init__(self,members,folder = '/TAPES/'):
         Block.Block.__init__(self)
         QWidget.__init__(self)
         # creation of inputs/outputs
@@ -204,6 +203,7 @@ class CSVRecorder(Block.Block,QWidget):
         self.outputs["Duration"] = Connexion(default = "1")
         self.outputs["Name"] = Connexion(default = "toto")
         self.number = 0
+        self.folder = folder
         
         self.robot = {}
         
@@ -224,13 +224,13 @@ class CSVRecorder(Block.Block,QWidget):
         self.poseTable.setModel(self.poseList)
         self.tapeTable = QTableView()
         self.tapeDir = QFileSystemModel()
-        self.tapeDir.setRootPath(QDir.currentPath()+"/TAPES/")
+        self.tapeDir.setRootPath(QDir.currentPath()+self.folder)
         self.tapeTable.setModel(self.tapeDir)
-        self.tapeTable.setRootIndex(self.tapeDir.index(QDir.currentPath()+"/TAPES/"))
+        self.tapeTable.setRootIndex(self.tapeDir.index(QDir.currentPath()+self.folder))
         self.cBackPose = QComboBox()
         self.cBackPose.setModel(self.tapeDir)
-        self.cBackPose.setRootModelIndex(self.tapeDir.index(QDir.currentPath()+"/TAPES/"))
-        imou = self.tapeDir.index(QDir.currentPath()+"/TAPES/_mou.seq")
+        self.cBackPose.setRootModelIndex(self.tapeDir.index(QDir.currentPath()+self.folder))
+        imou = self.tapeDir.index(QDir.currentPath()+self.folder+"_mou.seq")
         self.cBackPose.setCurrentIndex(imou.row())
         self.bInsertPose = QPushButton("Insert current pose below")
         self.bCopyPose = QPushButton("Copy pose")
@@ -238,6 +238,7 @@ class CSVRecorder(Block.Block,QWidget):
         self.bDeletePose = QPushButton("Delete pose")
         self.bPlayPose = QPushButton("Play")
         self.bReverse = QPushButton("Reverse")
+        self.bMirror = QPushButton("Mirror for Poppy")
         self.sbTimeScaling = QDoubleSpinBox()
         self.sbTimeScaling.setPrefix("Time scaling :")
         self.sbTimeScaling.setValue(1.0)
@@ -268,6 +269,7 @@ class CSVRecorder(Block.Block,QWidget):
         poselayout.addWidget(self.bDeletePose)
         poselayout.addWidget(self.bPlayPose)
         poselayout.addWidget(self.bReverse)
+        poselayout.addWidget(self.bMirror)
         poselayout.addWidget(self.sbTimeScaling)
         poselayout.addWidget(self.cIsCycle)
         poselayout.addWidget(self.poseTable)
@@ -290,6 +292,7 @@ class CSVRecorder(Block.Block,QWidget):
         self.connect(self.cBackPose,SIGNAL("currentIndexChanged(QString)"),self.loadBackPose)
         self.connect(self.bDeletePose,SIGNAL("pressed()"),self.deletePose)
         self.connect(self.bReverse,SIGNAL("pressed()"),self.reverse)
+        self.connect(self.bMirror,SIGNAL("pressed()"),self.mirror_poppy)
         self.connect(self.bPlayPose,SIGNAL("pressed()"),self.togglePlay)
         self.connect(self.bAcquireSelected,SIGNAL("pressed()"),self.acquireSelected)
         self.connect(self.bAcquireAll,SIGNAL("pressed()"),self.acquireAll)
@@ -407,6 +410,35 @@ class CSVRecorder(Block.Block,QWidget):
         self.iCurrentPose = 0
         self.initPos = self.robot.copy()
         self.updateObjective(0)
+        
+    def mirror_poppy(self):
+        
+        transfer_table = {"head_z":"-head_z","head_y":"head_y",
+        "l_shoulder_y":"r_shoulder_y","l_shoulder_x":"-r_shoulder_x","l_arm_z":"-r_arm_z","l_elbow_y":"r_elbow_y",'l_wrist_z':'-r_wrist_z','l_wrist_x':'-r_wrist_x',
+        "r_shoulder_y":"l_shoulder_y","r_shoulder_x":"-l_shoulder_x","r_arm_z":"-l_arm_z","r_elbow_y":"l_elbow_y",'r_wrist_z':'-l_wrist_z','r_wrist_x':'-l_wrist_x',
+        "l_hip_x":"-r_hip_x","l_hip_z":"-r_hip_z","l_hip_y":"r_hip_y","l_knee_y":"r_knee_y","l_ankle_y":"r_ankle_y",
+        "r_hip_x":"-l_hip_x","r_hip_z":"-l_hip_z","r_hip_y":"l_hip_y","r_knee_y":"l_knee_y","r_ankle_y":"l_ankle_y",
+        "abs_x":"-abs_x","abs_y":"abs_y","abs_z":"-abs_z","bust_y":"bust_y","bust_x":"-bust_x"}
+        ipose = self.poseTable.currentIndex().row()
+        self.poseList.poseList[ipose]["objectives"].emit(SIGNAL("layoutAboutToBeChanged()"))
+        
+        for pose in self.poseList.poseList:
+            # create hash table
+            old_pose = {}
+            for obj in pose["objectives"].objectiveList:
+                old_pose[obj["name"]] = obj["consign"]
+            for obj in pose["objectives"].objectiveList:
+                link = transfer_table[obj["name"]]
+                if link[0] == '-':
+                    signus = '-'
+                    link = link[1:]
+                else:
+                    signus = '+'
+                if signus == '-':
+                    obj["consign"] = -old_pose[link]
+                else:
+                    obj["consign"] = old_pose[link]
+        self.poseList.poseList[ipose]["objectives"].emit(SIGNAL("layoutChanged()"))
     
     def acquireSelected(self):
         iobj = self.objTable.currentIndex().row()
@@ -528,7 +560,6 @@ class CSVRecorder(Block.Block,QWidget):
             tape = self.poseList.toDictCSV()
             
             duration = float(tape[self.iCurrentPose]["Duration"])/self.sbTimeScaling.value()
-            #print [t,self.t0,duration,self.index]
             if (t-self.t0)>=duration and self.play == 1:
                 if self.iCurrentPose<=len(tape)-2:
                     self.iCurrentPose = self.iCurrentPose+1

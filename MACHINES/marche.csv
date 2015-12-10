@@ -4,6 +4,6 @@ allonge_ventre;1;0;0;0;0;0;0;0;;releve;allonge_ventre;allonge_ventre;allonge_ven
 releve;0;1;0;0;0;0;0;0;;releve;releve;releve;statique;releve;releve;releve;releve;releve;releve;releve
 avance;0;0;1;0;0;0;0;0;;avance;statique;avance;avance;avance;avance;avance;avance;statique;avance;avance
 tournerD;0;0;0;1;0;0;0;0;;tournerD;statique;tournerD;tournerD;avance;tournerG;tournerD;tournerD;tournerD;statique;tournerD
-tournerG;0;0;0;0;1;0;0;0;;tournerG;statique;tournerG;tournerG;avance;tournerG;tournerG;tournerG;tournerG;tournerG;statique
+tournerG;0;0;0;0;1;0;0;0;;tournerG;statique;tournerG;tournerG;avance;tournerG;tournerD;tournerG;tournerG;tournerG;statique
 statique;0;0;0;0;0;0;0;1;;statique;statique;recouche;statique;avance;tournerG;tournerD;statique;statique;statique;statique
 recouche;0;0;0;0;0;1;0;0;;recouche;recouche;recouche;recouche;recouche;recouche;recouche;allonge;recouche;recouche;recouche

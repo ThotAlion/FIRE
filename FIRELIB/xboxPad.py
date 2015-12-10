@@ -3,7 +3,7 @@ import Block
 from Connexion import *
 import Tools
 import time
-import pygame
+import zmq
 
 class xboxPad(Block.Block):
     """ this class describes a block """
@@ -26,14 +26,15 @@ class xboxPad(Block.Block):
         self.outputs["button back"] = Connexion(default = 0)
         self.outputs["button start"] = Connexion(default = 0)
         self.n = n
-        pygame.init()
-        pygame.joystick.init()
-        
+        self._context = zmq.Context()
+        self._socket = self._context.socket(zmq.REQ)
+        self._socket.connect("tcp://127.0.0.1:8081")
+        self.poll = zmq.Poller()
+        self.poll.register(self._socket,zmq.POLLIN)
 
     def start(self):
         a=1
-        
-        
+ 
     def init(self,f):
         return f
     
@@ -41,25 +42,32 @@ class xboxPad(Block.Block):
         a=1
         
     def setOutputs(self,f):
-        pygame.event.get()
-        j = pygame.joystick.Joystick(self.n)
-        j.init()
-        self.outputs["axe X1"].setValue(j.get_axis(0),f)
-        self.outputs["axe Y1"].setValue(j.get_axis(1),f)
-        self.outputs["axe X2"].setValue(j.get_axis(3),f)
-        self.outputs["axe Y2"].setValue(j.get_axis(4),f)
-        self.outputs["gache"].setValue(j.get_axis(2),f)
-        self.outputs["hat X1"].setValue(j.get_hat(0)[0],f)
-        self.outputs["hat Y1"].setValue(j.get_hat(0)[1],f)
-        self.outputs["button A"].setValue(j.get_button(0),f)
-        self.outputs["button B"].setValue(j.get_button(1),f)
-        self.outputs["button X"].setValue(j.get_button(2),f)
-        self.outputs["button Y"].setValue(j.get_button(3),f)
-        self.outputs["button L"].setValue(j.get_button(4),f)
-        self.outputs["button R"].setValue(j.get_button(5),f)
-        self.outputs["button back"].setValue(j.get_button(6),f)
-        self.outputs["button start"].setValue(j.get_button(7),f)
-
+        t0 = Tools.getTime()
+        req = {"pad":{"get_pad":"1"}}
+        self._socket.send_json(req)
+        expect = True
+        while expect:
+            socks = dict(self.poll.poll(100))
+            #print socks.get(self._socket)
+            if socks.get(self._socket) == zmq.POLLIN:
+                reply = self._socket.recv_json()
+                if not reply:
+                    break
+                else:
+                    j = reply[self.n]
+                    for button in self.outputs:
+                        if j.has_key(button):
+                            self.outputs[button].setValue(j[button],f)
+                    expect = False
+            else:
+                #print "reconnect"
+                self._socket.setsockopt(zmq.LINGER, 0)
+                self._socket.close()
+                self.poll.unregister(self._socket)
+                self._socket = self._context.socket(zmq.REQ)
+                self._socket.connect("tcp://127.0.0.1:8081")
+                self.poll.register(self._socket,zmq.POLLIN)
+                self._socket.send_json(req)
         return f
            
     def close(self):

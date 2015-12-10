@@ -26,9 +26,9 @@ mainLay.addLayout(popLay)
 
 interfaces = FIRELIB.Group.Group()
 interfaces.inputs["activate"].connectedTo = "1"
-interfaces.children['Poppy'] = FIRELIB.Robot.Robot(members,"10.0.0.5","8080")
+interfaces.children['Poppy'] = FIRELIB.Robot.Robot(members,"10.0.0.6","8080")
 interfaces.children['Poppy'].inputs["activate"].connectedTo = "1"
-interfaces.children['Mommy'] = FIRELIB.Robot.Robot(members,"10.0.0.4","8080")
+interfaces.children['Mommy'] = FIRELIB.Robot.Robot(members,"10.0.0.7","8080")
 interfaces.children['Mommy'].inputs["activate"].connectedTo = "1"
 interfaces.children['Index'] = FIRELIB.LeftIndex.LeftIndex()
 interfaces.children['Index'].inputs["activate"].connectedTo = "1"

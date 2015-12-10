@@ -1,0 +1,6 @@
+Name;b_retourne;b_coude;b_ramper;b_mou;b_decoude;SPACE;buttonA;buttonB;f_retourne;f_coude;f_ramper;f_decoude
+allonge;0;0;0;1;0;;allonge;allonge_ventre;allonge;allonge;allonge;allonge
+allonge_ventre;1;0;0;0;0;;allonge_ventre;allonge_ventre;coude;allonge_ventre;allonge_ventre;allonge_ventre
+coude;0;1;0;0;0;;coude;coude;coude;ramper;coude;coude
+ramper;0;0;1;0;0;;ramper;ramper;ramper;ramper;ramper;ramper
+recouche;0;0;0;0;1;;recouche;recouche;recouche;recouche;recouche;recouche
