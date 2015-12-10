@@ -5,7 +5,9 @@
         <BehaviorDescription name="behavior" src="behavior_1" xar="behavior.xar" />
     </BehaviorDescriptions>
     <Dialogs />
-    <Resources />
+    <Resources>
+        <File name="alto giattor 5 - extrait" src="alto giattor 5 - extrait.mp3" />
+    </Resources>
     <Topics />
     <IgnoredPaths>
         <Path src="behavior_1" />
