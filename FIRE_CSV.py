@@ -26,16 +26,12 @@ interfaces.children['Poppy'] = FIRELIB.Robot.Robot(members,"10.0.0.5","8080")
 interfaces.children['Poppy'].inputs["activate"].connectedTo = "1"
 interfaces.children['Index'] = FIRELIB.LeftIndex.LeftIndex()
 interfaces.children['Index'].inputs["activate"].connectedTo = "1"
-# interfaces.children['pad'] = FIRELIB.xboxPad.xboxPad(0)
-# interfaces.children['pad'].inputs["activate"].connectedTo = "1"
 
 
 systems = FIRELIB.Group.Group()
 systems.inputs["activate"].connectedTo = "1"
-# systems.children['Alarm'] = FIRELIB.SoundPlayer.SoundPlayer("Sounds/alarm.wav")
-# systems.children['Alarm'].inputs["activate"].connectedTo = "1"
-# systems.children['Machine'] = FIRELIB.FiniteStateMachine.FiniteStateMachine("MACHINES/machine.csv")
-# systems.children['Machine'].inputs["activate"].connectedTo = "0"
+systems.children['Ratelim'] = FIRELIB.Ratelim.Ratelim(2,10)
+systems.children['Ratelim'].inputs["activate"].connectedTo = "1"
 
 systems.children['CSVRecorder'] = FIRELIB.CSVRecorder.CSVRecorder(members,folder = '/TAPES_CSV/')
 systems.children['CSVRecorder'].inputs["activate"].connectedTo = "1"
@@ -56,15 +52,14 @@ systems.children['CSVRecorder'].outputs['Duration'].connectedTo = " Delta "
 interfaces.children['Poppy'].inputs['Duration'].connectedTo = " Delta "
 
 interfaces.children['Index'].outputs['index yaw'].connectedTo = " yaw "
-# interfaces.children['pad'].outputs['axe X1'].connectedTo = " yaw "
-interfaces.children['Poppy'].inputs['head_z'].connectedTo = "str(- yaw )"
+systems.children['Ratelim'].inputs['ch0'].connectedTo = " yaw "
+systems.children['Ratelim'].outputs['ch0'].connectedTo = " yawr "
+interfaces.children['Poppy'].inputs['head_z'].connectedTo = "str(- yawr )"
 
 interfaces.children['Index'].outputs['index pitch'].connectedTo = " pitch "
-# interfaces.children['pad'].outputs['axe Y1'].connectedTo = " pitch "
-interfaces.children['Poppy'].inputs['head_y'].connectedTo = "str(- pitch )"
-
-# interfaces.children['pad'].outputs['button A'].connectedTo = " buttonA "
-# systems.children['Alarm'].inputs['play'].connectedTo = " buttonA "
+systems.children['Ratelim'].inputs['ch1'].connectedTo = " pitch "
+systems.children['Ratelim'].outputs['ch1'].connectedTo = " pitchr "
+interfaces.children['Poppy'].inputs['head_y'].connectedTo = "str(- pitchr )"
 
 # execution of FIRE engine
 channels = {}
