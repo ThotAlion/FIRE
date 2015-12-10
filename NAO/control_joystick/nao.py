@@ -38,6 +38,12 @@ class Nao:
             print self.name+" Could not create proxy to ALLeds"
             print "Error was: ",e
 
+        try:
+            self.behavior = ALProxy("ALBehaviorManager", robotIP, PORT)
+        except Exception, e:
+            print self.name+" Could not create proxy to ALBehavior"
+            print "Error was: ",e
+
         ##### Init of nao, position and move
         self.is_walking = False
         self.is_headmoving = False
@@ -55,23 +61,30 @@ class Nao:
     def init_pos(self):
 
         if self.motion:
+            self.motion.stopMove()
             self.motion.setStiffnesses("Body", 1.0)
 
         self.go_posture("Crouch")
         
         ## Enable arms control by Motion algorithm
         if self.motion:
-            self.motion.setMoveArmsEnabled(True, True)
+
+            #self.motion.setMoveArmsEnabled(True, True)
 
             ## Enable head to move
             self.motion.wbEnableEffectorControl("Head", True)
 
-    
+        if self.behavior.isBehaviorInstalled("main_joystick-d361da/behavior_1"):
+            self.behavior.stopAllBehaviors()
+            self.behavior.startBehavior("main_joystick-d361da/behavior_1")
+ 
 
     ### NOT use . Use of memoryEvent("PostureAsked", name ) instead
     def go_posture(self, posture_name):
 
-        if posture_name != "Rest":    
+        if posture_name != "Rest":
+
+            self.motion.stopMove()
             self.posture.goToPosture(posture_name, 0.65)
 
         else:

@@ -65,17 +65,20 @@ def joystick_update():
 
                 ###### BOUTON RB - LB #########
 
+                joy_state["RB"] = joy.get_button(5)
+                joy_state["LB"] = joy.get_button(4)
+    
                 if joy.get_button(5):
                     
                     joy_state["RB"] = True
-                    if joy.get_button(4):
+                    if joy_state["LB"]:
                         nao_switch_all()
                     else:
                         nao_switch(True)
-                        print "RB switch nao down"
+                        
                 else:
                     joy_state["RB"]=False
-                    print "RB OFF"
+                    
 
                 if joy.get_button(4):
                     
@@ -84,10 +87,10 @@ def joystick_update():
                         nao_switch_all()
                     else:
                         nao_switch(False)
-                        print "LB switch nao up"
+                        
                 else:
                     joy_state["LB"]=False
-                    print "LB OFF"
+                    
 
                 ###### BOUTON DE MANETTE #########
 
@@ -100,12 +103,15 @@ def joystick_update():
                         print " Y down Se lever"
                         nao_go_posture("Stand")
                     elif joy_state["hat_left"]:
-                        print " Y left Bras gauche     "
+                        print " Y left setFps :20  "
+                        nao_memoryEvent("SetFps", 20)
                     elif joy_state["hat_right"]:
-                        print "Y right Bras droite"
+                        print "Y right Stop sound"
+                        nao_memoryEvent("PlaySound", 0)
                     else :
-                        print "Y dire quelque chose"
-                        nao_say("bijour les amis")
+                        print "Yplay Cun Salut"
+                        nao_memoryEvent("anim", 3)
+                        
 
                 if joy.get_button(2):
                     if joy_state["hat_up"]:
@@ -115,9 +121,11 @@ def joystick_update():
                         print " X down position Crouch"
                         nao_go_posture("Rest")
                     elif joy_state["hat_left"]:
-                        print " X left Bras gauche"
+                        print " X left set fps 12"
+                        nao_memoryEvent("SetFps", 12)
                     elif joy_state["hat_right"]:
-                        print "X right Bras droit"
+                        print "X right Play sound"
+                        nao_memoryEvent("PlaySound", 1)
                     else :
                         print "X animation 1"
                         nao_memoryEvent("anim", 1)
@@ -130,7 +138,8 @@ def joystick_update():
                         print " B down position stand init"
                         nao_go_posture("StandInit")
                     elif joy_state["hat_left"]:
-                        print " B left Bras gauche"
+                        print " B left set FPS 25"
+                        nao_memoryEvent("SetFps", 25)
                     elif joy_state["hat_right"]:
                         print "B right Bras droit"
                     else :
@@ -145,12 +154,13 @@ def joystick_update():
                         print " A down s'assoir"
                         nao_go_posture("Sit")
                     elif joy_state["hat_left"]:
-                        print " A left Bras gauche"
+                        print " A left Set FPS 30"
+                        nao_memoryEvent("SetFps", 30)
                     elif joy_state["hat_right"]:
                         print "A right Bras droit"
                     else :
                         print "A animation 3"
-                        nao_memoryEvent("anim", 3)
+                        nao_memoryEvent("anim", 4)
 
             
             if event.type == pygame.locals.JOYAXISMOTION:
@@ -204,7 +214,7 @@ def joystick_update():
                     ax4 = joy.get_axis(4)                
                     print "move head "+str(ax3)+" - "+str(ax4)
                     joy_state["joy_head"] = True
-                    nao_move_head(-ax4*85.5, -ax3*29.5)
+                    nao_move_head(-ax4*60.5, -ax3*29.5)
                 # axis 3 (up -1, down 1) acix 4 (-1 left, 1 right )
 
             ###### JOYSTICK HAT #########
@@ -316,7 +326,7 @@ def nao_switch_all():
 def nao_activate():
     global list_of_nao, current_nao
 
-    print "nao courrant: "+str(current_nao)
+    print "nao courrant: "+str(current_nao)+" : "+list_of_nao[current_nao].name
 
     #active only one nao
     for a in range(len(list_of_nao)):
