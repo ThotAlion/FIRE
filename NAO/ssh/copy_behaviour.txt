@@ -1,0 +1,11 @@
+cd MyDocuments/GitHub/FIRE/NAO/choregraphe/main_joystick/behavior_1
+
+
+scp behavior.xar nao@10.0.1.11:.local/share/PackageManager/apps/main_joystick-d361da/behavior_1
+
+scp behavior.xar nao@10.0.1.12:.local/share/PackageManager/apps/main_joystick-d361da/behavior_1
+
+scp behavior.xar nao@10.0.1.13:.local/share/PackageManager/apps/main_joystick-d361da/behavior_1
+
+scp behavior.xar nao@10.0.1.14:.local/share/PackageManager/apps/main_joystick-d361da/behavior_1
+ 
