@@ -97,27 +97,26 @@ def joystick_update():
                 if joy.get_button(3):
 
                     if joy_state["hat_up"]:
-                        print "Y up  Play sound"
-                        nao_memoryEvent("PlaySound", 0)
+                        print "Y up  Led couleur 1"
+                        nao_leds("ear", 1 )
                     elif joy_state["hat_down"]:
-                        print " Y down  s assoir"
+                        print " Y down Se lever"
                         nao_go_posture("Stand")
                     elif joy_state["hat_left"]:
                         print " Y left setFps :20  "
                         nao_memoryEvent("SetFps", 20)
                     elif joy_state["hat_right"]:
-                        print "Y right anim cote"
-                        nao_memoryEvent("anim", 3)
-                        
+                        print "Y right Stop sound"
+                        nao_memoryEvent("PlaySound", 0)
                     else :
-                        print "Yplay Cun torsion"
-                        nao_memoryEvent("anim", 1)
+                        print "Yplay Cun Salut"
+                        nao_memoryEvent("anim", 3)
                         
 
                 if joy.get_button(2):
                     if joy_state["hat_up"]:
-                        print "X up Play sound"
-                        nao_memoryEvent("PlaySound", 1)
+                        print "X up Led couleur 2"
+                        nao_leds("rotate", 2)
                     elif joy_state["hat_down"]:
                         print " X down position Crouch"
                         nao_go_posture("Rest")
@@ -125,12 +124,11 @@ def joystick_update():
                         print " X left set fps 12"
                         nao_memoryEvent("SetFps", 12)
                     elif joy_state["hat_right"]:
-                        print "X right anim clavier"
-                        nao_memoryEvent("anim", 4)
-                        
+                        print "X right Play sound"
+                        nao_memoryEvent("PlaySound", 1)
                     else :
-                        print "X animation 2 bow"
-                        nao_memoryEvent("anim", 2)
+                        print "X animation 1"
+                        nao_memoryEvent("anim", 1)
 
                 if joy.get_button(1):
                     if joy_state["hat_up"]:
@@ -143,11 +141,10 @@ def joystick_update():
                         print " B left set FPS 25"
                         nao_memoryEvent("SetFps", 25)
                     elif joy_state["hat_right"]:
-                        print "B right anim 7 Salut A"
-                        nao_memoryEvent("anim", 7)
+                        print "B right Bras droit"
                     else :
-                        print "B animation 8 ronde"
-                        nao_memoryEvent("anim", 8)
+                        print "B animation 2"
+                        nao_memoryEvent("anim", 2)
 
                 if joy.get_button(0):
                     if joy_state["hat_up"]:
@@ -160,10 +157,9 @@ def joystick_update():
                         print " A left Set FPS 30"
                         nao_memoryEvent("SetFps", 30)
                     elif joy_state["hat_right"]:
-                        print "A right anim pyramide"
-                        nao_memoryEvent("anim", 6)
+                        print "A right Bras droit"
                     else :
-                        print "A animation 4 clavier"
+                        print "A animation 3"
                         nao_memoryEvent("anim", 4)
 
             
@@ -218,7 +214,7 @@ def joystick_update():
                     ax4 = joy.get_axis(4)                
                     print "move head "+str(ax3)+" - "+str(ax4)
                     joy_state["joy_head"] = True
-                    nao_move_head(-ax4*40.5, -ax3*29.5)
+                    nao_move_head(-ax4*60.5, -ax3*29.5)
                 # axis 3 (up -1, down 1) acix 4 (-1 left, 1 right )
 
             ###### JOYSTICK HAT #########
