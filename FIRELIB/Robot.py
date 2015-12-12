@@ -46,6 +46,7 @@ class Robot(Block.Block,QWidget):
         for member in self.members:
             self.dict_checkbox[member] = QCheckBox("Force "+member+" mou")
         self.tempLabel = QLabel("Max Temp : 0deg")
+        self.hottestMotor = QLabel("Hottest motor : TBD")
         self.voltLabel = QLabel("Min Voltage : 0V")
         
         # composition
@@ -53,6 +54,7 @@ class Robot(Block.Block,QWidget):
         for member in self.dict_checkbox:
             mainlayout.addWidget(self.dict_checkbox[member])
         mainlayout.addWidget(self.tempLabel)
+        mainlayout.addWidget(self.hottestMotor)
         mainlayout.addWidget(self.voltLabel)
         
         # signals
@@ -95,7 +97,10 @@ class Robot(Block.Block,QWidget):
                     if r.has_key(art):
                         self.outputs[art].setValue(r[art],f)
             self.tempLabel.setText("Max Temp : "+r["Temperature"]+"deg")
+            if r.has_key("Hottest"):
+                self.hottestMotor.setText("Hottest motor : "+r["Hottest"])
             self.voltLabel.setText("Min voltage : "+r["Voltage"]+"V")
+            
         return f
         
 class clientThread(Thread):

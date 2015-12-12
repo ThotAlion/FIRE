@@ -1,4 +1,5 @@
 Name;b_arret;b_retourne;b_genou;b_laser;SPACE;f_retourne;f_genou;f_laser;buttonA
+allonge;1;0;0;0;;allonge;allonge;allonge;allonge
 retourne;0;1;0;0;;genou;retourne;retourne;arret
 genou;0;0;1;0;;genou;laser;genou;arret
 laser;0;0;0;1;;laser;laser;laser;arret

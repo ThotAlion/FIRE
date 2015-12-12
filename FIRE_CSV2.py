@@ -26,9 +26,9 @@ mainLay.addLayout(popLay)
 
 interfaces = FIRELIB.Group.Group()
 interfaces.inputs["activate"].connectedTo = "1"
-interfaces.children['Poppy'] = FIRELIB.Robot.Robot(members,"10.0.0.6","8080")
+interfaces.children['Poppy'] = FIRELIB.Robot.Robot(members,"10.0.2.1","8080")
 interfaces.children['Poppy'].inputs["activate"].connectedTo = "1"
-interfaces.children['Mommy'] = FIRELIB.Robot.Robot(members,"10.0.0.7","8080")
+interfaces.children['Mommy'] = FIRELIB.Robot.Robot(members,"10.0.2.2","8080")
 interfaces.children['Mommy'].inputs["activate"].connectedTo = "1"
 interfaces.children['Index'] = FIRELIB.LeftIndex.LeftIndex()
 interfaces.children['Index'].inputs["activate"].connectedTo = "1"
@@ -38,14 +38,14 @@ interfaces.children['Index'].inputs["activate"].connectedTo = "1"
 
 systems = FIRELIB.Group.Group()
 systems.inputs["activate"].connectedTo = "1"
-systems.children['Alarm'] = FIRELIB.SoundPlayer.SoundPlayer("Sounds/alarm.wav")
-systems.children['Alarm'].inputs["activate"].connectedTo = "1"
+# systems.children['Alarm'] = FIRELIB.SoundPlayer.SoundPlayer("Sounds/alarm.wav")
+# systems.children['Alarm'].inputs["activate"].connectedTo = "1"
 # systems.children['Machine'] = FIRELIB.FiniteStateMachine.FiniteStateMachine("MACHINES/machine.csv")
 # systems.children['Machine'].inputs["activate"].connectedTo = "0"
 
-systems.children['CSVRecorder1'] = FIRELIB.CSVRecorder.CSVRecorder(members)
+systems.children['CSVRecorder1'] = FIRELIB.CSVRecorder.CSVRecorder(members,folder = '/TAPES_CSV/')
 systems.children['CSVRecorder1'].inputs["activate"].connectedTo = "1"
-systems.children['CSVRecorder2'] = FIRELIB.CSVRecorder.CSVRecorder(members)
+systems.children['CSVRecorder2'] = FIRELIB.CSVRecorder.CSVRecorder(members,folder = '/TAPES_CSV/')
 systems.children['CSVRecorder2'].inputs["activate"].connectedTo = "1"
 
 popLay.addWidget(interfaces.children['Poppy'])

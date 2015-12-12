@@ -23,7 +23,7 @@ members["right leg"] = ['r_hip_x','r_hip_z','r_hip_y','r_knee_y','r_ankle_y']
 interfaces = FIRELIB.Group.Group()
 interfaces.inputs["activate"].connectedTo = "1"
 
-interfaces.children['Poppy'] = FIRELIB.Robot.Robot(members,"10.0.0.4","8080")
+interfaces.children['Poppy'] = FIRELIB.Robot.Robot(members,"10.0.2.1","8080")
 interfaces.children['Poppy'].inputs["activate"].connectedTo = "1"
 interfaces.children['Poppy'].outputs["Temperature"].connectedTo = " TC "
 interfaces.children['Poppy'].inputs['Number'].connectedTo = " n "
@@ -39,14 +39,14 @@ interfaces.children['pad'].inputs["activate"].connectedTo = "1"
 interfaces.children['pad'].outputs['button A'].connectedTo = " buttonA "
 
 interfaces.children['Index'] = FIRELIB.LeftIndex.LeftIndex()
-interfaces.children['Index'].inputs["activate"].connectedTo = " blaser "
+interfaces.children['Index'].inputs["activate"].connectedTo = "1"
 interfaces.children['Index'].outputs['index pitch'].connectedTo = " pitch "
 interfaces.children['Index'].outputs['index yaw'].connectedTo = " yaw "
 
 systems = FIRELIB.Group.Group()
 systems.inputs["activate"].connectedTo = "1"
 
-systems.children['Machine'] = FIRELIB.FiniteStateMachine.FiniteStateMachine("MACHINES/machine.csv")
+systems.children['Machine'] = FIRELIB.FiniteStateMachine.FiniteStateMachine("MACHINES/laser.csv")
 systems.children['Machine'].inputs["activate"].connectedTo = "1"
 systems.children['Machine'].inputs["f_retourne"].connectedTo = " f_retourne "
 systems.children['Machine'].inputs["f_genou"].connectedTo = " f_genou "
@@ -57,11 +57,12 @@ systems.children['Machine'].outputs["b_retourne"].connectedTo = " b_retourne "
 systems.children['Machine'].outputs["b_genou"].connectedTo = " b_genou "
 systems.children['Machine'].outputs["b_laser"].connectedTo = " b_laser "
 
-systems.children['Alarm'] = FIRELIB.SoundPlayer.SoundPlayer("Sounds/alarm.wav")
-systems.children['Alarm'].inputs["activate"].connectedTo = "1"
-systems.children['Alarm'].inputs['play'].connectedTo = " TC > 60 "
-
-
+systems.children['Ratelim'] = FIRELIB.Ratelim.Ratelim(2,10)
+systems.children['Ratelim'].inputs["activate"].connectedTo = " b_laser "
+systems.children['Ratelim'].inputs['ch0'].connectedTo = " yaw "
+systems.children['Ratelim'].outputs['ch0'].connectedTo = " yawr "
+systems.children['Ratelim'].inputs['ch1'].connectedTo = " pitch "
+systems.children['Ratelim'].outputs['ch1'].connectedTo = " pitchr "
 
 systems.children['retourne'] = FIRELIB.CSVPlayer.CSVPlayer("TAPES_CSV/dos_2_ventre.csv")
 systems.children['retourne'].inputs["activate"].connectedTo = " b_retourne "
@@ -98,9 +99,9 @@ systems.children['tete direct'].outputs["ch1"].connectedTo = " head_z "
 
 systems.children['tete laser'] = FIRELIB.Wires.Wires(2)
 systems.children['tete laser'].inputs["activate"].connectedTo = " b_laser "
-systems.children['tete direct'].inputs["ch0"].connectedTo = " str(- pitch ) "
+systems.children['tete direct'].inputs["ch0"].connectedTo = " str(- pitchr ) "
 systems.children['tete direct'].outputs["ch0"].connectedTo = " head_y "
-systems.children['tete direct'].inputs["ch1"].connectedTo = " str(- yaw ) "
+systems.children['tete direct'].inputs["ch1"].connectedTo = " str(- yawr ) "
 systems.children['tete direct'].outputs["ch1"].connectedTo = " head_z "
 
 # execution of FIRE engine
