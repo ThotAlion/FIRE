@@ -6,14 +6,22 @@ class Nao_manager(QtGui.QWidget):
     def __init__(self):
 
         super(Nao_manager, self).__init__()
-        
+
+        ## NAO MANAGEMENT
         self.list_of_nao = []
         self.selection = []
+
+        ## GUI
+        self.layout1 = QtGui.QGridLayout()
+        self.setLayout(self.layout1)
+        self.setWindowTitle("Multiple Nao xbox controller")
 
 
     def addNao(self, name, adresseIP, port ):
         naoId = len(self.list_of_nao)
         nao = Nao(adresseIP, name, naoId)
+
+        self.layout1.addWidget(nao, 0, naoId)
         self.list_of_nao.append(nao)
         self.selection.append(False)
 
@@ -47,6 +55,7 @@ class Nao_manager(QtGui.QWidget):
     # select only one nao, switching from one to the other
     def selectSwitch(self, isIncreasing ):
 
+        print "manager:selectSwitch"
         #find the last nao activated
         last_id = 0
         current_id = 0
@@ -56,14 +65,20 @@ class Nao_manager(QtGui.QWidget):
             current_id += 1
 
         for i in range(len(self.selection)):
-            self.selection[i] = ( ((last_id + 1)%len(self.selection))==i ) 
+            self.selection[i] = ( ((last_id + 1)%len(self.selection))==i )
+
+        self.activateNao()
                 
 
     # select or unselect one nao, over the current selection, according to its ID
     def select(self, isSelecting, nao_id ):
 
         if nao_id>-1 and nao_id< len(self.list_of_nao):
-            self.list_of_nao[nao_id] = isSelecting
+            self.selection[nao_id] = isSelecting
+
+        self.activateNao()
+
+        
 
     # return True if a nao is selected
     def is_selected(self, nao_id):
@@ -77,7 +92,7 @@ class Nao_manager(QtGui.QWidget):
     
 
         for a in range(len(self.list_of_nao)):
-            self.list_of_nao[a].is_activated( self.selection[a] )
+            (self.list_of_nao[a]).activate( self.selection[a] )
 
     # call a memory event to all selected nao
     def nao_memoryEvent(self, name, arg ):
@@ -100,7 +115,7 @@ class Nao_manager(QtGui.QWidget):
 
         for i in range(len(self.list_of_nao)):
             if self.selection[i]:
-                self.list_of_nao[i].move_head(self, yaw,pitch)
+                self.list_of_nao[i].move_head(yaw,pitch)
 
     # ask a posture to all selected nao
     def nao_go_posture(self, posture_name):
@@ -117,7 +132,10 @@ class Nao_manager(QtGui.QWidget):
     ####################################################################
     def transmit_msg(self, msgGlobal):
 
+        
+        
         for msg in msgGlobal:
+
 
             if(len(msg)==3):
 

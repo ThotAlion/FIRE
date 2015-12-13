@@ -4,6 +4,8 @@ import time
 
 class Interpret(QtGui.QWidget):
 
+    interpret_event = QtCore.pyqtSignal(list)
+
     def __init__(self):
 
         super(Interpret, self).__init__()
@@ -89,6 +91,6 @@ class Interpret(QtGui.QWidget):
                     res.append(translated_word)
 
 
-        return res
+        self.interpret_event.emit(res)
 
 

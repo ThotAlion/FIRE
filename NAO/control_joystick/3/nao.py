@@ -1,13 +1,34 @@
 from naoqi import ALProxy
 import time
+from PyQt4 import QtGui, QtCore
 
-class Nao:
+class Nao(QtGui.QWidget):
 
 
-    def __init__(self,robotIP,robotName,robotID, PORT=9559):
+    def __init__(self,robotIP,robotName,robotID, PORT=9559, parent=None):
+        
 
+        ##### GUI
+        #QtGui.QWidget.__init__(self)
+        super(Nao, self).__init__(parent)
+        self.label_name = QtGui.QLabel(robotName)
+ 
+        self.slider1 = QtGui.QSlider(QtCore.Qt.Horizontal)
+
+        self.radioButton1 = QtGui.QRadioButton("selected")
+        self.radioButton1.setChecked(False)
+
+        self.layout1 = QtGui.QGridLayout()
+
+        self.layout1.addWidget(self.radioButton1 , 0, 0)
+        self.layout1.addWidget(self.label_name, 1, 0 )
+        self.layout1.addWidget(self.slider1, 2, 0 )
+        self.setLayout(self.layout1)
+
+        ### Nao init
         self.name = robotName
         self.id = robotID
+
         
         try:
             self.motion = ALProxy("ALMotion", robotIP, PORT)
@@ -139,17 +160,30 @@ class Nao:
 
        
         if(not(self.is_headmoving) and abs(yaw * pitch)>0):
-            self.motion.stiffnessInterpolation("Head", 1.0, 0.1)
+
+            try:
+                self.motion.stiffnessInterpolation("Head", 1.0, 0.1)
+            except Exception, errorMsg:
+                print str(errorMsg)
             self.is_headmoving = True
 
 
         fractionMaxSpeed  = 0.2
-        
-        self.motion.setAngles("HeadYaw",yaw*3.14/180.0, fractionMaxSpeed);
-        self.motion.setAngles("HeadPitch",pitch*3.14/180.0, fractionMaxSpeed);
+
+        try:
+            self.motion.setAngles("HeadYaw",yaw*3.14/180.0, fractionMaxSpeed);
+            self.motion.setAngles("HeadPitch",pitch*3.14/180.0, fractionMaxSpeed);
+        except Exception, errorMsg
+            print str(errorMsg)
+
 
         if(not(self.is_headmoving) and (yaw*pitch==0.0)):
-            self.motion.stiffnessInterpolation("Head", 0.0, 0.4)
+            try:
+                self.motion.stiffnessInterpolation("Head", 0.0, 0.4)
+            except Exception errorMsg
+                print str(errorMsg)
+
+    
             self.is_headmoving = False
 
       
@@ -173,6 +207,8 @@ class Nao:
 
     def activate(self, is_activated):
     #function in order to recognize the current nao remotely controlled
+
+        self.radioButton1.setChecked(is_activated)
 
 
         if is_activated and self.leds:

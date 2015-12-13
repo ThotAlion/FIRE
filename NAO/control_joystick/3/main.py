@@ -18,19 +18,28 @@ class main_ui(QtGui.QWidget):
 
     def init_ui(self):
         QtGui.QMainWindow.__init__(self, None)
-        self.show()
+
 
         self.interpret = Interpret()
         self.joystick = Joystick(self)
         self.manager = Nao_manager()
 
         self.manager.addNao("dudule", "127.0.0.1", 8484 )
+        self.manager.addNao("gerald", "127.0.0.1", 8484 )
+        self.manager.addNao("oscar", "127.0.0.1", 8484 )
         self.manager.init_manager()
 
         ########### Connect ######
         self.joystick.joy_event.connect(self.interpret.translate)
-    
-    
+        self.interpret.interpret_event.connect(self.manager.transmit_msg)
+
+        #### GUI######
+        self.setWindowTitle("Multiple Nao xbox controller")
+        self.layout_main = QtGui.QGridLayout()
+        self.layout_main.addWidget(self.manager, 0, 0)
+        self.setLayout(self.layout_main)
+
+        self.show()    
     
 if __name__ == "__main__":
     import sys
