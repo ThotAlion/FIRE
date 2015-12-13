@@ -8,17 +8,29 @@ import csv
 class CSVPlayer(Block.Block):
     """ this class describes a block """
     
-    def __init__(self,CSVFile):
+    def __init__(self,members):
         Block.Block.__init__(self)
+        QWidget.__init__(self)
+        self.tapeName = ""
         self.tape = []
+        self.index = 0
+        self.number = 0
+        self.members = members
+        # creation of outputs/inputs
+        for member in self.members:
+            for ch in self.members[member]:
+                self.outputs[ch] = Connexion(default = NaN)
+        self.outputs["Number"] = Connexion(default = "-1")
+        self.outputs["Duration"] = Connexion(default = "1")
+        self.outputs["Name"] = Connexion(default = "toto")
+        self.inputs["Tape"] = Connexion(default = self.tapeName)
+        self.inputs["Pause"] = Connexion(default = 0)
+        
         r = csv.DictReader(open(CSVFile,'r'),delimiter = ';')
         for row in r:
             self.tape.append(row)
         for name in r.fieldnames:
             self.outputs[name] = Connexion(default = NaN)
-        self.outputs["Number"] = Connexion(default = "-1")
-        self.index = 0
-        self.number = 0
         
 
     def start(self):
@@ -35,14 +47,23 @@ class CSVPlayer(Block.Block):
         
     def setOutputs(self,f):
         t = Tools.getTime()
+        # control of tape change
+        tape_input = self.inputs["Tape"].getValue(f)
+        if tape_input != self.tapeName:
+            f = self.init(f)
+            self.tapeName = tape_input
+            self.tape = []
+            r = csv.DictReader(open(CSVFile,'r'),delimiter = ';')
+            for row in r:
+                self.tape.append(row)
+        # control of outputs
         duration = float(self.tape[self.index]["Duration"])
-        #print [t,self.t0,duration,self.index]
-        if (t-self.t0)>=duration and self.index<=len(self.tape)-2:
+        if (t-self.t0)>=duration and self.index<=len(self.tape)-1:
             self.index = self.index+1
             self.t0 = t
             self.number = self.number+1
             print self.index
-        elif self.index==len(self.tape)-2:
+        elif self.index==len(self.tape)-1:
             self.outputs["finished"].setValue(1,f)
         
         for name in self.tape[self.index]:

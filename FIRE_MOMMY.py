@@ -19,6 +19,8 @@ members["right arm"] = ['r_shoulder_y','r_shoulder_x','r_arm_z','r_elbow_y','r_w
 members["left leg"] =  ['l_hip_x','l_hip_z','l_hip_y','l_knee_y','l_ankle_y']
 members["right leg"] = ['r_hip_x','r_hip_z','r_hip_y','r_knee_y','r_ankle_y']
 
+mainW = QWidget()
+mainLay = QHBoxLayout(mainW)
 
 interfaces = FIRELIB.Group.Group()
 interfaces.inputs["activate"].connectedTo = "1"
@@ -35,6 +37,10 @@ systems.children['Ratelim'].inputs["activate"].connectedTo = "1"
 
 systems.children['CSVRecorder'] = FIRELIB.CSVRecorder.CSVRecorder(members,folder = '/TAPES_CSV/')
 systems.children['CSVRecorder'].inputs["activate"].connectedTo = "1"
+
+mainLay.addWidget(interfaces.children['Poppy'])
+mainLay.addWidget(systems.children['CSVRecorder'])
+mainW.show()
 
 for member in members:
     for art in members[member]:
