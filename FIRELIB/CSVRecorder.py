@@ -220,13 +220,16 @@ class CSVRecorder(Block.Block,QWidget):
         
         # creation of components
         self.objTable = QTableView()
+        self.objTable.horizontalHeader().setResizeMode(QHeaderView.ResizeToContents)
         self.poseTable = QTableView()
         self.poseTable.setModel(self.poseList)
+        self.poseTable.horizontalHeader().setResizeMode(QHeaderView.ResizeToContents)
         self.tapeTable = QTableView()
         self.tapeDir = QFileSystemModel()
         self.tapeDir.setRootPath(QDir.currentPath()+self.folder)
         self.tapeTable.setModel(self.tapeDir)
         self.tapeTable.setRootIndex(self.tapeDir.index(QDir.currentPath()+self.folder))
+        self.tapeTable.horizontalHeader().setResizeMode(QHeaderView.ResizeToContents)
         self.cBackPose = QComboBox()
         self.cBackPose.setModel(self.tapeDir)
         self.cBackPose.setRootModelIndex(self.tapeDir.index(QDir.currentPath()+self.folder))

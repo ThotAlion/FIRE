@@ -99,7 +99,12 @@ class FiniteStateMachine(Block.Block,QWidget):
         
         # generate outputs
         for b in self.state[self.currentState]:
-            self.outputs[b].setValue(int(self.state[self.currentState][b]),f)
+            vals = self.state[self.currentState][b]
+            try:
+                val = float(vals)
+            except:
+                val = vals
+            self.outputs[b].setValue(val),f)
         return f
         
 
