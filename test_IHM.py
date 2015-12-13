@@ -19,7 +19,7 @@ interfaces.inputs["activate"].connectedTo = "1"
 
 systems = FIRELIB.Group.Group()
 systems.inputs["activate"].connectedTo = "1"
-systems.children["button"] = FIRELIB.Buttons.Buttons(["button 1","button 2"])
+systems.children["button"] = FIRELIB.Buttons.Buttons(["button 1","button 2","STOP"])
 systems.children["button"].inputs["activate"].connectedTo = "1"
 systems.children["disp"] = FIRELIB.Display.Display(["disp 1","disp 2"])
 systems.children["disp"].inputs["activate"].connectedTo = "1"

@@ -1,11 +1,12 @@
 from numpy import *
 import Block
+from PyQt4.QtGui import *
+from PyQt4.QtCore import *
 from Connexion import *
 import Tools
 import time
-import pygame
 
-class SoundPlayer(Block.Block):
+class SoundPlayer(Block.Block,):
     """ this class describes a block """
     
     def __init__(self,Filename,mode = "Stop"):

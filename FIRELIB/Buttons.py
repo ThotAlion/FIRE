@@ -19,7 +19,10 @@ class Buttons(Block.Block,QWidget):
             self.outputs[b] = Connexion(default = 0)
             self.buttonDict[b] = QPushButton(b)
             self.buttonDict[b].setSizePolicy(QSizePolicy.Expanding,QSizePolicy.Expanding)
-            self.buttonDict[b].setStyleSheet("color: #b1b1b1;background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #565656, stop: 0.1 #525252, stop: 0.5 #4e4e4e, stop: 0.9 #4a4a4a, stop: 1 #464646);font-size: 24px;")
+            if b == "STOP":
+                self.buttonDict[b].setStyleSheet("color: yellow;background-color: red;font-size: 30px;")
+            else:
+                self.buttonDict[b].setStyleSheet("color: #b1b1b1;background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #565656, stop: 0.1 #525252, stop: 0.5 #4e4e4e, stop: 0.9 #4a4a4a, stop: 1 #464646);font-size: 24px;")
             layout.addWidget(self.buttonDict[b])
         self.show()
 
