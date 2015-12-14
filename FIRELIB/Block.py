@@ -26,12 +26,17 @@ class Block(object):
         print "get inputs to deliver them in the reality."
         
     def _setOutputs(self,f):
+        # print "self._active"
+        # print self._active
+        # print "activate"
+        # print self.inputs["activate"].getValue(f)
         if self._active == False and self.inputs["activate"].getValue(f) == 1:
             f = self.init(f)
             self._active = True
         elif self.inputs["activate"].getValue(f) == 0:
             self._active = False
-            
+        # print f
+        # print self._active        
         if self._active == True:
             f = self.setOutputs(f)
         return f

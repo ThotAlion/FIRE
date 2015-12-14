@@ -1,11 +1,13 @@
 from numpy import *
 import Block
+from PyQt4.QtGui import *
+from PyQt4.QtCore import *
 from Connexion import *
 import Tools
 import time
 import csv
 
-class CSVPlayer(Block.Block):
+class CSVPlayer(Block.Block,QWidget):
     """ this class describes a block """
     
     def __init__(self,members):
@@ -25,13 +27,6 @@ class CSVPlayer(Block.Block):
         self.outputs["Name"] = Connexion(default = "toto")
         self.inputs["Tape"] = Connexion(default = self.tapeName)
         self.inputs["Pause"] = Connexion(default = 0)
-        
-        r = csv.DictReader(open(CSVFile,'r'),delimiter = ';')
-        for row in r:
-            self.tape.append(row)
-        for name in r.fieldnames:
-            self.outputs[name] = Connexion(default = NaN)
-        
 
     def start(self):
         a=1
@@ -50,20 +45,22 @@ class CSVPlayer(Block.Block):
         # control of tape change
         tape_input = self.inputs["Tape"].getValue(f)
         if tape_input != self.tapeName:
-            f = self.init(f)
+            self.index = 0
+            self.t0 = Tools.getTime()
+            self.outputs["finished"].setValue(0,f)
             self.tapeName = tape_input
             self.tape = []
-            r = csv.DictReader(open(CSVFile,'r'),delimiter = ';')
+            r = csv.DictReader(open(self.tapeName,'r'),delimiter = ';')
             for row in r:
                 self.tape.append(row)
         # control of outputs
         duration = float(self.tape[self.index]["Duration"])
-        if (t-self.t0)>=duration and self.index<=len(self.tape)-1:
+        if (t-self.t0)>=duration and self.index<=len(self.tape)-2:
             self.index = self.index+1
             self.t0 = t
             self.number = self.number+1
             print self.index
-        elif self.index==len(self.tape)-1:
+        elif self.index==len(self.tape)-2:
             self.outputs["finished"].setValue(1,f)
         
         for name in self.tape[self.index]:

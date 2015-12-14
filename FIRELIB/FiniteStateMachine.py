@@ -104,7 +104,7 @@ class FiniteStateMachine(Block.Block,QWidget):
                 val = float(vals)
             except:
                 val = vals
-            self.outputs[b].setValue(val),f)
+            self.outputs[b].setValue(val,f)
         return f
         
 
