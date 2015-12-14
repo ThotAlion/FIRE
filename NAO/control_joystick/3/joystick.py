@@ -43,12 +43,14 @@ class Joystick(QtCore.QThread):
         os.environ["SDL_VIDEODRIVER"] = "dummy"
         pygame.init()
         pygame.joystick.init()
-        self.joy = pygame.joystick.Joystick(0)
-        self.joy.init()
-
-        print "---- Init Joystick ID = "+str(self.id)
-        print self.joy.get_name()
-        print self.joy.get_init()
+        try :
+            self.joy = pygame.joystick.Joystick(0)
+            self.joy.init()
+            print "---- Init Joystick ID = "+str(self.id)
+            print self.joy.get_name()
+            print self.joy.get_init()
+        except :
+            print "error"
 
         done = False
 

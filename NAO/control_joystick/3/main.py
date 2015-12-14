@@ -21,17 +21,16 @@ class main_ui(QtGui.QWidget):
 
 
         self.interpret = Interpret()
-        self.joystick = Joystick(self)
+        #self.joystick = Joystick(self)
         self.manager = Nao_manager()
 
-        self.manager.addNao("dudule", "127.0.0.1", 8484 )
-        self.manager.addNao("gerald", "127.0.0.1", 8484 )
-        self.manager.addNao("oscar", "127.0.0.1", 8484 )
+        self.manager.addNao("Lucy", "0.0.1.13", 9559 )
+        self.manager.addNao("MaMa", "0.0.1.12", 9559 )
         self.manager.init_manager()
 
         ########### Connect ######
-        self.joystick.joy_event.connect(self.interpret.translate)
-        self.interpret.interpret_event.connect(self.manager.transmit_msg)
+        #self.joystick.joy_event.connect(self.interpret.translate)
+        #self.interpret.interpret_event.connect(self.manager.transmit_msg)
 
         #### GUI######
         self.setWindowTitle("Multiple Nao xbox controller")

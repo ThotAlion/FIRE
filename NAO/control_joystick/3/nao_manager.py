@@ -1,5 +1,6 @@
 from nao import Nao
 from PyQt4 import QtGui, QtCore
+import copy
 
 class Nao_manager(QtGui.QWidget):
 
@@ -7,23 +8,143 @@ class Nao_manager(QtGui.QWidget):
 
         super(Nao_manager, self).__init__()
 
-        ## NAO MANAGEMENT
+        ####### NAO MANAGEMENT #######
         self.list_of_nao = []
         self.selection = []
 
-        ## GUI
-        self.layout1 = QtGui.QGridLayout()
-        self.setLayout(self.layout1)
-        self.setWindowTitle("Multiple Nao xbox controller")
+        ######## GUI #################
 
+        ####Layout
+        self.layoutMain = QtGui.QVBoxLayout()
+        self.layoutNao= QtGui.QGridLayout()
+        self.layoutNao.setAlignment(QtCore.Qt.AlignHCenter)
+        self.layoutNao.setAlignment(QtCore.Qt.AlignTop)
+        self.layoutManager = QtGui.QHBoxLayout()
+
+        self.layoutMain.addLayout(self.layoutNao)
+        self.layoutMain.addLayout(self.layoutManager)
+        self.setLayout(self.layoutMain)
+
+        ####CheckBox for selection
+        self.list_of_selectionCheckBox = []
+
+        #####Group Selection
+        #construct
+        groupSelection = QtGui.QGroupBox("selection")
+        layoutSelection = QtGui.QVBoxLayout()
+        groupSelection.setLayout(layoutSelection)
+        self.selectionButton_all = QtGui.QPushButton("All")
+        self.selectionButton_nall = QtGui.QPushButton("None")
+        #connect
+        self.selectionButton_all.clicked.connect(lambda: self.selectAll(True))
+        self.selectionButton_nall.clicked.connect(lambda: self.selectAll(False))
+        #add to layout
+        layoutSelection.addWidget(self.selectionButton_all)
+        layoutSelection.addWidget(self.selectionButton_nall)
+        self.layoutManager.addWidget(groupSelection)
+                                          
+
+
+        #####GroupPosture : posture
+        #construct
+        groupPosture = QtGui.QGroupBox("Posture")
+        layoutPosture = QtGui.QVBoxLayout()
+        groupPosture.setLayout(layoutPosture)
+        self.postureButton_rest = QtGui.QPushButton("rest")
+        self.postureButton_stand = QtGui.QPushButton("stand")
+        self.postureButton_standInit = QtGui.QPushButton("stand init")
+        self.postureButton_sit = QtGui.QPushButton("sit")
+        #connect
+        self.postureButton_rest.clicked.connect(lambda: self.nao_memoryEvent("posture", "Rest"))
+        self.postureButton_stand.clicked.connect(lambda: self.nao_memoryEvent("posture", "Stand"))
+        self.postureButton_standInit.clicked.connect(lambda: self.nao_memoryEvent("posture", "StandInit"))
+        self.postureButton_sit.clicked.connect(lambda: self.nao_memoryEvent("posture", "Sit"))
+        #add to layout
+        layoutPosture.addWidget(self.postureButton_rest)
+        layoutPosture.addWidget(self.postureButton_stand)
+        layoutPosture.addWidget(self.postureButton_standInit)
+        layoutPosture.addWidget(self.postureButton_sit)
+        self.layoutManager.addWidget(groupPosture)
+
+        #####GroupAnimation
+        #construct
+        groupAnim = QtGui.QGroupBox("Animation Cunningham")
+        layoutAnim = QtGui.QGridLayout()
+        groupAnim.setLayout(layoutAnim)
+        self.list_of_animButton = []
+        self.list_of_animButton.append(QtGui.QPushButton("anim1"))
+        self.list_of_animButton.append(QtGui.QPushButton("anim2"))
+        self.list_of_animButton.append(QtGui.QPushButton("anim3"))
+        self.list_of_animButton.append(QtGui.QPushButton("anim4"))
+        self.list_of_animButton.append(QtGui.QPushButton("anim5"))
+        self.list_of_animButton.append(QtGui.QPushButton("anim6"))
+        self.list_of_animButton.append(QtGui.QPushButton("anim7"))
+        self.list_of_animButton.append(QtGui.QPushButton("anim8"))
+        self.list_of_animButton.append(QtGui.QPushButton("anim9"))
+        #connect
+        self.list_of_animButton[0].clicked.connect(lambda: self.nao_memoryEvent("anim", "1"))
+        self.list_of_animButton[1].clicked.connect(lambda: self.nao_memoryEvent("anim", "2"))
+        self.list_of_animButton[2].clicked.connect(lambda: self.nao_memoryEvent("anim", "3"))
+        self.list_of_animButton[3].clicked.connect(lambda: self.nao_memoryEvent("anim", "4"))
+        self.list_of_animButton[4].clicked.connect(lambda: self.nao_memoryEvent("anim", "5"))
+        self.list_of_animButton[5].clicked.connect(lambda: self.nao_memoryEvent("anim", "6"))
+        self.list_of_animButton[6].clicked.connect(lambda: self.nao_memoryEvent("anim", "7"))
+        self.list_of_animButton[7].clicked.connect(lambda: self.nao_memoryEvent("anim", "8"))
+        self.list_of_animButton[8].clicked.connect(lambda: self.nao_memoryEvent("anim", "9"))
+        #add to layout
+        for i in range(3):
+            for j in range(3):
+                layoutAnim.addWidget(self.list_of_animButton[(i*3) + j ], i, j )
+        self.layoutManager.addWidget(groupAnim)
+
+        #####GroupAnimLibrary
+        #construct
+        groupAnimLib = QtGui.QGroupBox("Animation Librarie")
+        layoutAnimLib = QtGui.QGridLayout()
+        groupAnimLib.setLayout(layoutAnimLib)
+        self.list_of_animLibButton = []
+        self.list_of_animLibButton.append(QtGui.QPushButton("1"))
+        self.list_of_animLibButton.append(QtGui.QPushButton("2"))
+        self.list_of_animLibButton.append(QtGui.QPushButton("3"))
+        self.list_of_animLibButton.append(QtGui.QPushButton("4"))
+        self.list_of_animLibButton.append(QtGui.QPushButton("5"))
+        self.list_of_animLibButton.append(QtGui.QPushButton("6"))
+        self.list_of_animLibButton.append(QtGui.QPushButton("7"))
+        self.list_of_animLibButton.append(QtGui.QPushButton("8"))
+        self.list_of_animLibButton.append(QtGui.QPushButton("9"))
+        #connect
+        self.list_of_animLibButton[0].clicked.connect(lambda: self.nao_memoryEvent("animLib", "1"))
+        self.list_of_animLibButton[1].clicked.connect(lambda: self.nao_memoryEvent("animLib", "2"))
+        self.list_of_animLibButton[2].clicked.connect(lambda: self.nao_memoryEvent("animLib", "3"))
+        self.list_of_animLibButton[3].clicked.connect(lambda: self.nao_memoryEvent("animLib", "4"))
+        self.list_of_animLibButton[4].clicked.connect(lambda: self.nao_memoryEvent("animLib", "5"))
+        self.list_of_animLibButton[5].clicked.connect(lambda: self.nao_memoryEvent("animLib", "6"))
+        self.list_of_animLibButton[6].clicked.connect(lambda: self.nao_memoryEvent("animLib", "7"))
+        self.list_of_animLibButton[7].clicked.connect(lambda: self.nao_memoryEvent("animLib", "8"))
+        self.list_of_animLibButton[8].clicked.connect(lambda: self.nao_memoryEvent("animLib", "9"))
+        #add to layout
+        for i in range(3):
+            for j in range(3):
+                layoutAnimLib.addWidget(self.list_of_animLibButton[(i*3) + j ], i, j )
+
+        self.layoutManager.addWidget(groupAnimLib)
+        
+
+        
 
     def addNao(self, name, adresseIP, port ):
+        #nao management
         naoId = len(self.list_of_nao)
         nao = Nao(adresseIP, name, naoId)
-
-        self.layout1.addWidget(nao, 0, naoId)
         self.list_of_nao.append(nao)
         self.selection.append(False)
+
+        #gui management
+        self.layoutNao.addWidget(nao, 1, naoId, QtCore.Qt.AlignCenter)
+        checkBox = QtGui.QCheckBox("")
+        self.list_of_selectionCheckBox.append(checkBox)
+        self.layoutNao.addWidget( checkBox, 0, naoId, QtCore.Qt.AlignCenter)
+        
 
     def init_nao(self):
 
@@ -40,15 +161,15 @@ class Nao_manager(QtGui.QWidget):
 
 
     # switching from select all to unselect all
-    def selectAll(self):
+    def selectAll(self, is_selecting=True):
+        if is_selecting:
+             print "selecting ALL"
+        else :
+            print "un_selecting all"
 
-        is_all_selected = True
-        for is_activated in self.selection:
-            is_all_selected = is_all_selected and is_activated
-        
-        
-        for is_activated in self.selection:
-            is_activated = not(is_all_selected)
+        for i in range(len(self.selection)):
+            self.selection[i] = is_selecting
+
         self.activateNao()
    
 
@@ -89,14 +210,21 @@ class Nao_manager(QtGui.QWidget):
 
     # activate some or all nao according to selection list
     def activateNao(self):
-    
+        print "activateNao :"
+        print self.selection
 
         for a in range(len(self.list_of_nao)):
             (self.list_of_nao[a]).activate( self.selection[a] )
+            if self.selection[a] :
+                print "setCheck : "+str(a)
+                (self.list_of_selectionCheckBox[a]).setCheckState(QtCore.Qt.Checked)
+            else:
+                (self.list_of_selectionCheckBox[a]).setCheckState(QtCore.Qt.Unchecked)
 
     # call a memory event to all selected nao
     def nao_memoryEvent(self, name, arg ):
-
+        
+        print "Memory Event : "+name+" -- "+str(arg)
         for i in range(len(self.list_of_nao)):
             if self.selection[i]:
                 self.list_of_nao[i].memoryEvent(name, arg)

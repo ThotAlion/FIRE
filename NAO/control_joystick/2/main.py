@@ -36,7 +36,7 @@ def global_init():
 
     current_nao = 0
     list_of_nao.append( Nao("10.0.1.11", "Lucas"))
-    list_of_nao.append( Nao("10.0.1.12", "MaMa"))
+    #list_of_nao.append( Nao("10.0.1.12", "MaMa"))
     list_of_nao.append( Nao("10.0.1.13", "Lycie"))
     list_of_nao.append( Nao("10.0.1.14", "Polytech"))
 
@@ -123,10 +123,10 @@ def joystick_update():
                         nao_go_posture("Rest")
                     elif joy_state["hat_left"]:
                         print " X left set fps 12"
-                        nao_memoryEvent("SetFps", 12)
+                        nao_memoryEvent("anim", 9)
                     elif joy_state["hat_right"]:
                         print "X right anim clavier"
-                        nao_memoryEvent("anim", 4)
+                        nao_memoryEvent("anim", 5)
                         
                     else :
                         print "X animation 2 bow"
@@ -147,7 +147,7 @@ def joystick_update():
                         nao_memoryEvent("anim", 7)
                     else :
                         print "B animation 8 ronde"
-                        nao_memoryEvent("anim", 8)
+                        nao_memoryEvent("anim", 9)
 
                 if joy.get_button(0):
                     if joy_state["hat_up"]:

@@ -15,15 +15,27 @@ class Nao(QtGui.QWidget):
  
         self.slider1 = QtGui.QSlider(QtCore.Qt.Horizontal)
 
-        self.radioButton1 = QtGui.QRadioButton("selected")
-        self.radioButton1.setChecked(False)
+        self.radio_connect1 = QtGui.QRadioButton("None")
+        self.radio_connect1.setChecked(QtCore.Qt.Checked)
+        self.radio_connect2 = QtGui.QRadioButton("Connected")
+        self.radio_connect2.setChecked(False)
+        self.radio_connect3 = QtGui.QRadioButton("Ready")
+        self.radio_connect3.setChecked(False)
 
-        self.layout1 = QtGui.QGridLayout()
+        layout1 = QtGui.QVBoxLayout()
+        layout1.addWidget(self.label_name)
+        layout1.addWidget(self.radio_connect1)
+        layout1.addWidget(self.radio_connect2)
+        layout1.addWidget(self.radio_connect3)
+        
 
-        self.layout1.addWidget(self.radioButton1 , 0, 0)
-        self.layout1.addWidget(self.label_name, 1, 0 )
-        self.layout1.addWidget(self.slider1, 2, 0 )
-        self.setLayout(self.layout1)
+        groupBox = QtGui.QGroupBox("Nao "+str(robotID))
+        groupBox.setLayout(layout1)
+
+        layoutMain = QtGui.QHBoxLayout()
+        layoutMain.addWidget(groupBox)
+ 
+        self.setLayout(layoutMain)
 
         ### Nao init
         self.name = robotName
@@ -173,14 +185,14 @@ class Nao(QtGui.QWidget):
         try:
             self.motion.setAngles("HeadYaw",yaw*3.14/180.0, fractionMaxSpeed);
             self.motion.setAngles("HeadPitch",pitch*3.14/180.0, fractionMaxSpeed);
-        except Exception, errorMsg
+        except Exception, errorMsg:
             print str(errorMsg)
 
 
         if(not(self.is_headmoving) and (yaw*pitch==0.0)):
             try:
                 self.motion.stiffnessInterpolation("Head", 0.0, 0.4)
-            except Exception errorMsg
+            except Exception, errorMsg:
                 print str(errorMsg)
 
     
