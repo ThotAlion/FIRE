@@ -39,19 +39,19 @@ class Interpret(QtGui.QWidget):
         dic1["B"] = ["ANIM", "ARABESQUE", 0]
 
         dic1["RIGHT_Y"] = ["ANIM","COTE", 0]
-        dic1["RIGHT_X"] = ["ANIM", "CLAVIER", 0]
+        dic1["RIGHT_X"] = ["ANIM", "PYRAMIDE", 0]
         dic1["RIGHT_B"] = ["ANIM", "SALUTA", 0]
         dic1["RIGHT_A"] = ["ANIM", "PYRAMIDE", 0]
 
         dic1["UP_Y"] = ["PLAY_SOUND", 0, 0]
         dic1["UP_X"] = ["PLAY_SOUND", 1, 0]
-        dic1["UP_B"] = ["PLAY_SOUND", 2, 0]
-        dic1["UP_A"] = ["PLAY_SOUND", 3, 0]
+        dic1["UP_B"] = ["LEDS", "OFF", 0]
+        dic1["UP_A"] = ["LEDS", "INIT", 0]
 
-        dic1["DOWN_Y"] = ["POSTURE", "STAND", 0]
-        dic1["DOWN_X"] = ["POSTURE", "REST", 0]
-        dic1["DOWN_B"] = ["POSTURE", "STANDINIT", 0]
-        dic1["DOWN_A"] = ["POSTURE", "SIT", 0]
+        dic1["DOWN_Y"] = ["POSTURE", "Stand", 0]
+        dic1["DOWN_X"] = ["POSTURE", "Rest", 0]
+        dic1["DOWN_B"] = ["POSTURE", "StandInit", 0]
+        dic1["DOWN_A"] = ["POSTURE", "Sit", 0]
 
         dic1["LEFT_Y"] = ["FPS", 15, 0]
         dic1["LEFT_X"] = ["ANIM", "RONDE", 0]

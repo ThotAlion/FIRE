@@ -55,10 +55,10 @@ class Nao_manager(QtGui.QWidget):
         self.postureButton_standInit = QtGui.QPushButton("stand init")
         self.postureButton_sit = QtGui.QPushButton("sit")
         #connect
-        self.postureButton_rest.clicked.connect(lambda: self.nao_memoryEvent("posture", "Rest"))
-        self.postureButton_stand.clicked.connect(lambda: self.nao_memoryEvent("posture", "Stand"))
-        self.postureButton_standInit.clicked.connect(lambda: self.nao_memoryEvent("posture", "StandInit"))
-        self.postureButton_sit.clicked.connect(lambda: self.nao_memoryEvent("posture", "Sit"))
+        self.postureButton_rest.clicked.connect(lambda: self.nao_go_posture("Rest"))
+        self.postureButton_stand.clicked.connect(lambda: self.nao_go_posture("Stand"))
+        self.postureButton_standInit.clicked.connect(lambda: self.self.nao_go_posture("StandInit"))
+        self.postureButton_sit.clicked.connect(lambda: self.self.nao_go_posture("Sit"))
         #add to layout
         layoutPosture.addWidget(self.postureButton_rest)
         layoutPosture.addWidget(self.postureButton_stand)
@@ -72,25 +72,25 @@ class Nao_manager(QtGui.QWidget):
         layoutAnim = QtGui.QGridLayout()
         groupAnim.setLayout(layoutAnim)
         self.list_of_animButton = []
-        self.list_of_animButton.append(QtGui.QPushButton("anim1"))
-        self.list_of_animButton.append(QtGui.QPushButton("anim2"))
-        self.list_of_animButton.append(QtGui.QPushButton("anim3"))
-        self.list_of_animButton.append(QtGui.QPushButton("anim4"))
-        self.list_of_animButton.append(QtGui.QPushButton("anim5"))
-        self.list_of_animButton.append(QtGui.QPushButton("anim6"))
-        self.list_of_animButton.append(QtGui.QPushButton("anim7"))
-        self.list_of_animButton.append(QtGui.QPushButton("anim8"))
+        self.list_of_animButton.append(QtGui.QPushButton("Torsion"))
+        self.list_of_animButton.append(QtGui.QPushButton("Triangle"))
+        self.list_of_animButton.append(QtGui.QPushButton("Cote"))
+        self.list_of_animButton.append(QtGui.QPushButton("Clavier"))
+        self.list_of_animButton.append(QtGui.QPushButton("Pyramide"))
+        self.list_of_animButton.append(QtGui.QPushButton("Salut A"))
+        self.list_of_animButton.append(QtGui.QPushButton("Arabesque"))
+        self.list_of_animButton.append(QtGui.QPushButton("Ronde"))
         self.list_of_animButton.append(QtGui.QPushButton("anim9"))
         #connect
-        self.list_of_animButton[0].clicked.connect(lambda: self.nao_memoryEvent("anim", "1"))
-        self.list_of_animButton[1].clicked.connect(lambda: self.nao_memoryEvent("anim", "2"))
-        self.list_of_animButton[2].clicked.connect(lambda: self.nao_memoryEvent("anim", "3"))
-        self.list_of_animButton[3].clicked.connect(lambda: self.nao_memoryEvent("anim", "4"))
-        self.list_of_animButton[4].clicked.connect(lambda: self.nao_memoryEvent("anim", "5"))
-        self.list_of_animButton[5].clicked.connect(lambda: self.nao_memoryEvent("anim", "6"))
-        self.list_of_animButton[6].clicked.connect(lambda: self.nao_memoryEvent("anim", "7"))
-        self.list_of_animButton[7].clicked.connect(lambda: self.nao_memoryEvent("anim", "8"))
-        self.list_of_animButton[8].clicked.connect(lambda: self.nao_memoryEvent("anim", "9"))
+        self.list_of_animButton[0].clicked.connect(lambda: self.nao_memoryEvent("anim", "TORSION"))
+        self.list_of_animButton[1].clicked.connect(lambda: self.nao_memoryEvent("anim", "TRIANGLE"))
+        self.list_of_animButton[2].clicked.connect(lambda: self.nao_memoryEvent("anim", "COTE"))
+        self.list_of_animButton[3].clicked.connect(lambda: self.nao_memoryEvent("anim", "CLAVIER"))
+        self.list_of_animButton[4].clicked.connect(lambda: self.nao_memoryEvent("anim", "PYRAMIDE"))
+        self.list_of_animButton[5].clicked.connect(lambda: self.nao_memoryEvent("anim", "SALUTA"))
+        self.list_of_animButton[6].clicked.connect(lambda: self.nao_memoryEvent("anim", "ARABESQUE"))
+        self.list_of_animButton[7].clicked.connect(lambda: self.nao_memoryEvent("anim", "RONDE"))
+        self.list_of_animButton[8].clicked.connect(lambda: self.nao_memoryEvent("anim", "anim9"))
         #add to layout
         for i in range(3):
             for j in range(3):
@@ -234,7 +234,7 @@ class Nao_manager(QtGui.QWidget):
 
         for i in range(len(self.list_of_nao)):
             if self.selection[i]:
-                self.list_of_nao[i].update_walk(self, X, Y , Theta, Speed)
+                self.list_of_nao[i].update_walk( X, Y , Theta, Speed)
 
         print "marche X="+str(X)+" Y="+str(Y)+" Theta="+str(Theta)+" Speed="+str(Speed)+""
 
@@ -250,7 +250,27 @@ class Nao_manager(QtGui.QWidget):
 
         for i in range(len(self.list_of_nao)):
             if self.selection[i]:
-                self.list_of_nao[i].go_posture(self, posture_name)
+                self.list_of_nao[i].go_posture( posture_name)
+
+    def nao_getStatus(self):
+
+        for nao in self.list_of_nao :
+            nao.get_status()
+
+    def nao_leds(self, leds_posture):
+
+        zone = ""
+        value = 0
+        if leds_posture == "INIT":
+            zone = "eye"
+            value = 1
+        if leds_posture == "OFF":
+            zone = "eye"
+            value = 0
+            
+        for i in range(len(self.list_of_nao)):
+            if self.selection[i]:
+                self.list_of_nao[i].use_leds( zone, value)
         
 
 
@@ -276,7 +296,7 @@ class Nao_manager(QtGui.QWidget):
                 if   name == "SWITCH" :
                     self.selectSwitch(arg1==1)
                 elif name == "SELECT_ALL" :
-                    self.selectedAll()
+                    self.selectAll()
                 elif name == "SELECT":
                     self.select(True, arg1 )
                 elif name == "UNSELECT":
@@ -288,7 +308,7 @@ class Nao_manager(QtGui.QWidget):
                     self.nao_memoryEvent("anim", arg1 )
                     
                 elif name == "POSTURE":
-                    self.nao_memoryEvent("PostureAsked" ,arg1)
+                    self.nao_go_posture(arg1)
 
                 elif name == "WALK": #arg1 left<0 right>0 -- arg2 up>0 down<0
                     if arg1==0.0 and arg2==0.0 :
@@ -316,7 +336,8 @@ class Nao_manager(QtGui.QWidget):
                     self.nao_memoryEvent("SetFps", arg1)
                     
                 elif name == "LEDS":
-                    self.nao_memoryEvent("SetLeds", arg1)
+                    self.nao_leds( arg1)
+                    
 
                 elif name == "PLAY_SOUND":
                     self.nao_memoryEvent("PlaySound", arg1)

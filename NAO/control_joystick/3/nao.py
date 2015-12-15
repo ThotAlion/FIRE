@@ -8,22 +8,28 @@ class Nao(QtGui.QWidget):
     def __init__(self,robotIP,robotName,robotID, PORT=9559, parent=None):
         
 
-        ##### GUI
+        ######### GUI
         #QtGui.QWidget.__init__(self)
         super(Nao, self).__init__(parent)
         self.label_name = QtGui.QLabel(robotName)
- 
+        #slider marche
         self.slider1 = QtGui.QSlider(QtCore.Qt.Horizontal)
-
+        #radio de connection
         self.radio_connect1 = QtGui.QRadioButton("None")
         self.radio_connect1.setChecked(QtCore.Qt.Checked)
         self.radio_connect2 = QtGui.QRadioButton("Connected")
         self.radio_connect2.setChecked(False)
         self.radio_connect3 = QtGui.QRadioButton("Ready")
         self.radio_connect3.setChecked(False)
-
+        #progress bar de batterie
+        self.battery_progress = QtGui.QProgressBar()
+        self.battery_progress.setTextVisible(True)
+        self.battery_progress.setMinimum(0)
+        self.battery_progress.setMaximum(100)
+        #layout
         layout1 = QtGui.QVBoxLayout()
         layout1.addWidget(self.label_name)
+        layout1.addWidget(self.battery_progress)
         layout1.addWidget(self.radio_connect1)
         layout1.addWidget(self.radio_connect2)
         layout1.addWidget(self.radio_connect3)
@@ -84,6 +90,20 @@ class Nao(QtGui.QWidget):
             print "Error was: ",e
             self.behavior = None
 
+        try:
+            self.battery = ALProxy("ALBattery", robotIP, PORT)
+        except Exception, e:
+            print self.name+" Could not create proxy to ALBattery"
+            print "Error was: ",e
+            self.battery = None
+
+        try:
+            self.audio = ALProxy("ALAudioDevice", robotIP, PORT)
+        except Exception, e:
+            print self.name+" Could not create proxy to ALAudioDevice"
+            print "Error was: ",e
+            self.audio = None
+
         ##### Init of nao, position and move
         self.is_walking = False
         self.is_headmoving = False
@@ -121,7 +141,7 @@ class Nao(QtGui.QWidget):
         if posture_name != "Rest":
             if self.motion and self.posture :
                 self.motion.stopMove()
-                self.posture.goToPosture(posture_name, 0.65)
+                self.memory.raiseEvent("PostureAsked", posture_name)
 
         else:
             if self.motion : 
@@ -210,28 +230,73 @@ class Nao(QtGui.QWidget):
 
         if name == "ear" :
             if value > 0 :
-                self.leds.on("EarLeds")
-                self.leds.on("BrainLeds")
+                try:
+                    self.leds.on("EarLeds")
+                    self.leds.on("BrainLeds")
+                except Exception, errorMsg:
+                    print str(errorMsg)
             else:
-                self.leds.off("EarLeds")
-                self.leds.off("BrainLeds")
+                try:
+                    self.leds.off("EarLeds")
+                    self.leds.off("BrainLeds")
+                except Exception, errorMsg:
+                    print str(errorMsg)
+
+        elif name == "eye" :
+            if value > 0 :
+                try:
+                    self.leds.on("FaceLed")                    
+                except Exception, errorMsg:
+                    print str(errorMsg)
+            else:
+                try:
+                    self.leds.off("FaceLed")
+                except Exception, errorMsg:
+                    print str(errorMsg)
+               
 
 
     def activate(self, is_activated):
     #function in order to recognize the current nao remotely controlled
 
-        self.radioButton1.setChecked(is_activated)
-
-
         if is_activated and self.leds:
             self.use_leds("ear", 1)
         elif self.leds :
             self.use_leds("ear", 0)
-                
-                               
+                                               
     def say(self, toSay):
 
-        self.speech.say(toSay)
+        try:        
+            self.speech.say(toSay)
+        except Exception, errorMsg:
+            print str(errorMsg)
+
+    def get_status(self):
+
+        batLevel = 0
+
+        try:
+            batLevel = self.battery.getBatteryCharge()
+        except Exception, errorMsg:
+            print str(errorMsg)
+
+        self.battery_progress.setValue(batLevel)
+        if self.behavior :
+
+            if self.behavior.isBehaviorInstalled("main_joystick-d361da/behavior_1"):
+               
+                if self.behavior.isBehaviorRunning("main_joystick-d361da/behavior_1"):
+                    self.radio_connect3.setChecked(QtCore.Qt.Checked)
+                else:
+                    self.radio_connect2.setChecked(QtCore.Qt.Checked)
+        else:
+            self.radio_connect1.setChecked(QtCore.Qt.Checked)
+
+                
+        
+            
+
+    
                 
 
     
