@@ -36,23 +36,22 @@
 
     def onInput_onStart(self, p):
         #self.onStopped() #activate the output of the box
-        if p==1:
-            self.anim1()
-        if p==2:
-            self.anim2()
-        if p==3:
-            self.anim3()
-        if p==4:
-            self.anim4()
-        if p==5:
-            self.anim5()
-        if p==6:
-            self.anim6()
-        if p==7:
-            self.anim7()
-        if p==8:
-            self.anim8()
-
+        if p=="TORSION":
+            self.torsion()
+        if p=="TRIANGLE":
+            self.triangle()
+        if p=="COTE":
+            self.cote()
+        if p=="CLAVIER":
+            self.clavier()
+        if p=="PYRAMIDE":
+            self.pyramide()
+        if p=="SALUTA":
+            self.saluta()
+        if p=="ARABESQUE":
+            self.arabesque()
+        if p=="RONDE":
+            self.ronde()
 
         pass
 
@@ -65,14 +64,14 @@
                             <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
                             <Input name="onStart" type="2" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
                             <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
-                            <Output name="anim5" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
-                            <Output name="anim1" type="1" type_size="1" nature="2" inner="0" tooltip="" id="5" />
-                            <Output name="anim2" type="1" type_size="1" nature="2" inner="0" tooltip="" id="6" />
-                            <Output name="anim3" type="1" type_size="1" nature="2" inner="0" tooltip="" id="7" />
-                            <Output name="anim4" type="1" type_size="1" nature="2" inner="0" tooltip="" id="8" />
-                            <Output name="anim6" type="1" type_size="1" nature="2" inner="0" tooltip="" id="9" />
-                            <Output name="anim7" type="1" type_size="1" nature="2" inner="0" tooltip="" id="10" />
-                            <Output name="anim8" type="1" type_size="1" nature="2" inner="0" tooltip="" id="11" />
+                            <Output name="torsion" type="1" type_size="1" nature="2" inner="0" tooltip="" id="4" />
+                            <Output name="triangle" type="1" type_size="1" nature="2" inner="0" tooltip="" id="5" />
+                            <Output name="cote" type="1" type_size="1" nature="2" inner="0" tooltip="" id="6" />
+                            <Output name="clavier" type="1" type_size="1" nature="2" inner="0" tooltip="" id="7" />
+                            <Output name="pyramide" type="1" type_size="1" nature="2" inner="0" tooltip="" id="8" />
+                            <Output name="saluta" type="1" type_size="1" nature="2" inner="0" tooltip="" id="9" />
+                            <Output name="arabesque" type="1" type_size="1" nature="2" inner="0" tooltip="" id="10" />
+                            <Output name="ronde" type="1" type_size="1" nature="2" inner="0" tooltip="" id="11" />
                         </Box>
                         <Box name="sw posture" id="4" localization="8" tooltip="" x="168" y="1226">
                             <bitmap>media/images/box/box-python-script.png</bitmap>
@@ -14155,7 +14154,7 @@ class MyClass(GeneratedClass):
 			"Danish" : " Hej ",
 			"German" : " Hallo ",
 			"Greek" : "  ",
-			"English" : " 17 and 47 ",
+			"English" : " 14 and 05 ",
 			"Spanish" : " Hola ",
 			"Finnish" : " Hei ",
 			"French" : " Bonjour ",
@@ -14195,7 +14194,7 @@ class MyClass(GeneratedClass):
                                                                             <![CDATA[]]>
 </greek>
                                                                         <english>
-                                                                            <![CDATA[17 and 47]]>
+                                                                            <![CDATA[14 and 05]]>
 </english>
                                                                         <spanish>
                                                                             <![CDATA[Hola]]>
@@ -14242,7 +14241,7 @@ class MyClass(GeneratedClass):
                                                                         <chinese>
                                                                             <![CDATA[]]>
 </chinese>
-                                                                        <language>6</language>
+                                                                        <language>5</language>
                                                                     </pluginContent>
                                                                     <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
                                                                     <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Data is sent on the output when this input is stimulated." id="2" />
@@ -17519,7 +17518,7 @@ class MyClass(GeneratedClass):
                                 </BehaviorLayer>
                             </Timeline>
                         </Box>
-                        <Box name="Bow" id="17" localization="8" tooltip="Enter description here" x="468" y="146">
+                        <Box name="triangle" id="17" localization="8" tooltip="Enter description here" x="468" y="146">
                             <bitmap>media/images/box/box-diagram.png</bitmap>
                             <script language="4">
                                 <content>
@@ -18457,14 +18456,15 @@ class MyClass(GeneratedClass):
                         <Link inputowner="6" indexofinput="2" outputowner="4" indexofoutput="5" />
                         <Link inputowner="1" indexofinput="3" outputowner="4" indexofoutput="6" />
                         <Link inputowner="9" indexofinput="2" outputowner="0" indexofoutput="2" />
-                        <Link inputowner="16" indexofinput="2" outputowner="2" indexofoutput="8" />
-                        <Link inputowner="10" indexofinput="2" outputowner="2" indexofoutput="9" />
-                        <Link inputowner="32" indexofinput="2" outputowner="2" indexofoutput="10" />
-                        <Link inputowner="11" indexofinput="2" outputowner="2" indexofoutput="7" />
-                        <Link inputowner="17" indexofinput="2" outputowner="2" indexofoutput="6" />
-                        <Link inputowner="12" indexofinput="2" outputowner="2" indexofoutput="5" />
                         <Link inputowner="27" indexofinput="2" outputowner="28" indexofoutput="4" />
                         <Link inputowner="31" indexofinput="2" outputowner="27" indexofoutput="4" />
+                        <Link inputowner="12" indexofinput="2" outputowner="2" indexofoutput="4" />
+                        <Link inputowner="17" indexofinput="2" outputowner="2" indexofoutput="5" />
+                        <Link inputowner="11" indexofinput="2" outputowner="2" indexofoutput="6" />
+                        <Link inputowner="16" indexofinput="2" outputowner="2" indexofoutput="7" />
+                        <Link inputowner="10" indexofinput="2" outputowner="2" indexofoutput="8" />
+                        <Link inputowner="32" indexofinput="2" outputowner="2" indexofoutput="9" />
+                        <Link inputowner="28" indexofinput="2" outputowner="2" indexofoutput="10" />
                         <Link inputowner="1" indexofinput="2" outputowner="2" indexofoutput="11" />
                     </Diagram>
                 </BehaviorKeyframe>
