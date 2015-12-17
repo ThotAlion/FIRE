@@ -13,6 +13,7 @@ class Interpret(QtGui.QWidget):
         self.list_of_dic = []
         self.current_dic = 0
         dic1 = {}
+        dic2 = {}
 
         ##############  GUI ############################
         #construct
@@ -21,10 +22,13 @@ class Interpret(QtGui.QWidget):
         group = QtGui.QGroupBox("Interpret")
         group.setLayout(layoutGroup)
         self.dic1Button = QtGui.QPushButton("Dic1")
+        self.dic2Button = QtGui.QPushButton("Dic2")
         #connect
         self.dic1Button.clicked.connect( lambda: self.changeDict(0))
+        self.dic2Button.clicked.connect( lambda: self.changeDict(1))
         #add to layout
         layoutGroup.addWidget(self.dic1Button)
+        layoutGroup.addWidget(self.dic2Button)
         self.layoutMain.addWidget(group)
         self.setLayout(self.layoutMain)
         
@@ -74,12 +78,66 @@ class Interpret(QtGui.QWidget):
 
         ##### --1-- JOYSTICK ####
         dic1["JOY_MAIN"] = ["WALK"]
+        dic1["LEFT_JOY_MAIN"] = ["WALKSIDE"]
+        dic1["UP_JOY_MAIN"] = ["WALKPREC"]
         dic1["LT"] = ["TURN"]
         dic1["RT"] = ["TURN"]
         dic1["JOY_SEC"] = ["HEAD"]
 
-
         self.list_of_dic.append(dic1)
+
+        ############## DICTIONNAIRE 2 ###################
+
+        #### --1-- RB LB ####
+        dic2["RB"] = ["SWITCH", 1, 0]
+        dic2["LB"] = ["SWITCH", 0, 0]
+        dic2["LB+RB"] = ["SELECT_ALL"]
+        dic2["RB_Y"] = ["SELECT", 1, 0]
+        dic2["RB_X"] = ["SELECT", 2, 0]
+        dic2["RB_B"] = ["SELECT", 3, 0]
+        dic2["RB_A"] = ["SELECT", 4, 0]
+        dic2["LB_Y"] = ["UNSELECT", 1, 0]
+        dic2["LB_X"] = ["UNSELECT", 2, 0]
+        dic2["LB_B"] = ["UNSELECT", 3, 0]
+        dic2["LB_A"] = ["UNSELECT", 4, 0]
+
+        
+        #### --1-- BUTTON ###
+        dic2["Y"] = ["ANIMLIB", "", 0]
+        dic2["X"] = ["ANIMLIB", "", 0]
+        dic2["A"] = ["ANIMLIB","", 0]
+        dic2["B"] = ["ANIMLIB", "", 0]
+
+        dic2["RIGHT_Y"] = ["ANIMLIB","", 0]
+        dic2["RIGHT_X"] = ["ANIMLIB", "", 0]
+        dic2["RIGHT_A"] = ["ANIMLIB", "", 0]
+        dic2["RIGHT_B"] = ["ANIMLIB", "", 0]
+
+        dic2["UP_Y"] = ["", 0, 0]
+        dic2["UP_X"] = ["", 0, 0]
+        dic2["UP_B"] = ["", 0, 0]
+        dic2["UP_A"] = ["", 0, 0]
+
+        dic2["DOWN_Y"] = ["POSTURE", "Stand", 0]
+        dic2["DOWN_X"] = ["POSTURE", "Rest", 0]
+        dic2["DOWN_B"] = ["POSTURE", "StandInit", 0]
+        dic2["DOWN_A"] = ["POSTURE", "Sit", 0]
+
+        dic2["LEFT_Y"] = ["",0, 0]
+        dic2["LEFT_X"] = ["", "RONDE", 0]
+        dic2["LEFT_B"] = ["", 0, 0]
+        dic2["LEFT_A"] = ["", 0, 0]
+
+        ##### --1-- JOYSTICK ####
+        dic2["JOY_MAIN"] = ["WALK"]
+        dic2["LEFT_JOY_MAIN"] = ["WALKSIDE"]
+        dic2["UP_JOY_MAIN"] = ["WALKPREC"]
+        dic2["LT"] = ["TURN"]
+        dic2["RT"] = ["TURN"]
+        dic2["JOY_SEC"] = ["HEAD"]
+
+        
+        self.list_of_dic.append(dic2)
 
 
 
@@ -88,6 +146,7 @@ class Interpret(QtGui.QWidget):
     def changeDict(self, a):
         if(a>(-1) and a<len(self.list_of_dic)):
            self.current_dic = a
+           print "---- change of dic : "+str(a)+" ------"
 
     def translate( self, a ):
 

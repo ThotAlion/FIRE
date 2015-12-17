@@ -1,3 +1,4 @@
+
 import time
 import pygame
 from pygame.locals import *
@@ -183,7 +184,12 @@ class Joystick(QtCore.QThread):
                             ax1= self.joy.get_axis(1)
                             ax0= self.joy.get_axis(0)
                             self.joy_state["joy_main"] = True
-                            res.append(["JOY_MAIN", -ax0, -ax1])
+                            if self.joy_state["hat_up"]:
+                                res.append(["UP_JOY_MAIN", -ax0, -ax1])
+                            elif self.joy_state["hat_left"] or self.joy_state["hat_right"]:
+                                res.append(["LEFT_JOY_MAIN", -ax0, -ax1])
+                            else :
+                                res.append(["JOY_MAIN", -ax0, -ax1])
 
 
                         ###### LT - RT ROTATION DU ROBOT #########

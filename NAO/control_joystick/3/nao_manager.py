@@ -42,9 +42,28 @@ class Nao_manager(QtGui.QWidget):
         layoutSelection.addWidget(self.selectionButton_all)
         layoutSelection.addWidget(self.selectionButton_nall)
         self.layoutManager.addWidget(groupSelection)
+
+        #####GroupWalk : walk
+        #construct
+        groupWalk = QtGui.QGroupBox("walk")
+        groupWalk.setMinimumWidth(100)
+        layoutWalk = QtGui.QVBoxLayout()
+        groupWalk.setLayout(layoutWalk)
+        self.sliderWalk_x = QtGui.QSlider(QtCore.Qt.Vertical)
+        self.sliderWalk_x.setRange(-100, 100)
+        self.sliderWalk_y = QtGui.QSlider(QtCore.Qt.Horizontal)
+        self.sliderWalk_y.setRange(-100, 100)
+        self.sliderWalk_y.setTickInterval(100)
+        self.sliderWalk_tetha = QtGui.QSlider(QtCore.Qt.Horizontal)
+        self.sliderWalk_tetha.setRange(-100, 100)
+        self.sliderWalk_tetha.setTickInterval(100)
+        #add to layout
+        layoutWalk.addWidget(self.sliderWalk_x)
+        layoutWalk.addWidget(self.sliderWalk_y)
+        layoutWalk.addWidget(self.sliderWalk_tetha)
+        self.layoutManager.addWidget(groupWalk)
+        
                                           
-
-
         #####GroupPosture : posture
         #construct
         groupPosture = QtGui.QGroupBox("Posture")
@@ -237,6 +256,9 @@ class Nao_manager(QtGui.QWidget):
                 self.list_of_nao[i].update_walk( X, Y , Theta, Speed)
 
         print "marche X="+str(X)+" Y="+str(Y)+" Theta="+str(Theta)+" Speed="+str(Speed)+""
+        self.sliderWalk_tetha.setValue(-Theta*100)
+        self.sliderWalk_x.setValue(X*100)
+        self.sliderWalk_y.setValue(Y*100)
 
     # update turning head to all selected nao
     def nao_move_head(self, yaw,pitch):
@@ -244,6 +266,8 @@ class Nao_manager(QtGui.QWidget):
         for i in range(len(self.list_of_nao)):
             if self.selection[i]:
                 self.list_of_nao[i].move_head(yaw,pitch)
+
+        print "Tete yaw="+str(yaw)+" pitch="+str(pitch)+" "
 
     # ask a posture to all selected nao
     def nao_go_posture(self, posture_name):
@@ -314,8 +338,21 @@ class Nao_manager(QtGui.QWidget):
                     if arg1==0.0 and arg2==0.0 :
                         self.nao_update_walk(0,0,0.0,0.0)
                     else :
-                        self.nao_update_walk( abs(arg2)/(arg2), 0.0, arg1*abs(arg1)*0.7, abs(arg2))
+                        self.nao_update_walk( abs(arg2)/(arg2), 0.0, arg1*0.7, abs(arg2))
+
+                elif name == "WALKPREC": #arg1 left<0 right>0 -- arg2 up>0 down<0
+                    if arg1==0.0 and arg2==0.0 :
+                        self.nao_update_walk(0,0,0.0,0.0)
+                    else :
+                        self.nao_update_walk( abs(arg2)/(arg2), 0.0, arg1*0.15, abs(arg2))
                     
+                elif name == "WALKSIDE": #arg1 left<0 right>0 -- arg2 up>0 down<0
+                    if arg1==0.0 and arg2==0.0 :
+                        self.nao_update_walk(0,0,0.0,0.0)
+                    else :
+                        self.nao_update_walk( abs(arg2)/(arg2),arg1*0.7, 0.0,  abs(arg2))
+                    
+
                 elif name == "TURN":
 
                     if(arg1==0):
@@ -328,7 +365,7 @@ class Nao_manager(QtGui.QWidget):
                     
                 elif name == "HEAD": #arg1 left<0 right>0 --- arg2 up>0, down<0
 
-                    self.nao_move_head(-arg1*40.5, arg2*29.5)
+                    self.nao_move_head(-arg1*40.5, -arg2*29.5)
 
                 ### OTHERS #######
 
