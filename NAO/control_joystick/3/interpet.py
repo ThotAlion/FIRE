@@ -14,6 +14,20 @@ class Interpret(QtGui.QWidget):
         self.current_dic = 0
         dic1 = {}
 
+        ##############  GUI ############################
+        #construct
+        self.layoutMain = QtGui.QVBoxLayout()
+        layoutGroup = QtGui.QVBoxLayout()
+        group = QtGui.QGroupBox("Interpret")
+        group.setLayout(layoutGroup)
+        self.dic1Button = QtGui.QPushButton("Dic1")
+        #connect
+        self.dic1Button.clicked.connect( lambda: self.changeDict(0))
+        #add to layout
+        layoutGroup.addWidget(self.dic1Button)
+        self.layoutMain.addWidget(group)
+        self.setLayout(self.layoutMain)
+        
 
 
         ############## DICTIONNAIRE 1 ###################
@@ -40,13 +54,13 @@ class Interpret(QtGui.QWidget):
 
         dic1["RIGHT_Y"] = ["ANIM","COTE", 0]
         dic1["RIGHT_X"] = ["ANIM", "PYRAMIDE", 0]
-        dic1["RIGHT_B"] = ["ANIM", "SALUTA", 0]
-        dic1["RIGHT_A"] = ["ANIM", "PYRAMIDE", 0]
+        dic1["RIGHT_A"] = ["ANIM", "SALUTA", 0]
+        dic1["RIGHT_B"] = ["ANIM", "TOUPIE", 0]
 
-        dic1["UP_Y"] = ["PLAY_SOUND", 0, 0]
-        dic1["UP_X"] = ["PLAY_SOUND", 1, 0]
-        dic1["UP_B"] = ["LEDS", "OFF", 0]
-        dic1["UP_A"] = ["LEDS", "INIT", 0]
+        dic1["UP_Y"] = ["AUTONOME", 2, 0]
+        dic1["UP_X"] = ["AUTONOME", 1, 0]
+        dic1["UP_B"] = ["AUTONOME", 3, 0]
+        dic1["UP_A"] = ["AUTONOME", 4, 0]
 
         dic1["DOWN_Y"] = ["POSTURE", "Stand", 0]
         dic1["DOWN_X"] = ["POSTURE", "Rest", 0]

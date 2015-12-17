@@ -314,7 +314,7 @@ class Nao_manager(QtGui.QWidget):
                     if arg1==0.0 and arg2==0.0 :
                         self.nao_update_walk(0,0,0.0,0.0)
                     else :
-                        self.nao_update_walk( abs(arg2)/(arg2), 0.0, arg1*0.70, abs(arg2))
+                        self.nao_update_walk( abs(arg2)/(arg2), 0.0, arg1*abs(arg1)*0.7, abs(arg2))
                     
                 elif name == "TURN":
 
@@ -328,7 +328,7 @@ class Nao_manager(QtGui.QWidget):
                     
                 elif name == "HEAD": #arg1 left<0 right>0 --- arg2 up>0, down<0
 
-                    self.nao_move_head(arg1*40.5, arg2*29.5)
+                    self.nao_move_head(-arg1*40.5, arg2*29.5)
 
                 ### OTHERS #######
 
@@ -338,11 +338,11 @@ class Nao_manager(QtGui.QWidget):
                 elif name == "LEDS":
                     self.nao_leds( arg1)
                     
-
                 elif name == "PLAY_SOUND":
                     self.nao_memoryEvent("PlaySound", arg1)
 
-            
+                elif name == "AUTONOME":
+                    self.nao_memoryEvent("autonome", arg1)            
 
                 
             

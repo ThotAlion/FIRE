@@ -39,12 +39,13 @@ class main_ui(QtGui.QWidget):
         self.setWindowTitle("Multiple Nao xbox controller")
         self.layout_main = QtGui.QGridLayout()
         self.layout_main.addWidget(self.manager, 0, 0)
+        self.layout_main.addWidget(self.interpret, 0,1)
         self.setLayout(self.layout_main)
         self.show()
 
         #### Nao Manager ####
-        self.manager.addNao("Baltazar", "10.0.1.14", 9559 )
         self.manager.addNao("Lucas", "10.0.1.11", 9559 )
+        self.manager.addNao("Baltazar", "10.0.1.14", 9559 )
         self.manager.addNao("MaMa", "10.0.1.12", 9559 )
         self.manager.addNao("Lucy", "10.0.1.13", 9559 )
 

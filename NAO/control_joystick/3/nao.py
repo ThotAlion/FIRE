@@ -124,7 +124,7 @@ class Nao(QtGui.QWidget):
         ## Enable arms control by Motion algorithm
         if self.motion:
 
-            #self.motion.setMoveArmsEnabled(True, True)
+            self.motion.setMoveArmsEnabled(True, True)
 
             ## Enable head to move
             self.motion.wbEnableEffectorControl("Head", True)
@@ -133,6 +133,7 @@ class Nao(QtGui.QWidget):
             if self.behavior.isBehaviorInstalled("main_joystick-d361da/behavior_1"):
                 self.behavior.stopAllBehaviors()
                 self.behavior.startBehavior("main_joystick-d361da/behavior_1")
+                self.motion.rest()
  
 
     ### NOT use . Use of memoryEvent("PostureAsked", name ) instead
@@ -194,13 +195,13 @@ class Nao(QtGui.QWidget):
         if(not(self.is_headmoving) and abs(yaw * pitch)>0):
 
             try:
-                self.motion.stiffnessInterpolation("Head", 1.0, 0.1)
+                self.motion.stiffnessInterpolation("Head", 1.0, 0.8)
             except Exception, errorMsg:
                 print str(errorMsg)
             self.is_headmoving = True
 
 
-        fractionMaxSpeed  = 0.2
+        fractionMaxSpeed  = 0.4
 
         try:
             self.motion.setAngles("HeadYaw",yaw*3.14/180.0, fractionMaxSpeed);
