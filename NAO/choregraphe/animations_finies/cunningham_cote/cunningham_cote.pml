@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Package name="cunningham_cote" format_version="4">
+    <Manifest src="manifest.xml" />
+    <BehaviorDescriptions>
+        <BehaviorDescription name="behavior" src="behavior_1" xar="behavior.xar" />
+    </BehaviorDescriptions>
+    <Dialogs />
+    <Resources>
+        <File name="alto giattor 5 - extrait" src="alto giattor 5 - extrait.mp3" />
+    </Resources>
+    <Topics />
+    <IgnoredPaths>
+        <Path src="behavior_1" />
+        <Path src=".metadata" />
+        <Path src="behavior_1/behavior.xar" />
+    </IgnoredPaths>
+</Package>
