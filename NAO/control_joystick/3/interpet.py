@@ -40,14 +40,14 @@ class Interpret(QtGui.QWidget):
         dic1["RB"] = ["SWITCH", 1, 0]
         dic1["LB"] = ["SWITCH", 0, 0]
         dic1["LB+RB"] = ["SELECT_ALL"]
-        dic1["RB_Y"] = ["SELECT", 1, 0]
-        dic1["RB_X"] = ["SELECT", 2, 0]
-        dic1["RB_B"] = ["SELECT", 3, 0]
-        dic1["RB_A"] = ["SELECT", 4, 0]
-        dic1["LB_Y"] = ["UNSELECT", 1, 0]
-        dic1["LB_X"] = ["UNSELECT", 2, 0]
-        dic1["LB_B"] = ["UNSELECT", 3, 0]
-        dic1["LB_A"] = ["UNSELECT", 4, 0]
+        dic1["RB_Y"] = ["SELECT", 0, 0]
+        dic1["RB_X"] = ["SELECT", 1, 0]
+        dic1["RB_B"] = ["SELECT", 2, 0]
+        dic1["RB_A"] = ["SELECT", 3, 0]
+        dic1["LB_Y"] = ["UNSELECT", 0, 0]
+        dic1["LB_X"] = ["UNSELECT", 1, 0]
+        dic1["LB_B"] = ["UNSELECT", 2, 0]
+        dic1["LB_A"] = ["UNSELECT", 3, 0]
 
         
         #### --1-- BUTTON ###
@@ -89,17 +89,17 @@ class Interpret(QtGui.QWidget):
         ############## DICTIONNAIRE 2 ###################
 
         #### --1-- RB LB ####
-        dic2["RB"] = ["SWITCH", 1, 0]
-        dic2["LB"] = ["SWITCH", 0, 0]
+        dic2["RB"] = ["", 0, 0]
+        dic2["LB"] = ["", 0, 0]
         dic2["LB+RB"] = ["SELECT_ALL"]
-        dic2["RB_Y"] = ["SELECT", 1, 0]
-        dic2["RB_X"] = ["SELECT", 2, 0]
+        dic2["RB_Y"] = ["SELECT", 2, 0]
+        dic2["RB_X"] = ["SELECT", 1, 0]
         dic2["RB_B"] = ["SELECT", 3, 0]
-        dic2["RB_A"] = ["SELECT", 4, 0]
-        dic2["LB_Y"] = ["UNSELECT", 1, 0]
-        dic2["LB_X"] = ["UNSELECT", 2, 0]
+        dic2["RB_A"] = ["SELECT", 0, 0]
+        dic2["LB_Y"] = ["UNSELECT", 2, 0]
+        dic2["LB_X"] = ["UNSELECT", 1, 0]
         dic2["LB_B"] = ["UNSELECT", 3, 0]
-        dic2["LB_A"] = ["UNSELECT", 4, 0]
+        dic2["LB_A"] = ["UNSELECT", 0, 0]
 
         
         #### --1-- BUTTON ###

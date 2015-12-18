@@ -133,7 +133,9 @@ class Nao(QtGui.QWidget):
             if self.behavior.isBehaviorInstalled("main_joystick-d361da/behavior_1"):
                 self.behavior.stopAllBehaviors()
                 self.behavior.startBehavior("main_joystick-d361da/behavior_1")
-                self.motion.rest()
+
+        if self.motion:
+            self.motion.rest()
  
 
     ### NOT use . Use of memoryEvent("PostureAsked", name ) instead

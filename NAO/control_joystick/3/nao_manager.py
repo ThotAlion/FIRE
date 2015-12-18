@@ -213,6 +213,8 @@ class Nao_manager(QtGui.QWidget):
     # select or unselect one nao, over the current selection, according to its ID
     def select(self, isSelecting, nao_id ):
 
+        print "nao manager : select , nao_id= "+str(nao_id)
+
         if nao_id>-1 and nao_id< len(self.list_of_nao):
             self.selection[nao_id] = isSelecting
 
@@ -257,8 +259,8 @@ class Nao_manager(QtGui.QWidget):
 
         print "marche X="+str(X)+" Y="+str(Y)+" Theta="+str(Theta)+" Speed="+str(Speed)+""
         self.sliderWalk_tetha.setValue(-Theta*100)
-        self.sliderWalk_x.setValue(X*100)
-        self.sliderWalk_y.setValue(Y*100)
+        self.sliderWalk_x.setValue(X*100*Speed)
+        self.sliderWalk_y.setValue(-Y*100)
 
     # update turning head to all selected nao
     def nao_move_head(self, yaw,pitch):
