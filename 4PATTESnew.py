@@ -45,9 +45,6 @@ systems.children['Machine'].inputs["gauche"].connectedTo = " X == -1"
 systems.children['Machine'].inputs["droite"].connectedTo = " X == 1"
 systems.children['Machine'].outputs["CSVPath"].connectedTo = " CSVPath "
 
-
-
-
 systems.children['Player'] = FIRELIB.CSVPlayer.CSVPlayer(members)
 systems.children['Player'].inputs["activate"].connectedTo = "1"
 systems.children['Player'].inputs["Tape"].connectedTo = " CSVPath "
