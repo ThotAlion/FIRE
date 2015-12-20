@@ -1,6 +1,6 @@
-Name;b_retourne;b_coude;b_ramper;b_mou;b_decoude;SPACE;buttonA;buttonB;f_retourne;f_coude;f_ramper;f_decoude
-allonge;0;0;0;1;0;;allonge;allonge_ventre;allonge;allonge;allonge;allonge
-allonge_ventre;1;0;0;0;0;;allonge_ventre;allonge_ventre;coude;allonge_ventre;allonge_ventre;allonge_ventre
-coude;0;1;0;0;0;;coude;coude;coude;ramper;coude;coude
-ramper;0;0;1;0;0;;ramper;ramper;ramper;ramper;ramper;ramper
-recouche;0;0;0;0;1;;recouche;recouche;recouche;recouche;recouche;recouche
+Name;CSV;SPACE;finished;droite;gauche;buttonA
+allonge;TAPES_CSV/_mou.csv;;allonge;allonge;allonge;coude
+coude;TAPES_CSV/ventre_2_coude.csv;;coude;ramperD;ramperG;recouche
+ramperD;TAPES_CSV/ramper_D2.csv;;coude;ramperD;ramperG;ramperD
+ramperG;TAPES_CSV/ramper_G2.csv;;coude;ramperD;ramperG;ramperG
+recouche;TAPES_CSV/coude_2_ventre.csv;;allonge;recouche;recouche;recouche
