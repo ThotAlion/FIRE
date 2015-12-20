@@ -48,6 +48,7 @@ class CSVPlayer(Block.Block,QWidget):
             self.index = 0
             self.t0 = Tools.getTime()
             self.outputs["finished"].setValue(0,f)
+            self.number = self.number+1
             self.tapeName = tape_input
             self.tape = []
             r = csv.DictReader(open(self.tapeName,'r'),delimiter = ';')
