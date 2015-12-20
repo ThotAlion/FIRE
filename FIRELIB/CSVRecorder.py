@@ -13,6 +13,8 @@ class Objectives(QAbstractTableModel):
         QAbstractItemModel.__init__(self)
         self.headerdata = ["Name","Nature","Consign"]
         self.objectiveList = objectiveList
+    
+
         
     def data(self,i,role):
         if i.row()>=len(self.objectiveList):
@@ -443,6 +445,25 @@ class CSVRecorder(Block.Block,QWidget):
                     obj["consign"] = old_pose[link]
         self.poseList.poseList[ipose]["objectives"].emit(SIGNAL("layoutChanged()"))
     
+    # function to manage the backup pose
+    def get_backup_pose(filename):
+        p = []
+        r = csv.DictReader(open(filename,'r'),delimiter = ';')
+        for row in r:
+            p.append(row)
+        a = {}
+        a['CSVPath'] = p[0]["CSVPath"]
+        a['cursor'] = int(p[0]["cursor"])
+        return a
+    
+    def set_backup_pose(filename,dict):
+        f = open(filename,'w')
+        r = csv.DictWriter(f,delimiter = ';',lineterminator = '\n',fieldnames=["CSVPath","cursor"])
+        r.writeheader()
+        r.writerow(dict)
+        f.close()
+        
+        
     def acquireSelected(self):
         iobj = self.objTable.currentIndex().row()
         ipose = self.poseTable.currentIndex().row()
