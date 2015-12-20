@@ -33,11 +33,6 @@ for member in members:
         interfaces.children['Poppy'].inputs[art].connectedTo = " "+art+" "
         interfaces.children['Poppy'].outputs[art].connectedTo = " "+art+"m "
 
-
-interfaces.children['pad'] = FIRELIB.xboxPad.xboxPad(0)
-interfaces.children['pad'].inputs["activate"].connectedTo = "1"
-interfaces.children['pad'].outputs['button A'].connectedTo = " buttonA "
-
 interfaces.children['Index'] = FIRELIB.LeftIndex.LeftIndex()
 interfaces.children['Index'].inputs["activate"].connectedTo = "1"
 interfaces.children['Index'].outputs['index pitch'].connectedTo = " pitch "
@@ -48,47 +43,27 @@ systems.inputs["activate"].connectedTo = "1"
 
 systems.children['Machine'] = FIRELIB.FiniteStateMachine.FiniteStateMachine("MACHINES/laser.csv")
 systems.children['Machine'].inputs["activate"].connectedTo = "1"
-systems.children['Machine'].inputs["f_retourne"].connectedTo = " f_retourne "
-systems.children['Machine'].inputs["f_genou"].connectedTo = " f_genou "
-systems.children['Machine'].inputs["f_laser"].connectedTo = " f_laser "
-systems.children['Machine'].inputs["buttonA"].connectedTo = " buttonA "
-systems.children['Machine'].outputs["b_arret"].connectedTo = " b_arret "
-systems.children['Machine'].outputs["b_retourne"].connectedTo = " b_retourne "
-systems.children['Machine'].outputs["b_genou"].connectedTo = " b_genou "
+systems.children['Machine'].inputs["finished"].connectedTo = " finished "
+systems.children['Machine'].outputs["CSVPath"].connectedTo = " CSV "
 systems.children['Machine'].outputs["b_laser"].connectedTo = " b_laser "
+systems.children['Machine'].outputs["b_direct"].connectedTo = " b_direct "
 
 systems.children['Ratelim'] = FIRELIB.Ratelim.Ratelim(2,10)
-systems.children['Ratelim'].inputs["activate"].connectedTo = " b_laser "
+systems.children['Ratelim'].inputs["activate"].connectedTo = "1"
 systems.children['Ratelim'].inputs['ch0'].connectedTo = " yaw "
 systems.children['Ratelim'].outputs['ch0'].connectedTo = " yawr "
 systems.children['Ratelim'].inputs['ch1'].connectedTo = " pitch "
 systems.children['Ratelim'].outputs['ch1'].connectedTo = " pitchr "
 
-systems.children['retourne'] = FIRELIB.CSVPlayer.CSVPlayer("TAPES_CSV/dos_2_ventre.csv")
-systems.children['retourne'].inputs["activate"].connectedTo = " b_retourne "
-systems.children['retourne'].outputs["finished"].connectedTo = " f_retourne "
-systems.children['retourne'].outputs['Duration'].connectedTo = " Delta "
-systems.children['retourne'].outputs['Number'].connectedTo = " n "
+systems.children['Player'] = FIRELIB.CSVPlayer.CSVPlayer(members)
+systems.children['Player'].inputs["activate"].connectedTo = "1"
+systems.children['Player'].inputs["Tape"].connectedTo = " CSV "
+systems.children['Player'].outputs["finished"].connectedTo = " finished "
+systems.children['Player'].outputs['Duration'].connectedTo = " Delta "
+systems.children['Player'].outputs['Number'].connectedTo = " n "
 for member in members:
     for art in members[member]:
-        systems.children['retourne'].outputs[art].connectedTo = " "+art+" "
-
-systems.children['releve'] = FIRELIB.CSVPlayer.CSVPlayer("TAPES_CSV/ventre_2_genou.csv")
-systems.children['releve'].inputs["activate"].connectedTo = " b_genou "
-systems.children['releve'].outputs["finished"].connectedTo = " f_genou "
-systems.children['releve'].outputs['Duration'].connectedTo = " Delta "
-systems.children['releve'].outputs['Number'].connectedTo = " n "
-for member in members:
-    for art in members[member]:
-        systems.children['releve'].outputs[art].connectedTo = " "+art+" "
-
-systems.children['mou'] = FIRELIB.CSVPlayer.CSVPlayer("TAPES_CSV/_mou.csv")
-systems.children['mou'].inputs["activate"].connectedTo = " b_arret "
-systems.children['mou'].outputs['Duration'].connectedTo = " Delta "
-systems.children['mou'].outputs['Number'].connectedTo = " n "
-for member in members:
-    for art in members[member]:
-        systems.children['mou'].outputs[art].connectedTo = " "+art+" "
+        systems.children['Player'].outputs[art].connectedTo = " "+art+" "
 
 systems.children['tete direct'] = FIRELIB.Wires.Wires(2)
 systems.children['tete direct'].inputs["activate"].connectedTo = " b_direct "
@@ -103,6 +78,16 @@ systems.children['tete direct'].inputs["ch0"].connectedTo = " str(- pitchr ) "
 systems.children['tete direct'].outputs["ch0"].connectedTo = " head_y "
 systems.children['tete direct'].inputs["ch1"].connectedTo = " str(- yawr ) "
 systems.children['tete direct'].outputs["ch1"].connectedTo = " head_z "
+
+systems.children['Disp'] = FIRELIB.Display.Display(["tape name","finished","n","laser","direct","yawr","pitchr"])
+systems.children['Disp'].inputs["activate"].connectedTo = "1"
+systems.children['Disp'].inputs["tape name"].connectedTo = " CSV "
+systems.children['Disp'].inputs["finished"].connectedTo = " finished "
+systems.children['Disp'].inputs["n"].connectedTo = " n "
+systems.children['Disp'].inputs["laser"].connectedTo = " b_laser "
+systems.children['Disp'].inputs["yawr"].connectedTo = " yawr "
+systems.children['Disp'].inputs["pitchr"].connectedTo = " pitchr "
+
 
 # execution of FIRE engine
 channels = {}
