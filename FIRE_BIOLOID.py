@@ -20,13 +20,13 @@ members["right leg"] = ["r_hip_z", "r_hip_x","r_hip_y","r_knee_y","r_ankle_y","r
 
 interfaces = FIRELIB.Group.Group()
 interfaces.inputs["activate"].connectedTo = "1"
-interfaces.children['Bioloid'] = FIRELIB.Robot.Robot(members,"10.0.0.17","8080")
+interfaces.children['Bioloid'] = FIRELIB.Robot.Robot(members,"10.0.0.3","8080")
 interfaces.children['Bioloid'].inputs["activate"].connectedTo = "1"
 
 
 systems = FIRELIB.Group.Group()
 systems.inputs["activate"].connectedTo = "1"
-systems.children['CSVRecorder'] = FIRELIB.CSVRecorder.CSVRecorder(members)
+systems.children['CSVRecorder'] = FIRELIB.CSVRecorder.CSVRecorder(members,folder = '/TAPES_BIOLOID/')
 systems.children['CSVRecorder'].inputs["activate"].connectedTo = "1"
 
 for member in members:
@@ -46,7 +46,7 @@ interfaces.children['Bioloid'].inputs['Duration'].connectedTo = " Delta "
 
 # execution of FIRE engine
 channels = {}
-e = FIRELIB.Engine.Engine(interfaces,systems,channels,dt=0.02)
+e = FIRELIB.Engine.Engine(interfaces,systems,channels,dt=0.1)
 e.start()
     
 
