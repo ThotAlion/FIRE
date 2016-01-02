@@ -20,7 +20,7 @@ members["right leg"] = ["r_hip_z", "r_hip_x","r_hip_y","r_knee_y","r_ankle_y","r
 
 interfaces = FIRELIB.Group.Group()
 interfaces.inputs["activate"].connectedTo = "1"
-interfaces.children['Bioloid'] = FIRELIB.Robot.Robot(members,"10.0.0.3","8080")
+interfaces.children['Bioloid'] = FIRELIB.Robot.Robot(members,"127.0.0.1","8080")
 interfaces.children['Bioloid'].inputs["activate"].connectedTo = "1"
 
 
