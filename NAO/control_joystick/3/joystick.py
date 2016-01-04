@@ -252,5 +252,5 @@ class Joystick(QtCore.QThread):
             if len(res)>0:
                 self.joy_event.emit(res)
 
-            time.sleep(0.02)
+            time.sleep(0.04)
                             

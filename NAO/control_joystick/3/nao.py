@@ -124,7 +124,7 @@ class Nao(QtGui.QWidget):
         ## Enable arms control by Motion algorithm
         if self.motion:
 
-            self.motion.setMoveArmsEnabled(True, True)
+            self.motion.setMoveArmsEnabled(False, False)
 
             ## Enable head to move
             self.motion.wbEnableEffectorControl("Head", True)

@@ -71,10 +71,10 @@ class Interpret(QtGui.QWidget):
         dic1["DOWN_B"] = ["POSTURE", "StandInit", 0]
         dic1["DOWN_A"] = ["POSTURE", "Sit", 0]
 
-        dic1["LEFT_Y"] = ["FPS", 15, 0]
+        dic1["LEFT_Y"] = ["FPS", -5, 0]
         dic1["LEFT_X"] = ["ANIM", "RONDE", 0]
-        dic1["LEFT_B"] = ["FPS", 25, 0]
-        dic1["LEFT_A"] = ["FPS", 30, 0]
+        dic1["LEFT_B"] = ["FPS", 5, 0]
+        dic1["LEFT_A"] = ["FPS", 10, 0]
 
         ##### --1-- JOYSTICK ####
         dic1["JOY_MAIN"] = ["WALK"]
