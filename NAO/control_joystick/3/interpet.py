@@ -61,10 +61,10 @@ class Interpret(QtGui.QWidget):
         dic1["RIGHT_A"] = ["ANIM", "SALUTA", 0]
         dic1["RIGHT_B"] = ["ANIM", "TOUPIE", 0]
 
-        dic1["UP_Y"] = ["AUTONOME", 2, 0]
-        dic1["UP_X"] = ["AUTONOME", 1, 0]
-        dic1["UP_B"] = ["AUTONOME", 3, 0]
-        dic1["UP_A"] = ["AUTONOME", 4, 0]
+        dic1["UP_Y"] = ["AUTONOME", -1, 0]
+        dic1["UP_X"] = ["AUTONOME", 0, 0]
+        dic1["UP_B"] = ["AUTONOME", 1, 0]
+        dic1["UP_A"] = ["AUTONOME", 2, 0]
 
         dic1["DOWN_Y"] = ["POSTURE", "Stand", 0]
         dic1["DOWN_X"] = ["POSTURE", "Rest", 0]
@@ -88,7 +88,7 @@ class Interpret(QtGui.QWidget):
 
         ############## DICTIONNAIRE 2 ###################
 
-        #### --1-- RB LB ####
+        #### --2-- RB LB ####
         dic2["RB"] = ["", 0, 0]
         dic2["LB"] = ["", 0, 0]
         dic2["LB+RB"] = ["SELECT_ALL"]
@@ -102,7 +102,7 @@ class Interpret(QtGui.QWidget):
         dic2["LB_A"] = ["UNSELECT", 0, 0]
 
         
-        #### --1-- BUTTON ###
+        #### --2-- BUTTON ###
         dic2["Y"] = ["ANIMLIB", "", 0]
         dic2["X"] = ["ANIMLIB", "", 0]
         dic2["A"] = ["ANIMLIB","", 0]
@@ -128,7 +128,7 @@ class Interpret(QtGui.QWidget):
         dic2["LEFT_B"] = ["", 0, 0]
         dic2["LEFT_A"] = ["", 0, 0]
 
-        ##### --1-- JOYSTICK ####
+        ##### --2-- JOYSTICK ####
         dic2["JOY_MAIN"] = ["WALK"]
         dic2["LEFT_JOY_MAIN"] = ["WALKSIDE"]
         dic2["UP_JOY_MAIN"] = ["WALKPREC"]

@@ -277,6 +277,16 @@ class Nao_manager(QtGui.QWidget):
         for i in range(len(self.list_of_nao)):
             if self.selection[i]:
                 self.list_of_nao[i].go_posture( posture_name)
+                
+    def nao_autonomeLevel(self, arg):
+
+        isReset = (arg == 0)
+        isStop = (arg == -1)
+        isIncreasing = (arg == 2)
+        
+        for i in range(len(self.list_of_nao)):
+            if self.selection[i]:
+                self.list_of_nao[i].changeAutonomeLevel(isIncreasing, isReset, isStop)
 
     def nao_getStatus(self):
 
@@ -381,7 +391,7 @@ class Nao_manager(QtGui.QWidget):
                     self.nao_memoryEvent("PlaySound", arg1)
 
                 elif name == "AUTONOME":
-                    self.nao_memoryEvent("autonome", arg1)            
+                    self.nao_autonomeLevel(arg1)          
 
                 
             

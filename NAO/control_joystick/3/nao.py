@@ -6,8 +6,8 @@ class Nao(QtGui.QWidget):
 
 
     def __init__(self,robotIP,robotName,robotID, PORT=9559, parent=None):
-        
 
+        
         ######### GUI
         #QtGui.QWidget.__init__(self)
         super(Nao, self).__init__(parent)
@@ -26,26 +26,30 @@ class Nao(QtGui.QWidget):
         self.battery_progress.setTextVisible(True)
         self.battery_progress.setMinimum(0)
         self.battery_progress.setMaximum(100)
+        #niveau dautonomie
+        self.lcd = QtGui.QLCDNumber(1)
+        self.lcd.setSegmentStyle(QtGui.QLCDNumber.Flat)
         #layout
         layout1 = QtGui.QVBoxLayout()
         layout1.addWidget(self.label_name)
         layout1.addWidget(self.battery_progress)
+        layout1.addWidget(self.lcd)
         layout1.addWidget(self.radio_connect1)
         layout1.addWidget(self.radio_connect2)
         layout1.addWidget(self.radio_connect3)
-        
-
+        #Group box
         groupBox = QtGui.QGroupBox("Nao "+str(robotID))
         groupBox.setLayout(layout1)
-
+        #Layout Main
         layoutMain = QtGui.QHBoxLayout()
         layoutMain.addWidget(groupBox)
- 
         self.setLayout(layoutMain)
 
         ### Nao init
         self.name = robotName
         self.id = robotID
+        self.autonomeLevel = 1
+        self.lcd.display(self.autonomeLevel)
 
         
         try:
@@ -191,7 +195,7 @@ class Nao(QtGui.QWidget):
             #nao_go_posture("StandInit")
 
 
-    def  move_head(self, yaw,pitch):
+    def move_head(self, yaw,pitch):
 
        
         if(not(self.is_headmoving) and abs(yaw * pitch)>0):
@@ -228,6 +232,28 @@ class Nao(QtGui.QWidget):
     def memoryEvent(self, name, num):
 
         self.memory.raiseEvent(name, num)
+		
+    def changeAutonomeLevel(self, isIncreasing, isReset, isStop):
+	
+        if(isReset):
+            self.autonomeLevel = 0
+            self.memory.raiseEvent("autonome", self.autonomeLevel)
+            
+        if(isStop):
+            self.autonomeLevel = 1
+            self.memory.raiseEvent("autonome", self.autonomeLevel)
+            
+        if( not(isReset) and not(isStop) ):
+            if isIncreasing :
+                self.autonomeLevel += 1
+            else :
+                self.autonomeLevel -= 1
+                if self.autonomeLevel < 0:
+                    self.autonomeLevel = 0
+        self.memory.raiseEvent("autonome", self.autonomeLevel)
+                
+
+        self.lcd.display(self.autonomeLevel)	
 
     def use_leds(self, name, value):
 
