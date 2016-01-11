@@ -9,5 +9,7 @@
         <File name="roh1" src="behavior_1/roh1.ogg" />
     </Resources>
     <Topics />
-    <IgnoredPaths />
+    <IgnoredPaths>
+        <Path src="behavior_1/roh1.ogg" />
+    </IgnoredPaths>
 </Package>

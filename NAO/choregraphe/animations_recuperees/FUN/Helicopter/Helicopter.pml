@@ -9,5 +9,7 @@
         <File name="helicopter_2" src="behavior_1/helicopter_2.ogg" />
     </Resources>
     <Topics />
-    <IgnoredPaths />
+    <IgnoredPaths>
+        <Path src="behavior_1/helicopter_2.ogg" />
+    </IgnoredPaths>
 </Package>
