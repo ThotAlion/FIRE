@@ -69,6 +69,16 @@ interfaces.children['Poppy'].inputs['head_y'].connectedTo = "str(- pitchr )"
 
 # execution of FIRE engine
 channels = {}
+# interfaces.start()
+# systems.start()
+# time.sleep(1)
+# while True:
+    # t0 = FIRELIB.Tools.getTime()
+    # channels = interfaces._setOutputs(channels)
+    # channels = systems._setOutputs(channels)
+    # interfaces._getInputs(channels)
+    # while FIRELIB.Tools.getTime()-t0 <= 0.02:
+        # time.sleep(0.01)
 e = FIRELIB.Engine.Engine(interfaces,systems,channels)
 e.start()
     
