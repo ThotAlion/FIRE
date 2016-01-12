@@ -147,9 +147,7 @@ class Nao_manager(QtGui.QWidget):
                 layoutAnimLib.addWidget(self.list_of_animLibButton[(i*3) + j ], i, j )
 
         self.layoutManager.addWidget(groupAnimLib)
-        
 
-        
 
     def addNao(self, name, adresseIP, port ):
         #nao management
@@ -161,6 +159,7 @@ class Nao_manager(QtGui.QWidget):
         #gui management
         self.layoutNao.addWidget(nao, 1, naoId, QtCore.Qt.AlignCenter)
         checkBox = QtGui.QCheckBox("")
+        checkBox.stateChanged.connect(lambda: self.select(checkBox.isChecked(), naoId ))
         self.list_of_selectionCheckBox.append(checkBox)
         self.layoutNao.addWidget( checkBox, 0, naoId, QtCore.Qt.AlignCenter)
         
@@ -213,7 +212,10 @@ class Nao_manager(QtGui.QWidget):
     # select or unselect one nao, over the current selection, according to its ID
     def select(self, isSelecting, nao_id ):
 
-        print "nao manager : select , nao_id= "+str(nao_id)
+        if isSelecting :
+            print "nao manager : select , nao_id= "+str(nao_id)
+        else :
+            print "nao manager : unselect , nao_id= "+str(nao_id)
 
         if nao_id>-1 and nao_id< len(self.list_of_nao):
             self.selection[nao_id] = isSelecting
@@ -233,7 +235,7 @@ class Nao_manager(QtGui.QWidget):
     def activateNao(self):
         print "activateNao :"
         print self.selection
-
+        #TODO : attention , recurrence sur la check box
         for a in range(len(self.list_of_nao)):
             (self.list_of_nao[a]).activate( self.selection[a] )
             if self.selection[a] :
@@ -344,8 +346,10 @@ class Nao_manager(QtGui.QWidget):
                 ### MOTION  ######
                 elif name == "ANIM":
                     self.nao_memoryEvent("anim", arg1 )
-                    
-                                    
+                
+                elif name == "COMBO":
+                    self.nao_memoryEvent("combo", arg1 )
+                                       
                 elif name == "POSTURE":
                     self.nao_go_posture(arg1)
 

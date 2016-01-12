@@ -16,20 +16,44 @@ class Interpret(QtGui.QWidget):
         dic2 = {}
 
         ##############  GUI ############################
+        #TODO change to radio list
         #construct
-        self.layoutMain = QtGui.QVBoxLayout()
+        self.layoutMain = QtGui.QHBoxLayout()
         layoutGroup = QtGui.QVBoxLayout()
-        group = QtGui.QGroupBox("Interpret")
-        group.setLayout(layoutGroup)
-        self.dic1Button = QtGui.QPushButton("Dic1")
-        self.dic2Button = QtGui.QPushButton("Dic2")
+        groupDic = QtGui.QGroupBox("Interpret")
+        groupDic.setLayout(layoutGroup)
+        self.radio_dic1 = QtGui.QRadioButton("Dic 1")
+        self.radio_dic1.setChecked(QtCore.Qt.Checked)
+        self.radio_dic2 = QtGui.QRadioButton("Dic 2")
+        layoutView = QtGui.QGridLayout()
+        groupView = QtGui.QGroupBox("Controller view")
+        groupView.setLayout(layoutView)
+        self.buttonLeft = QtGui.QLabel("X")
+        self.buttonTop = QtGui.QLabel("Y")
+        self.buttonRight = QtGui.QLabel("B")
+        self.buttonBottom = QtGui.QLabel("A")
+        #images
+        self.imgTorsion = "images/torsion.png"
+        self.imgSaluta = "images/saluta.png"
+        self.imgPyramide = "images/pyramide.png"
+        self.imgTriangle = "images/triangle.png"
+        self.imgAnnaToupi = "images/annaToupi.png"
+        self.imgArabesque = "images/arabesque.png"
+        self.imgCote = "images/cote.png"
+        #setPixmap
+        self.changeView(0)
         #connect
-        self.dic1Button.clicked.connect( lambda: self.changeDict(0))
-        self.dic2Button.clicked.connect( lambda: self.changeDict(1))
+        self.radio_dic1.clicked.connect( lambda: self.changeDict(0))
+        self.radio_dic2.clicked.connect( lambda: self.changeDict(1))
         #add to layout
-        layoutGroup.addWidget(self.dic1Button)
-        layoutGroup.addWidget(self.dic2Button)
-        self.layoutMain.addWidget(group)
+        layoutGroup.addWidget(self.radio_dic1)
+        layoutGroup.addWidget(self.radio_dic2)
+        layoutView.addWidget(self.buttonLeft, 0, 1)
+        layoutView.addWidget(self.buttonTop, 1, 0)
+        layoutView.addWidget(self.buttonRight, 2, 1)
+        layoutView.addWidget(self.buttonBottom, 1, 2)
+        self.layoutMain.addWidget(groupDic)
+        self.layoutMain.addWidget(groupView)
         self.setLayout(self.layoutMain)
         
 
@@ -84,26 +108,26 @@ class Interpret(QtGui.QWidget):
 
         ############## DICTIONNAIRE 2 ###################
 
-        #### --1-- RB LB ####
-        dic1["RB"] = ["SWITCH", 1, 0]
-        dic1["LB"] = ["", 1, 0]
-        dic1["LB+RB"] = ["UNSELECT_ALL"]
-        dic1["LB_X"] = ["SELECT", 0, 0]
-        dic1["LB_Y"] = ["SELECT", 1, 0]
-        dic1["LB_B"] = ["SELECT", 2, 0]
-        dic1["LB_A"] = ["SELECT", 3, 0]
+        #### --2-- RB LB ####
+        dic2["RB"] = ["SWITCH", 1, 0]
+        dic2["LB"] = ["", 1, 0]
+        dic2["LB+RB"] = ["UNSELECT_ALL"]
+        dic2["LB_X"] = ["SELECT", 0, 0]
+        dic2["LB_Y"] = ["SELECT", 1, 0]
+        dic2["LB_B"] = ["SELECT", 2, 0]
+        dic2["LB_A"] = ["SELECT", 3, 0]
 
         
         #### --2-- BUTTON ###
-        dic2["Y"] = ["ANIMLIB", "", 0]
-        dic2["X"] = ["ANIMLIB", "", 0]
-        dic2["A"] = ["ANIMLIB","", 0]
-        dic2["B"] = ["ANIMLIB", "", 0]
+        dic2["Y"] = ["COMBO", "RAMASSER", 0]
+        dic2["X"] = ["COMBO", "", 0]
+        dic2["A"] = ["COMBO","", 0]
+        dic2["B"] = ["COMBO", "", 0]
 
-        dic2["RIGHT_Y"] = ["ANIMLIB","", 0]
-        dic2["RIGHT_X"] = ["ANIMLIB", "", 0]
-        dic2["RIGHT_A"] = ["ANIMLIB", "", 0]
-        dic2["RIGHT_B"] = ["ANIMLIB", "", 0]
+        dic2["RIGHT_Y"] = ["COMBO","", 0]
+        dic2["RIGHT_X"] = ["COMBO", "", 0]
+        dic2["RIGHT_A"] = ["COMBO", "", 0]
+        dic2["RIGHT_B"] = ["COMBO", "", 0]
 
         dic2["UP_Y"] = ["", 0, 0]
         dic2["UP_X"] = ["", 0, 0]
@@ -139,6 +163,7 @@ class Interpret(QtGui.QWidget):
         if(a>(-1) and a<len(self.list_of_dic)):
            self.current_dic = a
            print "---- change of dic : "+str(a)+" ------"
+           self.changeView(a)
 
     def translate( self, a ):
 
@@ -157,5 +182,24 @@ class Interpret(QtGui.QWidget):
 
 
         self.interpret_event.emit(res)
-
+    
+    def changeView(self, a):
+        
+        print a
+        if current_dic == 0:
+        
+            if a==0:
+                self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgTorsion))
+                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgSaluta))
+                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgPyramide))
+                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgTriangle))
+            elif a==1:
+                self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgArabesque))
+                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgCote))
+                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgAnnaToupi))
+                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgTriangle))
+        
+        
+        elif current_dic == 1:
+        
 
