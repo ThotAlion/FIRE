@@ -5,7 +5,9 @@
         <BehaviorDescription name="behavior" src="behavior_1" xar="behavior.xar" />
     </BehaviorDescriptions>
     <Dialogs />
-    <Resources />
+    <Resources>
+        <File name="whistle3" src="behavior_1/whistle3.ogg" />
+    </Resources>
     <Topics />
     <IgnoredPaths />
 </Package>

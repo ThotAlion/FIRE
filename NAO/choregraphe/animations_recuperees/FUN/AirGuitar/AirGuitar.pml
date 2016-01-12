@@ -7,5 +7,7 @@
     <Dialogs />
     <Resources />
     <Topics />
-    <IgnoredPaths />
+    <IgnoredPaths>
+        <Path src="behavior_1/heavyMetal1.ogg" />
+    </IgnoredPaths>
 </Package>

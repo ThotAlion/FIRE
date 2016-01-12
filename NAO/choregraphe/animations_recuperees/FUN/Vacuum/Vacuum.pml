@@ -5,7 +5,9 @@
         <BehaviorDescription name="behavior" src="behavior_1" xar="behavior.xar" />
     </BehaviorDescriptions>
     <Dialogs />
-    <Resources />
+    <Resources>
+        <File name="vacuum1" src="behavior_1/vacuum1.ogg" />
+    </Resources>
     <Topics />
     <IgnoredPaths />
 </Package>
