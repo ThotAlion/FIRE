@@ -333,6 +333,8 @@ class Nao_manager(QtGui.QWidget):
                     self.selectSwitch(arg1==1)
                 elif name == "SELECT_ALL" :
                     self.selectAll()
+                elif name == "UNSELECT_ALL" :
+                    self.selectAll(False)
                 elif name == "SELECT":
                     self.select(True, arg1 )
                 elif name == "UNSELECT":
@@ -343,6 +345,7 @@ class Nao_manager(QtGui.QWidget):
                 elif name == "ANIM":
                     self.nao_memoryEvent("anim", arg1 )
                     
+                                    
                 elif name == "POSTURE":
                     self.nao_go_posture(arg1)
 

@@ -128,7 +128,7 @@ class Nao(QtGui.QWidget):
         ## Enable arms control by Motion algorithm
         if self.motion:
 
-            self.motion.setMoveArmsEnabled(False, False)
+            self.motion.setMoveArmsEnabled(True, True)
 
             ## Enable head to move
             self.motion.wbEnableEffectorControl("Head", True)
@@ -178,6 +178,7 @@ class Nao(QtGui.QWidget):
 
             try:
                 #motion.moveToward( X, Y, Theta, [["Frequency", Frequency]])
+                self.motion.setMoveArmsEnabled(True, True)
                 self.motion.setWalkTargetVelocity( X, Y, Theta, Frequency)
             except Exception, errorMsg:
                 print str(errorMsg)
