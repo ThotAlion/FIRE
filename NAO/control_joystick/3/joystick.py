@@ -233,28 +233,31 @@ class Joystick(QtCore.QThread):
                         (a,b) = self.joy.get_hat(0)
                         if a > 0.2 :
                             self.joy_state["hat_right"] = True
-                            view_event.emit("right")
+                            self.view_event.emit("right")
                         else:
                             self.joy_state["hat_right"] = False
-                            view_event.emit("none")
+                            
                         if a < -0.2 :
                             self.joy_state["hat_left"] = True
-                            view_event.emit("left")
+                            self.view_event.emit("left")
                         else:
                             self.joy_state["hat_left"] = False
-                            view_event.emit("none")
+                            
                         if b > 0.2 :
                             self.joy_state["hat_up"] = True
-                            view_event.emit("up")
+                            self.view_event.emit("up")
                         else :
                             self.joy_state["hat_up"] = False
-                            view_event.emit("none")
+                            
                         if b < -0.2 :
                             self.joy_state["hat_down"] = True
-                            view_event.emit("down")
+                            self.view_event.emit("down")
                         else:
                             self.joy_state["hat_down"]= False
-                            view_event.emit("none")
+                            
+                        if not(self.joy_state["hat_up"] or self.joy_state["hat_left"] or self.joy_state["hat_up"] or self.joy_state["hat_down"] ):
+                            self.view_event.emit("none")
+
             #######
             #If something is pressed, the the Qt Signal
             #######

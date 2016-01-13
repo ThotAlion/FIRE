@@ -29,11 +29,15 @@ class Nao(QtGui.QWidget):
         #niveau dautonomie
         self.lcd = QtGui.QLCDNumber(1)
         self.lcd.setSegmentStyle(QtGui.QLCDNumber.Flat)
+        #Stiffness
+        self.checkBox_stiff = QtGui.QCheckBox("Stiffness")
+        self.checkBox_stiff.clicked.connect(lambda: self.setStiffness(self.checkBox_stiff.isChecked() ))
         #layout
         layout1 = QtGui.QVBoxLayout()
         layout1.addWidget(self.label_name)
         layout1.addWidget(self.battery_progress)
         layout1.addWidget(self.lcd)
+        layout1.addWidget(self.checkBox_stiff)
         layout1.addWidget(self.radio_connect1)
         layout1.addWidget(self.radio_connect2)
         layout1.addWidget(self.radio_connect3)
@@ -59,19 +63,19 @@ class Nao(QtGui.QWidget):
             print "Error was: ",e
             self.motion = None
 
-        try:
-            self.posture = ALProxy("ALRobotPosture",robotIP, PORT)
-        except Exception, e:
-            print self.name+" Could not create proxy to ALRobotPosture"
-            print "Error was: ",e
-            self.posture = None
+        # try:
+            # self.posture = ALProxy("ALRobotPosture",robotIP, PORT)
+        # except Exception, e:
+            # print self.name+" Could not create proxy to ALRobotPosture"
+            # print "Error was: ",e
+            # self.posture = None
 
-        try:
-            self.speech = ALProxy("ALTextToSpeech", robotIP, PORT)
-        except Exception, e:
-            print self.name+" Could not create proxy to ALTextToSpeech"
-            print "Error was: ",e
-            self.speech = None
+        # try:
+            # self.speech = ALProxy("ALTextToSpeech", robotIP, PORT)
+        # except Exception, e:
+            # print self.name+" Could not create proxy to ALTextToSpeech"
+            # print "Error was: ",e
+            # self.speech = None
 
         try:
             self.memory = ALProxy("ALMemory", robotIP, PORT)
@@ -146,7 +150,7 @@ class Nao(QtGui.QWidget):
     def go_posture(self, posture_name):
 
         if posture_name != "Rest":
-            if self.motion and self.posture :
+            if self.motion  :
                 self.motion.stopMove()
                 self.memory.raiseEvent("PostureAsked", posture_name)
 
@@ -286,30 +290,59 @@ class Nao(QtGui.QWidget):
                
 
 
-    def activate(self, is_activated):
     #function in order to recognize the current nao remotely controlled
+    def activate(self, is_activated):
+    
 
         if is_activated and self.leds:
             self.use_leds("ear", 1)
         elif self.leds :
             self.use_leds("ear", 0)
                                                
-    def say(self, toSay):
+    # def say(self, toSay):
 
-        try:        
-            self.speech.say(toSay)
-        except Exception, errorMsg:
-            print str(errorMsg)
+        # try:        
+            # self.speech.say(toSay)
+        # except Exception, errorMsg:
+            # print str(errorMsg)
+            
+    def setStiffness(self, is_active):
+    
+        stiffness_value = 0.0
+        stiffness_duration = 1.0
+        if is_active:
+            stiffness_value = 1.0
+        
+        print ("set stiffness :"+str(stiffness_value))
+        self.motion.stiffnessInterpolation('Body', stiffness_value, stiffness_duration)
+        
+    def getStiffness(self):
+    
+        jointName   = "Body"
+        stiffnesses = self.motion.getStiffnesses(jointName)
+        res = 0.0
+        for a in stiffnesses :
+            res += a
+            
+        if res < 1.0 :
+            self.checkBox_stiff.setCheckState(QtCore.Qt.Unchecked)
+        else:
+            self.checkBox_stiff.setCheckState(QtCore.Qt.Checked)
+    
+    
+    
 
     def get_status(self):
-
+        
+        #Check battery level
         batLevel = 0
 
         try:
             batLevel = self.battery.getBatteryCharge()
         except Exception, errorMsg:
             print str(errorMsg)
-
+        
+        #Check behavior running
         self.battery_progress.setValue(batLevel)
         if self.behavior :
 
@@ -321,6 +354,11 @@ class Nao(QtGui.QWidget):
                     self.radio_connect2.setChecked(QtCore.Qt.Checked)
         else:
             self.radio_connect1.setChecked(QtCore.Qt.Checked)
+            
+        #Check stiffness status
+        self.getStiffness()
+        
+        
 
                 
         

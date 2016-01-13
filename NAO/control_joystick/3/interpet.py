@@ -119,8 +119,8 @@ class Interpret(QtGui.QWidget):
 
         
         #### --2-- BUTTON ###
-        dic2["Y"] = ["COMBO", "RAMASSER", 0]
-        dic2["X"] = ["COMBO", "", 0]
+        dic2["Y"] = ["COMBO", "COMBO", 0]
+        dic2["X"] = ["COMBO", "RAMASSER", 0]
         dic2["A"] = ["COMBO","", 0]
         dic2["B"] = ["COMBO", "", 0]
 
@@ -154,6 +154,9 @@ class Interpret(QtGui.QWidget):
 
         
         self.list_of_dic.append(dic2)
+        
+        ##### -init viewer -- ####
+        self.changeView("none")
 
 
 
@@ -186,20 +189,20 @@ class Interpret(QtGui.QWidget):
     def changeView(self, a):
         
         print a
-        if current_dic == 0:
+        if self.current_dic == 0:
         
-            if a==0:
+            if a=="none":
                 self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgTorsion))
                 self.buttonTop.setPixmap(QtGui.QPixmap(self.imgSaluta))
                 self.buttonRight.setPixmap(QtGui.QPixmap(self.imgPyramide))
                 self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgTriangle))
-            elif a==1:
+            elif a=="up":
                 self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgArabesque))
                 self.buttonTop.setPixmap(QtGui.QPixmap(self.imgCote))
                 self.buttonRight.setPixmap(QtGui.QPixmap(self.imgAnnaToupi))
                 self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgTriangle))
         
         
-        elif current_dic == 1:
+        
         
 

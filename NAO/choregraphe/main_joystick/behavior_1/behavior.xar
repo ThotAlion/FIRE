@@ -417,7 +417,7 @@ class MyClass(GeneratedClass):
                                                                         <chinese>
                                                                             <![CDATA[]]>
 </chinese>
-                                                                        <language>6</language>
+                                                                        <language>7</language>
                                                                     </pluginContent>
                                                                     <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
                                                                     <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Data is sent on the output when this input is stimulated." id="2" />
@@ -17716,6 +17716,8 @@ class MyClass(GeneratedClass):
         #self.onStopped() #activate the output of the box
         if p=="RAMASSER":
             self.ramasser()
+        if p=="PIETA":
+            self.pieta()
 
 
         pass
@@ -17730,8 +17732,9 @@ class MyClass(GeneratedClass):
                                                 <Input name="onStart" type="3" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
                                                 <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
                                                 <Output name="ramasser" type="1" type_size="1" nature="2" inner="0" tooltip="" id="4" />
+                                                <Output name="pieta" type="1" type_size="1" nature="2" inner="0" tooltip="" id="5" />
                                             </Box>
-                                            <Box name="ramasser-droit" id="1" localization="8" tooltip="" x="541" y="42">
+                                            <Box name="ramasser-droit" id="1" localization="8" tooltip="" x="579" y="22">
                                                 <bitmap>media/images/box/box-diagram.png</bitmap>
                                                 <script language="4">
                                                     <content>
@@ -18546,7 +18549,7 @@ class MyClass(GeneratedClass):
                                                     </BehaviorLayer>
                                                 </Timeline>
                                             </Box>
-                                            <Box name="ramasser gauche" id="3" localization="8" tooltip="" x="550" y="143">
+                                            <Box name="ramasser gauche" id="3" localization="8" tooltip="" x="590" y="127">
                                                 <bitmap>media/images/box/box-diagram.png</bitmap>
                                                 <script language="4">
                                                     <content>
@@ -19447,10 +19450,72 @@ class MyClass(GeneratedClass):
                                                 <Output name="baltazar" type="1" type_size="1" nature="2" inner="0" tooltip="" id="5" />
                                                 <Output name="lucas" type="1" type_size="1" nature="2" inner="0" tooltip="" id="6" />
                                             </Box>
+                                            <Box name="Get Name (1)" id="5" localization="8" tooltip='Returns the robot&apos;s name.&#x0A;&#x0A;For example: &quot;Patate&quot;.&#x0A;&#x0A;Note: You can change the name of your robot on its webpage.' x="335" y="299">
+                                                <bitmap>media/images/box/movement/stand.png</bitmap>
+                                                <script language="4">
+                                                    <content>
+                                                        <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onGet(self):
+        # for example robotName = "Patate"
+        realNotVirtual = False
+
+        try:
+            ALMemory.getData( "DCM/Time" )
+            if( ALMemory.getData( "DCM/Simulation" ) != 1 ):
+                realNotVirtual = True
+            else:
+                import os
+                realNotVirtual = os.path.exists("/home/nao")
+        except:
+            pass # already set to False
+
+        if realNotVirtual:
+            import socket
+            robotName = socket.gethostname()
+            self.log("\n")
+            self.log(robotName)
+
+            if robotName == "Lucas":
+                self.lucas()
+            elif robotName == "MarieMadeleine":
+                self.mama()
+            elif ( robotName == "Baltazar" or robotName == "nao" ):
+                self.baltazar()
+            elif robotName == "Lucy":
+                self.lucy()
+
+
+        else:
+            self.lucas()
+
+    def onInput_onStop(self):
+        self.onUnload() #~ it is recommanded to call onUnload of this box in a onStop method, as the code written in onUnload is used to stop the box as well
+        pass]]>
+</content>
+                                                </script>
+                                                <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                                                <Input name="onGet" type="1" type_size="1" nature="1" inner="0" tooltip="The data is sent to the output when a signal is received on this input." id="2" />
+                                                <Output name="lucy" type="1" type_size="1" nature="2" inner="0" tooltip="The data is sent to this output when a signal is received to the intput." id="3" />
+                                                <Output name="mama" type="1" type_size="1" nature="2" inner="0" tooltip="" id="4" />
+                                                <Output name="baltazar" type="1" type_size="1" nature="2" inner="0" tooltip="" id="5" />
+                                                <Output name="lucas" type="1" type_size="1" nature="2" inner="0" tooltip="" id="6" />
+                                            </Box>
                                             <Link inputowner="2" indexofinput="2" outputowner="0" indexofoutput="2" />
                                             <Link inputowner="4" indexofinput="2" outputowner="2" indexofoutput="4" />
+                                            <Link inputowner="5" indexofinput="2" outputowner="2" indexofoutput="5" />
                                             <Link inputowner="3" indexofinput="2" outputowner="4" indexofoutput="3" />
-                                            <Link inputowner="1" indexofinput="2" outputowner="4" indexofoutput="5" />
+                                            <Link inputowner="1" indexofinput="2" outputowner="4" indexofoutput="4" />
                                         </Diagram>
                                     </BehaviorKeyframe>
                                 </BehaviorLayer>
