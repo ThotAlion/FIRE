@@ -5,9 +5,7 @@
         <BehaviorDescription name="behavior" src="behavior_1" xar="behavior.xar" />
     </BehaviorDescriptions>
     <Dialogs />
-    <Resources>
-        <File name="PIETA_1_NAO_mama" src="PIETA_1_NAO_mama.pml" />
-    </Resources>
+    <Resources />
     <Topics />
     <IgnoredPaths />
 </Package>
