@@ -32,6 +32,11 @@ class Nao(QtGui.QWidget):
         #Stiffness
         self.checkBox_stiff = QtGui.QCheckBox("Stiffness")
         self.checkBox_stiff.clicked.connect(lambda: self.setStiffness(self.checkBox_stiff.isChecked() ))
+        #Bouton restart
+        self.button_proxy = QtGui.QPushButton("Proxy")
+        self.button_proxy.clicked.connect(self.init_proxy)
+        self.button_behavior = QtGui.QPushButton("Restart")
+        self.button_behavior.clicked.connect(self.restart_behavior)
         #layout
         layout1 = QtGui.QVBoxLayout()
         layout1.addWidget(self.label_name)
@@ -41,6 +46,8 @@ class Nao(QtGui.QWidget):
         layout1.addWidget(self.radio_connect1)
         layout1.addWidget(self.radio_connect2)
         layout1.addWidget(self.radio_connect3)
+        layout1.addWidget(self.button_behavior)
+        layout1.addWidget(self.button_proxy)
         #Group box
         groupBox = QtGui.QGroupBox("Nao "+str(robotID))
         groupBox.setLayout(layout1)
@@ -51,13 +58,26 @@ class Nao(QtGui.QWidget):
 
         ### Nao init
         self.name = robotName
+        self.ip = robotIP
+        self.port = PORT
         self.id = robotID
         self.autonomeLevel = 1
         self.lcd.display(self.autonomeLevel)
+        
+        ##### Init of nao, position and move
+        self.is_walking = False
+        self.is_headmoving = False
+        self.is_turning = False
+        
+        self.init_proxy()
 
+
+        print "creation du nao: "+str(self.id)+ " : "+self.name
+
+    def init_proxy(self)  : 
         
         try:
-            self.motion = ALProxy("ALMotion", robotIP, PORT)
+            self.motion = ALProxy("ALMotion", self.ip, self.port)
         except Exception, e:
             print self.name+" Could not create proxy to ALMotion"
             print "Error was: ",e
@@ -78,47 +98,41 @@ class Nao(QtGui.QWidget):
             # self.speech = None
 
         try:
-            self.memory = ALProxy("ALMemory", robotIP, PORT)
+            self.memory = ALProxy("ALMemory", self.ip, self.port)
         except Exception, e:
             print self.name+" Could not create proxy to ALMemory"
             print "Error was: ",e
             self.memory = None
 
         try:
-            self.leds = ALProxy("ALLeds", robotIP, PORT)
+            self.leds = ALProxy("ALLeds", self.ip, self.port)
         except Exception, e:
             print self.name+" Could not create proxy to ALLeds"
             print "Error was: ",e
             self.leds = None
 
         try:
-            self.behavior = ALProxy("ALBehaviorManager", robotIP, PORT)
+            self.behavior = ALProxy("ALBehaviorManager", self.ip, self.port)
         except Exception, e:
             print self.name+" Could not create proxy to ALBehavior"
             print "Error was: ",e
             self.behavior = None
 
         try:
-            self.battery = ALProxy("ALBattery", robotIP, PORT)
+            self.battery = ALProxy("ALBattery", self.ip, self.port)
         except Exception, e:
             print self.name+" Could not create proxy to ALBattery"
             print "Error was: ",e
             self.battery = None
 
-        try:
-            self.audio = ALProxy("ALAudioDevice", robotIP, PORT)
-        except Exception, e:
-            print self.name+" Could not create proxy to ALAudioDevice"
-            print "Error was: ",e
-            self.audio = None
+        # try:
+            # self.audio = ALProxy("ALAudioDevice",self.ip, self.port)
+        # except Exception, e:
+            # print self.name+" Could not create proxy to ALAudioDevice"
+            # print "Error was: ",e
+            # self.audio = None
 
-        ##### Init of nao, position and move
-        self.is_walking = False
-        self.is_headmoving = False
-        self.is_turning = False
-        self.name = robotName
-
-        print "creation du nao: "+str(self.id)+ " : "+self.name
+        
 
 
     def init_pos(self):
@@ -137,14 +151,21 @@ class Nao(QtGui.QWidget):
             ## Enable head to move
             self.motion.wbEnableEffectorControl("Head", True)
 
+        ## Be start behavior
+        self.restart_behavior()
+
+        if self.motion:
+            self.motion.rest()
+            
+    
+    
+    def restart_behavior(self):
+    
         if self.behavior :
             if self.behavior.isBehaviorInstalled("main_joystick-d361da/behavior_1"):
                 self.behavior.stopAllBehaviors()
                 self.behavior.startBehavior("main_joystick-d361da/behavior_1")
-
-        if self.motion:
-            self.motion.rest()
- 
+        
 
     ### NOT use . Use of memoryEvent("PostureAsked", name ) instead
     def go_posture(self, posture_name):
@@ -241,11 +262,11 @@ class Nao(QtGui.QWidget):
     def changeAutonomeLevel(self, isIncreasing, isReset, isStop):
 	
         if(isReset):
-            self.autonomeLevel = 0
+            self.autonomeLevel = 1
             self.memory.raiseEvent("autonome", self.autonomeLevel)
             
         if(isStop):
-            self.autonomeLevel = 1
+            self.autonomeLevel = 4
             self.memory.raiseEvent("autonome", self.autonomeLevel)
             
         if( not(isReset) and not(isStop) ):
@@ -319,7 +340,11 @@ class Nao(QtGui.QWidget):
     def getStiffness(self):
     
         jointName   = "Body"
-        stiffnesses = self.motion.getStiffnesses(jointName)
+        stiffnesses = []
+        try:
+            stiffnesses = self.motion.getStiffnesses(jointName)
+        except Exception, errorMsg:
+            print str(errorMsg)
         res = 0.0
         for a in stiffnesses :
             res += a
@@ -331,7 +356,7 @@ class Nao(QtGui.QWidget):
     
     
     
-
+    ## fonction called by a timer, to check nao status ( battery, connection, stiffness ...)
     def get_status(self):
         
         #Check battery level
@@ -344,7 +369,8 @@ class Nao(QtGui.QWidget):
         
         #Check behavior running
         self.battery_progress.setValue(batLevel)
-        if self.behavior :
+        
+        try:
 
             if self.behavior.isBehaviorInstalled("main_joystick-d361da/behavior_1"):
                
@@ -352,7 +378,8 @@ class Nao(QtGui.QWidget):
                     self.radio_connect3.setChecked(QtCore.Qt.Checked)
                 else:
                     self.radio_connect2.setChecked(QtCore.Qt.Checked)
-        else:
+        except Exception, errorMsg:
+            print str(errorMsg)
             self.radio_connect1.setChecked(QtCore.Qt.Checked)
             
         #Check stiffness status

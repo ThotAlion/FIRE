@@ -255,7 +255,7 @@ class Joystick(QtCore.QThread):
                         else:
                             self.joy_state["hat_down"]= False
                             
-                        if not(self.joy_state["hat_up"] or self.joy_state["hat_left"] or self.joy_state["hat_up"] or self.joy_state["hat_down"] ):
+                        if not(self.joy_state["hat_up"] or self.joy_state["hat_left"] or self.joy_state["hat_right"] or self.joy_state["hat_down"] ):
                             self.view_event.emit("none")
 
             #######

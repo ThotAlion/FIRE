@@ -40,6 +40,15 @@ class Interpret(QtGui.QWidget):
         self.imgAnnaToupi = "images/annaToupi.png"
         self.imgArabesque = "images/arabesque.png"
         self.imgCote = "images/cote.png"
+        self.imgEmpty = "images/empty.png"
+        self.imgAutoReset = "images/auto-reset.png"
+        self.imgAutoStop = "images/auto-stop.png"
+        self.imgAutoPlus = "images/auto-plus.png"
+        self.imgAutoMinus = "images/auto-minus.png"
+        self.imgSit = "images/sit.png"
+        self.imgStand = "images/stand.png"
+        self.imgStandInit = "images/standInit.png"
+        self.imgRest = "images/rest.png"
         #setPixmap
         self.changeView(0)
         #connect
@@ -48,10 +57,10 @@ class Interpret(QtGui.QWidget):
         #add to layout
         layoutGroup.addWidget(self.radio_dic1)
         layoutGroup.addWidget(self.radio_dic2)
-        layoutView.addWidget(self.buttonLeft, 0, 1)
-        layoutView.addWidget(self.buttonTop, 1, 0)
-        layoutView.addWidget(self.buttonRight, 2, 1)
-        layoutView.addWidget(self.buttonBottom, 1, 2)
+        layoutView.addWidget(self.buttonLeft, 1, 0)
+        layoutView.addWidget(self.buttonTop, 0, 1)
+        layoutView.addWidget(self.buttonRight, 1, 2)
+        layoutView.addWidget(self.buttonBottom, 2, 1)
         self.layoutMain.addWidget(groupDic)
         self.layoutMain.addWidget(groupView)
         self.setLayout(self.layoutMain)
@@ -119,20 +128,20 @@ class Interpret(QtGui.QWidget):
 
         
         #### --2-- BUTTON ###
-        dic2["Y"] = ["COMBO", "COMBO", 0]
+        dic2["Y"] = ["COMBO", "REACTION", 0]
         dic2["X"] = ["COMBO", "RAMASSER", 0]
-        dic2["A"] = ["COMBO","", 0]
-        dic2["B"] = ["COMBO", "", 0]
+        dic2["A"] = ["COMBO","PIETA", 0]
+        dic2["B"] = ["COMBO", "PIETA", 0]
 
         dic2["RIGHT_Y"] = ["COMBO","", 0]
         dic2["RIGHT_X"] = ["COMBO", "", 0]
         dic2["RIGHT_A"] = ["COMBO", "", 0]
         dic2["RIGHT_B"] = ["COMBO", "", 0]
 
-        dic2["UP_Y"] = ["", 0, 0]
-        dic2["UP_X"] = ["", 0, 0]
-        dic2["UP_B"] = ["", 0, 0]
-        dic2["UP_A"] = ["", 0, 0]
+        dic2["UP_Y"] = ["AUTONOME", -1, 0]
+        dic2["UP_X"] = ["AUTONOME", 0, 0]
+        dic2["UP_B"] = ["AUTONOME", 1, 0]
+        dic2["UP_A"] = ["AUTONOME", 2, 0]
 
         dic2["DOWN_Y"] = ["POSTURE", "Stand", 0]
         dic2["DOWN_X"] = ["POSTURE", "Rest", 0]
@@ -192,17 +201,43 @@ class Interpret(QtGui.QWidget):
         if self.current_dic == 0:
         
             if a=="none":
-                self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgTorsion))
-                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgSaluta))
-                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgPyramide))
-                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgTriangle))
-            elif a=="up":
-                self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgArabesque))
+                self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgTriangle))
+                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgTorsion))
+                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgArabesque))
+                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgEmpty))
+            elif a=="right":
+                self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgPyramide))
                 self.buttonTop.setPixmap(QtGui.QPixmap(self.imgCote))
                 self.buttonRight.setPixmap(QtGui.QPixmap(self.imgAnnaToupi))
-                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgTriangle))
+                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgSaluta)) 
+            elif a=="left":
+                self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgEmpty))
+                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgEmpty))
+                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgEmpty))
+                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgEmpty))            
+            elif a=="up":
+                self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgAutoReset))
+                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgAutoStop))
+                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgAutoMinus))
+                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgAutoPlus))
+            elif a=="down":
+                self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgRest))
+                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgStand))
+                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgStandInit))
+                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgSit))
+                
+        elif self.current_dic == 1:
+        
+            self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgEmpty))
+            self.buttonTop.setPixmap(QtGui.QPixmap(self.imgEmpty))
+            self.buttonRight.setPixmap(QtGui.QPixmap(self.imgEmpty))
+            self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgEmpty))
+        
+        
         
         
         
         
 
+
+        
