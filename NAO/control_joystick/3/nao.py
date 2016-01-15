@@ -31,6 +31,7 @@ class Nao(QtGui.QWidget):
         self.lcd.setSegmentStyle(QtGui.QLCDNumber.Flat)
         #Stiffness
         self.checkBox_stiff = QtGui.QCheckBox("Stiffness")
+        #TODO change isChecked par clicked pour eviter le double envoi
         self.checkBox_stiff.clicked.connect(lambda: self.setStiffness(self.checkBox_stiff.isChecked() ))
         #Bouton restart
         self.button_proxy = QtGui.QPushButton("Proxy")
@@ -200,6 +201,18 @@ class Nao(QtGui.QWidget):
                 self.is_walking = True
             else :
                 self.is_turning = True
+                
+            #Bridage des nao
+            #pour Lucy et Baltzar, afin de d'eviter marche destabilisante
+
+          
+            if self.name == "Lucy" and Frequency < 0.85 :
+                Frequency = 0.85
+                print "bridage lucy"
+            if self.name == "Baltazar" and Frequency > 0.8:
+                Frequency = 0.8
+                print "bridage Baltzar"
+                
 
             try:
                 #motion.moveToward( X, Y, Theta, [["Frequency", Frequency]])
@@ -266,7 +279,7 @@ class Nao(QtGui.QWidget):
             self.memory.raiseEvent("autonome", self.autonomeLevel)
             
         if(isStop):
-            self.autonomeLevel = 4
+            self.autonomeLevel = 3
             self.memory.raiseEvent("autonome", self.autonomeLevel)
             
         if( not(isReset) and not(isStop) ):

@@ -159,7 +159,7 @@ class Nao_manager(QtGui.QWidget):
         #gui management
         self.layoutNao.addWidget(nao, 1, naoId, QtCore.Qt.AlignCenter)
         checkBox = QtGui.QCheckBox("")
-        checkBox.stateChanged.connect(lambda: self.select(checkBox.isChecked(), naoId ))
+        checkBox.clicked.connect(lambda: self.select(checkBox.isChecked(), naoId ))
         self.list_of_selectionCheckBox.append(checkBox)
         self.layoutNao.addWidget( checkBox, 0, naoId, QtCore.Qt.AlignCenter)
         
