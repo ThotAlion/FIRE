@@ -163,9 +163,11 @@ class Nao(QtGui.QWidget):
     def restart_behavior(self):
     
         if self.behavior :
-            if self.behavior.isBehaviorInstalled("main_joystick-d361da/behavior_1"):
+            if self.behavior.isBehaviorInstalled("starter-eb8f6c/behavior_1"):
                 self.behavior.stopAllBehaviors()
-                self.behavior.startBehavior("main_joystick-d361da/behavior_1")
+                self.behavior.startBehavior("starter-eb8f6c/behavior_1")
+            else :
+                print "starter-ebf6c - behavior_1 is not installed"
         
 
     ### NOT use . Use of memoryEvent("PostureAsked", name ) instead
@@ -246,7 +248,7 @@ class Nao(QtGui.QWidget):
             self.is_headmoving = True
 
 
-        fractionMaxSpeed  = 0.4
+        fractionMaxSpeed  = 0.35
 
         try:
             self.motion.setAngles("HeadYaw",yaw*3.14/180.0, fractionMaxSpeed);
@@ -296,10 +298,11 @@ class Nao(QtGui.QWidget):
 
     def use_leds(self, name, value):
 
+        # here is the light on when a nao is activated
         if name == "ear" :
             if value > 0 :
                 try:
-                    self.leds.on("EarLeds")
+                    self.leds.off("EarLeds")
                     self.leds.on("BrainLeds")
                 except Exception, errorMsg:
                     print str(errorMsg)

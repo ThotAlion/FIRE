@@ -61,8 +61,14 @@ class Joystick(QtCore.QThread):
         while done==False:
         
             res = []
+            count = 0
 
             for event in pygame.event.get():
+            
+                print str(count)
+                count += 1
+            
+                
 
                 if pygame.joystick.get_count() > 0:
                     if event.type == pygame.locals.JOYBUTTONDOWN:
@@ -264,5 +270,5 @@ class Joystick(QtCore.QThread):
             if len(res)>0:
                 self.joy_event.emit(res)
 
-            time.sleep(0.04)
+            time.sleep(0.07)
                             

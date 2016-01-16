@@ -313,12 +313,17 @@ class Nao_manager(QtGui.QWidget):
 
 
     ####################################################################    
-    # transmit message from interpret to itself and all selected nao(s).
+    # TRANSMIT message from interpret to itself and all selected nao(s).
     # Contains all dictionnary message and functions calls
+    #
+    #To avoid repetion of messages, the function call 1 walk and 1 head for 
+    #each msgGlobal. We don't need more that 25 walk and head information / sec
+    #
     ####################################################################
     def transmit_msg(self, msgGlobal):
 
-        
+        walk_information = False
+        head_information = False
         
         for msg in msgGlobal:
 
@@ -353,23 +358,26 @@ class Nao_manager(QtGui.QWidget):
                 elif name == "POSTURE":
                     self.nao_go_posture(arg1)
 
-                elif name == "WALK": #arg1 left<0 right>0 -- arg2 up>0 down<0
+                elif name == "WALK" and not(walk_information): #arg1 left<0 right>0 -- arg2 up>0 down<0
                     if arg1==0.0 and arg2==0.0 :
                         self.nao_update_walk(0,0,0.0,0.0)
                     else :
                         self.nao_update_walk( abs(arg2)/(arg2), 0.0, arg1*0.7, abs(arg2))
+                    walk_information = True
 
-                elif name == "WALKPREC": #arg1 left<0 right>0 -- arg2 up>0 down<0
+                elif name == "WALKPREC" and not(walk_information): #arg1 left<0 right>0 -- arg2 up>0 down<0
                     if arg1==0.0 and arg2==0.0 :
                         self.nao_update_walk(0,0,0.0,0.0)
                     else :
                         self.nao_update_walk( abs(arg2)/(arg2), 0.0, arg1*0.15, abs(arg2))
+                    walk_information = True
                     
-                elif name == "WALKSIDE": #arg1 left<0 right>0 -- arg2 up>0 down<0
+                elif name == "WALKSIDE" and not(walk_information): #arg1 left<0 right>0 -- arg2 up>0 down<0
                     if arg1==0.0 and arg2==0.0 :
                         self.nao_update_walk(0,0,0.0,0.0)
                     else :
                         self.nao_update_walk( abs(arg2)/(arg2),arg1*0.7, 0.0,  abs(arg2))
+                    walk_information = True
                     
 
                 elif name == "TURN":
@@ -382,9 +390,10 @@ class Nao_manager(QtGui.QWidget):
                         self.nao_update_walk(0.0,0.0,-0.9, abs(arg1))
 
                     
-                elif name == "HEAD": #arg1 left<0 right>0 --- arg2 up>0, down<0
+                elif name == "HEAD" and not(head_information): #arg1 left<0 right>0 --- arg2 up>0, down<0
 
                     self.nao_move_head(-arg1*40.5, -arg2*29.5)
+                    head_information = True
 
                 ### OTHERS #######
 
