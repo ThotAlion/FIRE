@@ -1,4 +1,6 @@
+#!c:/Python27/python.exe
 import sys
+import numpy
 import FIRELIB
 import time
 from PyQt4.QtGui import *
@@ -82,6 +84,4 @@ channels = {}
 e = FIRELIB.Engine.Engine(interfaces,systems,channels)
 e.start()
     
-
 sys.exit(app.exec_())
-
