@@ -220,6 +220,7 @@ class CSVRecorder(Block.Block,QWidget):
         self.iCurrentPose = -1
         self.play = 0
         
+        
         # creation of components
         self.objTable = QTableView()
         self.objTable.horizontalHeader().setResizeMode(QHeaderView.ResizeToContents)
@@ -307,6 +308,9 @@ class CSVRecorder(Block.Block,QWidget):
         self.connect(self.scCtrlZ,SIGNAL("activated()"),self.undo)
         self.connect(self.poseList,SIGNAL("layoutAboutToBeChanged()"),self.store)
         self.connect(self.objectiveList,SIGNAL("layoutAboutToBeChanged()"),self.store)
+        
+        # ask the initial pose
+        self.load()
 
     def insertPose(self):
         i=self.poseTable.currentIndex().row()
