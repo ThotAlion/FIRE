@@ -6,7 +6,7 @@
     </BehaviorDescriptions>
     <Dialogs />
     <Resources>
-        <File name="Opera Acapella" src="Opera Acapella.wav" />
+        <File name="Opera Acapella" src="Opera Acapella.mp3" />
     </Resources>
     <Topics />
     <IgnoredPaths />
