@@ -4,6 +4,7 @@ from PyQt4 import QtGui, QtCore
 from nao_manager import Nao_manager
 from interpet import Interpret
 from joystick import Joystick
+from storytelling import StoryTelling
 import time
 from numpy import *
 import argparse
@@ -20,12 +21,11 @@ class main_ui(QtGui.QWidget):
     def init_ui(self):
         QtGui.QMainWindow.__init__(self, None)
 
-        ###Joystick 1 ####
+        ###Joystick Interpret StoryTelling and Nao_Manager ####
         self.joystick = Joystick(self)
         self.interpret1 = Interpret(1)        
         self.interpret2 = Interpret(2)
-    
-        
+        self.story = StoryTelling()
         self.manager = Nao_manager()
 
         #Timer, updating nao battery level, and connection
@@ -38,11 +38,13 @@ class main_ui(QtGui.QWidget):
         ########### Connect ######
         self.joystick.joy_event1.connect(self.interpret1.translate)
         self.joystick.view_event1.connect(self.interpret1.changeView)
-        self.interpret1.interpret_event.connect(self.manager.transmit_msg)
+        self.interpret1.interpret_event.connect(self.story.transmit_msg)
         
         self.joystick.joy_event2.connect(self.interpret2.translate)
         self.joystick.view_event2.connect(self.interpret2.changeView)
-        self.interpret2.interpret_event.connect(self.manager.transmit_msg)
+        self.interpret2.interpret_event.connect(self.story.transmit_msg)
+        
+        self.story.storytelling_event.connect(self.manager.transmit_msg)
         
         self.joystick.second_joy_detected.connect(self.add_joystick)
 

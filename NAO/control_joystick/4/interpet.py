@@ -27,7 +27,7 @@ class Interpret(QtGui.QWidget):
         self.radio_dic1.setChecked(QtCore.Qt.Checked)
         self.radio_dic2 = QtGui.QRadioButton("Dic 2")
         layoutView = QtGui.QGridLayout()
-        groupView = QtGui.QGroupBox("Controller view")
+        groupView = QtGui.QGroupBox("Controller view "+str(self.joy_id))
         if( self.joy_id == 1):
             groupView.setStyleSheet("background-color:yellow")
         else:
@@ -61,6 +61,8 @@ class Interpret(QtGui.QWidget):
         self.imgMur = "images/mur.png"
         self.imgChoreDuo = "images/choreduo.png"
         self.imgAspirateur = "images/aspirateur.png"
+        self.imgPieta2 = "images/pieta2.png"
+        self.imgCiel = "images/ciel.png"
         #setPixmap
         self.changeView(0)
         #connect
@@ -146,10 +148,10 @@ class Interpret(QtGui.QWidget):
         dic2["A"] = ["COMBO","MUR", 0]
         
 
-        dic2["RIGHT_X"] = ["COMBO", "DUO", 0]
+        dic2["RIGHT_X"] = ["ANIM", "DUO", 0]
         dic2["RIGHT_Y"] = ["COMBO","ASPI", 0]
-        dic2["RIGHT_B"] = ["COMBO", "TRIO", 0]
-        dic2["RIGHT_A"] = ["COMBO", "", 0]
+        dic2["RIGHT_B"] = ["COMBO", "PIETA2", 0]
+        dic2["RIGHT_A"] = ["COMBO", "CIEL", 0]
         
 
         dic2["UP_Y"] = ["AUTONOME", -1, 0]
@@ -251,8 +253,8 @@ class Interpret(QtGui.QWidget):
             elif a=="right":
                 self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgChoreDuo))
                 self.buttonTop.setPixmap(QtGui.QPixmap(self.imgAspirateur))
-                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgEmpty))
-                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgEmpty))
+                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgPieta2))
+                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgCiel))
             elif a=="up":
                 self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgAutoReset))
                 self.buttonTop.setPixmap(QtGui.QPixmap(self.imgAutoStop))
