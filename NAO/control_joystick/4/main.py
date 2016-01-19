@@ -1,0 +1,81 @@
+
+# -*- coding: cp1252 -*-
+from PyQt4 import QtGui, QtCore
+from nao_manager import Nao_manager
+from interpet import Interpret
+from joystick import Joystick
+import time
+from numpy import *
+import argparse
+
+
+
+
+class main_ui(QtGui.QWidget):
+
+    def __init__(self):
+        super(main_ui, self).__init__()
+        self.init_ui()
+
+    def init_ui(self):
+        QtGui.QMainWindow.__init__(self, None)
+
+        ###Joystick 1 ####
+        self.joystick = Joystick(self)
+        self.interpret1 = Interpret(1)        
+        self.interpret2 = Interpret(2)
+    
+        
+        self.manager = Nao_manager()
+
+        #Timer, updating nao battery level, and connection
+        self.timer = QtCore.QTimer(self)
+        self.connect(self.timer, QtCore.SIGNAL("timeout()"), self.manager.nao_getStatus)
+        self.timer.start(5000)
+        
+        
+
+        ########### Connect ######
+        self.joystick.joy_event1.connect(self.interpret1.translate)
+        self.joystick.view_event1.connect(self.interpret1.changeView)
+        self.interpret1.interpret_event.connect(self.manager.transmit_msg)
+        
+        self.joystick.joy_event2.connect(self.interpret2.translate)
+        self.joystick.view_event2.connect(self.interpret2.changeView)
+        self.interpret2.interpret_event.connect(self.manager.transmit_msg)
+        
+        self.joystick.second_joy_detected.connect(self.add_joystick)
+
+        #### GUI######
+        self.setWindowTitle("Multiple Nao xbox controller")
+        self.layout_main = QtGui.QGridLayout()
+        
+        self.layout_main.addWidget(self.manager, 0, 1)
+        self.layout_main.addWidget(self.interpret1, 0,0)
+        self.setLayout(self.layout_main)
+        self.show()
+
+        #### Nao Manager ####
+        
+        #self.manager.addNao("Lucy", "10.0.1.13", 9559 )
+        self.manager.addNao("Baltazar", "10.0.1.14", 9559 )
+        #self.manager.addNao("Lucas", "10.0.1.11", 9559 )
+        #self.manager.addNao("MaMa", "10.0.1.12", 9559 )
+
+        self.manager.init_manager()
+    
+    ## add a Widget for a second joystick if detected 
+    def add_joystick(self,a):
+        print "ADD GUI FOR SECOND JOYSTICK"
+        self.layout_main.addWidget(self.interpret2, 0,2)
+        
+        
+        
+
+    
+if __name__ == "__main__":
+    import sys
+
+    app=QtGui.QApplication(sys.argv) 
+    main_application_window=main_ui()
+    sys.exit(app.exec_())
