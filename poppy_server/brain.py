@@ -6,6 +6,18 @@ import json
 import time
 import numpy as np
 
+import logging
+import sys
+
+root = logging.getLogger()
+root.setLevel(logging.WARNING)
+
+ch = logging.StreamHandler(sys.stdout)
+ch.setLevel(logging.WARNING)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+ch.setFormatter(formatter)
+root.addHandler(ch)
+
 
 class listener(Thread):
     
@@ -38,9 +50,9 @@ class listener(Thread):
                     self._socket.send_json("{}")
 
 if __name__ == "__main__":
-    addresses = netifaces.ifaddresses('wlan4')
+    addresses = netifaces.ifaddresses('wlan0')
     ip = addresses[netifaces.AF_INET][0]["addr"]
-    robot = pypot.robot.from_json("full_poppy.json")
+    robot = pypot.robot.from_json("full_mommy.json")
     task = listener(ip,'8080')
     task.start()
     number = "-1"
@@ -63,14 +75,18 @@ if __name__ == "__main__":
         
         tempc = 0
         voltage = 1000
+        hottest = 'TBD'
         for mot in robot.motors:
             p[mot.name] = mot.present_position
             a[mot.name] = str(np.round(p[mot.name]*100)/100)
             tempc = max(tempc,mot.present_temperature)
+            if tempc == mot.present_temperature:
+                hottest = mot.name
             if mot.model!='XL-320':
                 voltage = min(voltage,mot.present_voltage)
         a["Temperature"] = str(tempc)
         a["Voltage"] = str(voltage)
+        a["Hottest"] = hottest
         if len(p0)==0:
             p0 = p.copy()
             t0 = t        
@@ -89,7 +105,7 @@ if __name__ == "__main__":
                         duration = float(b["Duration"])
                     elif mot == "Name":
                         temp = 1
-                    else:
+                    elif robot.__dict__.has_key(mot):
                         m = getattr(robot,mot)
                         if b[mot][0] == "M":
                             v[mot] = 0.0
@@ -124,12 +140,21 @@ if __name__ == "__main__":
                                 yp0 = v0[mot]
                             else:
                                 v0=0.0
-                            ap = (yc-yp0*duration-y0)/(duration**2)
-                            bp = yp0
-                            cp = y0
-                            m.compliant = False
-                            pc[mot] = ap*dt**2+bp*dt+cp
-                            v[mot] = 2*ap*dt+bp
+                            if False: # FLAG ! interpolation using parabol (unstable)
+                                ap = (yc-yp0*duration-y0)/(duration**2)
+                                bp = yp0
+                                cp = y0
+                                m.compliant = False
+                                pc[mot] = ap*dt**2+bp*dt+cp
+                                v[mot] = 2*ap*dt+bp
+                            else: # cubic interpolation with end parallel to the AB segment
+                                ap = (y0-yc)/(duration**3)+yp0/duration**2
+                                bp = 2*(yc-y0)/(duration**2)-2*yp0/duration
+                                cp = yp0
+                                dp = y0
+                                m.compliant = False 
+                                pc[mot] = ap*dt**3+bp*dt**2+cp*dt+dp
+                                v[mot] = 3*ap*dt**2+2*bp*dt+cp
                             m.goal_position = pc[mot]
                         elif b[mot][0] == "S":
                             dt = t-t0
