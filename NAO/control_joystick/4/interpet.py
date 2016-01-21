@@ -63,6 +63,10 @@ class Interpret(QtGui.QWidget):
         self.imgAspirateur = "images/aspirateur.png"
         self.imgPieta2 = "images/pieta2.png"
         self.imgCiel = "images/ciel.png"
+        self.imgOpera = "images/opera.png"
+        self.imgLucy = "images/lucy.png"
+        self.imgMama = "images/mama.png"
+        self.imgLucas = "images/lucas.png"
         #setPixmap
         self.changeView(0)
         #connect
@@ -87,10 +91,10 @@ class Interpret(QtGui.QWidget):
         dic1["RB"] = ["SWITCH", 1, 0]
         dic1["LB"] = ["", 1, 0]
         dic1["LB+RB"] = ["UNSELECT_ALL"]
-        dic1["LB_X"] = ["SELECT", 0, 0]
-        dic1["LB_Y"] = ["SELECT", 1, 0]
-        dic1["LB_B"] = ["SELECT", 2, 0]
-        dic1["LB_A"] = ["SELECT", 3, 0]
+        dic1["LB_X"] = ["ADDSELECT", 0, 0]
+        dic1["LB_Y"] = ["ADDSELECT", 3, 0]
+        dic1["LB_B"] = ["ADDSELECT", 1, 0]
+        dic1["LB_A"] = ["ADDSELECT", 2, 0]
 
         
         #### --1-- BUTTON ###
@@ -135,15 +139,15 @@ class Interpret(QtGui.QWidget):
         dic2["RB"] = ["SWITCH", 1, 0]
         dic2["LB"] = ["", 1, 0]
         dic2["LB+RB"] = ["UNSELECT_ALL"]
-        dic2["LB_X"] = ["SELECT", 0, 0]
-        dic2["LB_Y"] = ["SELECT", 1, 0]
-        dic2["LB_B"] = ["SELECT", 2, 0]
-        dic2["LB_A"] = ["SELECT", 3, 0]
+        dic2["LB_X"] = ["ADDSELECT", 0, 0]
+        dic2["LB_Y"] = ["ADDSELECT", 3, 0]
+        dic2["LB_B"] = ["ADDSELECT", 1, 0]
+        dic2["LB_A"] = ["ADDSELECT", 2, 0]
 
         
         #### --2-- BUTTON ###
         dic2["X"] = ["COMBO", "RAMASSER", 0]
-        dic2["Y"] = ["COMBO", "REACTION", 0]
+        dic2["Y"] = ["ANIM", "REACTION", 0]
         dic2["B"] = ["COMBO", "PIETA", 0]
         dic2["A"] = ["COMBO","MUR", 0]
         
@@ -164,8 +168,8 @@ class Interpret(QtGui.QWidget):
         dic2["DOWN_B"] = ["POSTURE", "StandInit", 0]
         dic2["DOWN_A"] = ["POSTURE", "Sit", 0]
 
-        dic2["LEFT_Y"] = ["",0, 0]
-        dic2["LEFT_X"] = ["", "RONDE", 0]
+        dic2["LEFT_Y"] = ["COMBO","OPERA", 0]
+        dic2["LEFT_X"] = ["ANIM", "RONDE", 0]
         dic2["LEFT_B"] = ["", 0, 0]
         dic2["LEFT_A"] = ["", 0, 0]
 
@@ -241,6 +245,12 @@ class Interpret(QtGui.QWidget):
                 self.buttonTop.setPixmap(QtGui.QPixmap(self.imgStand))
                 self.buttonRight.setPixmap(QtGui.QPixmap(self.imgStandInit))
                 self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgSit))
+            elif a=="lb":
+                self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgLucy))
+                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgEmpty))
+                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgLucas))
+                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgMama))  
+              
                 
         elif self.current_dic == 1:
         
@@ -267,9 +277,14 @@ class Interpret(QtGui.QWidget):
                 self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgSit))
             elif a=="left":
                 self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgRonde))
-                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgEmpty))
+                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgOpera))
                 self.buttonRight.setPixmap(QtGui.QPixmap(self.imgEmpty))
                 self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgEmpty)) 
+            elif a=="lb":
+                self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgLucy))
+                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgEmpty))
+                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgLucas))
+                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgMama)) 
                 
                 
                 

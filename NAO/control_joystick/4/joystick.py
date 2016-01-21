@@ -100,8 +100,10 @@ class Joystick(QtCore.QThread):
             for event in pygame.event.get():
 
                 count += 1
+                
 
                 if pygame.joystick.get_count() > 0:
+                
                     if event.type == pygame.locals.JOYBUTTONDOWN:
 
                         ###### BOUTON RB - LB #########
@@ -109,7 +111,12 @@ class Joystick(QtCore.QThread):
                         for j in range(pygame.joystick.get_count()):
                         
                             self.list_of_joy_state[j]["RB"] = self.list_of_joy[j].get_button(5)
+                            if self.list_of_joy_state[j]["LB"] and not(self.list_of_joy[j].get_button(4)):
+                                self.emit_view_event("none", j)
+                            
                             self.list_of_joy_state[j]["LB"] = self.list_of_joy[j].get_button(4)
+                            
+                            
                 
                             if self.list_of_joy_state[j]["RB"]:
                                 
@@ -124,6 +131,8 @@ class Joystick(QtCore.QThread):
                                     res[j].append(["LB+RB",0, 0])
                                 else:
                                     res[j].append(["LB",0, 0])
+                                    self.emit_view_event("lb", j)
+                                   
 
 
                         ###### BOUTON DE MANETTE ########

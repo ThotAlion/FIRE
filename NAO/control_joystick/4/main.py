@@ -51,18 +51,24 @@ class main_ui(QtGui.QWidget):
         #### GUI######
         self.setWindowTitle("Multiple Nao xbox controller")
         self.layout_main = QtGui.QGridLayout()
+        self.group_ManagerStory = QtGui.QGroupBox("Nao Control Joystick")
+        self.layout_ManagerStory = QtGui.QVBoxLayout()
+        self.layout_ManagerStory.addWidget(self.manager)
+        self.layout_ManagerStory.addWidget(self.story)
+        self.group_ManagerStory.setLayout(self.layout_ManagerStory)
         
-        self.layout_main.addWidget(self.manager, 0, 1)
+        #set layout QGridBox
+        self.layout_main.addWidget(self.group_ManagerStory, 0, 1)
         self.layout_main.addWidget(self.interpret1, 0,0)
         self.setLayout(self.layout_main)
         self.show()
 
         #### Nao Manager ####
         
-        #self.manager.addNao("Lucy", "10.0.1.13", 9559 )
-        self.manager.addNao("Baltazar", "10.0.1.14", 9559 )
+        self.manager.addNao("Lucy", "10.0.1.13", 9559 )
+        #self.manager.addNao("Baltazar", "10.0.1.14", 9559 )
         #self.manager.addNao("Lucas", "10.0.1.11", 9559 )
-        #self.manager.addNao("MaMa", "10.0.1.12", 9559 )
+        self.manager.addNao("MaMa", "10.0.1.12", 9559 )
 
         self.manager.init_manager()
     

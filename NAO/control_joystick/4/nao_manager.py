@@ -24,7 +24,7 @@ class Nao_manager(QtGui.QWidget):
         self.layoutManager = QtGui.QHBoxLayout()
 
         self.layoutMain.addLayout(self.layoutNao)
-        self.layoutMain.addLayout(self.layoutManager)
+        #self.layoutMain.addLayout(self.layoutManager)
         self.setLayout(self.layoutMain)
 
         ####CheckBox for selection
@@ -174,8 +174,8 @@ class Nao_manager(QtGui.QWidget):
         checkBox1.setStyleSheet("background-color:yellow")
         checkBox2 = QtGui.QCheckBox("2")
         checkBox2.setStyleSheet("background-color:white")
-        checkBox1.clicked.connect(lambda: self.select(1, checkBox1.isChecked(), naoId ))
-        checkBox2.clicked.connect(lambda: self.select(2, checkBox2.isChecked(), naoId ))
+        checkBox1.clicked.connect(lambda: self.addselect(1, checkBox1.isChecked(), naoId ))
+        checkBox2.clicked.connect(lambda: self.addselect(2, checkBox2.isChecked(), naoId ))
         self.list_of_selectionCheckBox1.append(checkBox1)
         self.list_of_selectionCheckBox2.append(checkBox2)
         self.layoutNao.addWidget( checkBox1, 0, naoId, QtCore.Qt.AlignCenter)
@@ -251,7 +251,7 @@ class Nao_manager(QtGui.QWidget):
                 
 
     # select or unselect one nao, over the current selection, according to its ID
-    def select(self, joy_id, isSelecting, nao_id ):
+    def addselect(self, joy_id, isSelecting, nao_id ):
     
         selection = []
         if joy_id == 1 : 
@@ -270,6 +270,23 @@ class Nao_manager(QtGui.QWidget):
             selection[nao_id] = isSelecting
 
         self.activateNao()
+        
+    # select or unselect nao according to a number 1000 choose the first nao for example
+    def select(self, joy_id, selectNumber):
+    
+        selection = []
+        if joy_id == 1 : 
+            selection = self.selection1
+        elif joy_id == 2 : 
+            selection = self.selection2
+        else :
+            print "error joystick" 
+            
+        for i in range(len(selection)):
+            selection[i] =  ( int(selectNumber) / pow(10, 3 - i) % 2 ) == 1
+            
+        self.activateNao()
+    
 
 
     # activate some or all nao according to selection list
@@ -344,6 +361,27 @@ class Nao_manager(QtGui.QWidget):
         self.sliderWalk_tetha.setValue(-Theta*100)
         self.sliderWalk_x.setValue(X*100*Speed)
         self.sliderWalk_y.setValue(-Y*100)
+    
+    def nao_update_walk_to_point(self,joy_id, X, Y, Theta, Speed):
+    
+        selection = []
+        if joy_id == 1 : 
+            selection = self.selection1
+        elif joy_id == 2 : 
+            selection = self.selection2
+        #All nao selected from 1 and 2
+        elif joy_id == 0:
+            selection = self.selectionGlobal 
+
+        for i in range(len(self.list_of_nao)):
+            if selection[i]:
+                self.list_of_nao[i].update_walk_to_point( X, Y , Theta, Speed)
+
+        print "marche to Point X="+str(X)+" Y="+str(Y)+" Theta="+str(Theta)+" Speed="+str(Speed)+""
+        self.sliderWalk_tetha.setValue(-Theta*100)
+        self.sliderWalk_x.setValue(X*100*Speed)
+        self.sliderWalk_y.setValue(-Y*100)
+
 
     # update turning head to all selected nao
     def nao_move_head(self,joy_id, yaw,pitch):
@@ -435,10 +473,12 @@ class Nao_manager(QtGui.QWidget):
                     self.selectAll(joy_id)
                 elif name == "UNSELECT_ALL" :
                     self.selectAll(joy_id, False)
+                elif name == "ADDSELECT":
+                    self.addselect(joy_id, True, arg1 )
+                elif name == "ADDUNSELECT":
+                    self.addselect(joy_id, False, arg1 )
                 elif name == "SELECT":
-                    self.select(joy_id, True, arg1 )
-                elif name == "UNSELECT":
-                    self.select(joy_id, False, arg1 )
+                    self.select(joy_id, arg1)
 
 
                 ### MOTION  ######
@@ -455,24 +495,30 @@ class Nao_manager(QtGui.QWidget):
                     if arg1==0.0 and arg2==0.0 :
                         self.nao_update_walk(joy_id, 0,0,0.0,0.0)
                     else :
-                        self.nao_update_walk(joy_id, abs(arg2)/(arg2), 0.0, arg1*0.7, abs(arg2))
+                        self.nao_update_walk(joy_id, abs(arg2)/(arg2 * 0.99999)*abs(arg2), 0.0, arg1*0.7, abs(arg2))
                     walk_information = True
+                
+                # Point walk, command when you want to move from A to B in 1 command
+                elif name == "PWALK" and not(walk_information):
+                    
+                    self.nao_update_walk_to_point(joy_id, arg2, 0, arg1, 0.1)
+                    walk_information = True
+                    
 
                 elif name == "WALKPREC" and not(walk_information): #arg1 left<0 right>0 -- arg2 up>0 down<0
                     if arg1==0.0 and arg2==0.0 :
                         self.nao_update_walk(joy_id,0,0,0.0,0.0)
                     else :
-                        self.nao_update_walk(joy_id,  abs(arg2)/(arg2), 0.0, arg1*0.15, abs(arg2))
+                        self.nao_update_walk(joy_id,  abs(arg2)/(arg2 * 0.99999)*abs(arg2), 0.0, arg1*0.15, abs(arg2))
                     walk_information = True
                     
                 elif name == "WALKSIDE" and not(walk_information): #arg1 left<0 right>0 -- arg2 up>0 down<0
                     if arg1==0.0 and arg2==0.0 :
                         self.nao_update_walk(joy_id, 0,0,0.0,0.0)
                     else :
-                        self.nao_update_walk(joy_id, abs(arg2)/(arg2),arg1*0.7, 0.0,  abs(arg2))
+                        self.nao_update_walk(joy_id, abs(arg2)/(arg2 * 0.99999)*abs(arg2),arg1*0.7, 0.0,  abs(arg2))
                     walk_information = True
                     
-
                 elif name == "TURN":
 
                     if(arg1==0):

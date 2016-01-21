@@ -11,7 +11,6 @@ class Nao(QtGui.QWidget):
         ######### GUI
         #QtGui.QWidget.__init__(self)
         super(Nao, self).__init__(parent)
-        self.label_name = QtGui.QLabel(robotName)
         #slider marche
         self.slider1 = QtGui.QSlider(QtCore.Qt.Horizontal)
         #radio de connection
@@ -40,7 +39,6 @@ class Nao(QtGui.QWidget):
         self.button_behavior.clicked.connect(self.restart_behavior)
         #layout
         layout1 = QtGui.QVBoxLayout()
-        layout1.addWidget(self.label_name)
         layout1.addWidget(self.battery_progress)
         layout1.addWidget(self.lcd)
         layout1.addWidget(self.checkBox_stiff)
@@ -50,7 +48,7 @@ class Nao(QtGui.QWidget):
         layout1.addWidget(self.button_behavior)
         layout1.addWidget(self.button_proxy)
         #Group box
-        groupBox = QtGui.QGroupBox("Nao "+str(robotID))
+        groupBox = QtGui.QGroupBox(str(robotID)+": "+robotName)
         groupBox.setLayout(layout1)
         #Layout Main
         layoutMain = QtGui.QHBoxLayout()
@@ -190,6 +188,51 @@ class Nao(QtGui.QWidget):
         #
         #Crouch,LyingBack,LyingBelly,Sit,SitRelax,Stand,StandInit,StandZero
         ##############
+        
+    def update_walk_to_point(self, X, Y, Theta, Speed):
+        
+        if Speed > 0.01 :
+        
+            Frequency = abs(Speed)
+            if X>0 :
+                self.is_walking = True
+            else :
+                self.is_turning = True
+                
+            #Bridage des nao
+            #pour Lucy et Baltzar, afin de d'eviter marche destabilisante
+
+          
+            if self.name == "Lucy" and Frequency < 0.85 :
+                X = X * Frequency
+                Frequency = 0.95
+                
+                print "bridage lucy"
+            if self.name == "Baltazar" and Frequency > 0.8:
+                Frequency = 0.8
+                print "bridage Baltzar"
+                
+
+            try:
+                self.motion.stopMove()
+                self.motion.setMoveArmsEnabled(True, True)
+                self.motion.moveTo( X, Y, Theta, Frequency)
+                
+            except Exception, errorMsg:
+                print str(errorMsg)
+                print " not allowed to walk "
+
+        else:
+            if self.is_turning:
+                self.motion.moveToward(0,0,0)
+                self.is_turning = False
+
+            if self.is_walking:
+                self.motion.moveToward(0,0,0)
+                self.is_walking = False
+            #motion.stopMove()
+            #nao_go_posture("StandInit")
+        
 
 
 
@@ -208,8 +251,8 @@ class Nao(QtGui.QWidget):
             #pour Lucy et Baltzar, afin de d'eviter marche destabilisante
 
           
-            if self.name == "Lucy" and Frequency < 0.85 :
-                Frequency = 0.85
+            if self.name == "Lucy" and Frequency < 0.35 :
+                Frequency = 0.35
                 print "bridage lucy"
             if self.name == "Baltazar" and Frequency > 0.8:
                 Frequency = 0.8
@@ -220,6 +263,7 @@ class Nao(QtGui.QWidget):
                 #motion.moveToward( X, Y, Theta, [["Frequency", Frequency]])
                 self.motion.setMoveArmsEnabled(True, True)
                 self.motion.setWalkTargetVelocity( X, Y, Theta, Frequency)
+                
             except Exception, errorMsg:
                 print str(errorMsg)
                 print " not allowed to walk "
