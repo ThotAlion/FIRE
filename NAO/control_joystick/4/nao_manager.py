@@ -30,6 +30,7 @@ class Nao_manager(QtGui.QWidget):
         ####CheckBox for selection
         self.list_of_selectionCheckBox1 = []
         self.list_of_selectionCheckBox2 = []
+        self.list_of_selectionCheckBoxGlobal = []
 
         #####Group Selection
         #construct
@@ -169,17 +170,22 @@ class Nao_manager(QtGui.QWidget):
         self.selectionGlobal.append(False)
 
         #gui management
-        self.layoutNao.addWidget(nao, 2, naoId, QtCore.Qt.AlignCenter)
+        self.layoutNao.addWidget(nao, 3, naoId, QtCore.Qt.AlignCenter)
         checkBox1 = QtGui.QCheckBox("1")
         checkBox1.setStyleSheet("background-color:yellow")
         checkBox2 = QtGui.QCheckBox("2")
         checkBox2.setStyleSheet("background-color:white")
+        checkBoxGlobal = QtGui.QCheckBox("Global")
+        checkBoxGlobal.setStyleSheet("background-color:red")
         checkBox1.clicked.connect(lambda: self.addselect(1, checkBox1.isChecked(), naoId ))
         checkBox2.clicked.connect(lambda: self.addselect(2, checkBox2.isChecked(), naoId ))
+        checkBoxGlobal.clicked.connect(lambda: self.addselect(0, checkBoxGlobal.isChecked(), naoId ))
         self.list_of_selectionCheckBox1.append(checkBox1)
         self.list_of_selectionCheckBox2.append(checkBox2)
+        self.list_of_selectionCheckBoxGlobal.append(checkBoxGlobal)
         self.layoutNao.addWidget( checkBox1, 0, naoId, QtCore.Qt.AlignCenter)
         self.layoutNao.addWidget( checkBox2, 1, naoId, QtCore.Qt.AlignCenter)
+        self.layoutNao.addWidget( checkBoxGlobal, 2, naoId, QtCore.Qt.AlignCenter)
         
 
     def init_nao(self):
@@ -259,6 +265,7 @@ class Nao_manager(QtGui.QWidget):
         elif joy_id == 2 : 
             selection = self.selection2
         else :
+            selection = self.selectionGlobal
             print "error joystick"
 
         if isSelecting :
@@ -268,6 +275,8 @@ class Nao_manager(QtGui.QWidget):
 
         if nao_id>-1 and nao_id< len(self.list_of_nao):
             selection[nao_id] = isSelecting
+            if isSelecting:
+                self.selectionGlobal[nao_id] = False
 
         self.activateNao()
         
@@ -280,7 +289,7 @@ class Nao_manager(QtGui.QWidget):
         elif joy_id == 2 : 
             selection = self.selection2
         else :
-            print "error joystick" 
+            selection = self.selectionGlobal
             
         for i in range(len(selection)):
             selection[i] =  ( int(selectNumber) / pow(10, 3 - i) % 2 ) == 1
@@ -295,12 +304,10 @@ class Nao_manager(QtGui.QWidget):
         print self.selection1
         print "activateNao - joystick 2 :"
         print self.selection2
+        print "activateNao - GLOBAL :"
+        print self.selectionGlobal
         # calculate the Global selection , according to joystick 1 and 2
-        self.calcGlobalSelection()
-        
-        for a in range(len(self.selectionGlobal)):
-            if (self.selectionGlobal[a] and self.selection1[a] and self.selection2[a]):
-                self.selection2[a] = False
+        #self.calcGlobalSelection()
         
         #Check the checkbox for the first joystick
         for a in range(len(self.list_of_nao)):
@@ -316,6 +323,13 @@ class Nao_manager(QtGui.QWidget):
                 (self.list_of_selectionCheckBox2[a]).setCheckState(QtCore.Qt.Checked)
             else:
                 (self.list_of_selectionCheckBox2[a]).setCheckState(QtCore.Qt.Unchecked)
+        #Check the checkbox for the Global selection
+        for a in range(len(self.list_of_nao)):
+            
+            if self.selectionGlobal[a] :
+                (self.list_of_selectionCheckBoxGlobal[a]).setCheckState(QtCore.Qt.Checked)
+            else:
+                (self.list_of_selectionCheckBoxGlobal[a]).setCheckState(QtCore.Qt.Unchecked)
    
     # calc a global selection according to the addition of selection1 and selection 2
     def calcGlobalSelection(self):

@@ -12,6 +12,7 @@ class StoryTelling(QtGui.QWidget):
         ##GUI
         self.layoutMain = QtGui.QHBoxLayout()
         self.groupMenu = QtGui.QGroupBox("StoryTelling")
+        self.groupMenu.setStyleSheet("background-color:red")
         self.layoutMenu = QtGui.QVBoxLayout()
         self.checkBox_realTime = QtGui.QCheckBox("realTime")
         self.checkBox_realTime.setChecked(QtCore.Qt.Checked)
