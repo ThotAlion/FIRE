@@ -1,0 +1,65 @@
+SELECT 2 1110 0
+COMBO 2 PIETA 0
+ANIM 2 WINGS 0
+SELECT 2 1110 0 
+COMBO 2 CIEL 
+COMBO 2 OPERA 0
+SELECT 2 0100 0
+PWALK 2 -1.57 0
+SELECT 2 0010 0
+PWALK 2 1.57 0
+SELECT 2 0110 0
+ANIM 2 DUO 0
+SELECT 2 1000 0
+ANIM 2 YOUME 0
+*deplacement 
+SELECT 1 0000 0
+SELECT2 1110 0
+COMBO 2 CIELMIN 0
+*****PARTIE 2*****
+*finir deplacement des 3
+SELECT 2 1110 0
+COMBO 2 RAMASSER 0
+SELECT 2 00010 0
+ANIM 2 MUR 0
+* lucas et  lucy s'avancent l'un vers l'autre
+SELECT 2 1100 0
+COMBO 2 SEDUCTION 0
+*lucas rejoint mama
+SELECT 1 0000 0
+SELECT 2 1110 0
+COMBO 2 DECLARATION 0
+*placer mama et lucy face public
+SELECT 2 1010 0
+ANIM 2 DUO 0
+*lucas se deplace
+SELECT 2 0100 0
+ANIM 2 TOUPIE 0
+SELECT 2 1110 0
+ANIM 2 HELICOPTER 0
+*placement pieta 2  mama:Tete:Profil Lucas:Milieu Lucy:Pied:public
+SELECT 1 0000 0
+SELECT2 1110 0
+ANIM 2 CIELREVELATION 0
+COMBO 2 PIETA2 0
+*installation
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -

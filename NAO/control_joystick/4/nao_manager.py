@@ -435,6 +435,25 @@ class Nao_manager(QtGui.QWidget):
         for i in range(len(self.list_of_nao)):
             if selection[i]:
                 self.list_of_nao[i].changeAutonomeLevel(isIncreasing, isReset, isStop)
+                
+    def nao_autonomeLevelDirect(self, joy_id, arg):
+    
+        selection = []
+        if joy_id == 1 : 
+            selection = self.selection1
+        elif joy_id == 2 : 
+            selection = self.selection2
+        #All nao selected from 1 and 2
+        elif joy_id == 0:
+            selection = self.selectionGlobal
+            
+        for i in range(len(self.list_of_nao)):
+            if selection[i]:
+                self.list_of_nao[i].changeAutonomeLevelDirect(arg)
+            
+            
+    
+    
 
     def nao_getStatus(self):
 
@@ -495,7 +514,7 @@ class Nao_manager(QtGui.QWidget):
                     if arg1==0.0 and arg2==0.0 :
                         self.nao_update_walk(joy_id, 0,0,0.0,0.0)
                     else :
-                        self.nao_update_walk(joy_id, abs(arg2)/(arg2 * 0.99999)*abs(arg2), 0.0, arg1*0.7, abs(arg2))
+                        self.nao_update_walk(joy_id, abs(arg2)/(arg2 * 1.00001), 0.0, arg1*0.7, abs(arg2))
                     walk_information = True
                 
                 # Point walk, command when you want to move from A to B in 1 command
@@ -509,14 +528,14 @@ class Nao_manager(QtGui.QWidget):
                     if arg1==0.0 and arg2==0.0 :
                         self.nao_update_walk(joy_id,0,0,0.0,0.0)
                     else :
-                        self.nao_update_walk(joy_id,  abs(arg2)/(arg2 * 0.99999)*abs(arg2), 0.0, arg1*0.15, abs(arg2))
+                        self.nao_update_walk(joy_id,  abs(arg2)/(arg2 * 1.00001), 0.0, arg1*0.15, abs(arg2))
                     walk_information = True
                     
                 elif name == "WALKSIDE" and not(walk_information): #arg1 left<0 right>0 -- arg2 up>0 down<0
                     if arg1==0.0 and arg2==0.0 :
                         self.nao_update_walk(joy_id, 0,0,0.0,0.0)
                     else :
-                        self.nao_update_walk(joy_id, abs(arg2)/(arg2 * 0.99999)*abs(arg2),arg1*0.7, 0.0,  abs(arg2))
+                        self.nao_update_walk(joy_id, abs(arg2)/(arg2 * 1.00001),arg1*0.7, 0.0,  abs(arg2))
                     walk_information = True
                     
                 elif name == "TURN":
@@ -544,7 +563,10 @@ class Nao_manager(QtGui.QWidget):
                     self.nao_memoryEvent(joy_id, "PlaySound", arg1)
 
                 elif name == "AUTONOME":
-                    self.nao_autonomeLevel(joy_id, arg1)          
+                    self.nao_autonomeLevel(joy_id, arg1)  
+
+                elif name == "AUTONOMED":
+                    self.nao_autonomeLevelDirect(joy_id, arg1)
 
                 
             

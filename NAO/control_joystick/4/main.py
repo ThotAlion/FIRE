@@ -67,7 +67,7 @@ class main_ui(QtGui.QWidget):
         
         self.manager.addNao("Lucy", "10.0.1.13", 9559 )
         #self.manager.addNao("Baltazar", "10.0.1.14", 9559 )
-        #self.manager.addNao("Lucas", "10.0.1.11", 9559 )
+        self.manager.addNao("Lucas", "10.0.1.11", 9559 )
         self.manager.addNao("MaMa", "10.0.1.12", 9559 )
 
         self.manager.init_manager()

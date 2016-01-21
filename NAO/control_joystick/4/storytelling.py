@@ -103,7 +103,7 @@ class StoryTelling(QtGui.QWidget):
             list_of_word.append(0)
         
         for word in list_of_word:
-            if str(word[:1]).isdigit():
+            if str(word[:1]).isdigit() or str(word[:1]) == "-":
                 first.append(float(word))
             else :
                 first.append(word)

@@ -203,9 +203,9 @@ class Nao(QtGui.QWidget):
             #pour Lucy et Baltzar, afin de d'eviter marche destabilisante
 
           
-            if self.name == "Lucy" and Frequency < 0.85 :
+            if self.name == "Lucy" and Frequency < 0.75 :
                 X = X * Frequency
-                Frequency = 0.95
+                Frequency = 0.75
                 
                 print "bridage lucy"
             if self.name == "Baltazar" and Frequency > 0.8:
@@ -251,8 +251,8 @@ class Nao(QtGui.QWidget):
             #pour Lucy et Baltzar, afin de d'eviter marche destabilisante
 
           
-            if self.name == "Lucy" and Frequency < 0.35 :
-                Frequency = 0.35
+            if self.name == "Lucy" and Frequency < 0.65 :
+                Frequency = 0.65
                 print "bridage lucy"
             if self.name == "Baltazar" and Frequency > 0.8:
                 Frequency = 0.8
@@ -340,6 +340,11 @@ class Nao(QtGui.QWidget):
 
         self.lcd.display(self.autonomeLevel)	
 
+    def changeAutonomeLevelDirect(self, level):
+	
+        self.memory.raiseEvent("autonome", level)
+        self.lcd.display(self.autonomeLevel)	    
+        
     def use_leds(self, name, value):
 
         # here is the light on when a nao is activated
