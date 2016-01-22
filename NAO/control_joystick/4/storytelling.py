@@ -17,7 +17,7 @@ class StoryTelling(QtGui.QWidget):
         self.checkBox_realTime = QtGui.QCheckBox("realTime")
         self.checkBox_realTime.setChecked(QtCore.Qt.Checked)
         self.button_next = QtGui.QPushButton("Next")
-        self.button_prev = QtGui.QPushButton("Previous")
+        self.button_open = QtGui.QPushButton("Open")
         self.button_save = QtGui.QPushButton("Save")
         #ListView
         self.listView = QtGui.QListView()
@@ -25,7 +25,7 @@ class StoryTelling(QtGui.QWidget):
         ##Add to layout
         self.layoutMenu.addWidget(self.checkBox_realTime)
         self.layoutMenu.addWidget(self.button_next)
-        self.layoutMenu.addWidget(self.button_prev)
+        self.layoutMenu.addWidget(self.button_open)
         self.layoutMenu.addWidget(self.button_save)
         self.groupMenu.setLayout(self.layoutMenu)
         self.layoutMain.addWidget(self.groupMenu)
@@ -46,6 +46,7 @@ class StoryTelling(QtGui.QWidget):
         self.model.itemChanged.connect(self.line_changed)
         self.connect(self.listView, QtCore.SIGNAL("activated(QModelIndex)"), self.handleSelectionChanged  )
         self.button_save.clicked.connect(self.save_file)
+        self.button_open.clicked.connect(self.open_file)
         
         
         

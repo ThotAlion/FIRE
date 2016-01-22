@@ -1,12 +1,22 @@
 SELECT 0 1110 0
 COMBO 0 PIETA 0
 ANIM 0 WINGS 0
-*Avancer lucy et placer lu-ma ciel
-SELECT 0 1110 0 
-COMBO 0 CIEL 
-COMBO 0 OPERA 0
+SELECT 0 0010 0
+PWALK 0 -2.8 0
+POSTURE 0 Stand 0
+- - - -
 SELECT 0 0100 0
 PWALK 0 -1.57 0
+SELECT 0 0010 0
+PWALK 0 0 0.6
+PWALK 0 -3.14 0
+* faire avancer lucas pour le ciel
+* faire avancer lucy pour le opera
+SELECT 0 1110 0 
+COMBO 0 CIEL 0
+COMBO 0 OPERA 0
+SELECT 0 0100 0
+PWALK 0 0 -0.2
 SELECT 0 0010 0
 PWALK 0 1.57 0
 SELECT 0 0110 0
@@ -14,37 +24,99 @@ ANIM 0 DUO 0
 SELECT 0 1000 0
 ANIM 0 YOUME 0
 *deplacement lu-ma a jardin lucy Hqui
+SELECT 0 1000 0
+PWALK 0 1.9 0
+SELECT 1 1000 0
+SELECT 0 0100 0
+PWALK 0 -3.14 0
+PWALK 0 0 0.2
+Lucy avance de 20 cm
+- - - -
+SELECT 0 0110 0
+PWALK 0 0 0.2
 SELECT 0 1110 0
 COMBO 0 CIELMIN 0
 *****PARTIE 2*****
-*finir deplacement des 3
+*finir de faire avancer lucy
+SELECT 0 1110 0
+PWALK 0 -1.57 0
+- - - - 
 SELECT 0 1110 0
 COMBO 0 RAMASSER 0
 SELECT 0 0010 0
 ANIM 0 MUR 0
 * lucas et  lucy s'avancent l'un vers l'autre
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
 SELECT 0 1100 0
 COMBO 0 SEDUCTION 0
 *lucas rejoint mi chemin mama
 *lucy sortir du hqui
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
 SELECT 0 1110 0
 COMBO 0 CIELMIN 0
 *lucy sortir du hqui
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
 SELECT 0 1110 0
-COMBO 2 DECLARATION 0
+COMBO 0 DECLARATION 0
 *placer mama et lucy face public
-SELECT 2 1010 0
-ANIM 2 DUO 0
+SELECT 0 1010 0
+ANIM 0 DUO 0
 *lucas se deplace
-SELECT 2 0100 0
-ANIM 2 TOUPIE 0
-SELECT 2 1110 0
-ANIM 2 HELICOPTER 0
+- - - -
+- - - -
+bidulle
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+SELECT 0 0100 0
+ANIM 0 TOUPIE 0
+SELECT 0 1110 0
+ANIM 0 HELICOPTER 0
 *placement pieta 2  mama:Tete:Profil Lucas:Milieu Lucy:Pied:public
-SELECT 1 0000 0
-SELECT2 1110 0
-ANIM 2 CIELREVELATION 0
-COMBO 2 PIETA2 0
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+SELECT 0 1110 0
+ANIM 0 CIELREVELATION 0
+COMBO 0 PIETA2 0
 *installation
 - - - -
 - - - -

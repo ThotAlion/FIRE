@@ -423,7 +423,6 @@ class Nao_manager(QtGui.QWidget):
             selection = self.selection1
         elif joy_id == 2 : 
             selection = self.selection2
-        #All nao selected from 1 and 2
         elif joy_id == 0:
             selection = selectionGlobal
 
