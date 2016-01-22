@@ -960,7 +960,7 @@ class MyClass(GeneratedClass):
                             <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
                             <Input name="onSet" type="1" type_size="1" nature="1" inner="0" tooltip="The data is set when a signal is received on this input." id="2" />
                             <Output name="onReady" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when the data has been set." id="3" />
-                            <Parameter name="Volume (%)" inherits_from_parent="0" content_type="1" value="70" default_value="50" min="0" max="100" tooltip="Percentage of maximum output volume." id="4" />
+                            <Parameter name="Volume (%)" inherits_from_parent="0" content_type="1" value="46" default_value="50" min="0" max="100" tooltip="Percentage of maximum output volume." id="4" />
                         </Box>
                         <Link inputowner="2" indexofinput="2" outputowner="0" indexofoutput="2" />
                         <Link inputowner="1" indexofinput="2" outputowner="2" indexofoutput="3" />

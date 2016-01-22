@@ -420,7 +420,7 @@
                                                             <Key frame="730" value="-7.38531" />
                                                             <Key frame="854" value="-6.68218" />
                                                             <Key frame="954" value="22.7616" />
-                                                            <Key frame="1066" value="25.3104" />
+                                                            <Key frame="1066" value="24.6462" />
                                                         </ActuatorCurve>
                                                         <ActuatorCurve name="value" actuator="HeadYaw" recordable="0" mute="0" unit="0">
                                                             <Key frame="1" value="-1.145" />
@@ -435,7 +435,7 @@
                                                             <Key frame="730" value="30.2324" />
                                                             <Key frame="854" value="12.3903" />
                                                             <Key frame="954" value="23.9041" />
-                                                            <Key frame="1066" value="3.77694" />
+                                                            <Key frame="1066" value="-24.9637" />
                                                         </ActuatorCurve>
                                                         <ActuatorCurve name="value" actuator="LAnklePitch" recordable="0" mute="0" unit="0">
                                                             <Key frame="1" value="-67.679" />
