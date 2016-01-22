@@ -1,0 +1,163 @@
+SELECT 0 1110 0
+ANIM 0 CIELREVELATION 0
+COMBO 0 PIETA2 0
+ANIM 0 WINGS 0
+*tourner LUCAS
+SELECT 0 0100 0
+PWALK 0 -90 0 
+*avancer lucy
+SELECT 0 1000 0
+PWALK 0 90 0
+PWALK 0 0 0.2
+*combo ciel youme
+SELECT 0 1110 0
+COMBO 0 CIEL 0
+*mama quart tour
+SELECT 0 0010 0
+PWALK 0 90 0
+*chore duo + opera
+SELECT 0 1110 0
+COMBO 0 OPERA 0
+- - - -
+- - - -
+- - - -
+- - - -
+*mama quart tour
+SELECT 0 0010 0
+PWALK 0 -85 0
+*lucas quart tour
+SELECT 0 0100 0
+PWALK 0 85 0
+*lucy presque tour et avance
+SELECT 0 1000 0
+PWALK 0 120 0
+PWALK 0 0 0.3
+*ciel mineur
+SELECT 0 1110 0
+COMBO 0 CIELMIN 0
+*combo lightshine ramasser
+COMBO 0 RAMASSER 0
+- - - -
+- - - -
+ - - - 
+- - - -
+- - - -
+- - - -
+- - - -
+- - - 
+- - - -
+- - - -
+- - - -
+- - - -
+ - - - 
+*lucas rejoint lucy
+SELECT 0 0100 0 
+PWALK 0 90 0
+PWALK 0 0 0.25
+*solitude + mur mama
+SELECT 0 1110 0
+- - - -
+- - -
+- - -
+COMBO 0 SEDUCTION 0
+COMBO 0 CIELMIN 0
+*lucas demi tour
+SELECT 0 0100 0
+PWALK 0 -180 0
+*mama quart de tour
+SELECT 0 0010 0
+PWALK 0 -90 0
+*lucas avance vers mama
+SELECT 0 0110 0
+PWALK 0 0 0.3
+ - - - - 
+SELECT 0 1110 0
+COMBO 0 DECLARATION 0
+*mama et lucas face public
+SELECT 0 0010 0
+PWALK 0 -90 0
+*lucy face public
+SELECT 0 1000 0
+PWALK 0 90 0
+*chore duo mama lucy
+SELECT 0 1010 0
+ANIM 0 DUO 0
+es toupies sur lucas
+SELECT 0 1110 0
+ANIM 0 HELICOPTER 0
+*wings decale
+SELECT 0 1100 0
+ANIM 0 WINGS 0
+SELECT 0 0010 0
+ANIM 0 WINGS 0
+*placement pour pieta
+*lucas quart de tour
+SELECT 0 0100 0
+PWALK 0 90 0
+*wings sur mama lucas pendant lucy qui se deplace
+SELECT 0 0110 0
+ANIM 0 WINGS 0
+*deplacement lucy joystick1 tete face public
+SELECT 1 1000 0
+*pieta 1
+SELECT 0 1110 0
+ANIM 0 CIELREVELATION 0
+COMBO 0 PIETA 0
+- - - -
+- - - -
+- - - -
+SELECT 0 1110 0
+COMBO 0 DECLARATION 0
+*placer mama et lucy face public
+SELECT 0 1010 0
+ANIM 0 DUO 0
+*lucas se deplace
+- - - -
+- - - -
+bidulle
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+SELECT 0 0100 0
+ANIM 0 TOUPIE 0
+SELECT 0 1110 0
+ANIM 0 HELICOPTER 0
+*placement pieta 2  mama:Tete:Profil Lucas:Milieu Lucy:Pied:public
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+SELECT 0 1110 0
+ANIM 0 CIELREVELATION 0
+COMBO 0 PIETA2 0
+*installation
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -
+- - - -

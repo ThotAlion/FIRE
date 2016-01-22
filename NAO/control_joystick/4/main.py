@@ -65,10 +65,11 @@ class main_ui(QtGui.QWidget):
 
         #### Nao Manager ####
         
-        self.manager.addNao("Lucy", "10.0.1.13", 9559 )
-        #self.manager.addNao("Baltazar", "10.0.1.14", 9559 )
-        self.manager.addNao("Lucas", "10.0.1.11", 9559 )
-        self.manager.addNao("MaMa", "10.0.1.12", 9559 )
+        #self.manager.addNao("Lucy", "10.0.1.13", 9559 )
+        
+        #self.manager.addNao("Lucy", "10.0.1.14", 9559 )
+        #self.manager.addNao("Lucas", "10.0.1.11", 9559 )
+        #self.manager.addNao("MaMa", "10.0.1.12", 9559 )
 
         self.manager.init_manager()
     
@@ -76,7 +77,6 @@ class main_ui(QtGui.QWidget):
     def add_joystick(self,a):
         print "ADD GUI FOR SECOND JOYSTICK"
         self.layout_main.addWidget(self.interpret2, 0,2)
-        
         
         
 

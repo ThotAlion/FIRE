@@ -212,15 +212,16 @@ class Nao(QtGui.QWidget):
                 Frequency = 0.8
                 print "bridage Baltzar"
                 
+            num = []
 
-            try:
-                self.motion.stopMove()
-                self.motion.setMoveArmsEnabled(True, True)
-                self.motion.moveTo( X, Y, Theta, Frequency)
+            num.append(X)
+            num.append(Y)
+            #Angle in degree
+            num.append(Theta)
+            num.append(Frequency)
                 
-            except Exception, errorMsg:
-                print str(errorMsg)
-                print " not allowed to walk "
+            self.memory.raiseEvent("motion", num)
+                
 
         else:
             if self.is_turning:
