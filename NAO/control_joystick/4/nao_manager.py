@@ -424,7 +424,7 @@ class Nao_manager(QtGui.QWidget):
         elif joy_id == 2 : 
             selection = self.selection2
         elif joy_id == 0:
-            selection = selectionGlobal
+            selection = self.selectionGlobal
 
         for i in range(len(self.list_of_nao)):
             if selection[i]:

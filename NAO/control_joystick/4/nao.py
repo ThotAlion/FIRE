@@ -155,6 +155,10 @@ class Nao(QtGui.QWidget):
 
         if self.motion:
             self.motion.rest()
+         
+        # Turn off head light
+        self.use_leds("brain", 0)
+        self.use_leds("ear", 0)
             
     
     
@@ -171,7 +175,8 @@ class Nao(QtGui.QWidget):
     ### NOT use . Use of memoryEvent("PostureAsked", name ) instead
     def go_posture(self, posture_name):
 
-        if posture_name != "Rest":
+        #Not use anymore, the "rest" posture is calling directly in choregraphe, and avoid stop of the programm
+        if posture_name != "#Rest":
             if self.motion  :
                 self.motion.stopMove()
                 self.memory.raiseEvent("PostureAsked", posture_name)
@@ -344,6 +349,7 @@ class Nao(QtGui.QWidget):
     def changeAutonomeLevelDirect(self, level):
 	
         self.memory.raiseEvent("autonome", level)
+        self.autonomeLevel = level
         self.lcd.display(self.autonomeLevel)	    
         
     def use_leds(self, name, value):
@@ -390,17 +396,19 @@ class Nao(QtGui.QWidget):
     #function in order to recognize the current nao remotely controlled
     def activate(self, is_activated, joy_id):
     
+        using_head_led = False
 
-        if is_activated and self.leds:
-            if joy_id == 1:
-                self.use_leds("ear", 1)
-            elif joy_id == 2:
-                self.use_leds("brain", 1)
-        elif self.leds :
-            if joy_id ==1:
-                self.use_leds("ear", 0)
-            elif joy_id ==2:
-                self.use_leds("brain", 0)
+        if using_head_led:
+            if is_activated and self.leds:
+                if joy_id == 1:
+                    self.use_leds("ear", 1)
+                elif joy_id == 2:
+                    self.use_leds("brain", 1)
+            elif self.leds :
+                if joy_id ==1:
+                    self.use_leds("ear", 0)
+                elif joy_id ==2:
+                    self.use_leds("brain", 0)
                                                
     # def say(self, toSay):
 

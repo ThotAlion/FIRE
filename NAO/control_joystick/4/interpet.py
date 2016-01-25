@@ -51,6 +51,9 @@ class Interpret(QtGui.QWidget):
         self.imgAutoStop = "images/auto-stop.png"
         self.imgAutoPlus = "images/auto-plus.png"
         self.imgAutoMinus = "images/auto-minus.png"
+        self.imgAutoCunni = "images/auto-cunni.png"
+        self.imgAutoFun = "images/auto-fun.png"
+        self.imgAutoSoft = "images/auto-soft.png"
         self.imgSit = "images/sit.png"
         self.imgStand = "images/stand.png"
         self.imgStandInit = "images/standInit.png"
@@ -59,11 +62,14 @@ class Interpret(QtGui.QWidget):
         self.imgReaction = "images/reaction.png"
         self.imgPieta = "images/pieta.png"
         self.imgMur = "images/mur.png"
-        self.imgChoreDuo = "images/choreduo.png"
-        self.imgAspirateur = "images/aspirateur.png"
+        self.imgChoreDuo = "images/duo.png"
         self.imgPieta2 = "images/pieta2.png"
         self.imgCiel = "images/ciel.png"
         self.imgOpera = "images/opera.png"
+        self.imgWings = "images/wings.png"
+        self.imgLightShine = "images/lightshine.png"
+        self.imgCielRevelation = "images/revelation.png"
+        self.imgRonde2 = "images/ronde2.png"
         self.imgLucy = "images/lucy.png"
         self.imgMama = "images/mama.png"
         self.imgLucas = "images/lucas.png"
@@ -72,6 +78,7 @@ class Interpret(QtGui.QWidget):
         self.imgStoryCall = "images/call.png"
         self.imgStoryEmpty = "images/story.png"
         self.imgFalling = "images/falling.png"
+        
         #setPixmap
         self.changeView(0)
         #connect
@@ -113,10 +120,10 @@ class Interpret(QtGui.QWidget):
         dic1["RIGHT_A"] = ["ANIM", "SALUTA", 0]
         dic1["RIGHT_B"] = ["ANIM", "TOUPIE", 0]
 
-        dic1["UP_Y"] = ["AUTONOME", -1, 0]
-        dic1["UP_X"] = ["AUTONOME", 0, 0]
-        dic1["UP_B"] = ["AUTONOME", 1, 0]
-        dic1["UP_A"] = ["AUTONOME", 2, 0]
+        dic1["UP_Y"] = ["AUTONOMED", 4, 0]
+        dic1["UP_X"] = ["AUTONOMED", 3, 0]
+        dic1["UP_B"] = ["AUTONOMED", 6, 0]
+        dic1["UP_A"] = ["AUTONOMED", 7, 0]
 
         dic1["DOWN_Y"] = ["POSTURE", "Stand", 0]
         dic1["DOWN_X"] = ["POSTURE", "Rest", 0]
@@ -157,26 +164,26 @@ class Interpret(QtGui.QWidget):
         dic2["A"] = ["STORY","NEXT", 0]
         
 
-        dic2["RIGHT_X"] = ["ANIM", "DUO", 0]
-        dic2["RIGHT_Y"] = ["COMBO","ASPI", 0]
-        dic2["RIGHT_B"] = ["COMBO", "PIETA2", 0]
-        dic2["RIGHT_A"] = ["COMBO", "CIEL", 0]
+        dic2["RIGHT_X"] = ["ANIM", "LIGHTSHINE", 0]
+        dic2["RIGHT_Y"] = ["ANIM","WINGS", 0]
+        dic2["RIGHT_B"] = ["ANIM", "DUO", 0]
+        dic2["RIGHT_A"] = ["ANIM", "TOUPIE", 0]
         
 
-        dic2["UP_Y"] = ["AUTONOME", -1, 0]
-        dic2["UP_X"] = ["AUTONOME", 0, 0]
-        dic2["UP_B"] = ["AUTONOME", 1, 0]
-        dic2["UP_A"] = ["AUTONOME", 2, 0]
+        dic2["UP_Y"] = ["AUTONOMED", 4, 0]
+        dic2["UP_X"] = ["AUTONOMED", 3, 0]
+        dic2["UP_B"] = ["AUTONOMED", 6, 0]
+        dic2["UP_A"] = ["AUTONOMED", 7, 0]
 
         dic2["DOWN_Y"] = ["POSTURE", "Stand", 0]
         dic2["DOWN_X"] = ["POSTURE", "Rest", 0]
         dic2["DOWN_B"] = ["POSTURE", "StandInit", 0]
         dic2["DOWN_A"] = ["POSTURE", "Sit", 0]
 
-        dic2["LEFT_Y"] = ["COMBO","OPERA", 0]
+        dic2["LEFT_Y"] = ["ANIM","OPERA", 0]
         dic2["LEFT_X"] = ["ANIM", "RONDE", 0]
-        dic2["LEFT_B"] = ["", 0, 0]
-        dic2["LEFT_A"] = ["", 0, 0]
+        dic2["LEFT_B"] = ["ANIM", "RONDE2", 0]
+        dic2["LEFT_A"] = ["ANIM", "CIELREVELATION", 0]
 
         ##### --2-- JOYSTICK ####
         dic2["JOY_MAIN"] = ["WALK"]
@@ -237,14 +244,14 @@ class Interpret(QtGui.QWidget):
                 self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgSaluta)) 
             elif a=="left":
                 self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgRonde))
-                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgEmpty))
+                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgOpera))
                 self.buttonRight.setPixmap(QtGui.QPixmap(self.imgEmpty))
                 self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgEmpty))            
             elif a=="up":
                 self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgAutoReset))
-                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgAutoStop))
-                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgAutoMinus))
-                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgAutoPlus))
+                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgAutoCunni))
+                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgAutoSoft))
+                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgAutoFun))
             elif a=="down":
                 self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgRest))
                 self.buttonTop.setPixmap(QtGui.QPixmap(self.imgStand))
@@ -266,15 +273,15 @@ class Interpret(QtGui.QWidget):
                 self.buttonRight.setPixmap(QtGui.QPixmap(self.imgStoryCall))
                 self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgStoryNext)) 
             elif a=="right":
-                self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgChoreDuo))
-                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgAspirateur))
-                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgPieta2))
-                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgCiel))
+                self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgLightShine))
+                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgWings))
+                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgChoreDuo))
+                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgAnnaToupi))
             elif a=="up":
                 self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgAutoReset))
-                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgAutoStop))
-                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgAutoMinus))
-                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgAutoPlus))
+                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgAutoCunni))
+                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgAutoSoft))
+                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgAutoFun))
             elif a=="down":
                 self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgRest))
                 self.buttonTop.setPixmap(QtGui.QPixmap(self.imgStand))
@@ -283,8 +290,8 @@ class Interpret(QtGui.QWidget):
             elif a=="left":
                 self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgRonde))
                 self.buttonTop.setPixmap(QtGui.QPixmap(self.imgOpera))
-                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgEmpty))
-                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgEmpty)) 
+                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgRonde2))
+                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgCielRevelation)) 
             elif a=="lb":
                 self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgLucy))
                 self.buttonTop.setPixmap(QtGui.QPixmap(self.imgEmpty))
