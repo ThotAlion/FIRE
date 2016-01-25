@@ -19,9 +19,9 @@ PWALK 0 90 0
 SELECT 0 1110 0
 COMBO 0 OPERA 0
 COMBO 0 CIELMIN 0
-- - - -
-- - - -
-- - - -
+*- - - -
+*- - - -
+*- - - -
 *mama quart tour
 SELECT 0 0010 0
 PWALK 0 -85 0
@@ -32,17 +32,17 @@ PWALK 0 85 0
 SELECT 0 1000 0
 PWALK 0 120 0
 PWALK 0 0 0.3
-- - - -
-- - - -
+*- - - -
+*- - - -
 SELECT 0 1110 0
 *combo lightshine ramasser
 COMBO 0 RAMASSER 0
 lucy apres sunhsine se tourne en manuel
-- - - 
+*- - - 
 *mama lance solitude +mur
 SELECT 0 0010 0 
 ANIM 0 MUR 0
-- - -
+*- - -
 *lucas rejoint lucy
 SELECT 0 0100 0
 PWALK 0 90 0
@@ -60,7 +60,7 @@ PWALK 0 -90 0
 *lucas avance vers mama 20cm
 SELECT 0 0100 0
 PWALK 0 0 0.2
- - - - - 
+*- - - - 
 SELECT 0 1110 0
 COMBO 0 DECLARATION 0
 *mama et lucy face public
@@ -74,17 +74,17 @@ SELECT 0 1010 0
 ANIM 0 DUO 0
 *lucas en manuel toupie
 SELECT 1 0100 0
-- - - - 
+*- - - - 
 SELECT 0 1110 0
 ANIM 0 HELICOPTER 0
 *wings decale
 SELECT 0 1010 0
 ANIM 0 WINGS 0
-- - -
+*- - -
 *placement mama manuel face joy2
 SELECT 2 0010 0
 *placement lucas manuel face joy1
-*SELECT 1 0100 0
+SELECT 1 0100 0
 *- - - -
 *- - - -
 *wings sur mama lucas pendant lucy qui se deplace
@@ -96,9 +96,9 @@ SELECT 1 1000 0
 SELECT 0 1110 0
 ANIM 0 CIELREVELATION 0
 COMBO 0 PIETA 0
-- - - -
-- - - -
-- -FIN 15:04- - 
-- -FIN - -
-- - -
-- - - -
+*- - - -
+*- - - -
+*- -FIN 15:04- - 
+*- -FIN - -
+*- - -
+FIN FIN FIN FIN

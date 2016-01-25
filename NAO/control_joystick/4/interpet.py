@@ -67,6 +67,11 @@ class Interpret(QtGui.QWidget):
         self.imgLucy = "images/lucy.png"
         self.imgMama = "images/mama.png"
         self.imgLucas = "images/lucas.png"
+        self.imgStoryNext = "images/next.png"
+        self.imgStoryPrev = "images/prev.png"
+        self.imgStoryCall = "images/call.png"
+        self.imgStoryEmpty = "images/story.png"
+        self.imgFalling = "images/falling.png"
         #setPixmap
         self.changeView(0)
         #connect
@@ -100,7 +105,7 @@ class Interpret(QtGui.QWidget):
         #### --1-- BUTTON ###
         dic1["Y"] = ["ANIM", "TORSION", 0]
         dic1["X"] = ["ANIM", "TRIANGLE", 0]
-        dic1["A"] = ["ANIM","CLAVIER", 0]
+        dic1["A"] = ["ANIM","FALLING", 0]
         dic1["B"] = ["ANIM", "ARABESQUE", 0]
 
         dic1["RIGHT_Y"] = ["ANIM","COTE", 0]
@@ -146,10 +151,10 @@ class Interpret(QtGui.QWidget):
 
         
         #### --2-- BUTTON ###
-        dic2["X"] = ["COMBO", "RAMASSER", 0]
-        dic2["Y"] = ["ANIM", "REACTION", 0]
-        dic2["B"] = ["COMBO", "PIETA", 0]
-        dic2["A"] = ["COMBO","MUR", 0]
+        dic2["X"] = ["STORY", "", 0]
+        dic2["Y"] = ["STORY", "PREV", 0]
+        dic2["B"] = ["STORY", "CALL", 0]
+        dic2["A"] = ["STORY","NEXT", 0]
         
 
         dic2["RIGHT_X"] = ["ANIM", "DUO", 0]
@@ -224,7 +229,7 @@ class Interpret(QtGui.QWidget):
                 self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgTriangle))
                 self.buttonTop.setPixmap(QtGui.QPixmap(self.imgTorsion))
                 self.buttonRight.setPixmap(QtGui.QPixmap(self.imgArabesque))
-                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgEmpty))
+                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgFalling))
             elif a=="right":
                 self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgPyramide))
                 self.buttonTop.setPixmap(QtGui.QPixmap(self.imgCote))
@@ -256,10 +261,10 @@ class Interpret(QtGui.QWidget):
         
             if a=="none":
         
-                self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgRamasser))
-                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgReaction))
-                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgPieta))
-                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgMur))
+                self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgStoryEmpty))
+                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgStoryPrev))
+                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgStoryCall))
+                self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgStoryNext)) 
             elif a=="right":
                 self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgChoreDuo))
                 self.buttonTop.setPixmap(QtGui.QPixmap(self.imgAspirateur))

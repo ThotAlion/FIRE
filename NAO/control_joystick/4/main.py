@@ -29,9 +29,12 @@ class main_ui(QtGui.QWidget):
         self.manager = Nao_manager()
 
         #Timer, updating nao battery level, and connection
-        self.timer = QtCore.QTimer(self)
-        self.connect(self.timer, QtCore.SIGNAL("timeout()"), self.manager.nao_getStatus)
-        self.timer.start(5000)
+        self.timerNao = QtCore.QTimer(self)
+        self.connect(self.timerNao, QtCore.SIGNAL("timeout()"), self.manager.nao_getStatus)
+        self.timerNao.start(3000)
+        self.timerStory = QtCore.QTimer(self)
+        self.connect(self.timerStory, QtCore.SIGNAL("timeout()"), self.story.warning_message_status)
+        self.timerStory.start(200)
         
         
 
@@ -63,11 +66,11 @@ class main_ui(QtGui.QWidget):
         self.setLayout(self.layout_main)
         self.show()
 
-        #### Nao Manager ####
+        #### Nao Manager #### LUCY PUIS LUCAS PUIS MAMA
+        
+        #self.manager.addNao("Baltazar", "10.0.1.13", 9559 )
         
         #self.manager.addNao("Lucy", "10.0.1.13", 9559 )
-        
-        #self.manager.addNao("Lucy", "10.0.1.14", 9559 )
         #self.manager.addNao("Lucas", "10.0.1.11", 9559 )
         #self.manager.addNao("MaMa", "10.0.1.12", 9559 )
 
