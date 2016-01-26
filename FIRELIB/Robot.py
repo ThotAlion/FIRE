@@ -43,8 +43,10 @@ class Robot(Block.Block,QWidget):
         self.dict_checkbox = {}
         
         self.dict_checkbox["All"] = QCheckBox("Force All mou")
+        self.resetButton = QPushButton("Reset Robot")
         for member in self.members:
             self.dict_checkbox[member] = QCheckBox("Force "+member+" mou")
+        
         self.tempLabel = QLabel("Max Temp : 0deg")
         self.hottestMotor = QLabel("Hottest motor : TBD")
         self.voltLabel = QLabel("Min Voltage : 0V")
@@ -56,6 +58,7 @@ class Robot(Block.Block,QWidget):
         mainlayout.addWidget(self.tempLabel)
         mainlayout.addWidget(self.hottestMotor)
         mainlayout.addWidget(self.voltLabel)
+        mainlayout.addWidget(self.resetButton)
         
         # signals
         for member in self.members:
@@ -85,6 +88,10 @@ class Robot(Block.Block,QWidget):
                 else:
                     a = self.inputs[art].getValue(f)
                 r[art] = a
+        if self.resetButton.isDown():
+            self.COM._reset = True
+        else:
+            self.COM._reset = False
         self.COM._robotOut = r
         
     def setOutputs(self,f):
@@ -115,6 +122,7 @@ class clientThread(Thread):
         self._socket.connect("tcp://"+self._IP+":"+self._port)
         self._robotIn = {}
         self._robotOut = {}
+        self._reset = False
         self._active = True
         self.poll = zmq.Poller()
         self.poll.register(self._socket,zmq.POLLIN)
@@ -123,10 +131,13 @@ class clientThread(Thread):
         send = 0
         while self._active:
             t0 = Tools.getTime()
-            if send == 0:
-                req = {"robot":{"get_pose":"1"}}
+            if self._reset == False:
+                if send == 0:
+                    req = {"robot":{"get_pose":"1"}}
+                elif send == 1:
+                    req = {"robot":{"set_pose":self._robotOut}}
             else:
-                req = {"robot":{"set_pose":self._robotOut}}
+                req = {"robot":{"reset":"1"}}
             self._socket.send_json(req)
             expect = True
             while expect:
