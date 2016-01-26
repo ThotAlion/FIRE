@@ -53,8 +53,8 @@ systems.children['PCSVRecorder'].inputs["activate"].connectedTo = "1"
 systems.children['MCSVRecorder'] = FIRELIB.CSVRecorder.CSVRecorder(members,folder = '/TAPES_CSV/')
 systems.children['MCSVRecorder'].inputs["activate"].connectedTo = " MommyIndependant "
 
-systems.children['Mommyswitch'] = FIRELIB.Wires.Wires(32)
-systems.children['Mommyswitch'].inputs["activate"].connectedTo = " 1- MommyIndependant "
+systems.children['MommyMirror'] = FIRELIB.Mirror.Mirror()
+systems.children['MommyMirror'].inputs["activate"].connectedTo = " 1- MommyIndependant "
 
 mainLay.addLayout(popLayP)
 poppytitle = QLabel("POPPY")
@@ -71,7 +71,7 @@ popLayM.addWidget(interfaces.children['Mommy'])
 popLayM.addWidget(interfaces.children['MommyButtons'])
 mainLay.addWidget(systems.children['MCSVRecorder'])
 mainW.show()
-i=0
+
 for member in members:
     for art in members[member]:
         if systems.children['PCSVRecorder'].outputs.has_key(art):
@@ -87,28 +87,27 @@ for member in members:
             systems.children['MCSVRecorder'].inputs[art].connectedTo = " m"+art+"m "
         interfaces.children['Mommy'].inputs[art].connectedTo = " m"+art+" "
         interfaces.children['Mommy'].outputs[art].connectedTo = " m"+art+"m "
+        systems.children['MommyMirror'].inputs[art].connectedTo = " p"+art+" "
+        systems.children['MommyMirror'].outputs[art].connectedTo = " m"+art+" "
         
-        systems.children['Mommyswitch'].inputs['ch'+str(i)].connectedTo = " p"+art+" "
-        systems.children['Mommyswitch'].outputs['ch'+str(i)].connectedTo = " m"+art+" "
-        i=i+1
-        
-            
 systems.children['PCSVRecorder'].outputs['Number'].connectedTo = " pn "
 interfaces.children['Poppy'].inputs['Number'].connectedTo = " pn "
 
 systems.children['MCSVRecorder'].outputs['Number'].connectedTo = " mn "
 interfaces.children['Mommy'].inputs['Number'].connectedTo = " mn "
-systems.children['Mommyswitch'].inputs['ch'+str(i)].connectedTo = " pn "
-systems.children['Mommyswitch'].outputs['ch'+str(i)].connectedTo = " mn "
-i=i+1
+
+systems.children['MommyMirror'].inputs["n"].connectedTo = " pn "
+systems.children['MommyMirror'].outputs["n"].connectedTo = " mn "
 
 systems.children['PCSVRecorder'].outputs['Duration'].connectedTo = " pDelta "
 interfaces.children['Poppy'].inputs['Duration'].connectedTo = " pDelta "
 
 systems.children['MCSVRecorder'].outputs['Duration'].connectedTo = " mDelta "
 interfaces.children['Mommy'].inputs['Duration'].connectedTo = " mDelta "
-systems.children['Mommyswitch'].inputs['ch'+str(i)].connectedTo = " pDelta "
-systems.children['Mommyswitch'].outputs['ch'+str(i)].connectedTo = " mDelta "
+
+systems.children['MommyMirror'].inputs["Delta"].connectedTo = " pDelta "
+systems.children['MommyMirror'].outputs["Delta"].connectedTo = " mDelta "
+
 
 interfaces.children['Index'].outputs['index yaw'].connectedTo = " yaw "
 systems.children['Ratelim'].inputs['ch0'].connectedTo = " yaw "
