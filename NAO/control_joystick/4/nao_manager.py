@@ -273,10 +273,14 @@ class Nao_manager(QtGui.QWidget):
         else :
             print "joystick "+str(joy_id)+" :: nao manager : unselect , nao_id= "+str(nao_id)
 
+        #This block unselect a nao if the nao is taken from a joystick
+        # it could security in case of emergency during the storytelling
+        # this is also a source of bug
+        
         if nao_id>-1 and nao_id< len(self.list_of_nao):
             selection[nao_id] = isSelecting
-            if isSelecting:
-                self.selectionGlobal[nao_id] = False
+            # if isSelecting:
+                # self.selectionGlobal[nao_id] = False
 
         self.activateNao()
         

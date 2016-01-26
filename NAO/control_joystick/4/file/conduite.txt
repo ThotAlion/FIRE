@@ -1,9 +1,12 @@
 *Ronde2 sur lucas seulement
 SELECT 0 0100 0
+POSTURE 0 Stand 0
 ANIM 0 RONDE2 0
 POSTURE 0 Stand 0
 *Ronde2 sur tous
 SELECT 0 1110 0
+POSTURE 0 Stand 0
+AUTONOMED 0 6 0
 ANIM 0 RONDE2 0
 *pieta sur tous
 COMBO 0 PIETA 0

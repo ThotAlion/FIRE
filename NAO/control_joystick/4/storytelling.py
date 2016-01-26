@@ -139,7 +139,11 @@ class StoryTelling(QtGui.QWidget):
         row = 1
         if len(selection_list) == 1:
             indexItem = selection_list[0]
-            indexItemNext = indexItem.sibling(indexItem.row() - 1, 0)
+            count = 1
+            indexItemNext = indexItem.sibling(indexItem.row() - count, 0)
+            while self.is_selectedRow_comment(indexItemNext) or indexItemNext.row()==0:
+                indexItemNext = indexItem.sibling(indexItem.row() - count, 0)
+                count += 1  
             self.listView.setCurrentIndex(indexItemNext)
         else :
             print "erreur : seleciton multiple"

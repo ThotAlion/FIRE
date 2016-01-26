@@ -180,7 +180,7 @@ class Interpret(QtGui.QWidget):
         dic2["DOWN_B"] = ["POSTURE", "StandInit", 0]
         dic2["DOWN_A"] = ["POSTURE", "Sit", 0]
 
-        dic2["LEFT_Y"] = ["ANIM","OPERA", 0]
+        dic2["LEFT_Y"] = ["COMBO","RAMASSER", 0]
         dic2["LEFT_X"] = ["ANIM", "RONDE", 0]
         dic2["LEFT_B"] = ["ANIM", "RONDE2", 0]
         dic2["LEFT_A"] = ["ANIM", "CIELREVELATION", 0]
@@ -289,7 +289,7 @@ class Interpret(QtGui.QWidget):
                 self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgSit))
             elif a=="left":
                 self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgRonde))
-                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgOpera))
+                self.buttonTop.setPixmap(QtGui.QPixmap(self.imgRamasser))
                 self.buttonRight.setPixmap(QtGui.QPixmap(self.imgRonde2))
                 self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgCielRevelation)) 
             elif a=="lb":
