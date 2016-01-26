@@ -1,0 +1,44 @@
+*Ronde2 sur lucas seulement
+SELECT 0 0100 0
+POSTURE 0 Stand 0
+ANIM 0 RONDE2 0
+POSTURE 0 Stand 0
+*Ronde2 sur tous
+SELECT 0 1110 0
+POSTURE 0 Stand 0
+AUTONOMED 0 6 0
+ANIM 0 RONDE2 0
+*pieta sur tous
+COMBO 0 PIETA 0
+ANIM 0 DANSE 0
+*lucy en manuel se rapproche
+SELECT 0 1000 0
+ANIM 0 OPERA 0
+*Mama Lucas applaudissent
+SELECT 0 0110 0
+POSTURE 0 Stand 0
+ANIM 0 APPLAUSE 0
+*Mama triste en solitude
+SELECT 0 0010 0
+ANIM 0 SOLITUDE 0
+*Lucas en manuel vers lucy
+*Lucy en manuel revient vers Lucas
+*seducation lucas lucy
+SELECT 0 1100 0
+COMBO 0 SEDUCTION 0
+*A la fin
+*Lucas en manuel vers Mama
+*Lucy frustre
+SELECT 0 1000 0
+ANIM 0 FRUSTRE 0
+*mama et lucas font le ciel
+*puis declaration
+SELECT 0 0110 0
+COMBO 0 CIEL 0
+COMBO 0 DECLARATION 0
+*- - - -
+*- - - -
+*- -FIN 15:04- - 
+*- -FIN - -
+*- - -
+FIN FIN FIN FIN
