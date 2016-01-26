@@ -10,6 +10,7 @@ import Engine
 import LeftIndex
 import xboxPad
 import Wires
+import Mirror
 import SoundPlayer
 import Ratelim
 import Buttons
