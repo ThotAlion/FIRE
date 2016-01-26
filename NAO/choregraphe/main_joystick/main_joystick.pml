@@ -8,7 +8,7 @@
     <Resources>
         <File name="alto giattor 5 - extrait" src="alto giattor 5 - extrait.mp3" />
         <File name="Opera Acapella" src="Opera Acapella.mp3" />
-        <File name="Opera Acapelle pitch" src="Opera Acapelle pitch.mp3" />
+        <File name="Voix-opera-transpose" src="Voix-opera-transpose.mp3" />
     </Resources>
     <Topics />
     <IgnoredPaths>
