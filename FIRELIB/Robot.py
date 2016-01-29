@@ -49,7 +49,8 @@ class Robot(Block.Block,QWidget):
         
         self.tempLabel = QLabel("Max Temp : 0deg")
         self.hottestMotor = QLabel("Hottest motor : TBD")
-        self.voltLabel = QLabel("Min Voltage : 0V")
+        self.minVoltLabel = QLabel("Min Voltage : 0V")
+        self.maxVoltLabel = QLabel("Max Voltage : 0V")
         
         # composition
         mainlayout = QVBoxLayout(self)
@@ -57,7 +58,8 @@ class Robot(Block.Block,QWidget):
             mainlayout.addWidget(self.dict_checkbox[member])
         mainlayout.addWidget(self.tempLabel)
         mainlayout.addWidget(self.hottestMotor)
-        mainlayout.addWidget(self.voltLabel)
+        mainlayout.addWidget(self.minVoltLabel)
+        mainlayout.addWidget(self.maxVoltLabel)
         mainlayout.addWidget(self.resetButton)
         
         # signals
@@ -98,7 +100,7 @@ class Robot(Block.Block,QWidget):
         r = self.COM._robotIn
         if len(r)>0:
             self.outputs["Temperature"].setValue(float(r["Temperature"]),f)
-            self.outputs["Voltage"].setValue(r["Voltage"],f)
+            self.outputs["Voltage"].setValue(r["VoltageMin"],f)
             for member in self.members:
                 for art in self.members[member]:
                     if r.has_key(art):
@@ -106,7 +108,8 @@ class Robot(Block.Block,QWidget):
             self.tempLabel.setText("Max Temp : "+r["Temperature"]+"deg")
             if r.has_key("Hottest"):
                 self.hottestMotor.setText("Hottest motor : "+r["Hottest"])
-            self.voltLabel.setText("Min voltage : "+r["Voltage"]+"V")
+            self.minVoltLabel.setText("Min voltage : "+r["VoltageMin"]+"V")
+            self.maxVoltLabel.setText("Max voltage : "+r["VoltageMax"]+"V")
             
         return f
         
