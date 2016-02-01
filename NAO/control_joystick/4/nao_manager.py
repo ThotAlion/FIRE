@@ -545,7 +545,7 @@ class Nao_manager(QtGui.QWidget):
                     if arg1==0.0 and arg2==0.0 :
                         self.nao_update_walk(joy_id,0,0,0.0,0.0)
                     else :
-                        self.nao_update_walk(joy_id,  abs(arg2)/(arg2 * 1.00001), 0.0, arg1*0.15, abs(arg2))
+                        self.nao_update_walk(joy_id,  abs(arg2)/(arg2 * 1.00001), 0.0, arg1*0.2, abs(arg2))
                     walk_information = True
                     
                 elif name == "WALKSIDE" and not(walk_information): #arg1 left<0 right>0 -- arg2 up>0 down<0

@@ -227,7 +227,7 @@ class Joystick(QtCore.QThread):
                         # axis 1, avant (-1) arriere (1), axis 0, gauche (-1), droite (1)
                         ################################
                        
-                        joy_threshold = 0.28
+                        joy_threshold = 0.32
                         
                         for j in range(pygame.joystick.get_count()):
 

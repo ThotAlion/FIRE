@@ -7,6 +7,7 @@
     <Dialogs />
     <Resources>
         <File name="Opera Acapella" src="Opera Acapella.mp3" />
+        <File name="Voix-opera-transpose" src="Voix-opera-transpose.mp3" />
     </Resources>
     <Topics />
     <IgnoredPaths />

@@ -6,9 +6,8 @@
     </BehaviorDescriptions>
     <Dialogs />
     <Resources>
-        <File name="alto giattor 5 - extrait" src="alto giattor 5 - extrait.mp3" />
-        <File name="Opera Acapella" src="Opera Acapella.mp3" />
         <File name="Voix-opera-transpose" src="Voix-opera-transpose.mp3" />
+        <File name="hey9" src="hey9.ogg" />
     </Resources>
     <Topics />
     <IgnoredPaths>

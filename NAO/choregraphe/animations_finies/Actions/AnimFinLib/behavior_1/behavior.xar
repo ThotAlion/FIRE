@@ -8276,16 +8276,16 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="-16.1745" />
                                         <Key frame="521" value="-14.6803" />
                                         <Key frame="579" value="-14.5045" />
-                                        <Key frame="637" value="-9.84628" />
-                                        <Key frame="680" value="-24.2605" />
+                                        <Key frame="637" value="-11.6041" />
+                                        <Key frame="680" value="-22.6785" />
                                         <Key frame="703" value="-25.6668" />
                                         <Key frame="709" value="-29.1825" />
-                                        <Key frame="745" value="-38.3232" />
-                                        <Key frame="795" value="-1.84813" />
+                                        <Key frame="745" value="-37.7958" />
+                                        <Key frame="795" value="-7.4732" />
                                         <Key frame="835" value="13.2692" />
                                         <Key frame="868" value="11.5993" />
                                         <Key frame="895" value="1.40386" />
-                                        <Key frame="919" value="-6.59429" />
+                                        <Key frame="918" value="-6.59429" />
                                         <Key frame="933" value="-6.59429" />
                                         <Key frame="940" value="-12.2194" />
                                         <Key frame="966" value="-20.3933" />
@@ -8297,7 +8297,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="-20.3933" />
                                         <Key frame="1146" value="17.3123" />
                                         <Key frame="1166" value="25.9256" />
-                                        <Key frame="1172" value="21.1795" />
+                                        <Key frame="1173" value="21.1795" />
                                         <Key frame="1199" value="-11.9557" />
                                         <Key frame="1227" value="-15.4713" />
                                         <Key frame="1263" value="4.91954" />
@@ -8313,7 +8313,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1518" value="-20.2175" />
                                         <Key frame="1560" value="-2.99072" />
                                         <Key frame="1584" value="14.7634" />
-                                        <Key frame="1590" value="14.7634" />
+                                        <Key frame="1591" value="14.7634" />
                                         <Key frame="1619" value="18.0154" />
                                         <Key frame="1639" value="21.7068" />
                                         <Key frame="1672" value="22.0584" />
@@ -8322,7 +8322,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1740" value="-27.1609" />
                                         <Key frame="1764" value="-15.8229" />
                                         <Key frame="1799" value="-12.5709" />
-                                        <Key frame="1813" value="-6.5064" />
+                                        <Key frame="1814" value="-6.5064" />
                                         <Key frame="1841" value="-31.204" />
                                         <Key frame="1868" value="-31.204" />
                                         <Key frame="1896" value="-12.5709" />
@@ -8355,11 +8355,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="-16.3503" />
                                         <Key frame="2655" value="-16.3503" />
                                         <Key frame="2717" value="-27.6004" />
-                                        <Key frame="2757" value="-31.5555" />
-                                        <Key frame="2795" value="-1.32078" />
-                                        <Key frame="2841" value="-1.32078" />
-                                        <Key frame="2895" value="16.8728" />
-                                        <Key frame="2941" value="16.8728" />
+                                        <Key frame="2820" value="-28.1278" />
+                                        <Key frame="2876" value="1.14019" />
+                                        <Key frame="2945" value="1.75543" />
                                         <Key frame="3002" value="9.84147" />
                                         <Key frame="3050" value="-9.05525" />
                                     </ActuatorCurve>
@@ -8381,16 +8379,16 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="-20.8327" />
                                         <Key frame="521" value="1.57965" />
                                         <Key frame="579" value="12.2146" />
-                                        <Key frame="637" value="13.0104" />
-                                        <Key frame="680" value="13.0104" />
+                                        <Key frame="637" value="12.3903" />
+                                        <Key frame="680" value="12.3903" />
                                         <Key frame="703" value="13.0983" />
                                         <Key frame="709" value="11.9557" />
-                                        <Key frame="745" value="11.8678" />
-                                        <Key frame="795" value="11.5162" />
+                                        <Key frame="745" value="11.7751" />
+                                        <Key frame="795" value="11.1598" />
                                         <Key frame="835" value="17.405" />
                                         <Key frame="868" value="-2.1949" />
                                         <Key frame="895" value="-20.5643" />
-                                        <Key frame="919" value="-29.3534" />
+                                        <Key frame="918" value="-29.3534" />
                                         <Key frame="933" value="-29.3534" />
                                         <Key frame="940" value="-28.3866" />
                                         <Key frame="966" value="-31.6386" />
@@ -8402,7 +8400,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="31.6386" />
                                         <Key frame="1146" value="3.95753" />
                                         <Key frame="1166" value="3.95753" />
-                                        <Key frame="1172" value="3.1665" />
+                                        <Key frame="1173" value="3.1665" />
                                         <Key frame="1199" value="2.46338" />
                                         <Key frame="1227" value="2.46338" />
                                         <Key frame="1263" value="2.37549" />
@@ -8418,7 +8416,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1518" value="23.2058" />
                                         <Key frame="1560" value="14.7682" />
                                         <Key frame="1584" value="5.71537" />
-                                        <Key frame="1590" value="5.10013" />
+                                        <Key frame="1591" value="5.10013" />
                                         <Key frame="1619" value="1.05711" />
                                         <Key frame="1639" value="10.9889" />
                                         <Key frame="1672" value="11.9557" />
@@ -8427,7 +8425,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1740" value="13.7135" />
                                         <Key frame="1764" value="4.22121" />
                                         <Key frame="1799" value="21.0037" />
-                                        <Key frame="1813" value="22.2342" />
+                                        <Key frame="1814" value="22.2342" />
                                         <Key frame="1841" value="29.5292" />
                                         <Key frame="1868" value="30.1445" />
                                         <Key frame="1896" value="-21.0037" />
@@ -8460,11 +8458,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="-0.261268" />
                                         <Key frame="2655" value="8.5279" />
                                         <Key frame="2717" value="1.40867" />
-                                        <Key frame="2757" value="4.22121" />
-                                        <Key frame="2795" value="4.57277" />
-                                        <Key frame="2841" value="4.57277" />
-                                        <Key frame="2895" value="4.74855" />
-                                        <Key frame="2941" value="4.74855" />
+                                        <Key frame="2820" value="3.60116" />
+                                        <Key frame="2876" value="0.261268" />
+                                        <Key frame="2945" value="-0.441859" />
                                         <Key frame="3002" value="2.46338" />
                                         <Key frame="3050" value="0.705531" />
                                     </ActuatorCurve>
@@ -8486,19 +8482,19 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="-15.0319" />
                                         <Key frame="521" value="19.7732" />
                                         <Key frame="579" value="22.0584" />
-                                        <Key frame="637" value="-31.1992" />
-                                        <Key frame="680" value="-24.2557" />
+                                        <Key frame="637" value="-31.2919" />
+                                        <Key frame="680" value="-27.6004" />
                                         <Key frame="703" value="-24.2557" />
                                         <Key frame="709" value="-9.5778" />
-                                        <Key frame="745" value="2.1997" />
-                                        <Key frame="795" value="-20.3885" />
+                                        <Key frame="745" value="2.28279" />
+                                        <Key frame="795" value="-16.8776" />
                                         <Key frame="835" value="6.06693" />
                                         <Key frame="868" value="6.06693" />
                                         <Key frame="895" value="5.27591" />
-                                        <Key frame="919" value="0.178186" />
+                                        <Key frame="918" value="0.178186" />
                                         <Key frame="933" value="0.178186" />
                                         <Key frame="940" value="0.178186" />
-                                        <Key frame="966" value="-10.6325" />
+                                        <Key frame="966" value="-11.0768" />
                                         <Key frame="1016" value="-14.0651" />
                                         <Key frame="1044" value="-2.90283" />
                                         <Key frame="1067" value="-5.89115" />
@@ -8507,7 +8503,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="17.8396" />
                                         <Key frame="1146" value="-37" />
                                         <Key frame="1166" value="-43.0645" />
-                                        <Key frame="1172" value="-32.8691" />
+                                        <Key frame="1173" value="-32.8691" />
                                         <Key frame="1199" value="-19.949" />
                                         <Key frame="1227" value="-8.69887" />
                                         <Key frame="1263" value="-2.0191" />
@@ -8516,23 +8512,23 @@ class MyClass(GeneratedClass):
                                         <Key frame="1321" value="-23.201" />
                                         <Key frame="1351" value="-23.201" />
                                         <Key frame="1385" value="8.96736" />
-                                        <Key frame="1411" value="8.96736" />
+                                        <Key frame="1411" value="5.88634" />
                                         <Key frame="1448" value="8.96736" />
                                         <Key frame="1456" value="8.96736" />
                                         <Key frame="1482" value="8.87946" />
                                         <Key frame="1518" value="-6.06212" />
                                         <Key frame="1560" value="-1.49175" />
                                         <Key frame="1584" value="-1.75543" />
-                                        <Key frame="1590" value="-6.06212" />
+                                        <Key frame="1591" value="-7.82477" />
                                         <Key frame="1619" value="3.86964" />
                                         <Key frame="1639" value="4.48488" />
-                                        <Key frame="1672" value="4.3091" />
+                                        <Key frame="1672" value="4.2164" />
                                         <Key frame="1694" value="4.3091" />
                                         <Key frame="1716" value="4.3091" />
-                                        <Key frame="1740" value="4.3091" />
+                                        <Key frame="1740" value="6.50159" />
                                         <Key frame="1764" value="1.84813" />
                                         <Key frame="1799" value="-10.9889" />
-                                        <Key frame="1813" value="-17.405" />
+                                        <Key frame="1814" value="-14.5045" />
                                         <Key frame="1841" value="-31.5555" />
                                         <Key frame="1868" value="-23.5574" />
                                         <Key frame="1896" value="-32.6933" />
@@ -8547,12 +8543,12 @@ class MyClass(GeneratedClass):
                                         <Key frame="2108" value="-27.6835" />
                                         <Key frame="2137" value="-12.3024" />
                                         <Key frame="2163" value="0.793436" />
-                                        <Key frame="2195" value="0.793436" />
+                                        <Key frame="2195" value="0.261268" />
                                         <Key frame="2214" value="0.266077" />
                                         <Key frame="2220" value="6.15482" />
                                         <Key frame="2243" value="-18.367" />
                                         <Key frame="2277" value="-11.7751" />
-                                        <Key frame="2308" value="-22.8494" />
+                                        <Key frame="2308" value="-5.45169" />
                                         <Key frame="2329" value="-25.3983" />
                                         <Key frame="2346" value="-45.0861" />
                                         <Key frame="2359" value="-45.0861" />
@@ -8564,11 +8560,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="3.25439" />
                                         <Key frame="2655" value="3.25439" />
                                         <Key frame="2717" value="-5.09532" />
-                                        <Key frame="2757" value="-26.9804" />
-                                        <Key frame="2795" value="1.49656" />
-                                        <Key frame="2841" value="1.49656" />
-                                        <Key frame="2895" value="2.11181" />
-                                        <Key frame="2941" value="5.45169" />
+                                        <Key frame="2820" value="-28.6551" />
+                                        <Key frame="2876" value="-27.952" />
+                                        <Key frame="2945" value="-16.7018" />
                                         <Key frame="3002" value="-5.2711" />
                                         <Key frame="3050" value="4.66066" />
                                     </ActuatorCurve>
@@ -8590,19 +8584,19 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="1.93602" />
                                         <Key frame="521" value="-8.52309" />
                                         <Key frame="579" value="-3.51326" />
-                                        <Key frame="637" value="-15.2077" />
-                                        <Key frame="680" value="-17.3171" />
+                                        <Key frame="637" value="-15.3786" />
+                                        <Key frame="680" value="-14.4118" />
                                         <Key frame="703" value="-17.3171" />
                                         <Key frame="709" value="-14.944" />
-                                        <Key frame="745" value="-14.944" />
-                                        <Key frame="795" value="-7.4732" />
+                                        <Key frame="745" value="-14.9392" />
+                                        <Key frame="795" value="-8.87466" />
                                         <Key frame="835" value="-13.274" />
                                         <Key frame="868" value="-13.274" />
                                         <Key frame="895" value="-21.2722" />
-                                        <Key frame="919" value="-19.8659" />
+                                        <Key frame="918" value="-19.8659" />
                                         <Key frame="933" value="-19.8659" />
                                         <Key frame="940" value="-14.4166" />
-                                        <Key frame="966" value="1.0523" />
+                                        <Key frame="966" value="1.05711" />
                                         <Key frame="1016" value="-4.12851" />
                                         <Key frame="1044" value="1.76024" />
                                         <Key frame="1067" value="2.90283" />
@@ -8611,7 +8605,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="-17.1365" />
                                         <Key frame="1146" value="3.33748" />
                                         <Key frame="1166" value="2.72224" />
-                                        <Key frame="1172" value="2.63435" />
+                                        <Key frame="1173" value="2.63435" />
                                         <Key frame="1199" value="-3.1665" />
                                         <Key frame="1227" value="-5.97904" />
                                         <Key frame="1263" value="-5.53958" />
@@ -8620,23 +8614,23 @@ class MyClass(GeneratedClass):
                                         <Key frame="1321" value="-5.3638" />
                                         <Key frame="1351" value="-5.3638" />
                                         <Key frame="1385" value="-13.0983" />
-                                        <Key frame="1411" value="-19.6902" />
+                                        <Key frame="1411" value="-19.7732" />
                                         <Key frame="1448" value="-19.6902" />
                                         <Key frame="1456" value="-14.0651" />
                                         <Key frame="1482" value="-2.11181" />
                                         <Key frame="1518" value="4.65585" />
                                         <Key frame="1560" value="-3.60597" />
                                         <Key frame="1584" value="-0.705531" />
-                                        <Key frame="1590" value="-3.1665" />
+                                        <Key frame="1591" value="-0.173378" />
                                         <Key frame="1619" value="-8.35212" />
                                         <Key frame="1639" value="-19.6902" />
-                                        <Key frame="1672" value="-19.6902" />
+                                        <Key frame="1672" value="-19.5096" />
                                         <Key frame="1694" value="-18.7233" />
                                         <Key frame="1716" value="-20.3933" />
-                                        <Key frame="1740" value="-12.9225" />
+                                        <Key frame="1740" value="-21.7068" />
                                         <Key frame="1764" value="-5.10013" />
                                         <Key frame="1799" value="-20.3006" />
-                                        <Key frame="1813" value="-18.5427" />
+                                        <Key frame="1814" value="-16.9607" />
                                         <Key frame="1841" value="-8.4352" />
                                         <Key frame="1868" value="-0.0854867" />
                                         <Key frame="1896" value="2.98591" />
@@ -8651,12 +8645,12 @@ class MyClass(GeneratedClass):
                                         <Key frame="2108" value="-2.1997" />
                                         <Key frame="2137" value="-22.239" />
                                         <Key frame="2163" value="-22.3269" />
-                                        <Key frame="2195" value="-22.3269" />
+                                        <Key frame="2195" value="-22.6737" />
                                         <Key frame="2214" value="-22.3269" />
                                         <Key frame="2220" value="-22.3269" />
                                         <Key frame="2243" value="-0.353968" />
                                         <Key frame="2277" value="5.44688" />
-                                        <Key frame="2308" value="8.17153" />
+                                        <Key frame="2308" value="1.76024" />
                                         <Key frame="2329" value="8.52309" />
                                         <Key frame="2346" value="8.52309" />
                                         <Key frame="2359" value="8.52309" />
@@ -8668,11 +8662,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="-7.20952" />
                                         <Key frame="2655" value="-7.20952" />
                                         <Key frame="2717" value="-8.5279" />
-                                        <Key frame="2757" value="9.66569" />
-                                        <Key frame="2795" value="17.5759" />
-                                        <Key frame="2841" value="17.5759" />
-                                        <Key frame="2895" value="17.5759" />
-                                        <Key frame="2941" value="-3.51807" />
+                                        <Key frame="2820" value="7.64898" />
+                                        <Key frame="2876" value="6.85796" />
+                                        <Key frame="2945" value="9.31893" />
                                         <Key frame="3002" value="-7.64898" />
                                         <Key frame="3050" value="-7.82477" />
                                     </ActuatorCurve>
@@ -8694,16 +8686,16 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="-47.1076" />
                                         <Key frame="521" value="-27.5077" />
                                         <Key frame="579" value="-38.7579" />
-                                        <Key frame="637" value="-35.7743" />
-                                        <Key frame="680" value="-55.7258" />
+                                        <Key frame="637" value="-36.0332" />
+                                        <Key frame="680" value="-53.8752" />
                                         <Key frame="703" value="-68.3822" />
                                         <Key frame="709" value="-61.4387" />
-                                        <Key frame="745" value="-21.7117" />
-                                        <Key frame="795" value="-71.8979" />
+                                        <Key frame="745" value="-22.0584" />
+                                        <Key frame="795" value="-70.311" />
                                         <Key frame="835" value="-42.2783" />
                                         <Key frame="868" value="-42.9815" />
                                         <Key frame="895" value="-38.7627" />
-                                        <Key frame="919" value="-41.5752" />
+                                        <Key frame="918" value="-41.5752" />
                                         <Key frame="933" value="-65.8333" />
                                         <Key frame="940" value="-29.7977" />
                                         <Key frame="966" value="-41.5752" />
@@ -8715,7 +8707,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="-37.9668" />
                                         <Key frame="1146" value="-37.6201" />
                                         <Key frame="1166" value="-56.8683" />
-                                        <Key frame="1172" value="-33.9286" />
+                                        <Key frame="1173" value="-33.9286" />
                                         <Key frame="1199" value="-31.7313" />
                                         <Key frame="1227" value="-23.5574" />
                                         <Key frame="1263" value="-46.7608" />
@@ -8731,7 +8723,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1518" value="-38.1474" />
                                         <Key frame="1560" value="-84.5542" />
                                         <Key frame="1584" value="-87.982" />
-                                        <Key frame="1590" value="-65.7454" />
+                                        <Key frame="1591" value="-65.7454" />
                                         <Key frame="1619" value="-55.0226" />
                                         <Key frame="1639" value="-54.0558" />
                                         <Key frame="1672" value="-8.61579" />
@@ -8740,7 +8732,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1740" value="-50.5401" />
                                         <Key frame="1764" value="-47.9034" />
                                         <Key frame="1799" value="-68.4652" />
-                                        <Key frame="1813" value="-78.4849" />
+                                        <Key frame="1814" value="-78.4849" />
                                         <Key frame="1841" value="-70.0473" />
                                         <Key frame="1868" value="-41.2188" />
                                         <Key frame="1896" value="-22.9421" />
@@ -8772,11 +8764,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="-10.3736" />
                                         <Key frame="2655" value="-10.3736" />
                                         <Key frame="2717" value="-68.9095" />
-                                        <Key frame="2757" value="-58.3625" />
-                                        <Key frame="2795" value="-2" />
-                                        <Key frame="2841" value="-2" />
-                                        <Key frame="2895" value="-30.8524" />
-                                        <Key frame="2941" value="-51.4191" />
+                                        <Key frame="2820" value="-63.016" />
+                                        <Key frame="2876" value="-51.1506" />
+                                        <Key frame="2945" value="-70.5747" />
                                         <Key frame="3002" value="-17.9323" />
                                         <Key frame="3050" value="-21.0964" />
                                     </ActuatorCurve>
@@ -8798,16 +8788,16 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="-13.0983" />
                                         <Key frame="521" value="-21.7996" />
                                         <Key frame="579" value="-118.48" />
-                                        <Key frame="637" value="-95.2722" />
-                                        <Key frame="680" value="-83.0553" />
+                                        <Key frame="637" value="-95.0134" />
+                                        <Key frame="680" value="-83.8511" />
                                         <Key frame="703" value="-89.4714" />
                                         <Key frame="709" value="-89.7351" />
-                                        <Key frame="745" value="-66.7953" />
-                                        <Key frame="795" value="-50.8869" />
+                                        <Key frame="745" value="-67.2396" />
+                                        <Key frame="795" value="-50.5401" />
                                         <Key frame="835" value="-65.8285" />
                                         <Key frame="868" value="-116.454" />
                                         <Key frame="895" value="-66.8832" />
-                                        <Key frame="919" value="-38.0547" />
+                                        <Key frame="918" value="-38.0547" />
                                         <Key frame="933" value="-43.2403" />
                                         <Key frame="940" value="-37.8789" />
                                         <Key frame="966" value="-43.6798" />
@@ -8819,7 +8809,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="-119.096" />
                                         <Key frame="1146" value="-44.7345" />
                                         <Key frame="1166" value="-27.5956" />
-                                        <Key frame="1172" value="-57.7425" />
+                                        <Key frame="1173" value="-57.7425" />
                                         <Key frame="1199" value="-60.555" />
                                         <Key frame="1227" value="-89.9108" />
                                         <Key frame="1263" value="-67.6742" />
@@ -8835,7 +8825,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1518" value="-60.7308" />
                                         <Key frame="1560" value="-23.992" />
                                         <Key frame="1584" value="-18.7185" />
-                                        <Key frame="1590" value="-39.9883" />
+                                        <Key frame="1591" value="-39.9883" />
                                         <Key frame="1619" value="-68.7289" />
                                         <Key frame="1639" value="-83.7584" />
                                         <Key frame="1672" value="-75.5845" />
@@ -8844,7 +8834,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1740" value="-119.5" />
                                         <Key frame="1764" value="-118.651" />
                                         <Key frame="1799" value="-13.7135" />
-                                        <Key frame="1813" value="-27.1609" />
+                                        <Key frame="1814" value="-27.1609" />
                                         <Key frame="1841" value="-16.7897" />
                                         <Key frame="1868" value="-65.8333" />
                                         <Key frame="1896" value="-119.003" />
@@ -8876,11 +8866,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="-73.0356" />
                                         <Key frame="2655" value="-73.0356" />
                                         <Key frame="2717" value="-91.9323" />
-                                        <Key frame="2757" value="-91.9323" />
-                                        <Key frame="2795" value="-69.9594" />
-                                        <Key frame="2841" value="-69.9594" />
-                                        <Key frame="2895" value="-49.217" />
-                                        <Key frame="2941" value="-56.0725" />
+                                        <Key frame="2820" value="-34.6318" />
+                                        <Key frame="2876" value="-40.4326" />
+                                        <Key frame="2945" value="-30.5008" />
                                         <Key frame="3002" value="-42.8009" />
                                         <Key frame="3050" value="-65.1254" />
                                     </ActuatorCurve>
@@ -8902,16 +8890,16 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="0.2928" />
                                         <Key frame="521" value="0.2988" />
                                         <Key frame="579" value="0.29" />
-                                        <Key frame="637" value="0.2596" />
-                                        <Key frame="680" value="0.0256" />
+                                        <Key frame="637" value="0.2716" />
+                                        <Key frame="680" value="0.0312001" />
                                         <Key frame="703" value="0.3316" />
                                         <Key frame="709" value="0.972" />
-                                        <Key frame="745" value="0.9732" />
-                                        <Key frame="795" value="0.9744" />
+                                        <Key frame="745" value="0.9456" />
+                                        <Key frame="795" value="0.9456" />
                                         <Key frame="835" value="0.9744" />
                                         <Key frame="868" value="0.9744" />
                                         <Key frame="895" value="0.9744" />
-                                        <Key frame="919" value="0.9744" />
+                                        <Key frame="918" value="0.9744" />
                                         <Key frame="933" value="0.07" />
                                         <Key frame="940" value="0.7808" />
                                         <Key frame="966" value="0.9744" />
@@ -8923,7 +8911,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="0.9512" />
                                         <Key frame="1146" value="0.966" />
                                         <Key frame="1166" value="0.0140001" />
-                                        <Key frame="1172" value="0.9732" />
+                                        <Key frame="1173" value="0.9732" />
                                         <Key frame="1199" value="0.9668" />
                                         <Key frame="1227" value="0.9668" />
                                         <Key frame="1263" value="0.972" />
@@ -8939,7 +8927,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1518" value="0.8828" />
                                         <Key frame="1560" value="0.89" />
                                         <Key frame="1584" value="0.3192" />
-                                        <Key frame="1590" value="0.9732" />
+                                        <Key frame="1591" value="0.9732" />
                                         <Key frame="1619" value="0.9732" />
                                         <Key frame="1639" value="0.9708" />
                                         <Key frame="1672" value="0.9732" />
@@ -8948,7 +8936,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1740" value="0.9732" />
                                         <Key frame="1764" value="0.9732" />
                                         <Key frame="1799" value="0.8708" />
-                                        <Key frame="1813" value="0.8708" />
+                                        <Key frame="1814" value="0.8708" />
                                         <Key frame="1841" value="0.8708" />
                                         <Key frame="1868" value="0.8708" />
                                         <Key frame="1896" value="0.9756" />
@@ -8980,11 +8968,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="0.6524" />
                                         <Key frame="2655" value="0.6524" />
                                         <Key frame="2717" value="0.6524" />
-                                        <Key frame="2757" value="0.6524" />
-                                        <Key frame="2795" value="0.6524" />
-                                        <Key frame="2841" value="0.6524" />
-                                        <Key frame="2895" value="0.6524" />
-                                        <Key frame="2941" value="0.6524" />
+                                        <Key frame="2820" value="0.648" />
+                                        <Key frame="2876" value="0.8404" />
+                                        <Key frame="2945" value="0.8404" />
                                         <Key frame="3002" value="0.6524" />
                                         <Key frame="3050" value="0.3052" />
                                     </ActuatorCurve>
@@ -9006,19 +8992,19 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="-4.48007" />
                                         <Key frame="521" value="-8.69887" />
                                         <Key frame="579" value="-27.6835" />
-                                        <Key frame="637" value="-17.9323" />
-                                        <Key frame="680" value="-29.4461" />
+                                        <Key frame="637" value="-18.1033" />
+                                        <Key frame="680" value="-30.1445" />
                                         <Key frame="703" value="-29.4461" />
                                         <Key frame="709" value="-37.0927" />
-                                        <Key frame="745" value="-24.5242" />
-                                        <Key frame="795" value="-19.6902" />
+                                        <Key frame="745" value="-24.4315" />
+                                        <Key frame="795" value="-25.4862" />
                                         <Key frame="835" value="19.4217" />
                                         <Key frame="868" value="20.0369" />
                                         <Key frame="895" value="22.5858" />
-                                        <Key frame="919" value="22.4979" />
+                                        <Key frame="918" value="22.4979" />
                                         <Key frame="933" value="22.4979" />
                                         <Key frame="940" value="22.41" />
-                                        <Key frame="966" value="27.0682" />
+                                        <Key frame="966" value="26.8973" />
                                         <Key frame="1016" value="12.3073" />
                                         <Key frame="1044" value="27.73" />
                                         <Key frame="1067" value="27.6883" />
@@ -9027,7 +9013,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="-1.57965" />
                                         <Key frame="1146" value="-8.08845" />
                                         <Key frame="1166" value="-10.8131" />
-                                        <Key frame="1172" value="-6.06693" />
+                                        <Key frame="1173" value="-6.06693" />
                                         <Key frame="1199" value="9.40201" />
                                         <Key frame="1227" value="16.8728" />
                                         <Key frame="1263" value="27.244" />
@@ -9036,23 +9022,23 @@ class MyClass(GeneratedClass):
                                         <Key frame="1321" value="-21.2722" />
                                         <Key frame="1351" value="-21.3601" />
                                         <Key frame="1385" value="10.7204" />
-                                        <Key frame="1411" value="13.3571" />
+                                        <Key frame="1411" value="17.2292" />
                                         <Key frame="1448" value="13.3571" />
                                         <Key frame="1456" value="11.1598" />
                                         <Key frame="1482" value="14.3239" />
                                         <Key frame="1518" value="15.2029" />
                                         <Key frame="1560" value="15.906" />
                                         <Key frame="1584" value="15.4665" />
-                                        <Key frame="1590" value="-4.22121" />
+                                        <Key frame="1591" value="-5.00743" />
                                         <Key frame="1619" value="18.2791" />
                                         <Key frame="1639" value="20.2127" />
-                                        <Key frame="1672" value="20.5643" />
+                                        <Key frame="1672" value="20.1296" />
                                         <Key frame="1694" value="20.2127" />
                                         <Key frame="1716" value="20.9158" />
-                                        <Key frame="1740" value="20.9158" />
+                                        <Key frame="1740" value="12.2194" />
                                         <Key frame="1764" value="20.8279" />
                                         <Key frame="1799" value="-16.4334" />
-                                        <Key frame="1813" value="-23.1131" />
+                                        <Key frame="1814" value="-19.6853" />
                                         <Key frame="1841" value="-29.9687" />
                                         <Key frame="1868" value="-20.3006" />
                                         <Key frame="1896" value="-9.84628" />
@@ -9067,12 +9053,12 @@ class MyClass(GeneratedClass):
                                         <Key frame="2108" value="-12.6588" />
                                         <Key frame="2137" value="-5.62747" />
                                         <Key frame="2163" value="8.4352" />
-                                        <Key frame="2195" value="7.81997" />
+                                        <Key frame="2195" value="8.00056" />
                                         <Key frame="2214" value="7.64417" />
                                         <Key frame="2220" value="-22.6785" />
                                         <Key frame="2243" value="-8.00056" />
                                         <Key frame="2277" value="21.7948" />
-                                        <Key frame="2308" value="27.73" />
+                                        <Key frame="2308" value="22.8542" />
                                         <Key frame="2329" value="14.4997" />
                                         <Key frame="2346" value="-7.73688" />
                                         <Key frame="2359" value="-7.73688" />
@@ -9084,11 +9070,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="22.4979" />
                                         <Key frame="2655" value="22.4979" />
                                         <Key frame="2717" value="21.0037" />
-                                        <Key frame="2757" value="-13.1862" />
-                                        <Key frame="2795" value="1.66754" />
-                                        <Key frame="2841" value="1.66754" />
-                                        <Key frame="2895" value="1.66754" />
-                                        <Key frame="2941" value="26.453" />
+                                        <Key frame="2820" value="-28.2108" />
+                                        <Key frame="2876" value="-43.1524" />
+                                        <Key frame="2945" value="-13.0056" />
                                         <Key frame="3002" value="27.5077" />
                                         <Key frame="3050" value="7.11683" />
                                     </ActuatorCurve>
@@ -9110,19 +9094,19 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="7.03374" />
                                         <Key frame="521" value="8.35212" />
                                         <Key frame="579" value="4.74855" />
-                                        <Key frame="637" value="23.6405" />
-                                        <Key frame="680" value="18.7185" />
+                                        <Key frame="637" value="23.4695" />
+                                        <Key frame="680" value="19.1628" />
                                         <Key frame="703" value="18.7185" />
                                         <Key frame="709" value="22.1463" />
-                                        <Key frame="745" value="24.6073" />
-                                        <Key frame="795" value="8.96255" />
+                                        <Key frame="745" value="24.8758" />
+                                        <Key frame="795" value="7.91266" />
                                         <Key frame="835" value="17.0486" />
                                         <Key frame="868" value="17.0486" />
                                         <Key frame="895" value="33.2207" />
-                                        <Key frame="919" value="29.5292" />
+                                        <Key frame="918" value="29.5292" />
                                         <Key frame="933" value="29.5292" />
                                         <Key frame="940" value="20.3885" />
-                                        <Key frame="966" value="-4.74855" />
+                                        <Key frame="966" value="-5.18321" />
                                         <Key frame="1016" value="6.41851" />
                                         <Key frame="1044" value="-6.58948" />
                                         <Key frame="1067" value="-7.02893" />
@@ -9131,7 +9115,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="34.1923" />
                                         <Key frame="1146" value="7.73207" />
                                         <Key frame="1166" value="9.13833" />
-                                        <Key frame="1172" value="8.08364" />
+                                        <Key frame="1173" value="8.08364" />
                                         <Key frame="1199" value="12.0388" />
                                         <Key frame="1227" value="6.76526" />
                                         <Key frame="1263" value="7.64417" />
@@ -9140,23 +9124,23 @@ class MyClass(GeneratedClass):
                                         <Key frame="1321" value="8.08364" />
                                         <Key frame="1351" value="8.08364" />
                                         <Key frame="1385" value="16.6091" />
-                                        <Key frame="1411" value="26.6288" />
+                                        <Key frame="1411" value="26.0183" />
                                         <Key frame="1448" value="26.6288" />
                                         <Key frame="1456" value="19.949" />
                                         <Key frame="1482" value="-0.61764" />
                                         <Key frame="1518" value="-13.1862" />
                                         <Key frame="1560" value="1.93121" />
                                         <Key frame="1584" value="0.349159" />
-                                        <Key frame="1590" value="-2.63916" />
+                                        <Key frame="1591" value="-2.81013" />
                                         <Key frame="1619" value="7.20472" />
                                         <Key frame="1639" value="29.705" />
-                                        <Key frame="1672" value="29.6171" />
+                                        <Key frame="1672" value="29.7098" />
                                         <Key frame="1694" value="25.662" />
                                         <Key frame="1716" value="29.2655" />
-                                        <Key frame="1740" value="17.9275" />
+                                        <Key frame="1740" value="30.3251" />
                                         <Key frame="1764" value="5.88634" />
                                         <Key frame="1799" value="23.8211" />
-                                        <Key frame="1813" value="25.7547" />
+                                        <Key frame="1814" value="20.5691" />
                                         <Key frame="1841" value="15.735" />
                                         <Key frame="1868" value="-2.89802" />
                                         <Key frame="1896" value="-4.04543" />
@@ -9171,12 +9155,12 @@ class MyClass(GeneratedClass):
                                         <Key frame="2108" value="-0.705531" />
                                         <Key frame="2137" value="17.6638" />
                                         <Key frame="2163" value="29.8808" />
-                                        <Key frame="2195" value="30.496" />
+                                        <Key frame="2195" value="23.5574" />
                                         <Key frame="2214" value="30.5839" />
                                         <Key frame="2220" value="24.0799" />
                                         <Key frame="2243" value="3.77694" />
                                         <Key frame="2277" value="-0.353968" />
-                                        <Key frame="2308" value="-3.86964" />
+                                        <Key frame="2308" value="-6.06212" />
                                         <Key frame="2329" value="-14.5045" />
                                         <Key frame="2346" value="-20.1296" />
                                         <Key frame="2359" value="-20.1296" />
@@ -9188,11 +9172,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="8.69887" />
                                         <Key frame="2655" value="8.69887" />
                                         <Key frame="2717" value="10.7204" />
-                                        <Key frame="2757" value="-10.7252" />
-                                        <Key frame="2795" value="-21.0964" />
-                                        <Key frame="2841" value="-21.0964" />
-                                        <Key frame="2895" value="-21.0964" />
-                                        <Key frame="2941" value="5.2711" />
+                                        <Key frame="2820" value="-2.89802" />
+                                        <Key frame="2876" value="-3.51326" />
+                                        <Key frame="2945" value="-7.20472" />
                                         <Key frame="3002" value="9.40201" />
                                         <Key frame="3050" value="6.15001" />
                                     </ActuatorCurve>
@@ -9214,19 +9196,19 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="-45.8771" />
                                         <Key frame="521" value="-44.2071" />
                                         <Key frame="579" value="-54.9299" />
-                                        <Key frame="637" value="-10.5446" />
-                                        <Key frame="680" value="-10.5446" />
+                                        <Key frame="637" value="-11.072" />
+                                        <Key frame="680" value="-9.31412" />
                                         <Key frame="703" value="-10.5446" />
                                         <Key frame="709" value="-17.3123" />
-                                        <Key frame="745" value="-20.5643" />
-                                        <Key frame="795" value="-26.9804" />
+                                        <Key frame="745" value="-20.6522" />
+                                        <Key frame="795" value="-28.3866" />
                                         <Key frame="835" value="-21.7948" />
                                         <Key frame="868" value="-21.1795" />
                                         <Key frame="895" value="-22.1463" />
-                                        <Key frame="919" value="-18.1912" />
+                                        <Key frame="918" value="-18.1912" />
                                         <Key frame="933" value="-18.1912" />
                                         <Key frame="940" value="-19.4217" />
-                                        <Key frame="966" value="-39.1973" />
+                                        <Key frame="966" value="-39.461" />
                                         <Key frame="1016" value="-21.1795" />
                                         <Key frame="1044" value="-22.1463" />
                                         <Key frame="1067" value="-18.1912" />
@@ -9235,7 +9217,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="-39.1973" />
                                         <Key frame="1146" value="-48.9533" />
                                         <Key frame="1166" value="-48.9533" />
-                                        <Key frame="1172" value="-51.5022" />
+                                        <Key frame="1173" value="-51.5022" />
                                         <Key frame="1199" value="-45.965" />
                                         <Key frame="1227" value="-19.3338" />
                                         <Key frame="1263" value="-17.9275" />
@@ -9244,23 +9226,23 @@ class MyClass(GeneratedClass):
                                         <Key frame="1321" value="-26.0135" />
                                         <Key frame="1351" value="-26.0135" />
                                         <Key frame="1385" value="-18.8064" />
-                                        <Key frame="1411" value="-21.2674" />
+                                        <Key frame="1411" value="-20.8279" />
                                         <Key frame="1448" value="-21.2674" />
                                         <Key frame="1456" value="-20.3006" />
                                         <Key frame="1482" value="-19.7732" />
                                         <Key frame="1518" value="-24.9589" />
                                         <Key frame="1560" value="-21.4432" />
                                         <Key frame="1584" value="-21.4432" />
-                                        <Key frame="1590" value="-25.8378" />
+                                        <Key frame="1591" value="-26.8046" />
                                         <Key frame="1619" value="-14.0603" />
                                         <Key frame="1639" value="-16.4334" />
-                                        <Key frame="1672" value="-16.7849" />
+                                        <Key frame="1672" value="-16.8728" />
                                         <Key frame="1694" value="-13.3571" />
                                         <Key frame="1716" value="-12.7419" />
-                                        <Key frame="1740" value="-16.1697" />
+                                        <Key frame="1740" value="-15.7302" />
                                         <Key frame="1764" value="-18.8943" />
                                         <Key frame="1799" value="-27.4198" />
-                                        <Key frame="1813" value="-27.4198" />
+                                        <Key frame="1814" value="-29.4413" />
                                         <Key frame="1841" value="-11.2477" />
                                         <Key frame="1868" value="-6.06212" />
                                         <Key frame="1896" value="-27.4198" />
@@ -9275,12 +9257,12 @@ class MyClass(GeneratedClass):
                                         <Key frame="2108" value="-27.4198" />
                                         <Key frame="2137" value="-11.2477" />
                                         <Key frame="2163" value="-6.06212" />
-                                        <Key frame="2195" value="-5.44688" />
+                                        <Key frame="2195" value="-5.71056" />
                                         <Key frame="2214" value="-5.71056" />
                                         <Key frame="2220" value="-16.3455" />
                                         <Key frame="2243" value="-42.3614" />
                                         <Key frame="2277" value="-44.9103" />
-                                        <Key frame="2308" value="-39.5489" />
+                                        <Key frame="2308" value="-43.9435" />
                                         <Key frame="2329" value="-50.6232" />
                                         <Key frame="2346" value="-57.4788" />
                                         <Key frame="2359" value="-57.4788" />
@@ -9292,11 +9274,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="-24.6952" />
                                         <Key frame="2655" value="-24.6952" />
                                         <Key frame="2717" value="-21.8826" />
-                                        <Key frame="2757" value="-43.5919" />
-                                        <Key frame="2795" value="-65.389" />
-                                        <Key frame="2841" value="-65.389" />
-                                        <Key frame="2895" value="-65.389" />
-                                        <Key frame="2941" value="-26.1014" />
+                                        <Key frame="2820" value="-45.965" />
+                                        <Key frame="2876" value="-48.4259" />
+                                        <Key frame="2945" value="-51.4143" />
                                         <Key frame="3002" value="-17.1365" />
                                         <Key frame="3050" value="-10.1051" />
                                     </ActuatorCurve>
@@ -9318,19 +9298,19 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="45.965" />
                                         <Key frame="521" value="19.5096" />
                                         <Key frame="579" value="34.2754" />
-                                        <Key frame="637" value="60.2082" />
-                                        <Key frame="680" value="58.0988" />
+                                        <Key frame="637" value="60.2913" />
+                                        <Key frame="680" value="64.5101" />
                                         <Key frame="703" value="58.0988" />
                                         <Key frame="709" value="47.2003" />
-                                        <Key frame="745" value="26.282" />
-                                        <Key frame="795" value="52.298" />
+                                        <Key frame="745" value="26.453" />
+                                        <Key frame="795" value="54.051" />
                                         <Key frame="835" value="-5.18321" />
                                         <Key frame="868" value="-5.18321" />
                                         <Key frame="895" value="-4.83163" />
-                                        <Key frame="919" value="-4.30429" />
+                                        <Key frame="918" value="-4.30429" />
                                         <Key frame="933" value="-3.60116" />
                                         <Key frame="940" value="-3.42537" />
-                                        <Key frame="966" value="17.3171" />
+                                        <Key frame="966" value="17.1365" />
                                         <Key frame="1016" value="21.9705" />
                                         <Key frame="1044" value="-0.705531" />
                                         <Key frame="1067" value="1.22808" />
@@ -9339,7 +9319,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="6.67737" />
                                         <Key frame="1146" value="80.9507" />
                                         <Key frame="1166" value="88.6852" />
-                                        <Key frame="1172" value="71.1947" />
+                                        <Key frame="1173" value="71.1947" />
                                         <Key frame="1199" value="41.0478" />
                                         <Key frame="1227" value="9.14314" />
                                         <Key frame="1263" value="-5.29" />
@@ -9348,23 +9328,23 @@ class MyClass(GeneratedClass):
                                         <Key frame="1321" value="63.8997" />
                                         <Key frame="1351" value="63.8997" />
                                         <Key frame="1385" value="-5.18321" />
-                                        <Key frame="1411" value="-5.18321" />
+                                        <Key frame="1411" value="-5.18802" />
                                         <Key frame="1448" value="-5.18321" />
                                         <Key frame="1456" value="-4.30429" />
                                         <Key frame="1482" value="-4.74374" />
                                         <Key frame="1518" value="10.0221" />
                                         <Key frame="1560" value="4.13332" />
                                         <Key frame="1584" value="4.92435" />
-                                        <Key frame="1590" value="23.8211" />
+                                        <Key frame="1591" value="26.1893" />
                                         <Key frame="1619" value="-4.74374" />
                                         <Key frame="1639" value="-4.74374" />
-                                        <Key frame="1672" value="-5.09532" />
+                                        <Key frame="1672" value="-4.83644" />
                                         <Key frame="1694" value="-5.09532" />
                                         <Key frame="1716" value="-5.09532" />
-                                        <Key frame="1740" value="-5.09532" />
+                                        <Key frame="1740" value="-4.83644" />
                                         <Key frame="1764" value="-5.09532" />
                                         <Key frame="1799" value="47.2834" />
-                                        <Key frame="1813" value="62.4007" />
+                                        <Key frame="1814" value="53.6994" />
                                         <Key frame="1841" value="69.1684" />
                                         <Key frame="1868" value="49.9201" />
                                         <Key frame="1896" value="60.9114" />
@@ -9379,12 +9359,12 @@ class MyClass(GeneratedClass):
                                         <Key frame="2108" value="63.7239" />
                                         <Key frame="2137" value="27.7762" />
                                         <Key frame="2163" value="-4.39218" />
-                                        <Key frame="2195" value="-4.48007" />
+                                        <Key frame="2195" value="-4.48488" />
                                         <Key frame="2214" value="-5.29" />
                                         <Key frame="2220" value="12.1315" />
                                         <Key frame="2243" value="50.1007" />
                                         <Key frame="2277" value="20.7449" />
-                                        <Key frame="2308" value="29.3582" />
+                                        <Key frame="2308" value="11.5114" />
                                         <Key frame="2329" value="50.7159" />
                                         <Key frame="2346" value="95.277" />
                                         <Key frame="2359" value="95.277" />
@@ -9396,11 +9376,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="-5.29" />
                                         <Key frame="2655" value="-5.29" />
                                         <Key frame="2717" value="8.35212" />
-                                        <Key frame="2757" value="65.306" />
-                                        <Key frame="2795" value="21.0085" />
-                                        <Key frame="2841" value="21.0085" />
-                                        <Key frame="2895" value="21.0085" />
-                                        <Key frame="2941" value="-5.29" />
+                                        <Key frame="2820" value="79.4517" />
+                                        <Key frame="2876" value="93.2507" />
+                                        <Key frame="2945" value="57.9182" />
                                         <Key frame="3002" value="-4.39218" />
                                         <Key frame="3050" value="-5.00743" />
                                     </ActuatorCurve>
@@ -9422,16 +9400,16 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="64.7738" />
                                         <Key frame="521" value="67.4106" />
                                         <Key frame="579" value="66.8832" />
-                                        <Key frame="637" value="14.5045" />
-                                        <Key frame="680" value="-10.193" />
+                                        <Key frame="637" value="17.488" />
+                                        <Key frame="680" value="-6.85796" />
                                         <Key frame="703" value="-8.52309" />
                                         <Key frame="709" value="1.23289" />
-                                        <Key frame="745" value="-18.6306" />
-                                        <Key frame="795" value="35.5107" />
+                                        <Key frame="745" value="-15.3835" />
+                                        <Key frame="795" value="37.7032" />
                                         <Key frame="835" value="64.6028" />
                                         <Key frame="868" value="49.4855" />
                                         <Key frame="895" value="32.6981" />
-                                        <Key frame="919" value="39.0263" />
+                                        <Key frame="918" value="39.0263" />
                                         <Key frame="933" value="51.8585" />
                                         <Key frame="940" value="36.3896" />
                                         <Key frame="966" value="71.7221" />
@@ -9443,7 +9421,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="75.6724" />
                                         <Key frame="1146" value="63.5481" />
                                         <Key frame="1166" value="62.054" />
-                                        <Key frame="1172" value="57.7473" />
+                                        <Key frame="1173" value="57.7473" />
                                         <Key frame="1199" value="71.0189" />
                                         <Key frame="1227" value="55.8137" />
                                         <Key frame="1263" value="-50.7111" />
@@ -9459,7 +9437,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1518" value="75.9409" />
                                         <Key frame="1560" value="44.8272" />
                                         <Key frame="1584" value="29.3582" />
-                                        <Key frame="1590" value="32.9618" />
+                                        <Key frame="1591" value="32.9618" />
                                         <Key frame="1619" value="52.3859" />
                                         <Key frame="1639" value="54.1437" />
                                         <Key frame="1672" value="81.0386" />
@@ -9468,7 +9446,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1740" value="74.7104" />
                                         <Key frame="1764" value="85.2574" />
                                         <Key frame="1799" value="29.5292" />
-                                        <Key frame="1813" value="30.4081" />
+                                        <Key frame="1814" value="30.4081" />
                                         <Key frame="1841" value="43.9435" />
                                         <Key frame="1868" value="5.18321" />
                                         <Key frame="1896" value="95.9802" />
@@ -9500,11 +9478,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="-83.1432" />
                                         <Key frame="2655" value="-83.1432" />
                                         <Key frame="2717" value="-48.8654" />
-                                        <Key frame="2757" value="31.204" />
-                                        <Key frame="2795" value="25.5789" />
-                                        <Key frame="2841" value="25.5789" />
-                                        <Key frame="2895" value="39.1142" />
-                                        <Key frame="2941" value="96.8591" />
+                                        <Key frame="2820" value="57.303" />
+                                        <Key frame="2876" value="51.1506" />
+                                        <Key frame="2945" value="42.0098" />
                                         <Key frame="3002" value="94.9255" />
                                         <Key frame="3050" value="89.4762" />
                                     </ActuatorCurve>
@@ -9526,16 +9502,16 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="1.14019" />
                                         <Key frame="521" value="29.705" />
                                         <Key frame="579" value="45.3497" />
-                                        <Key frame="637" value="20.1296" />
-                                        <Key frame="680" value="20.1296" />
+                                        <Key frame="637" value="19.949" />
+                                        <Key frame="680" value="20.74" />
                                         <Key frame="703" value="20.0417" />
                                         <Key frame="709" value="20.9206" />
-                                        <Key frame="745" value="22.9421" />
-                                        <Key frame="795" value="26.4578" />
+                                        <Key frame="745" value="23.7284" />
+                                        <Key frame="795" value="25.2225" />
                                         <Key frame="835" value="15.9108" />
                                         <Key frame="868" value="-15.4665" />
                                         <Key frame="895" value="-17.6638" />
-                                        <Key frame="919" value="-16.3455" />
+                                        <Key frame="918" value="-16.3455" />
                                         <Key frame="933" value="-4.74374" />
                                         <Key frame="940" value="-18" />
                                         <Key frame="966" value="3.51807" />
@@ -9547,7 +9523,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="9.13833" />
                                         <Key frame="1146" value="20.4812" />
                                         <Key frame="1166" value="18.2839" />
-                                        <Key frame="1172" value="4.92435" />
+                                        <Key frame="1173" value="4.92435" />
                                         <Key frame="1199" value="42.2783" />
                                         <Key frame="1227" value="60.2082" />
                                         <Key frame="1263" value="18.0202" />
@@ -9563,7 +9539,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1518" value="13.8014" />
                                         <Key frame="1560" value="28.9188" />
                                         <Key frame="1584" value="18.2839" />
-                                        <Key frame="1590" value="14.7682" />
+                                        <Key frame="1591" value="14.7682" />
                                         <Key frame="1619" value="19.2507" />
                                         <Key frame="1639" value="38.9384" />
                                         <Key frame="1672" value="14.7682" />
@@ -9572,7 +9548,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1740" value="39.5537" />
                                         <Key frame="1764" value="14.0651" />
                                         <Key frame="1799" value="-6.94585" />
-                                        <Key frame="1813" value="-8.35212" />
+                                        <Key frame="1814" value="-8.35212" />
                                         <Key frame="1841" value="48.2502" />
                                         <Key frame="1868" value="61.2581" />
                                         <Key frame="1896" value="71.9857" />
@@ -9604,11 +9580,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="5.10013" />
                                         <Key frame="2655" value="5.10013" />
                                         <Key frame="2717" value="6.5064" />
-                                        <Key frame="2757" value="7.38531" />
-                                        <Key frame="2795" value="-0.0854867" />
-                                        <Key frame="2841" value="-0.0854867" />
-                                        <Key frame="2895" value="27.5125" />
-                                        <Key frame="2941" value="26.1063" />
+                                        <Key frame="2820" value="8.25942" />
+                                        <Key frame="2876" value="30.496" />
+                                        <Key frame="2945" value="25.2225" />
                                         <Key frame="3002" value="14.3288" />
                                         <Key frame="3050" value="7.38531" />
                                     </ActuatorCurve>
@@ -9630,16 +9604,16 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="-37.0927" />
                                         <Key frame="521" value="-39.0263" />
                                         <Key frame="579" value="-71.6341" />
-                                        <Key frame="637" value="-15.7302" />
-                                        <Key frame="680" value="63.8118" />
+                                        <Key frame="637" value="-17.6686" />
+                                        <Key frame="680" value="62.0492" />
                                         <Key frame="703" value="66.2728" />
                                         <Key frame="709" value="72.3373" />
-                                        <Key frame="745" value="69.1732" />
-                                        <Key frame="795" value="-33.9238" />
+                                        <Key frame="745" value="68.1137" />
+                                        <Key frame="795" value="-32.1708" />
                                         <Key frame="835" value="-52.7326" />
                                         <Key frame="868" value="2.55127" />
                                         <Key frame="895" value="-6.67737" />
-                                        <Key frame="919" value="-101.161" />
+                                        <Key frame="918" value="-101.161" />
                                         <Key frame="933" value="-101.864" />
                                         <Key frame="940" value="-103.71" />
                                         <Key frame="966" value="-94.0417" />
@@ -9651,7 +9625,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="-98.6169" />
                                         <Key frame="1146" value="-49.5685" />
                                         <Key frame="1166" value="-49.3049" />
-                                        <Key frame="1172" value="-23.7284" />
+                                        <Key frame="1173" value="-23.7284" />
                                         <Key frame="1199" value="-49.1291" />
                                         <Key frame="1227" value="-2.89802" />
                                         <Key frame="1263" value="-67.059" />
@@ -9667,7 +9641,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1518" value="-54.842" />
                                         <Key frame="1560" value="-70.5747" />
                                         <Key frame="1584" value="-48.6896" />
-                                        <Key frame="1590" value="-56.4241" />
+                                        <Key frame="1591" value="-56.4241" />
                                         <Key frame="1619" value="-79.4517" />
                                         <Key frame="1639" value="-98.0848" />
                                         <Key frame="1672" value="-89.2077" />
@@ -9676,7 +9650,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1740" value="-102.391" />
                                         <Key frame="1764" value="-90.0866" />
                                         <Key frame="1799" value="-51.3312" />
-                                        <Key frame="1813" value="-61.1751" />
+                                        <Key frame="1814" value="-61.1751" />
                                         <Key frame="1841" value="-27.1609" />
                                         <Key frame="1868" value="-56.341" />
                                         <Key frame="1896" value="-9.92936" />
@@ -9708,11 +9682,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="-24.1678" />
                                         <Key frame="2655" value="-24.1678" />
                                         <Key frame="2717" value="-26.5409" />
-                                        <Key frame="2757" value="-12.3903" />
-                                        <Key frame="2795" value="-18.7185" />
-                                        <Key frame="2841" value="-18.7185" />
-                                        <Key frame="2895" value="-9.13833" />
-                                        <Key frame="2941" value="-18.6306" />
+                                        <Key frame="2820" value="-23.1179" />
+                                        <Key frame="2876" value="-55.4621" />
+                                        <Key frame="2945" value="-52.298" />
                                         <Key frame="3002" value="-5.88634" />
                                         <Key frame="3050" value="-5.88634" />
                                     </ActuatorCurve>
@@ -9734,19 +9706,19 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="15.735" />
                                         <Key frame="521" value="-37.0879" />
                                         <Key frame="579" value="-38.9336" />
-                                        <Key frame="637" value="-29.0946" />
-                                        <Key frame="680" value="-29.7098" />
+                                        <Key frame="637" value="-33.0449" />
+                                        <Key frame="680" value="-30.496" />
                                         <Key frame="703" value="-29.7098" />
                                         <Key frame="709" value="-19.5144" />
-                                        <Key frame="745" value="-3.51807" />
-                                        <Key frame="795" value="-20.4812" />
+                                        <Key frame="745" value="5.97904" />
+                                        <Key frame="795" value="-20.6522" />
                                         <Key frame="835" value="-14.0651" />
                                         <Key frame="868" value="-14.0651" />
                                         <Key frame="895" value="-2.90283" />
-                                        <Key frame="919" value="-5.89115" />
+                                        <Key frame="918" value="-5.89115" />
                                         <Key frame="933" value="-5.89115" />
                                         <Key frame="940" value="-4.66066" />
-                                        <Key frame="966" value="17.8396" />
+                                        <Key frame="966" value="5.45169" />
                                         <Key frame="1016" value="6.06693" />
                                         <Key frame="1044" value="5.27591" />
                                         <Key frame="1067" value="0.178186" />
@@ -9755,7 +9727,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="-10.6325" />
                                         <Key frame="1146" value="-32.8739" />
                                         <Key frame="1166" value="-36.4775" />
-                                        <Key frame="1172" value="-27.8641" />
+                                        <Key frame="1173" value="-27.8641" />
                                         <Key frame="1199" value="-21.448" />
                                         <Key frame="1227" value="-3.43018" />
                                         <Key frame="1263" value="-3.43018" />
@@ -9764,23 +9736,23 @@ class MyClass(GeneratedClass):
                                         <Key frame="1321" value="-26.6336" />
                                         <Key frame="1351" value="-27.2488" />
                                         <Key frame="1385" value="-8.87946" />
-                                        <Key frame="1411" value="-15.6471" />
+                                        <Key frame="1411" value="-15.4665" />
                                         <Key frame="1448" value="-15.6471" />
                                         <Key frame="1456" value="-5.45169" />
                                         <Key frame="1482" value="3.0738" />
                                         <Key frame="1518" value="0.788627" />
                                         <Key frame="1560" value="2.81013" />
                                         <Key frame="1584" value="2.89802" />
-                                        <Key frame="1590" value="2.89802" />
+                                        <Key frame="1591" value="-1.93121" />
                                         <Key frame="1619" value="4.04062" />
                                         <Key frame="1639" value="-3.60597" />
-                                        <Key frame="1672" value="-3.25439" />
+                                        <Key frame="1672" value="-5.53478" />
                                         <Key frame="1694" value="-6.06693" />
                                         <Key frame="1716" value="-6.68218" />
-                                        <Key frame="1740" value="-5.71537" />
+                                        <Key frame="1740" value="-7.3805" />
                                         <Key frame="1764" value="0.173378" />
                                         <Key frame="1799" value="-32.6933" />
-                                        <Key frame="1813" value="-27.6835" />
+                                        <Key frame="1814" value="-33.6601" />
                                         <Key frame="1841" value="-12.3024" />
                                         <Key frame="1868" value="0.793436" />
                                         <Key frame="1896" value="-10.9889" />
@@ -9795,12 +9767,12 @@ class MyClass(GeneratedClass):
                                         <Key frame="2108" value="-17.405" />
                                         <Key frame="2137" value="-31.5555" />
                                         <Key frame="2163" value="-23.5574" />
-                                        <Key frame="2195" value="-24.2605" />
+                                        <Key frame="2195" value="-24.4315" />
                                         <Key frame="2214" value="-24.3484" />
                                         <Key frame="2220" value="-2.63916" />
                                         <Key frame="2243" value="-13.0983" />
                                         <Key frame="2277" value="13.0056" />
-                                        <Key frame="2308" value="15.7302" />
+                                        <Key frame="2308" value="2.37549" />
                                         <Key frame="2329" value="-5.80326" />
                                         <Key frame="2346" value="-19.2507" />
                                         <Key frame="2359" value="-19.2507" />
@@ -9812,11 +9784,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="-1.145" />
                                         <Key frame="2655" value="-1.145" />
                                         <Key frame="2717" value="-11.9557" />
-                                        <Key frame="2757" value="-30.9403" />
-                                        <Key frame="2795" value="-21.9753" />
-                                        <Key frame="2841" value="-21.9753" />
-                                        <Key frame="2895" value="-22.0632" />
-                                        <Key frame="2941" value="-6.5064" />
+                                        <Key frame="2820" value="-34.0117" />
+                                        <Key frame="2876" value="-40.4278" />
+                                        <Key frame="2945" value="-24.2557" />
                                         <Key frame="3002" value="-2.55127" />
                                         <Key frame="3050" value="5.44688" />
                                     </ActuatorCurve>
@@ -9838,19 +9808,19 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="15.4713" />
                                         <Key frame="521" value="2.99072" />
                                         <Key frame="579" value="2.02391" />
-                                        <Key frame="637" value="6.4137" />
-                                        <Key frame="680" value="9.84147" />
+                                        <Key frame="637" value="10.2857" />
+                                        <Key frame="680" value="-0.173378" />
                                         <Key frame="703" value="9.84147" />
                                         <Key frame="709" value="5.09532" />
-                                        <Key frame="745" value="2.72224" />
-                                        <Key frame="795" value="3.95273" />
+                                        <Key frame="745" value="-1.75543" />
+                                        <Key frame="795" value="-0.788627" />
                                         <Key frame="835" value="4.12851" />
                                         <Key frame="868" value="4.12851" />
                                         <Key frame="895" value="-1.76024" />
-                                        <Key frame="919" value="-2.90283" />
+                                        <Key frame="918" value="-2.90283" />
                                         <Key frame="933" value="-2.90283" />
                                         <Key frame="940" value="0.173378" />
-                                        <Key frame="966" value="17.1365" />
+                                        <Key frame="966" value="15.0319" />
                                         <Key frame="1016" value="13.274" />
                                         <Key frame="1044" value="21.2722" />
                                         <Key frame="1067" value="19.8659" />
@@ -9859,7 +9829,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="-1.0523" />
                                         <Key frame="1146" value="4.48007" />
                                         <Key frame="1166" value="6.50159" />
-                                        <Key frame="1172" value="0.964409" />
+                                        <Key frame="1173" value="0.964409" />
                                         <Key frame="1199" value="2.89802" />
                                         <Key frame="1227" value="7.46839" />
                                         <Key frame="1263" value="9.13833" />
@@ -9868,23 +9838,23 @@ class MyClass(GeneratedClass):
                                         <Key frame="1321" value="5.79845" />
                                         <Key frame="1351" value="5.79845" />
                                         <Key frame="1385" value="5.88634" />
-                                        <Key frame="1411" value="-5.01224" />
+                                        <Key frame="1411" value="-4.83163" />
                                         <Key frame="1448" value="-5.01224" />
                                         <Key frame="1456" value="2.54646" />
                                         <Key frame="1482" value="17.488" />
                                         <Key frame="1518" value="22.5858" />
                                         <Key frame="1560" value="14.6755" />
                                         <Key frame="1584" value="14.5876" />
-                                        <Key frame="1590" value="13.7966" />
+                                        <Key frame="1591" value="10.8131" />
                                         <Key frame="1619" value="11.5993" />
                                         <Key frame="1639" value="-0.881327" />
-                                        <Key frame="1672" value="-0.705531" />
+                                        <Key frame="1672" value="-1.40386" />
                                         <Key frame="1694" value="-1.05711" />
                                         <Key frame="1716" value="-3.43018" />
-                                        <Key frame="1740" value="2.81013" />
+                                        <Key frame="1740" value="-1.14019" />
                                         <Key frame="1764" value="8.69887" />
                                         <Key frame="1799" value="-2.98591" />
-                                        <Key frame="1813" value="2.1997" />
+                                        <Key frame="1814" value="-2.81013" />
                                         <Key frame="1841" value="22.239" />
                                         <Key frame="1868" value="22.3269" />
                                         <Key frame="1896" value="20.3006" />
@@ -9899,12 +9869,12 @@ class MyClass(GeneratedClass):
                                         <Key frame="2108" value="18.5427" />
                                         <Key frame="2137" value="8.4352" />
                                         <Key frame="2163" value="0.0854867" />
-                                        <Key frame="2195" value="0.0854867" />
+                                        <Key frame="2195" value="-0.0854867" />
                                         <Key frame="2214" value="0.0854867" />
                                         <Key frame="2220" value="3.24959" />
                                         <Key frame="2243" value="1.31597" />
                                         <Key frame="2277" value="9.05044" />
-                                        <Key frame="2308" value="17.8396" />
+                                        <Key frame="2308" value="16.8776" />
                                         <Key frame="2329" value="9.84147" />
                                         <Key frame="2346" value="9.40201" />
                                         <Key frame="2359" value="9.40201" />
@@ -9916,11 +9886,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="11.072" />
                                         <Key frame="2655" value="11.072" />
                                         <Key frame="2717" value="10.9841" />
-                                        <Key frame="2757" value="13.3571" />
-                                        <Key frame="2795" value="11.5114" />
-                                        <Key frame="2841" value="11.5114" />
-                                        <Key frame="2895" value="11.5114" />
-                                        <Key frame="2941" value="10.8083" />
+                                        <Key frame="2820" value="4.3091" />
+                                        <Key frame="2876" value="-1.93121" />
+                                        <Key frame="2945" value="-0.876518" />
                                         <Key frame="3002" value="12.3024" />
                                         <Key frame="3050" value="7.46839" />
                                     </ActuatorCurve>
@@ -9942,16 +9910,16 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="19.4265" />
                                         <Key frame="521" value="85.4332" />
                                         <Key frame="579" value="58.1867" />
-                                        <Key frame="637" value="39.1094" />
-                                        <Key frame="680" value="60.9066" />
+                                        <Key frame="637" value="37.9716" />
+                                        <Key frame="680" value="59.4172" />
                                         <Key frame="703" value="72.8598" />
                                         <Key frame="709" value="57.4788" />
-                                        <Key frame="745" value="13.0935" />
-                                        <Key frame="795" value="59.9398" />
+                                        <Key frame="745" value="13.362" />
+                                        <Key frame="795" value="59.593" />
                                         <Key frame="835" value="43.5919" />
                                         <Key frame="868" value="68.9926" />
                                         <Key frame="895" value="46.5802" />
-                                        <Key frame="919" value="35.9453" />
+                                        <Key frame="918" value="35.9453" />
                                         <Key frame="933" value="55.8379" />
                                         <Key frame="940" value="10.2809" />
                                         <Key frame="966" value="37.9668" />
@@ -9963,7 +9931,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="41.5752" />
                                         <Key frame="1146" value="34.5391" />
                                         <Key frame="1166" value="54.7541" />
-                                        <Key frame="1172" value="41.043" />
+                                        <Key frame="1173" value="41.043" />
                                         <Key frame="1199" value="19.158" />
                                         <Key frame="1227" value="3.68905" />
                                         <Key frame="1263" value="35.1543" />
@@ -9979,7 +9947,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1518" value="42.0977" />
                                         <Key frame="1560" value="81.7369" />
                                         <Key frame="1584" value="87.6256" />
-                                        <Key frame="1590" value="70.3989" />
+                                        <Key frame="1591" value="70.3989" />
                                         <Key frame="1619" value="41.8341" />
                                         <Key frame="1639" value="42.3614" />
                                         <Key frame="1672" value="18.5427" />
@@ -9988,7 +9956,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1740" value="49.3927" />
                                         <Key frame="1764" value="41.6583" />
                                         <Key frame="1799" value="22.9421" />
-                                        <Key frame="1813" value="46.0577" />
+                                        <Key frame="1814" value="46.0577" />
                                         <Key frame="1841" value="44.7393" />
                                         <Key frame="1868" value="41.3115" />
                                         <Key frame="1896" value="68.4652" />
@@ -10020,11 +9988,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="15.0271" />
                                         <Key frame="2655" value="15.0271" />
                                         <Key frame="2717" value="21.0916" />
-                                        <Key frame="2757" value="28.1229" />
-                                        <Key frame="2795" value="8.08364" />
-                                        <Key frame="2841" value="8.08364" />
-                                        <Key frame="2895" value="31.9902" />
-                                        <Key frame="2941" value="31.4628" />
+                                        <Key frame="2820" value="66.7122" />
+                                        <Key frame="2876" value="65.306" />
+                                        <Key frame="2945" value="82.9722" />
                                         <Key frame="3002" value="30.8476" />
                                         <Key frame="3050" value="24.4315" />
                                     </ActuatorCurve>
@@ -10046,16 +10012,16 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="75.9361" />
                                         <Key frame="521" value="79.3638" />
                                         <Key frame="579" value="8.08364" />
-                                        <Key frame="637" value="55.2863" />
-                                        <Key frame="680" value="77.0834" />
+                                        <Key frame="637" value="54.4026" />
+                                        <Key frame="680" value="75.5845" />
                                         <Key frame="703" value="86.3121" />
                                         <Key frame="709" value="83.4117" />
-                                        <Key frame="745" value="72.3373" />
-                                        <Key frame="795" value="56.1652" />
+                                        <Key frame="745" value="72.7719" />
+                                        <Key frame="795" value="55.721" />
                                         <Key frame="835" value="31.0282" />
                                         <Key frame="868" value="26.1941" />
                                         <Key frame="895" value="38.2353" />
-                                        <Key frame="919" value="79.7202" />
+                                        <Key frame="918" value="79.7202" />
                                         <Key frame="933" value="98.529" />
                                         <Key frame="940" value="104.154" />
                                         <Key frame="966" value="119.096" />
@@ -10067,7 +10033,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="43.6798" />
                                         <Key frame="1146" value="47.7276" />
                                         <Key frame="1166" value="40.6084" />
-                                        <Key frame="1172" value="24.6121" />
+                                        <Key frame="1173" value="24.6121" />
                                         <Key frame="1199" value="29.6219" />
                                         <Key frame="1227" value="50.0128" />
                                         <Key frame="1263" value="69.1732" />
@@ -10083,7 +10049,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1518" value="91.3219" />
                                         <Key frame="1560" value="23.8211" />
                                         <Key frame="1584" value="26.5457" />
-                                        <Key frame="1590" value="39.4658" />
+                                        <Key frame="1591" value="39.4658" />
                                         <Key frame="1619" value="43.6846" />
                                         <Key frame="1639" value="12.5709" />
                                         <Key frame="1672" value="21.3601" />
@@ -10092,7 +10058,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1740" value="119.5" />
                                         <Key frame="1764" value="119.5" />
                                         <Key frame="1799" value="119.003" />
-                                        <Key frame="1813" value="119.003" />
+                                        <Key frame="1814" value="119.003" />
                                         <Key frame="1841" value="107.753" />
                                         <Key frame="1868" value="68.2016" />
                                         <Key frame="1896" value="13.7135" />
@@ -10124,11 +10090,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="96.2438" />
                                         <Key frame="2655" value="96.2438" />
                                         <Key frame="2717" value="92.2008" />
-                                        <Key frame="2757" value="99.0564" />
-                                        <Key frame="2795" value="103.803" />
-                                        <Key frame="2841" value="103.803" />
-                                        <Key frame="2895" value="87.0152" />
-                                        <Key frame="2941" value="84.5542" />
+                                        <Key frame="2820" value="34.9785" />
+                                        <Key frame="2876" value="60.9944" />
+                                        <Key frame="2945" value="44.3829" />
                                         <Key frame="3002" value="84.4664" />
                                         <Key frame="3050" value="69.4369" />
                                     </ActuatorCurve>
@@ -10150,16 +10114,16 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="0.436" />
                                         <Key frame="521" value="0.4344" />
                                         <Key frame="579" value="0.4456" />
-                                        <Key frame="637" value="0.3728" />
-                                        <Key frame="680" value="0.1488" />
+                                        <Key frame="637" value="0.376" />
+                                        <Key frame="680" value="0.1532" />
                                         <Key frame="703" value="0.3224" />
                                         <Key frame="709" value="0.9424" />
-                                        <Key frame="745" value="0.9452" />
-                                        <Key frame="795" value="0.9512" />
+                                        <Key frame="745" value="0.9432" />
+                                        <Key frame="795" value="0.9432" />
                                         <Key frame="835" value="0.9512" />
                                         <Key frame="868" value="0.9512" />
                                         <Key frame="895" value="0.9512" />
-                                        <Key frame="919" value="0.9512" />
+                                        <Key frame="918" value="0.9512" />
                                         <Key frame="933" value="0.08" />
                                         <Key frame="940" value="0.9204" />
                                         <Key frame="966" value="0.9512" />
@@ -10171,7 +10135,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="0.9744" />
                                         <Key frame="1146" value="0.9448" />
                                         <Key frame="1166" value="0.018" />
-                                        <Key frame="1172" value="0.8592" />
+                                        <Key frame="1173" value="0.8592" />
                                         <Key frame="1199" value="0.8692" />
                                         <Key frame="1227" value="0.8692" />
                                         <Key frame="1263" value="0.864" />
@@ -10188,7 +10152,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1518" value="0.9452" />
                                         <Key frame="1560" value="0.9436" />
                                         <Key frame="1584" value="0.3172" />
-                                        <Key frame="1590" value="0.9504" />
+                                        <Key frame="1591" value="0.9504" />
                                         <Key frame="1619" value="0.95" />
                                         <Key frame="1639" value="0.9344" />
                                         <Key frame="1672" value="0.95" />
@@ -10197,7 +10161,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1740" value="0.8608" />
                                         <Key frame="1764" value="0.8756" />
                                         <Key frame="1799" value="0.9756" />
-                                        <Key frame="1813" value="0.9756" />
+                                        <Key frame="1814" value="0.9756" />
                                         <Key frame="1841" value="0.9756" />
                                         <Key frame="1868" value="0.9756" />
                                         <Key frame="1896" value="0.8708" />
@@ -10230,11 +10194,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="0.9464" />
                                         <Key frame="2655" value="0.9464" />
                                         <Key frame="2717" value="0.9464" />
-                                        <Key frame="2757" value="0.9464" />
-                                        <Key frame="2795" value="0.9464" />
-                                        <Key frame="2841" value="0.9464" />
-                                        <Key frame="2895" value="0.9464" />
-                                        <Key frame="2941" value="0.9464" />
+                                        <Key frame="2820" value="0.9556" />
+                                        <Key frame="2876" value="0.9556" />
+                                        <Key frame="2945" value="0.9556" />
                                         <Key frame="3002" value="0.9464" />
                                         <Key frame="3050" value="0.3" />
                                     </ActuatorCurve>
@@ -10256,19 +10218,19 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="22.0584" />
                                         <Key frame="521" value="-10.0221" />
                                         <Key frame="579" value="-20.9206" />
-                                        <Key frame="637" value="-5.2711" />
-                                        <Key frame="680" value="-21.8826" />
+                                        <Key frame="637" value="-5.62747" />
+                                        <Key frame="680" value="-22.239" />
                                         <Key frame="703" value="-21.8826" />
                                         <Key frame="709" value="-18.2791" />
-                                        <Key frame="745" value="13.0104" />
-                                        <Key frame="795" value="-18.0154" />
+                                        <Key frame="745" value="10.1051" />
+                                        <Key frame="795" value="-28.8309" />
                                         <Key frame="835" value="12.3073" />
                                         <Key frame="868" value="12.3073" />
                                         <Key frame="895" value="27.73" />
-                                        <Key frame="919" value="27.6883" />
+                                        <Key frame="918" value="27.6883" />
                                         <Key frame="933" value="27.6883" />
                                         <Key frame="940" value="25.9305" />
-                                        <Key frame="966" value="-1.57965" />
+                                        <Key frame="966" value="-7.29742" />
                                         <Key frame="1016" value="20.0369" />
                                         <Key frame="1044" value="22.5858" />
                                         <Key frame="1067" value="22.4979" />
@@ -10277,7 +10239,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="27.0682" />
                                         <Key frame="1146" value="-13.2692" />
                                         <Key frame="1166" value="-14.6755" />
-                                        <Key frame="1172" value="-8.25942" />
+                                        <Key frame="1173" value="-8.25942" />
                                         <Key frame="1199" value="12.7467" />
                                         <Key frame="1227" value="17.405" />
                                         <Key frame="1263" value="27.2488" />
@@ -10286,23 +10248,23 @@ class MyClass(GeneratedClass):
                                         <Key frame="1321" value="-17.9275" />
                                         <Key frame="1351" value="-17.9275" />
                                         <Key frame="1385" value="7.91266" />
-                                        <Key frame="1411" value="11.7799" />
+                                        <Key frame="1411" value="11.6872" />
                                         <Key frame="1448" value="11.7799" />
                                         <Key frame="1456" value="11.7799" />
                                         <Key frame="1482" value="14.7682" />
                                         <Key frame="1518" value="2.11181" />
                                         <Key frame="1560" value="12.5709" />
                                         <Key frame="1584" value="12.9225" />
-                                        <Key frame="1590" value="-12.2146" />
+                                        <Key frame="1591" value="-9.75839" />
                                         <Key frame="1619" value="17.7565" />
                                         <Key frame="1639" value="27.6004" />
-                                        <Key frame="1672" value="27.6004" />
+                                        <Key frame="1672" value="27.4198" />
                                         <Key frame="1694" value="27.6004" />
                                         <Key frame="1716" value="27.6004" />
-                                        <Key frame="1740" value="26.8094" />
+                                        <Key frame="1740" value="22.3221" />
                                         <Key frame="1764" value="17.0534" />
                                         <Key frame="1799" value="-9.84628" />
-                                        <Key frame="1813" value="-12.6588" />
+                                        <Key frame="1814" value="-14.7682" />
                                         <Key frame="1841" value="-5.62747" />
                                         <Key frame="1868" value="8.4352" />
                                         <Key frame="1896" value="-16.4334" />
@@ -10317,12 +10279,12 @@ class MyClass(GeneratedClass):
                                         <Key frame="2108" value="-23.1131" />
                                         <Key frame="2137" value="-29.9687" />
                                         <Key frame="2163" value="-20.3006" />
-                                        <Key frame="2195" value="-20.3006" />
+                                        <Key frame="2195" value="-20.5691" />
                                         <Key frame="2214" value="-20.5643" />
                                         <Key frame="2220" value="-36.6484" />
                                         <Key frame="2243" value="-8.96255" />
                                         <Key frame="2277" value="22.4148" />
-                                        <Key frame="2308" value="11.9557" />
+                                        <Key frame="2308" value="-1.05711" />
                                         <Key frame="2329" value="-28.7382" />
                                         <Key frame="2346" value="-63.6312" />
                                         <Key frame="2359" value="-63.6312" />
@@ -10334,11 +10296,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="15.6471" />
                                         <Key frame="2655" value="15.6471" />
                                         <Key frame="2717" value="14.7682" />
-                                        <Key frame="2757" value="-16.6091" />
-                                        <Key frame="2795" value="5.80326" />
-                                        <Key frame="2841" value="5.80326" />
-                                        <Key frame="2895" value="5.80326" />
-                                        <Key frame="2941" value="27.2488" />
+                                        <Key frame="2820" value="-19.9538" />
+                                        <Key frame="2876" value="-32.1708" />
+                                        <Key frame="2945" value="-14.4166" />
                                         <Key frame="3002" value="27.2488" />
                                         <Key frame="3050" value="7.38531" />
                                     </ActuatorCurve>
@@ -10360,19 +10320,19 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="-19.949" />
                                         <Key frame="521" value="-12.0388" />
                                         <Key frame="579" value="-9.13833" />
-                                        <Key frame="637" value="-7.20952" />
-                                        <Key frame="680" value="-6.41851" />
+                                        <Key frame="637" value="-4.74374" />
+                                        <Key frame="680" value="3.86964" />
                                         <Key frame="703" value="-6.41851" />
                                         <Key frame="709" value="5.18321" />
-                                        <Key frame="745" value="8.08364" />
-                                        <Key frame="795" value="-3.34228" />
+                                        <Key frame="745" value="13.6256" />
+                                        <Key frame="795" value="-0.0854867" />
                                         <Key frame="835" value="-6.41851" />
                                         <Key frame="868" value="-6.41851" />
                                         <Key frame="895" value="6.58948" />
-                                        <Key frame="919" value="7.02893" />
+                                        <Key frame="918" value="7.02893" />
                                         <Key frame="933" value="7.02893" />
                                         <Key frame="940" value="0.700723" />
-                                        <Key frame="966" value="-34.1923" />
+                                        <Key frame="966" value="-34.0996" />
                                         <Key frame="1016" value="-17.0486" />
                                         <Key frame="1044" value="-33.2207" />
                                         <Key frame="1067" value="-29.5292" />
@@ -10381,7 +10341,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="4.74855" />
                                         <Key frame="1146" value="-20.4812" />
                                         <Key frame="1166" value="-20.4812" />
-                                        <Key frame="1172" value="-11.8678" />
+                                        <Key frame="1173" value="-11.8678" />
                                         <Key frame="1199" value="-11.6041" />
                                         <Key frame="1227" value="-8.5279" />
                                         <Key frame="1263" value="-13.7135" />
@@ -10390,23 +10350,23 @@ class MyClass(GeneratedClass):
                                         <Key frame="1321" value="-9.05525" />
                                         <Key frame="1351" value="-9.05525" />
                                         <Key frame="1385" value="-4.48488" />
-                                        <Key frame="1411" value="7.11683" />
+                                        <Key frame="1411" value="7.12163" />
                                         <Key frame="1448" value="7.11683" />
                                         <Key frame="1456" value="-1.93602" />
                                         <Key frame="1482" value="-23.909" />
                                         <Key frame="1518" value="-34.1923" />
                                         <Key frame="1560" value="-20.4812" />
                                         <Key frame="1584" value="-20.8327" />
-                                        <Key frame="1590" value="-18.8112" />
+                                        <Key frame="1591" value="-14.7634" />
                                         <Key frame="1619" value="-14.153" />
                                         <Key frame="1639" value="5.79845" />
-                                        <Key frame="1672" value="5.88634" />
+                                        <Key frame="1672" value="5.71537" />
                                         <Key frame="1694" value="4.83163" />
                                         <Key frame="1716" value="8.17153" />
-                                        <Key frame="1740" value="-2.28759" />
+                                        <Key frame="1740" value="7.4732" />
                                         <Key frame="1764" value="-10.8131" />
                                         <Key frame="1799" value="4.04543" />
-                                        <Key frame="1813" value="0.705531" />
+                                        <Key frame="1814" value="1.145" />
                                         <Key frame="1841" value="-17.6638" />
                                         <Key frame="1868" value="-29.8808" />
                                         <Key frame="1896" value="-23.8211" />
@@ -10421,12 +10381,12 @@ class MyClass(GeneratedClass):
                                         <Key frame="2108" value="-25.7547" />
                                         <Key frame="2137" value="-15.735" />
                                         <Key frame="2163" value="2.89802" />
-                                        <Key frame="2195" value="2.89802" />
+                                        <Key frame="2195" value="2.46338" />
                                         <Key frame="2214" value="2.28279" />
                                         <Key frame="2220" value="2.28279" />
                                         <Key frame="2243" value="-3.95753" />
                                         <Key frame="2277" value="-18.3718" />
-                                        <Key frame="2308" value="-32.0829" />
+                                        <Key frame="2308" value="-30.6718" />
                                         <Key frame="2329" value="-31.0282" />
                                         <Key frame="2346" value="-31.0282" />
                                         <Key frame="2359" value="-31.0282" />
@@ -10438,11 +10398,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="-14.153" />
                                         <Key frame="2655" value="-14.153" />
                                         <Key frame="2717" value="-16.4382" />
-                                        <Key frame="2757" value="-19.778" />
-                                        <Key frame="2795" value="-7.56109" />
-                                        <Key frame="2841" value="-7.56109" />
-                                        <Key frame="2895" value="-7.56109" />
-                                        <Key frame="2941" value="-17.6686" />
+                                        <Key frame="2820" value="-5.88634" />
+                                        <Key frame="2876" value="1.49656" />
+                                        <Key frame="2945" value="-3.95273" />
                                         <Key frame="3002" value="-15.2077" />
                                         <Key frame="3050" value="-6.15482" />
                                     </ActuatorCurve>
@@ -10464,19 +10422,19 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="-45.8771" />
                                         <Key frame="521" value="-44.2071" />
                                         <Key frame="579" value="-54.9299" />
-                                        <Key frame="637" value="-10.5446" />
-                                        <Key frame="680" value="-10.5446" />
+                                        <Key frame="637" value="-11.072" />
+                                        <Key frame="680" value="-9.31412" />
                                         <Key frame="703" value="-10.5446" />
                                         <Key frame="709" value="-17.3123" />
-                                        <Key frame="745" value="-20.5643" />
-                                        <Key frame="795" value="-26.9804" />
+                                        <Key frame="745" value="-20.6522" />
+                                        <Key frame="795" value="-28.3866" />
                                         <Key frame="835" value="-21.7948" />
                                         <Key frame="868" value="-21.1795" />
                                         <Key frame="895" value="-22.1463" />
-                                        <Key frame="919" value="-18.1912" />
+                                        <Key frame="918" value="-18.1912" />
                                         <Key frame="933" value="-18.1912" />
                                         <Key frame="940" value="-19.4217" />
-                                        <Key frame="966" value="-39.1973" />
+                                        <Key frame="966" value="-39.461" />
                                         <Key frame="1016" value="-21.1795" />
                                         <Key frame="1044" value="-22.1463" />
                                         <Key frame="1067" value="-18.1912" />
@@ -10485,7 +10443,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="-39.1973" />
                                         <Key frame="1146" value="-48.9533" />
                                         <Key frame="1166" value="-48.9533" />
-                                        <Key frame="1172" value="-51.5022" />
+                                        <Key frame="1173" value="-51.5022" />
                                         <Key frame="1199" value="-45.965" />
                                         <Key frame="1227" value="-19.3338" />
                                         <Key frame="1263" value="-17.9275" />
@@ -10494,23 +10452,23 @@ class MyClass(GeneratedClass):
                                         <Key frame="1321" value="-26.0135" />
                                         <Key frame="1351" value="-26.0135" />
                                         <Key frame="1385" value="-18.8064" />
-                                        <Key frame="1411" value="-21.2674" />
+                                        <Key frame="1411" value="-20.8279" />
                                         <Key frame="1448" value="-21.2674" />
                                         <Key frame="1456" value="-20.3006" />
                                         <Key frame="1482" value="-19.7732" />
                                         <Key frame="1518" value="-24.9589" />
                                         <Key frame="1560" value="-21.4432" />
                                         <Key frame="1584" value="-21.4432" />
-                                        <Key frame="1590" value="-25.8378" />
+                                        <Key frame="1591" value="-26.8046" />
                                         <Key frame="1619" value="-14.0603" />
                                         <Key frame="1639" value="-16.4334" />
-                                        <Key frame="1672" value="-16.7849" />
+                                        <Key frame="1672" value="-16.8728" />
                                         <Key frame="1694" value="-13.3571" />
                                         <Key frame="1716" value="-12.7419" />
-                                        <Key frame="1740" value="-16.1697" />
+                                        <Key frame="1740" value="-15.7302" />
                                         <Key frame="1764" value="-18.8943" />
                                         <Key frame="1799" value="-27.4198" />
-                                        <Key frame="1813" value="-27.4198" />
+                                        <Key frame="1814" value="-29.4413" />
                                         <Key frame="1841" value="-11.2477" />
                                         <Key frame="1868" value="-6.06212" />
                                         <Key frame="1896" value="-27.4198" />
@@ -10525,12 +10483,12 @@ class MyClass(GeneratedClass):
                                         <Key frame="2108" value="-27.4198" />
                                         <Key frame="2137" value="-11.2477" />
                                         <Key frame="2163" value="-6.06212" />
-                                        <Key frame="2195" value="-5.44688" />
+                                        <Key frame="2195" value="-5.71056" />
                                         <Key frame="2214" value="-5.71056" />
                                         <Key frame="2220" value="-16.3455" />
                                         <Key frame="2243" value="-42.3614" />
                                         <Key frame="2277" value="-44.9103" />
-                                        <Key frame="2308" value="-39.5489" />
+                                        <Key frame="2308" value="-43.9435" />
                                         <Key frame="2329" value="-50.6232" />
                                         <Key frame="2346" value="-57.4788" />
                                         <Key frame="2359" value="-57.4788" />
@@ -10542,11 +10500,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="-24.6952" />
                                         <Key frame="2655" value="-24.6952" />
                                         <Key frame="2717" value="-21.8826" />
-                                        <Key frame="2757" value="-43.5919" />
-                                        <Key frame="2795" value="-65.389" />
-                                        <Key frame="2841" value="-65.389" />
-                                        <Key frame="2895" value="-65.389" />
-                                        <Key frame="2941" value="-26.1014" />
+                                        <Key frame="2820" value="-45.965" />
+                                        <Key frame="2876" value="-48.4259" />
+                                        <Key frame="2945" value="-51.4143" />
                                         <Key frame="3002" value="-17.1365" />
                                         <Key frame="3050" value="-10.1051" />
                                     </ActuatorCurve>
@@ -10568,19 +10524,19 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="-5.29" />
                                         <Key frame="521" value="69.9642" />
                                         <Key frame="579" value="84.73" />
-                                        <Key frame="637" value="46.6681" />
-                                        <Key frame="680" value="58.2698" />
+                                        <Key frame="637" value="50.4523" />
+                                        <Key frame="680" value="60.5598" />
                                         <Key frame="703" value="58.2698" />
                                         <Key frame="709" value="42.6251" />
-                                        <Key frame="745" value="0.876518" />
-                                        <Key frame="795" value="52.6447" />
+                                        <Key frame="745" value="-5.29" />
+                                        <Key frame="795" value="60.8235" />
                                         <Key frame="835" value="21.9705" />
                                         <Key frame="868" value="21.9705" />
                                         <Key frame="895" value="-0.705531" />
-                                        <Key frame="919" value="1.22808" />
+                                        <Key frame="918" value="1.22808" />
                                         <Key frame="933" value="1.22808" />
                                         <Key frame="940" value="0.43705" />
-                                        <Key frame="966" value="6.67737" />
+                                        <Key frame="966" value="26.3699" />
                                         <Key frame="1016" value="-5.18321" />
                                         <Key frame="1044" value="-4.83163" />
                                         <Key frame="1067" value="-4.30429" />
@@ -10589,7 +10545,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="17.3171" />
                                         <Key frame="1146" value="81.9127" />
                                         <Key frame="1166" value="86.8346" />
-                                        <Key frame="1172" value="70.7504" />
+                                        <Key frame="1173" value="70.7504" />
                                         <Key frame="1199" value="40.5157" />
                                         <Key frame="1227" value="3.77694" />
                                         <Key frame="1263" value="-4.66066" />
@@ -10598,23 +10554,23 @@ class MyClass(GeneratedClass):
                                         <Key frame="1321" value="64.598" />
                                         <Key frame="1351" value="64.598" />
                                         <Key frame="1385" value="16.5212" />
-                                        <Key frame="1411" value="24.1678" />
+                                        <Key frame="1411" value="24.6121" />
                                         <Key frame="1448" value="24.1678" />
                                         <Key frame="1456" value="12.1267" />
                                         <Key frame="1482" value="0.261268" />
                                         <Key frame="1518" value="11.5993" />
                                         <Key frame="1560" value="3.51326" />
                                         <Key frame="1584" value="3.51326" />
-                                        <Key frame="1590" value="21.9705" />
+                                        <Key frame="1591" value="24.4363" />
                                         <Key frame="1619" value="-5.10013" />
                                         <Key frame="1639" value="-3.51807" />
-                                        <Key frame="1672" value="-3.78175" />
+                                        <Key frame="1672" value="-2.89802" />
                                         <Key frame="1694" value="-2.72705" />
                                         <Key frame="1716" value="-1.76024" />
-                                        <Key frame="1740" value="-0.353968" />
+                                        <Key frame="1740" value="0.969218" />
                                         <Key frame="1764" value="-0.178186" />
                                         <Key frame="1799" value="60.9114" />
-                                        <Key frame="1813" value="63.7239" />
+                                        <Key frame="1814" value="69.0853" />
                                         <Key frame="1841" value="27.7762" />
                                         <Key frame="1868" value="-4.39218" />
                                         <Key frame="1896" value="47.2834" />
@@ -10629,12 +10585,12 @@ class MyClass(GeneratedClass):
                                         <Key frame="2108" value="62.4007" />
                                         <Key frame="2137" value="69.1684" />
                                         <Key frame="2163" value="49.9201" />
-                                        <Key frame="2195" value="49.9201" />
+                                        <Key frame="2195" value="49.9249" />
                                         <Key frame="2214" value="50.008" />
                                         <Key frame="2220" value="37.4395" />
                                         <Key frame="2243" value="47.7228" />
                                         <Key frame="2277" value="-3.95753" />
-                                        <Key frame="2308" value="2.81013" />
+                                        <Key frame="2308" value="19.6902" />
                                         <Key frame="2329" value="59.5003" />
                                         <Key frame="2346" value="103.007" />
                                         <Key frame="2359" value="103.007" />
@@ -10646,11 +10602,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="3.95273" />
                                         <Key frame="2655" value="3.95273" />
                                         <Key frame="2717" value="19.5975" />
-                                        <Key frame="2757" value="69.8715" />
-                                        <Key frame="2795" value="40.0762" />
-                                        <Key frame="2841" value="40.0762" />
-                                        <Key frame="2895" value="40.0762" />
-                                        <Key frame="2941" value="-0.353968" />
+                                        <Key frame="2820" value="78.7534" />
+                                        <Key frame="2876" value="96.0681" />
+                                        <Key frame="2945" value="65.2181" />
                                         <Key frame="3002" value="-5.10013" />
                                         <Key frame="3050" value="-5.10013" />
                                     </ActuatorCurve>
@@ -10672,16 +10626,16 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="100.463" />
                                         <Key frame="521" value="108.549" />
                                         <Key frame="579" value="40.6084" />
-                                        <Key frame="637" value="18.9822" />
-                                        <Key frame="680" value="0.349159" />
+                                        <Key frame="637" value="22.6785" />
+                                        <Key frame="680" value="5.10013" />
                                         <Key frame="703" value="-3.60597" />
                                         <Key frame="709" value="1.49175" />
-                                        <Key frame="745" value="-23.3816" />
-                                        <Key frame="795" value="34.5391" />
+                                        <Key frame="745" value="-18.2791" />
+                                        <Key frame="795" value="38.0595" />
                                         <Key frame="835" value="50.9748" />
                                         <Key frame="868" value="43.3282" />
                                         <Key frame="895" value="17.9275" />
-                                        <Key frame="919" value="33.6601" />
+                                        <Key frame="918" value="33.6601" />
                                         <Key frame="933" value="50.9748" />
                                         <Key frame="940" value="29.8808" />
                                         <Key frame="966" value="75.6724" />
@@ -10693,7 +10647,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="71.7221" />
                                         <Key frame="1146" value="64.598" />
                                         <Key frame="1166" value="62.2249" />
-                                        <Key frame="1172" value="51.3264" />
+                                        <Key frame="1173" value="51.3264" />
                                         <Key frame="1199" value="58.6214" />
                                         <Key frame="1227" value="25.2225" />
                                         <Key frame="1263" value="-50.9796" />
@@ -10709,7 +10663,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1518" value="67.2348" />
                                         <Key frame="1560" value="46.3165" />
                                         <Key frame="1584" value="28.8261" />
-                                        <Key frame="1590" value="29.7929" />
+                                        <Key frame="1591" value="29.7929" />
                                         <Key frame="1619" value="-9.31893" />
                                         <Key frame="1639" value="-31.7313" />
                                         <Key frame="1672" value="-70.14" />
@@ -10718,7 +10672,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1740" value="47.9865" />
                                         <Key frame="1764" value="74.6177" />
                                         <Key frame="1799" value="95.9802" />
-                                        <Key frame="1813" value="74.3588" />
+                                        <Key frame="1814" value="74.3588" />
                                         <Key frame="1841" value="60.2082" />
                                         <Key frame="1868" value="24.7" />
                                         <Key frame="1896" value="29.5292" />
@@ -10750,11 +10704,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="97.0301" />
                                         <Key frame="2655" value="97.0301" />
                                         <Key frame="2717" value="103.358" />
-                                        <Key frame="2757" value="75.6724" />
-                                        <Key frame="2795" value="74.9692" />
-                                        <Key frame="2841" value="74.9692" />
-                                        <Key frame="2895" value="77.9576" />
-                                        <Key frame="2941" value="85.8678" />
+                                        <Key frame="2820" value="62.1419" />
+                                        <Key frame="2876" value="70.4037" />
+                                        <Key frame="2945" value="66.7122" />
                                         <Key frame="3002" value="100.194" />
                                         <Key frame="3050" value="89.0319" />
                                     </ActuatorCurve>
@@ -10776,16 +10728,16 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="-45.2666" />
                                         <Key frame="521" value="-42.6299" />
                                         <Key frame="579" value="7.02893" />
-                                        <Key frame="637" value="6.24271" />
-                                        <Key frame="680" value="11.9557" />
+                                        <Key frame="637" value="6.76526" />
+                                        <Key frame="680" value="12.8298" />
                                         <Key frame="703" value="10.5494" />
                                         <Key frame="709" value="10.0221" />
-                                        <Key frame="745" value="16.2624" />
-                                        <Key frame="795" value="-1.57965" />
+                                        <Key frame="745" value="15.9939" />
+                                        <Key frame="795" value="-0.353968" />
                                         <Key frame="835" value="0.0902951" />
                                         <Key frame="868" value="-26.9804" />
                                         <Key frame="895" value="-46.1408" />
-                                        <Key frame="919" value="-29.4413" />
+                                        <Key frame="918" value="-29.4413" />
                                         <Key frame="933" value="-24.871" />
                                         <Key frame="940" value="-30.9355" />
                                         <Key frame="966" value="-9.13833" />
@@ -10797,7 +10749,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="-3.51807" />
                                         <Key frame="1146" value="-0.964409" />
                                         <Key frame="1166" value="-10.8083" />
-                                        <Key frame="1172" value="-14.4997" />
+                                        <Key frame="1173" value="-14.4997" />
                                         <Key frame="1199" value="-38.8457" />
                                         <Key frame="1227" value="-59.764" />
                                         <Key frame="1263" value="-9.31412" />
@@ -10813,7 +10765,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1518" value="1.49656" />
                                         <Key frame="1560" value="-28.8261" />
                                         <Key frame="1584" value="-17.9275" />
-                                        <Key frame="1590" value="-19.5096" />
+                                        <Key frame="1591" value="-19.5096" />
                                         <Key frame="1619" value="-26.5409" />
                                         <Key frame="1639" value="-33.2207" />
                                         <Key frame="1672" value="-27.8593" />
@@ -10822,7 +10774,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1740" value="-51.4143" />
                                         <Key frame="1764" value="-16.697" />
                                         <Key frame="1799" value="-71.9857" />
-                                        <Key frame="1813" value="-71.9857" />
+                                        <Key frame="1814" value="-71.9857" />
                                         <Key frame="1841" value="-2.11181" />
                                         <Key frame="1868" value="17.9275" />
                                         <Key frame="1896" value="6.94585" />
@@ -10854,11 +10806,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="-12.2146" />
                                         <Key frame="2655" value="-12.2146" />
                                         <Key frame="2717" value="-19.3338" />
-                                        <Key frame="2757" value="-70.2231" />
-                                        <Key frame="2795" value="-71.7172" />
-                                        <Key frame="2841" value="-71.7172" />
-                                        <Key frame="2895" value="-72.5083" />
-                                        <Key frame="2941" value="-27.1561" />
+                                        <Key frame="2820" value="-14.5045" />
+                                        <Key frame="2876" value="-36.3896" />
+                                        <Key frame="2945" value="-41.5752" />
                                         <Key frame="3002" value="-11.6872" />
                                         <Key frame="3050" value="-6.76526" />
                                     </ActuatorCurve>
@@ -10880,16 +10830,16 @@ class MyClass(GeneratedClass):
                                         <Key frame="461" value="51.59" />
                                         <Key frame="521" value="53.7873" />
                                         <Key frame="579" value="48.6017" />
-                                        <Key frame="637" value="32.3466" />
-                                        <Key frame="680" value="-72.2446" />
+                                        <Key frame="637" value="33.6601" />
+                                        <Key frame="680" value="-71.1068" />
                                         <Key frame="703" value="-70.2231" />
                                         <Key frame="709" value="-69.0805" />
-                                        <Key frame="745" value="-68.4652" />
-                                        <Key frame="795" value="14.3288" />
+                                        <Key frame="745" value="-70.0521" />
+                                        <Key frame="795" value="13.8845" />
                                         <Key frame="835" value="29.7098" />
                                         <Key frame="868" value="41.9268" />
                                         <Key frame="895" value="48.6944" />
-                                        <Key frame="919" value="103.89" />
+                                        <Key frame="918" value="103.89" />
                                         <Key frame="933" value="103.275" />
                                         <Key frame="940" value="89.652" />
                                         <Key frame="966" value="98.6169" />
@@ -10901,7 +10851,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1116" value="94.0417" />
                                         <Key frame="1146" value="44.4756" />
                                         <Key frame="1166" value="32.2587" />
-                                        <Key frame="1172" value="52.8253" />
+                                        <Key frame="1173" value="52.8253" />
                                         <Key frame="1199" value="59.593" />
                                         <Key frame="1227" value="-9.13833" />
                                         <Key frame="1263" value="76.1166" />
@@ -10917,7 +10867,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1518" value="-15.4665" />
                                         <Key frame="1560" value="60.6477" />
                                         <Key frame="1584" value="53.0011" />
-                                        <Key frame="1590" value="51.2433" />
+                                        <Key frame="1591" value="51.2433" />
                                         <Key frame="1619" value="28.2156" />
                                         <Key frame="1639" value="39.29" />
                                         <Key frame="1672" value="18.7233" />
@@ -10926,7 +10876,7 @@ class MyClass(GeneratedClass):
                                         <Key frame="1740" value="103.89" />
                                         <Key frame="1764" value="82.2691" />
                                         <Key frame="1799" value="9.92936" />
-                                        <Key frame="1813" value="24.0799" />
+                                        <Key frame="1814" value="24.0799" />
                                         <Key frame="1841" value="16.5212" />
                                         <Key frame="1868" value="0.700723" />
                                         <Key frame="1896" value="51.3312" />
@@ -10958,11 +10908,9 @@ class MyClass(GeneratedClass):
                                         <Key frame="2623" value="-4.74374" />
                                         <Key frame="2655" value="-4.74374" />
                                         <Key frame="2717" value="-3.86484" />
-                                        <Key frame="2757" value="6.59429" />
-                                        <Key frame="2795" value="15.5592" />
-                                        <Key frame="2841" value="15.5592" />
-                                        <Key frame="2895" value="2.55127" />
-                                        <Key frame="2941" value="-35.418" />
+                                        <Key frame="2820" value="46.756" />
+                                        <Key frame="2876" value="57.303" />
+                                        <Key frame="2945" value="66.7074" />
                                         <Key frame="3002" value="-61.2581" />
                                         <Key frame="3050" value="-12.3903" />
                                     </ActuatorCurve>

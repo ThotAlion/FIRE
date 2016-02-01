@@ -10,6 +10,16 @@ from numpy import *
 import argparse
 
 
+######################################
+#                   TODO
+#changer la position de la chute et de l'arabesque
+#
+#
+#
+#
+#########################################
+
+
 
 
 class main_ui(QtGui.QWidget):
