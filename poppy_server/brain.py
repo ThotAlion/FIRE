@@ -32,11 +32,13 @@ class listener(Thread):
         self._robotIn = {}
         self._robotOut = {}
         self._active = True
+        self._reset = False
         
     def run(self):
         print "toto"
         while self._active:
             # waiting for a message
+            self._reset = False
             reply = self._socket.recv_json()
             if reply.has_key("robot"):
                 if reply["robot"].has_key("get_pose"):
@@ -44,6 +46,10 @@ class listener(Thread):
                 elif reply["robot"].has_key("set_pose"):
                     self._robotIn = reply["robot"]["set_pose"]
                     self._socket.send_json({})
+                elif reply["robot"].has_key("reset"):
+                    self._reset = True
+                    self._socket.send_json({})
+                    
                 else:
                     print "message not recognized."
                     print reply
@@ -52,7 +58,8 @@ class listener(Thread):
 if __name__ == "__main__":
     addresses = netifaces.ifaddresses('wlan0')
     ip = addresses[netifaces.AF_INET][0]["addr"]
-    robot = pypot.robot.from_json("full_mommy.json")
+    json_name = "full_mommy.json"
+    robot = pypot.robot.from_json(json_name)
     task = listener(ip,'8080')
     task.start()
     number = "-1"
@@ -68,13 +75,20 @@ if __name__ == "__main__":
     while goon:
         t = time.time()
         
+        if task._reset == True:
+            print "Reset!"
+            robot.close()
+            robot = pypot.robot.from_json(json_name)
+            print "Reset is done"
+        
         # print t
         # allocate the present_pose register
         a = {}
         p = {}
         
         tempc = 0
-        voltage = 1000
+        minVoltage = 1000
+        maxVoltage = 0
         hottest = 'TBD'
         for mot in robot.motors:
             p[mot.name] = mot.present_position
@@ -83,9 +97,11 @@ if __name__ == "__main__":
             if tempc == mot.present_temperature:
                 hottest = mot.name
             if mot.model!='XL-320':
-                voltage = min(voltage,mot.present_voltage)
+                minVoltage = min(minVoltage,mot.present_voltage)
+                maxVoltage = max(maxVoltage,mot.present_voltage)
         a["Temperature"] = str(tempc)
-        a["Voltage"] = str(voltage)
+        a["VoltageMin"] = str(minVoltage)
+        a["VoltageMax"] = str(maxVoltage)
         a["Hottest"] = hottest
         if len(p0)==0:
             p0 = p.copy()
