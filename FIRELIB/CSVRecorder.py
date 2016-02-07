@@ -160,13 +160,13 @@ class Poses(QAbstractTableModel):
                     c["name"] = f
                     if pos[f][0] == "M":
                         c["nature"] = "M"
-                        c["consign"] = "0.0"
+                        c["consign"] = 0.0
                     elif pos[f][0] == "P":
                         c["nature"] = "PM"
-                        c["consign"] = "0.0"
+                        c["consign"] = 0.0
                     elif pos[f][0] == "K":
                         c["nature"] = "K"
-                        c["consign"] = "0.0"
+                        c["consign"] = 0.0
                     elif pos[f][0] == "L":
                         c["nature"] = "L"
                         c["consign"] = float(pos[f][1:])
