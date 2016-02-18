@@ -1,4 +1,5 @@
 from PyQt4 import QtGui, QtCore
+import time
 
 class StoryTelling(QtGui.QWidget):
 
@@ -19,17 +20,19 @@ class StoryTelling(QtGui.QWidget):
         self.label_warning = QtGui.QLabel("Msg sent")
         self.label_warning.setStyleSheet("background-color:red")
         self.button_next = QtGui.QPushButton("Next")
-        self.button_prev = QtGui.QPushButton("Prev")
+        self.button_clock = QtGui.QPushButton("Clock")
         self.button_call = QtGui.QPushButton("Call")
         self.button_save = QtGui.QPushButton("Save")
+        self.lcd = QtGui.QLCDNumber(5)
+        self.lcd.setSegmentStyle(QtGui.QLCDNumber.Flat)
         #ListView
         self.listView = QtGui.QListView()
         self.model = QtGui.QStandardItemModel(self.listView)
         ##Add to layout
         self.layoutMenu.addWidget(self.checkBox_realTime)
-        self.layoutMenu.addWidget(self.label_warning)
+        self.layoutMenu.addWidget(self.lcd)
         self.layoutMenu.addWidget(self.button_next)
-        self.layoutMenu.addWidget(self.button_prev)
+        self.layoutMenu.addWidget(self.button_clock)
         self.layoutMenu.addWidget(self.button_call)
         self.layoutMenu.addWidget(self.button_save)
         self.groupMenu.setLayout(self.layoutMenu)
@@ -53,12 +56,17 @@ class StoryTelling(QtGui.QWidget):
         self.button_save.clicked.connect(self.save_file)
         self.button_call.clicked.connect(self.callSelection_button)
         self.button_next.clicked.connect(self.next_index)
-        self.button_prev.clicked.connect(self.prev_index)
+        self.button_clock.clicked.connect(self.reset_clock)
+        QtCore.QObject.connect( self.lcd , QtCore.SIGNAL("mousePressEvent()") , self.reset_clock)
         
         ## Warning information when message pressed
         self.isMessageSent = False
         self.imgBlank = "images/blank.png"
         self.imgSent = "images/sent.png"
+        
+        #clock manager to know where we are during the show
+        self.time_start = time.time()
+        
         
         #Select the fist line of QViewList
         first_item = self.model.item(0)
@@ -233,6 +241,20 @@ class StoryTelling(QtGui.QWidget):
     def write_msg(self,l):
     
         self.storytelling_event.emit(l)
+        
+    def update_clock(self):
+    
+        mytime = time.time() - self.time_start
+        min = int((int(mytime))/60 )
+        text = QtCore.QString(str(min)+":"+str(int(mytime)-min*60))
+        
+        self.lcd.display(text)
+        
+    def reset_clock(self):
+    
+        self.time_start = time.time()
+    
+        
     
     
             

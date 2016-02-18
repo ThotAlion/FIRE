@@ -43,7 +43,7 @@ class main_ui(QtGui.QWidget):
         self.connect(self.timerNao, QtCore.SIGNAL("timeout()"), self.manager.nao_getStatus)
         self.timerNao.start(3000)
         self.timerStory = QtCore.QTimer(self)
-        self.connect(self.timerStory, QtCore.SIGNAL("timeout()"), self.story.warning_message_status)
+        self.connect(self.timerStory, QtCore.SIGNAL("timeout()"), self.story.update_clock)
         self.timerStory.start(200)
         
         
@@ -80,9 +80,9 @@ class main_ui(QtGui.QWidget):
         
         #self.manager.addNao("Baltazar", "10.0.1.13", 9559 )
         
-        self.manager.addNao("Lucy", "10.0.1.13", 9559 )
-        self.manager.addNao("Lucas", "10.0.1.11", 9559 )
-        self.manager.addNao("MaMa", "10.0.1.12", 9559 )
+        #self.manager.addNao("Lucy", "10.0.1.13", 9559 )
+        self.manager.addNao("Lucas", "10.0.1.3", 9559 )
+        #self.manager.addNao("MaMa", "10.0.1.12", 9559 )
 
         self.manager.init_manager()
     
