@@ -132,6 +132,8 @@ class Poses(QAbstractTableModel):
             for obj in pose["objectives"].objectiveList:
                 if obj["nature"] == "M":
                     b[obj["name"]] =   "M"
+                elif obj["nature"] == "Z":
+                    b[obj["name"]] =   "Z"
                 elif obj["nature"] == "PM":
                     b[obj["name"]] =   "P"
                 elif obj["nature"] == "L":
@@ -160,6 +162,9 @@ class Poses(QAbstractTableModel):
                     c["name"] = f
                     if pos[f][0] == "M":
                         c["nature"] = "M"
+                        c["consign"] = 0.0
+                    elif pos[f][0] == "Z":
+                        c["nature"] = "Z"
                         c["consign"] = 0.0
                     elif pos[f][0] == "P":
                         c["nature"] = "PM"
@@ -212,9 +217,7 @@ class CSVRecorder(Block.Block,QWidget):
         self.poseList = Poses()
         self.history = []
         self.objectiveList = Objectives()
-        self.backPose = Objectives()
         self.holdPose = {}
-        self.loadBackPose('_mou.seq')
         
         self.t0 = Tools.getTime()
         self.iCurrentPose = -1
@@ -233,11 +236,6 @@ class CSVRecorder(Block.Block,QWidget):
         self.tapeTable.setModel(self.tapeDir)
         self.tapeTable.setRootIndex(self.tapeDir.index(QDir.currentPath()+self.folder))
         self.tapeTable.horizontalHeader().setResizeMode(QHeaderView.ResizeToContents)
-        self.cBackPose = QComboBox()
-        self.cBackPose.setModel(self.tapeDir)
-        self.cBackPose.setRootModelIndex(self.tapeDir.index(QDir.currentPath()+self.folder))
-        imou = self.tapeDir.index(QDir.currentPath()+self.folder+"_mou.seq")
-        self.cBackPose.setCurrentIndex(imou.row())
         self.bInsertPose = QPushButton("Insert current pose below")
         self.bCopyPose = QPushButton("Copy pose")
         self.bPastePose = QPushButton("Paste pose")
@@ -265,7 +263,6 @@ class CSVRecorder(Block.Block,QWidget):
         tapelayout = QVBoxLayout()
         tapelayout.addWidget(self.bSave)
         tapelayout.addWidget(self.bLoad)
-        tapelayout.addWidget(self.cBackPose)
         tapelayout.addWidget(self.tapeTable)
         mainlayout.addLayout(tapelayout)
         poselayout = QVBoxLayout()
@@ -295,7 +292,6 @@ class CSVRecorder(Block.Block,QWidget):
         self.connect(self.scCtrlV,SIGNAL("activated()"),self.pastePose)
         self.connect(self.poseTable,SIGNAL("clicked(QModelIndex)"),self.updateObjective)
         self.connect(self.tapeTable,SIGNAL("clicked(QModelIndex)"),self.loadSeq)
-        self.connect(self.cBackPose,SIGNAL("currentIndexChanged(QString)"),self.loadBackPose)
         self.connect(self.bDeletePose,SIGNAL("pressed()"),self.deletePose)
         self.connect(self.bReverse,SIGNAL("pressed()"),self.reverse)
         self.connect(self.bMirror,SIGNAL("pressed()"),self.mirror_poppy)
@@ -563,12 +559,7 @@ class CSVRecorder(Block.Block,QWidget):
             self.togglePlay()
         if self.cIsCycle.isChecked():
             self.cIsCycle.setCheckState(Qt.Unchecked)
-    
-    def loadBackPose(self,filename):
-        a = pickle.load(file(QDir.currentPath()+"/TAPES/"+filename,'rb'))
-        self.backPose.fromDict(a[0]["objectives"])
         
-    
     def start(self):
         a=1
         
