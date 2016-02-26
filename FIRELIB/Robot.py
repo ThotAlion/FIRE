@@ -44,6 +44,17 @@ class Robot(Block.Block,QWidget):
         
         self.dict_checkbox["All"] = QCheckBox("Force All mou")
         self.resetButton = QPushButton("Reset Robot")
+        self.abreath = QDoubleSpinBox()
+        self.abreath.setPrefix("br. amp. :")
+        self.abreath.setValue(3.0)
+        self.abreath.setSingleStep(1)
+        self.abreath.setMinimum(0.1)
+        self.tbreath = QDoubleSpinBox()
+        self.tbreath.setPrefix("br. per. :")
+        self.tbreath.setValue(3.0)
+        self.tbreath.setSingleStep(0.1)
+        self.tbreath.setMinimum(0.1)
+        
         for member in self.members:
             self.dict_checkbox[member] = QCheckBox("Force "+member+" mou")
         
@@ -51,6 +62,7 @@ class Robot(Block.Block,QWidget):
         self.hottestMotor = QLabel("Hottest motor : TBD")
         self.minVoltLabel = QLabel("Min Voltage : 0V")
         self.maxVoltLabel = QLabel("Max Voltage : 0V")
+        self.LoadLabel = QLabel("head : 0\nr_arm : 0,0,0,0\nl_arm : 0,0,0,0\nr_leg : 0,0,0,0,0\nl_leg : 0,0,0,0,0\ntorso : 0,0,0,0,0")
         
         # composition
         mainlayout = QVBoxLayout(self)
@@ -61,6 +73,9 @@ class Robot(Block.Block,QWidget):
         mainlayout.addWidget(self.minVoltLabel)
         mainlayout.addWidget(self.maxVoltLabel)
         mainlayout.addWidget(self.resetButton)
+        mainlayout.addWidget(self.abreath)
+        mainlayout.addWidget(self.tbreath)
+        mainlayout.addWidget(self.LoadLabel)
         
         # signals
         for member in self.members:
@@ -81,6 +96,8 @@ class Robot(Block.Block,QWidget):
         r["Duration"] = self.inputs['Duration'].getValue(f)
         r["Name"] = self.inputs['Name'].getValue(f)
         r["Number"] = self.inputs['Number'].getValue(f)
+        r["Abreath"] = self.abreath.value()
+        r["Tbreath"] = self.tbreath.value()
         for member in self.members:
             for art in self.members[member]:
                 if self.inputs["Emergency"].getValue(f) == "1":
@@ -110,6 +127,7 @@ class Robot(Block.Block,QWidget):
                 self.hottestMotor.setText("Hottest motor : "+r["Hottest"])
             self.minVoltLabel.setText("Min voltage : "+r["VoltageMin"]+"V")
             self.maxVoltLabel.setText("Max voltage : "+r["VoltageMax"]+"V")
+            self.LoadLabel.setText("head : "+r["v_head_y"]+","+r["v_head_z"]+"\nr_arm : "+r["v_r_shoulder_y"]+","+r["v_r_shoulder_x"]+","+r["v_r_arm_z"]+","+r["v_r_elbow_y"]+"\nl_arm : "+r["v_l_shoulder_y"]+","+r["v_l_shoulder_x"]+","+r["v_l_arm_z"]+","+r["v_l_elbow_y"]+"\nr_leg : "+r["v_r_hip_x"]+","+r["v_r_hip_z"]+","+r["v_r_hip_y"]+","+r["v_r_knee_y"]+","+r["v_r_ankle_y"]+"\nl_leg : "+r["v_l_hip_x"]+","+r["v_l_hip_z"]+","+r["v_l_hip_y"]+","+r["v_l_knee_y"]+","+r["v_l_ankle_y"]+"\ntorso : "+r["v_bust_x"]+","+r["v_bust_y"]+","+r["v_abs_z"]+","+r["v_abs_x"]+","+r["v_abs_y"])
             
         return f
         
