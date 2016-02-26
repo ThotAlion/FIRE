@@ -7,7 +7,10 @@ import FiniteStateMachine
 import UniPoppy
 import Recorder
 import Engine
-import LeftIndex
+try:
+    import LeftIndex
+except e:
+    print "No Leap Motion available."
 import xboxPad
 import Wires
 import Mirror
