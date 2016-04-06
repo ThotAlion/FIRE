@@ -44,7 +44,7 @@ interfaces.children['PoppyButtons'].outputs["head to hand"].connectedTo = " plea
 systems = FIRELIB.Group.Group()
 systems.inputs["activate"].connectedTo = "1"
 
-systems.children['Ratelim'] = FIRELIB.Ratelim.Ratelim(2,50)
+systems.children['Ratelim'] = FIRELIB.Ratelim.Ratelim(2,100)
 systems.children['Ratelim'].inputs["activate"].connectedTo = "1"
 
 systems.children['PCSVRecorder'] = FIRELIB.CSVRecorder.CSVRecorder(members,folder = '/TAPES_CSV_NANCY/')
@@ -125,9 +125,9 @@ systems.children['ptete direct'].outputs["ch1"].connectedTo = " phead_z "
 
 systems.children['ptete laser'] = FIRELIB.Wires.Wires(2)
 systems.children['ptete laser'].inputs["activate"].connectedTo = " pleap "
-systems.children['ptete laser'].inputs["ch0"].connectedTo = " str(- pitchr ) "
+systems.children['ptete laser'].inputs["ch0"].connectedTo = " str(- pitch ) "
 systems.children['ptete laser'].outputs["ch0"].connectedTo = " phead_y "
-systems.children['ptete laser'].inputs["ch1"].connectedTo = " str(- yawr ) "
+systems.children['ptete laser'].inputs["ch1"].connectedTo = " str(- yaw ) "
 systems.children['ptete laser'].outputs["ch1"].connectedTo = " phead_z "
 
 systems.children['mtete direct'] = FIRELIB.Wires.Wires(2)
@@ -139,9 +139,9 @@ systems.children['mtete direct'].outputs["ch1"].connectedTo = " mhead_z "
 
 systems.children['mtete laser'] = FIRELIB.Wires.Wires(2)
 systems.children['mtete laser'].inputs["activate"].connectedTo = " mleap "
-systems.children['mtete laser'].inputs["ch0"].connectedTo = " str(- pitchr ) "
+systems.children['mtete laser'].inputs["ch0"].connectedTo = " str(- pitch ) "
 systems.children['mtete laser'].outputs["ch0"].connectedTo = " mhead_y "
-systems.children['mtete laser'].inputs["ch1"].connectedTo = " str(- yawr ) "
+systems.children['mtete laser'].inputs["ch1"].connectedTo = " str(- yaw ) "
 systems.children['mtete laser'].outputs["ch1"].connectedTo = " mhead_z "
 
 
