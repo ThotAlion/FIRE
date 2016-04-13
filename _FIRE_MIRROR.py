@@ -27,9 +27,9 @@ popLayM = QVBoxLayout()
 
 interfaces = FIRELIB.Group.Group()
 interfaces.inputs["activate"].connectedTo = "1"
-interfaces.children['Poppy'] = FIRELIB.Robot.Robot(members,"10.0.2.1","8080")
+interfaces.children['Poppy'] = FIRELIB.Robot.Robot(members,"10.0.0.20","8080")
 interfaces.children['Poppy'].inputs["activate"].connectedTo = "1"
-interfaces.children['Mommy'] = FIRELIB.Robot.Robot(members,"10.0.2.2","8080")
+interfaces.children['Mommy'] = FIRELIB.Robot.Robot(members,"10.0.0.21","8080")
 interfaces.children['Mommy'].inputs["activate"].connectedTo = "1"
 interfaces.children['Index'] = FIRELIB.LeftIndex.LeftIndex()
 interfaces.children['Index'].inputs["activate"].connectedTo = "1"
