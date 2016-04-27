@@ -1,0 +1,52 @@
+*entre 1er nao 4m00
+*laurena 6m30
+*2e nao 7m30
+*chute 10m35
+*ronde 12m00
+*depart pieta 17m20
+*Ronde2 sur lucy  seulement
+SELECT 0 1000 0
+POSTURE 0 Stand 0
+ANIM 0 RONDE2 0
+POSTURE 0 Stand 0
+*17m20 prepa puis Ronde2 sur tous
+SELECT 0 1110 0
+POSTURE 0 Stand 0
+AUTONOMED 0 6 0
+ANIM 0 RONDE2 0
+*pieta sur tous 20m60
+COMBO 0 PIETA 0
+*danse gracieuse 21m27
+ANIM 0 DANSE 0
+*Mama en manuel se rapproche
+*opera 23m50
+SELECT 0 0010 0
+ANIM 0 OPERA 0
+*Lucy Lucas applaudissent
+SELECT 0 1100 0
+POSTURE 0 Stand 0
+ANIM 0 APPLAUSE 0
+*Lucas s'en va
+*Mama triste en solitude
+SELECT 0 0010 0
+ANIM 0 SOLITUDE 0
+*Lucas en manuel vers lucy
+*seducation lucas lucy
+SELECT 0 1100 0
+COMBO 0 SEDUCTION 0
+*A la fin
+*Lucas en manuel vers Mama
+*Lucy frustre
+SELECT 0 1000 0
+ANIM 0 FRUSTRE 0
+*mama et lucas font declaration
+*puis ciel
+SELECT 0 0110 0
+COMBO 0 DECLARATION 0
+COMBO 0 CIEL 0
+*- - - -
+*- - - -
+*- -FIN 15:04- - 
+*- -FIN - -
+*- - -
+FIN FIN FIN FIN

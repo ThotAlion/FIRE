@@ -78,6 +78,7 @@ class Interpret(QtGui.QWidget):
         self.imgStoryCall = "images/call.png"
         self.imgStoryEmpty = "images/story.png"
         self.imgFalling = "images/falling.png"
+        self.imgTaxi = "images/taxi.png"
         
         #setPixmap
         self.changeView(0)
@@ -132,7 +133,7 @@ class Interpret(QtGui.QWidget):
 
         dic1["LEFT_Y"] = ["FPS", -5, 0]
         dic1["LEFT_X"] = ["ANIM", "RONDE", 0]
-        dic1["LEFT_B"] = ["FPS", 5, 0]
+        dic1["LEFT_B"] = ["ANIM", "TAXI", 0]
         dic1["LEFT_A"] = ["FPS", 10, 0]
 
         ##### --1-- JOYSTICK ####
@@ -245,7 +246,7 @@ class Interpret(QtGui.QWidget):
             elif a=="left":
                 self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgRonde))
                 self.buttonTop.setPixmap(QtGui.QPixmap(self.imgOpera))
-                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgEmpty))
+                self.buttonRight.setPixmap(QtGui.QPixmap(self.imgTaxi))
                 self.buttonBottom.setPixmap(QtGui.QPixmap(self.imgEmpty))            
             elif a=="up":
                 self.buttonLeft.setPixmap(QtGui.QPixmap(self.imgAutoReset))

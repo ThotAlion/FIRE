@@ -10,18 +10,6 @@ from numpy import *
 import argparse
 
 
-######################################
-#                   TODO
-#changer la position de la chute et de l'arabesque
-#
-#
-#
-#
-#########################################
-
-
-
-
 class main_ui(QtGui.QWidget):
 
     def __init__(self):
@@ -58,7 +46,6 @@ class main_ui(QtGui.QWidget):
         self.interpret2.interpret_event.connect(self.story.transmit_msg)
         
         self.story.storytelling_event.connect(self.manager.transmit_msg)
-        
         self.joystick.second_joy_detected.connect(self.add_joystick)
 
         #### GUI######
@@ -80,9 +67,9 @@ class main_ui(QtGui.QWidget):
         
         #self.manager.addNao("Baltazar", "10.0.1.13", 9559 )
         
-        #self.manager.addNao("Lucy", "10.0.1.13", 9559 )
-        self.manager.addNao("Lucas", "10.0.1.3", 9559 )
-        #self.manager.addNao("MaMa", "10.0.1.12", 9559 )
+        self.manager.addNao("Lucy", "10.0.0.10", 9559 )
+        self.manager.addNao("Lucas", "10.0.0.12", 9559 )
+        self.manager.addNao("MaMa", "10.0.0.11", 9559 )
 
         self.manager.init_manager()
     

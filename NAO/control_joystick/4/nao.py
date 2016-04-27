@@ -207,10 +207,10 @@ class Nao(QtGui.QWidget):
             #Bridage des nao
             #pour Lucy et Baltzar, afin de d'eviter marche destabilisante
 
-          
-            if self.name == "Lucy" and Frequency < 0.75 :
-                X = X * Frequency
-                Frequency = 0.75
+            # Lucy debride
+            #if self.name == "Lucy" and Frequency < 0.75 :
+            #    X = X * Frequency
+            #    Frequency = 0.75
                 
                 print "bridage lucy"
             if self.name == "Baltazar" and Frequency > 0.8:
