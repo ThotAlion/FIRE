@@ -61,10 +61,11 @@ class CSVPlayer(Block.Block,QWidget):
             self.t0 = t
             self.number = self.number+1
             print self.index
-        elif self.index==len(self.tape)-2:
+        elif self.index>=len(self.tape)-1:
             self.outputs["finished"].setValue(1,f)
         
         for name in self.tape[self.index]:
+            
             self.outputs[name].setValue(self.tape[self.index][name],f)
         self.outputs["Number"].setValue(str(self.number),f)
         return f
