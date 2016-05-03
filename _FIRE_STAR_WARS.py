@@ -26,22 +26,26 @@ popLayP = QVBoxLayout()
 
 interfaces = FIRELIB.Group.Group()
 interfaces.inputs["activate"].connectedTo = "1"
-interfaces.children['Poppy'] = FIRELIB.Robot.Robot(members,"10.0.0.20","8080")
+interfaces.append('Poppy',FIRELIB.Robot.Robot(members,"10.0.0.20","8080"))
 interfaces.children['Poppy'].inputs["activate"].connectedTo = "1"
-interfaces.children['Index'] = FIRELIB.LeftIndex.LeftIndex()
+interfaces.append('Index',FIRELIB.LeftIndex.LeftIndex())
 interfaces.children['Index'].inputs["activate"].connectedTo = "1"
-interfaces.children['PoppyButtons'] = FIRELIB.Buttons.Buttons(['wrist to hand'],[0],'check')
+interfaces.append('PoppyButtons',FIRELIB.Buttons.Buttons(['wrist to hand'],[0],'check'))
 interfaces.children['PoppyButtons'].inputs["activate"].connectedTo = "1"
 interfaces.children['PoppyButtons'].outputs["wrist to hand"].connectedTo = " pleap "
+interfaces.append('Display', FIRELIB.Display.Display(['pitch','yaw','pleap','wrist_z','wrist_x']))
+interfaces.children['Display'].inputs["activate"].connectedTo = "1"
 
 systems = FIRELIB.Group.Group()
 systems.inputs["activate"].connectedTo = "1"
 
-systems.children['Ratelim'] = FIRELIB.Ratelim.Ratelim(2,100)
-systems.children['Ratelim'].inputs["activate"].connectedTo = "1"
-
-systems.children['PCSVRecorder'] = FIRELIB.CSVRecorder.CSVRecorder(members,folder = '/TAPES_CSV_STAR_WARS/')
+systems.append('PCSVRecorder',FIRELIB.CSVRecorder.CSVRecorder(members,folder = '/TAPES_CSV_STAR_WARS/'))
 systems.children['PCSVRecorder'].inputs["activate"].connectedTo = "1"
+
+
+
+systems.append('ptete direct', FIRELIB.Wires.Wires(2))
+systems.append('ptete laser', FIRELIB.Wires.Wires(2))
 
 mainLay.addLayout(popLayP)
 poppytitle = QLabel("POPPY")
@@ -70,25 +74,31 @@ systems.children['PCSVRecorder'].outputs['Duration'].connectedTo = " pDelta "
 interfaces.children['Poppy'].inputs['Duration'].connectedTo = " pDelta "
 
 interfaces.children['Index'].outputs['index yaw'].connectedTo = " yaw "
-systems.children['Ratelim'].inputs['ch0'].connectedTo = " yaw "
-systems.children['Ratelim'].outputs['ch0'].connectedTo = " yawr "
 interfaces.children['Index'].outputs['index pitch'].connectedTo = " pitch "
-systems.children['Ratelim'].inputs['ch1'].connectedTo = " pitch "
-systems.children['Ratelim'].outputs['ch1'].connectedTo = " pitchr "
+interfaces.children['Display'].inputs["pitch"].connectedTo = " pitch "
+interfaces.children['Display'].inputs["yaw"].connectedTo = " yaw "
+interfaces.children['Display'].inputs["pleap"].connectedTo = " pleap "
+interfaces.children['Display'].inputs["wrist_z"].connectedTo = " pr_wrist_z "
+interfaces.children['Display'].inputs["wrist_x"].connectedTo = " pr_wrist_x "
 
-systems.children['ptete direct'] = FIRELIB.Wires.Wires(2)
+
+
+
 systems.children['ptete direct'].inputs["activate"].connectedTo = " - pleap +1 "
-systems.children['ptete direct'].inputs["ch0"].connectedTo = " pwrist_x "
-systems.children['ptete direct'].outputs["ch0"].connectedTo = " pwrist_x "
-systems.children['ptete direct'].inputs["ch1"].connectedTo = " pwrist_z "
-systems.children['ptete direct'].outputs["ch1"].connectedTo = " pwrist_z "
+systems.children['ptete direct'].inputs["ch0"].connectedTo = " pr_wrist_x "
+systems.children['ptete direct'].outputs["ch0"].connectedTo = " pr_wrist_x "
+systems.children['ptete direct'].inputs["ch1"].connectedTo = " pr_wrist_z "
+systems.children['ptete direct'].outputs["ch1"].connectedTo = " pr_wrist_z "
 
-systems.children['ptete laser'] = FIRELIB.Wires.Wires(2)
+
 systems.children['ptete laser'].inputs["activate"].connectedTo = " pleap "
 systems.children['ptete laser'].inputs["ch0"].connectedTo = " str(- pitch ) "
-systems.children['ptete laser'].outputs["ch0"].connectedTo = " pwrist_x "
+systems.children['ptete laser'].outputs["ch0"].connectedTo = " pr_wrist_x "
 systems.children['ptete laser'].inputs["ch1"].connectedTo = " str(- yaw ) "
-systems.children['ptete laser'].outputs["ch1"].connectedTo = " pwrist_z "
+systems.children['ptete laser'].outputs["ch1"].connectedTo = " pr_wrist_z "
+
+print interfaces.list
+print systems.list
 
 
 # execution of FIRE engine
