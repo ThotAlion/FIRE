@@ -30,11 +30,10 @@ class Display(Block.Block,QWidget):
         return f
     
     def getInputs(self,f):
-        a=1
-        
-    def setOutputs(self,f):
         for b in self.labelDict:
             self.labelDict[b].setText(b+" : "+str(self.inputs[b].getValue(f)))
+        
+    def setOutputs(self,f):
         return f
            
     def close(self):
