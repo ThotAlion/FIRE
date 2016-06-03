@@ -1,10 +1,10 @@
-*entre 1er nao 4m00
-*laurena 6m30
-*2e nao 7m30
-*chute 10m35
-*ronde 12m00
-*depart pieta 17m20
-*Ronde2 sur lucy  seulement
+*entre 1er nao 3m00
+*laurena 5m30
+*2e nao 6m30
+*3e nao 8m10 - foret 9m
+*chute10m35
+*ronde12m00
+*lucy avant scene ecorche 17-20
 SELECT 0 1000 0
 POSTURE 0 Stand 0
 ANIM 0 RONDE2 0
@@ -14,7 +14,7 @@ SELECT 0 1110 0
 POSTURE 0 Stand 0
 AUTONOMED 0 6 0
 ANIM 0 RONDE2 0
-*pieta sur tous 20m60
+*pieta sur tous 20m00
 COMBO 0 PIETA 0
 *danse gracieuse 21m27
 ANIM 0 DANSE 0

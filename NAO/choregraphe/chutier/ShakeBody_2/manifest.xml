@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package uuid="shakebody_2-2a1de5">
+ <names>
+  <name lang="en_US">ShakeBody_2</name>
+ </names>
+ <descriptionLanguages>
+  <language>en_US</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path=".">
+   <nature></nature>
+   <tags>
+    <tag lang="en_US">dizzy</tag>
+    <tag lang="en_US">shake</tag>
+   </tags>
+   <permissions/>
+  </behaviorContent>
+ </contents>
+</package>
