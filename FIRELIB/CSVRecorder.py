@@ -251,6 +251,9 @@ class CSVRecorder(Block.Block,QWidget):
         self.cIsCycle = QCheckBox("is a Cycle ?")
         self.bAcquireSelected = QPushButton("Acquire selected")
         self.bAcquireAll = QPushButton("Acquire All")
+        self.dict_AcquireMember = {}
+        for member in self.members:
+            self.dict_AcquireMember[member] = QPushButton("Acquire "+member)
         self.bSave = QPushButton("Save")
         self.bLoad = QPushButton("Load")
         self.scCtrlC = QShortcut(QKeySequence("Ctrl+C"),self)
@@ -280,6 +283,8 @@ class CSVRecorder(Block.Block,QWidget):
         objlayout = QVBoxLayout()
         objlayout.addWidget(self.bAcquireSelected)
         objlayout.addWidget(self.bAcquireAll)
+        for member in self.dict_AcquireMember:
+            objlayout.addWidget(self.dict_AcquireMember[member])
         objlayout.addWidget(self.objTable)
         mainlayout.addLayout(objlayout)
         self.show()
@@ -297,6 +302,8 @@ class CSVRecorder(Block.Block,QWidget):
         self.connect(self.bMirror,SIGNAL("pressed()"),self.mirror_poppy)
         self.connect(self.bPlayPose,SIGNAL("pressed()"),self.togglePlay)
         self.connect(self.bAcquireSelected,SIGNAL("pressed()"),self.acquireSelected)
+        for member in self.dict_AcquireMember:
+            self.connect(self.dict_AcquireMember[member],SIGNAL("pressed()"),self.acquireMember)
         self.connect(self.bAcquireAll,SIGNAL("pressed()"),self.acquireAll)
         self.connect(self.bSave,SIGNAL("pressed()"),self.saveCSV)
         self.connect(self.scCtrlS,SIGNAL("activated()"),self.saveCSV)
@@ -470,6 +477,17 @@ class CSVRecorder(Block.Block,QWidget):
         name = self.poseList.poseList[ipose]["objectives"].objectiveList[iobj]["name"]
         self.poseList.poseList[ipose]["objectives"].emit(SIGNAL("layoutAboutToBeChanged()"))
         self.poseList.poseList[ipose]["objectives"].objectiveList[iobj]["consign"] = float(self.robot[name])
+        self.poseList.poseList[ipose]["objectives"].emit(SIGNAL("layoutChanged()"))
+    
+    def acquireMember(self):
+        sender = self.sender()
+        member = str(sender.text().replace("Acquire ",""))
+        ipose = self.poseTable.currentIndex().row()
+        self.poseList.poseList[ipose]["objectives"].emit(SIGNAL("layoutAboutToBeChanged()"))
+        for obj in self.poseList.poseList[ipose]["objectives"].objectiveList:
+            name = obj["name"]
+            if name in self.members[member]:
+                obj["consign"] = float(self.robot[name])
         self.poseList.poseList[ipose]["objectives"].emit(SIGNAL("layoutChanged()"))
         
     def acquireAll(self):
