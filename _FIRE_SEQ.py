@@ -26,13 +26,13 @@ popLayP = QVBoxLayout()
 
 interfaces = FIRELIB.Group.Group()
 interfaces.inputs["activate"].connectedTo = "1"
-interfaces.children['Poppy'] = FIRELIB.Robot.Robot(members,"10.0.2.1","8080")
+interfaces.children['Poppy'] = FIRELIB.Robot.Robot(members,"10.0.0.20","8080")
 interfaces.children['Poppy'].inputs["activate"].connectedTo = "1"
 interfaces.children['Index'] = FIRELIB.LeftIndex.LeftIndex()
 interfaces.children['Index'].inputs["activate"].connectedTo = "1"
-interfaces.children['PoppyButtons'] = FIRELIB.Buttons.Buttons(['head to hand'],[0],'check')
+interfaces.children['PoppyButtons'] = FIRELIB.Buttons.Buttons(['head to leap'],[0],'check')
 interfaces.children['PoppyButtons'].inputs["activate"].connectedTo = "1"
-interfaces.children['PoppyButtons'].outputs["head to hand"].connectedTo = " pleap "
+interfaces.children['PoppyButtons'].outputs["head to leap"].connectedTo = " pleap "
 
 systems = FIRELIB.Group.Group()
 systems.inputs["activate"].connectedTo = "1"
@@ -40,7 +40,7 @@ systems.inputs["activate"].connectedTo = "1"
 systems.children['Ratelim'] = FIRELIB.Ratelim.Ratelim(2,50)
 systems.children['Ratelim'].inputs["activate"].connectedTo = "1"
 
-systems.children['PCSVRecorder'] = FIRELIB.CSVRecorder.CSVRecorder(members,folder = '/TAPES_CSV/')
+systems.children['PCSVRecorder'] = FIRELIB.CSVRecorder.CSVRecorder(members,folder = '/TAPES_SEQ1/')
 systems.children['PCSVRecorder'].inputs["activate"].connectedTo = "1"
 
 mainLay.addLayout(popLayP)
