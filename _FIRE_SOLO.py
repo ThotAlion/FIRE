@@ -26,7 +26,7 @@ popLayP = QVBoxLayout()
 
 interfaces = FIRELIB.Group.Group()
 interfaces.inputs["activate"].connectedTo = "1"
-interfaces.children['Poppy'] = FIRELIB.Robot.Robot(members,"10.0.0.20","8080")
+interfaces.children['Poppy'] = FIRELIB.Robot.Robot(members,"10.0.0.101","8080")
 interfaces.children['Poppy'].inputs["activate"].connectedTo = "1"
 interfaces.children['Index'] = FIRELIB.LeftIndex.LeftIndex()
 interfaces.children['Index'].inputs["activate"].connectedTo = "1"
@@ -40,7 +40,7 @@ systems.inputs["activate"].connectedTo = "1"
 systems.children['Ratelim'] = FIRELIB.Ratelim.Ratelim(2,50)
 systems.children['Ratelim'].inputs["activate"].connectedTo = "1"
 
-systems.children['PCSVRecorder'] = FIRELIB.CSVRecorder.CSVRecorder(members,folder = '/TAPES_SEQ1/')
+systems.children['PCSVRecorder'] = FIRELIB.CSVRecorder.CSVRecorder(members,folder = '/TAPES_CSV_DUSSELDORF/')
 systems.children['PCSVRecorder'].inputs["activate"].connectedTo = "1"
 
 mainLay.addLayout(popLayP)
