@@ -1,9 +1,9 @@
-from numpy import *
+import numpy
 
 class Connexion(object):
     """ this class describes a connexion (formalism is as simple as possible!) """
     
-    def __init__(self,default = 0.0, min = -Inf, max = Inf):
+    def __init__(self,default = 0.0, min = -numpy.Inf, max = numpy.Inf):
         self.connectedTo = ""
         self.default = default
         self.min = min
@@ -31,7 +31,7 @@ class Connexion(object):
             if type(val) == str:
                 f[self.connectedTo] = val
             else:
-                val = minimum(val,self.max)
-                val = maximum(val,self.min)
+                #val = numpy.minimum(val,self.max)
+                #val = numpy.maximum(val,self.min)
                 f[self.connectedTo] = val
         return f
