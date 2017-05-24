@@ -142,7 +142,7 @@
 		},
 		"l_ankle_y": {
 			"id": 23,
-			"type": "AX-18",
+			"type": "MX-28",
 			"orientation": "indirect",
 			"offset": 0,
 			"angle_limit": [-80,80]

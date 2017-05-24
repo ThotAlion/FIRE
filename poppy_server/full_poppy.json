@@ -20,8 +20,8 @@
 	"motorgroups": {
 		"l_arm": ["l_shoulder_y", "l_shoulder_x","l_arm_z","l_elbow_y"],
 		"r_arm": ["r_shoulder_y", "r_shoulder_x","r_arm_z","r_elbow_y"],
-		"l_leg": ["l_hip_x", "l_hip_z","l_hip_y","l_knee_y","l_ankle_y"],
-		"r_leg": ["r_hip_x", "r_hip_z","r_hip_y","r_knee_y","r_ankle_y"],
+		"l_leg": ["l_hip_x", "l_hip_z","l_hip_y","l_knee_y"],
+		"r_leg": ["r_hip_x", "r_hip_z","r_hip_y","r_knee_y"],
 		"head": ["head_z", "head_y"],
 		"torso": ["abs_y","abs_x","abs_z","bust_y","bust_x"],
         "l_hand": ["l_wrist_z","l_wrist_x"],
@@ -140,13 +140,6 @@
 			"offset": 0,
 			"angle_limit": [-130,20]
 		},
-		"l_ankle_y": {
-			"id": 23,
-			"type": "MX-28",
-			"orientation": "indirect",
-			"offset": 0,
-			"angle_limit": [-80,80]
-		},
 		"r_hip_x": {
 			"id": 29,
 			"type": "MX-28",
@@ -174,13 +167,6 @@
 			"orientation": "direct",
 			"offset": 0,
 			"angle_limit": [-20,130]
-		},
-		"r_ankle_y": {
-			"id": 18,
-			"type": "MX-28",
-			"orientation": "direct",
-			"offset": 0,
-			"angle_limit": [-90,90]
 		},
 		"head_z": {
 			"id": 24,

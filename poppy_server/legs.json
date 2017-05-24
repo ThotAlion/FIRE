@@ -1,0 +1,71 @@
+{
+	"controllers": {
+		"lower_body": {
+			"port": "auto",
+			"sync_read": true,
+			"attached_motors": ["l_leg","r_leg"]
+		}
+	},
+	"motorgroups": {
+		"l_leg": ["l_hip_x", "l_hip_z","l_hip_y","l_knee_y"],
+		"r_leg": ["r_hip_x", "r_hip_z","r_hip_y","r_knee_y"]
+	},
+	"motors": {
+		"l_hip_x": {
+			"id": 19,
+			"type": "MX-28",
+			"orientation": "direct",
+			"offset": 0,
+			"angle_limit": [-20,20]
+		},
+		"l_hip_z": {
+			"id": 20,
+			"type": "MX-28",
+			"orientation": "indirect",
+			"offset": 0,
+			"angle_limit": [-70,15]
+		},
+		"l_hip_y": {
+			"id": 21,
+			"type": "MX-64",
+			"orientation": "direct",
+			"offset": 0,
+			"angle_limit": [-90,100]
+		},
+		"l_knee_y": {
+			"id": 22,
+			"type": "MX-28",
+			"orientation": "indirect",
+			"offset": 0,
+			"angle_limit": [-130,20]
+		},
+		"r_hip_x": {
+			"id": 29,
+			"type": "MX-28",
+			"orientation": "direct",
+			"offset": 0,
+			"angle_limit": [-20,20]
+		},
+		"r_hip_z": {
+			"id": 15,
+			"type": "MX-28",
+			"orientation": "indirect",
+			"offset": 0,
+			"angle_limit": [-15,70]
+		},
+		"r_hip_y": {
+			"id": 16,
+			"type": "MX-64",
+			"orientation": "indirect",
+			"offset": 0,
+			"angle_limit": [-90,100]
+		},
+		"r_knee_y": {
+			"id": 17,
+			"type": "MX-28",
+			"orientation": "direct",
+			"offset": 0,
+			"angle_limit": [-20,130]
+		}
+	}
+}

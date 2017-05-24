@@ -458,7 +458,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
     border: 1px solid #444;
 }
 
-QTreeView 
+QTableView 
 {
     alternate-background-color: #323232;
 }

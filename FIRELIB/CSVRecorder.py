@@ -83,6 +83,7 @@ class Poses(QAbstractTableModel):
             if role == Qt.BackgroundRole:
                 if obj["name"][0]=="k":
                     return QBrush(Qt.blue)
+                
     
     def headerData(self, col, orientation, role):
         if orientation == Qt.Horizontal and role == Qt.DisplayRole:
@@ -226,16 +227,17 @@ class CSVRecorder(Block.Block,QWidget):
         
         # creation of components
         self.objTable = QTableView()
-        self.objTable.horizontalHeader().setResizeMode(QHeaderView.ResizeToContents)
+        self.objTable.horizontalHeader().setResizeMode(QHeaderView.Stretch)
         self.poseTable = QTableView()
+        self.poseTable.horizontalHeader().setResizeMode(QHeaderView.Stretch)
         self.poseTable.setModel(self.poseList)
-        self.poseTable.horizontalHeader().setResizeMode(QHeaderView.ResizeToContents)
         self.tapeTable = QTableView()
+        self.tapeTable.horizontalHeader().setResizeMode(QHeaderView.ResizeToContents)
         self.tapeDir = QFileSystemModel()
         self.tapeDir.setRootPath(QDir.currentPath()+self.folder)
         self.tapeTable.setModel(self.tapeDir)
         self.tapeTable.setRootIndex(self.tapeDir.index(QDir.currentPath()+self.folder))
-        self.tapeTable.horizontalHeader().setResizeMode(QHeaderView.ResizeToContents)
+        self.tapeTable.setAlternatingRowColors(True)
         self.bInsertPose = QPushButton("Insert current pose below")
         self.bCopyPose = QPushButton("Copy pose")
         self.bPastePose = QPushButton("Paste pose")
@@ -359,6 +361,7 @@ class CSVRecorder(Block.Block,QWidget):
             
             self.poseList.emit(SIGNAL("layoutAboutToBeChanged()"))
             self.poseList.poseList.insert(i+1,pose)
+            
             self.poseList.emit(SIGNAL("layoutChanged()"))
             self.updateObjective(i+1)
             

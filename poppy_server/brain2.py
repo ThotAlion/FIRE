@@ -57,7 +57,7 @@ class listener(Thread):
 
 if __name__ == "__main__":
     ip = '0.0.0.0'
-    json_name = "full_poppy.json"
+    json_name = "legs.json"
     robot = pypot.robot.from_json(json_name)
     task = listener(ip,'8080')
     task.start()
