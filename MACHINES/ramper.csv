@@ -1,6 +1,0 @@
-Name;CSV;SPACE;finished;droite;gauche;buttonA
-allonge;TAPES_CSV/_mou.csv;;allonge;allonge;allonge;coude
-coude;TAPES_CSV/ventre_2_coude.csv;;coude;ramperD;ramperG;recouche
-ramperD;TAPES_CSV/ramper_D2.csv;;coude;ramperD;ramperG;ramperD
-ramperG;TAPES_CSV/ramper_G2.csv;;coude;ramperD;ramperG;ramperG
-recouche;TAPES_CSV/coude_2_ventre.csv;;allonge;recouche;recouche;recouche

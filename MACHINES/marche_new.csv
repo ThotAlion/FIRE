@@ -1,9 +1,0 @@
-Name;CSVPath;SPACE;finished;buttonA;buttonB;avant;gauche;droite
-allonge;TAPES_CSV/_mou.csv;;allonge;allonge_ventre;releve;allonge;allonge;allonge
-allonge_ventre;TAPES_CSV/dos_2_ventre.csv;;releve;allonge_ventre;allonge_ventre;allonge_ventre;allonge_ventre;allonge_ventre
-releve;TAPES_CSV/ventre_2_quatre.csv;;statique;releve;releve;releve;releve;releve
-avance;TAPES_CSV/quatre_pattes_avance.csv;;statique;avance;avance;avance;avance;avance
-tournerD;TAPES_CSV/quatre_pattes_droite.csv;;statique;statique;tournerD;avance;tournerG;tournerD
-tournerG;TAPES_CSV/quatre_pattes_gauche.csv;;statique;statique;tournerG;avance;tournerG;tournerD
-statique;TAPES_CSV/_quatre_pattes.csv;;statique;statique;recouche;avance;tournerG;tournerD
-recouche;TAPES_CSV/quatre_2_ventre.csv;;allonge;recouche;recouche;recouche;recouche;recouche
