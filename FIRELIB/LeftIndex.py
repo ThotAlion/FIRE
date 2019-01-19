@@ -29,7 +29,7 @@ class LeftIndex(Block.Block):
         frame = self.leap.frame()
         for fin in frame.fingers:
             if fin.hand.is_left and fin.type == fin.TYPE_INDEX:
-                self.outputs["index pitch"].setValue(fin.direction.pitch*180.0/pi,f)
+                self.outputs["index pitch"].setValue(0.5*fin.direction.pitch*180.0/pi,f)
                 self.outputs["index yaw"].setValue(fin.direction.yaw*180.0/pi,f)
         return f
            
