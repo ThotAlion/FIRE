@@ -1,0 +1,5 @@
+Name;Duration;r_shoulder_y;r_shoulder_x;r_arm_z;r_elbow_y;r_wrist_z;r_wrist_x;head_z;head_y;l_hip_x;l_hip_z;l_hip_y;l_knee_y;l_ankle_y;l_shoulder_y;l_shoulder_x;l_arm_z;l_elbow_y;l_wrist_z;l_wrist_x;bust_y;bust_x;r_hip_x;r_hip_z;r_hip_y;r_knee_y;r_ankle_y;abs_x;abs_y;abs_z
+k pose ventre;5;S-105.01;S51.36;S80.66;S-65.63;M;M;S-9.24;S10.06;S8.75;S-6.55;S10.68;S57.01;S77.49;S-122.24;S-66.75;S-96.75;S-49.98;M;M;S28.44;S-10.07;S-13.67;S3.12;S10.59;S52.18;S70.02;S7.52;S26.95;S0.04
+k meilleur;5.0;S-113.63;S82.51;S90.51;S-67.82;S-28.89;S-30.06;S-10.41;S-17.8;S6.99;S8.31;S-73.1;S89.45;S78.74;S-127.69;S-89.63;S-95.25;S-67.65;S83.43;S41.79;S20.97;S-8.66;S-20.88;S-12.26;S-70.64;S87.6;S68.77;S0.13;S49.27;S-6.29
+k ouvre;5;S-27.12;S-22.11;S104.04;S-35.47;M;M;P;P;P;P;P;P;P;S-35.03;S29.76;S-101.58;S-35.74;M;M;P;P;P;P;P;P;P;P;P;S0.0
+k long;5;S19.65;S60.35;S86.11;S-32.22;M;M;P;P;P;P;P;P;P;S26.77;S-61.76;S-63.69;S-26.95;M;M;P;P;P;P;P;P;P;P;P;S0.0

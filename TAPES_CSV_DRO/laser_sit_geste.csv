@@ -1,0 +1,7 @@
+Name;Duration;r_shoulder_y;r_shoulder_x;r_arm_z;r_elbow_y;r_wrist_z;r_wrist_x;head_z;head_y;l_hip_x;l_hip_z;l_hip_y;l_knee_y;l_ankle_y;l_shoulder_y;l_shoulder_x;l_arm_z;l_elbow_y;l_wrist_z;l_wrist_x;bust_y;bust_x;r_hip_x;r_hip_z;r_hip_y;r_knee_y;r_ankle_y;abs_x;abs_y;abs_z
+ksit;1;S-28.0;S97.69;S-6.11;S-17.1;S71.7;S31.23;S-8.65;S-11.06;S23.78;S2.77;S5.0;PM;PM;S-33.63;S-96.46;S3.12;S-20.0;S-75.81;S-67.3;S15.16;S4.88;S-18.95;S5.23;S5.0;PM;PM;S0.0;S43.0;S-1.1
+anticipation;1;S-34.07;S93.56;S-6.11;S-21.05;S73.75;S29.18;S-4.55;S2.73;S19.03;S5.32;S9.1;PM;PM;S-40.92;S-93.74;S2.95;S-20.0;S-74.63;S-61.14;S19.3;S2.77;S-20.62;S6.64;S7.34;PM;PM;S-0.13;S47.6;S2.33
+tendu coude;1;S-34.07;S93.56;S-6.11;S-21.05;S73.75;S29.18;S-4.55;S2.73;S19.03;S5.32;S9.1;PM;PM;S-40.92;S-93.74;S2.95;S-10.0;S-74.63;S-61.14;S19.3;S2.77;S-20.62;S6.64;S7.34;PM;PM;S-0.13;S47.6;S2.33
+k main en haut;3;S-33.54;S89.71;S-5.14;S-17.45;S0.0;S0.0;S0.15;S0.38;S19.91;S2.95;S14.29;PM;PM;S-148.09;S-62.73;S-1.36;S-37.32;S-74.34;S-7.77;S12.53;S11.12;S-20.7;S2.77;S12.7;PM;PM;S0.04;S47.52;S-3.12
+pause;3;S-33.54;S89.71;S-5.14;S-17.45;S0.0;S0.0;S0.15;S0.38;S19.91;S2.95;S14.29;PM;PM;S-148.09;S-62.73;S-1.36;S-37.32;S-74.34;S-7.77;S12.53;S11.12;S-20.7;S2.77;S12.7;PM;PM;S0.04;S47.52;S-3.12
+ksit;3;S-28.0;S97.69;S-6.11;S-17.1;S71.7;S31.23;S-8.65;S-11.06;S23.78;S2.77;S5.0;PM;PM;S-33.63;S-96.46;S3.12;S-6.11;S-75.81;S-67.3;S15.16;S4.88;S-18.95;S5.23;S5.0;PM;PM;S0.0;S43.0;S-1.1
