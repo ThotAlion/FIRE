@@ -187,11 +187,11 @@ class clientThread(Thread):
                 send = 1
             else:
                 send = 0
-            while Tools.getTime()-t0<0.02:
+            while Tools.getTime()-t0<0.05:
                 a=1
             
     def close(self):
         self._active = False
-        time.sleep(0.5)
+        time.sleep(0.01)
         self._socket.close()
         
