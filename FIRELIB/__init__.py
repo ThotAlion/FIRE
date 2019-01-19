@@ -6,10 +6,7 @@ import CSVRecorder
 import FiniteStateMachine
 import Recorder
 import Engine
-try:
-    import LeftIndex
-except e:
-    print "No Leap Motion available."
+import LeftIndex
 import xboxPad
 import Wires
 import Mirror
