@@ -1,0 +1,5 @@
+Name;Duration;r_shoulder_y;r_shoulder_x;r_arm_z;r_elbow_y;r_wrist_z;r_wrist_x;head_z;head_y;l_hip_x;l_hip_z;l_hip_y;l_knee_y;l_ankle_y;l_shoulder_y;l_shoulder_x;l_arm_z;l_elbow_y;l_wrist_z;l_wrist_x;bust_y;bust_x;r_hip_x;r_hip_z;r_hip_y;r_knee_y;r_ankle_y;abs_x;abs_y;abs_z
+k left devant;2.0;S-90;S90.0;S30.0;S-20.0;S0.0;S0.0;S0.0;S0.0;S10.0;S0.0;S-15.0;S0.0;S10.0;S-90;S-90.0;S-30.0;S-20.0;S0.0;S0.0;S-20;S0.0;S-10.0;S0.0;S15.0;S0.0;S-10.0;S0.0;S0.0;S0.0
+k mid;2.0;S-90;S90.0;S30.0;S-20.0;S0.0;S0.0;S0.0;S0.0;L20.0;L0.0;L0.0;L0.0;L0.0;S-90;S-90.0;S-30.0;S-20.0;S0.0;S0.0;S-20;S0.0;L0.0;L0.0;L-40.0;L70.0;L-20.0;S10.0;S0.0;S0.0
+k right devant;2.0;S-90;S90.0;S30.0;S-20.0;S0.0;S0.0;S0.0;S0.0;S10.0;S0.0;S15.0;S0.0;S-10.0;S-90;S-90.0;S-30.0;S-20.0;S0.0;S0.0;S-20;S0.0;S-10.0;S0.0;S-15.0;S0.0;S10.0;S0.0;S0.0;S0.0
+k mid;2.0;S-90;S90.0;S30.0;S-20.0;S0.0;S0.0;S0.0;S0.0;L0.0;L0.0;L-40.0;L70.0;L-20.0;S-90;S-90.0;S-30.0;S-20.0;S0.0;S0.0;S-20;S0.0;L-20.0;L0.0;L0.0;L0.0;L0.0;S-10.0;S0.0;S0.0

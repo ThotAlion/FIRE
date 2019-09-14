@@ -29,7 +29,7 @@ interfaces = FIRELIB.Group.Group()
 interfaces.inputs["activate"].connectedTo = "1"
 interfaces.children['Poppy'] = FIRELIB.Robot.Robot(members,"10.0.0.109","8080")
 interfaces.children['Poppy'].inputs["activate"].connectedTo = "1"
-interfaces.children['Mommy'] = FIRELIB.Robot.Robot(members,"10.0.0.119","8080")
+interfaces.children['Mommy'] = FIRELIB.Robot.Robot(members,"10.0.0.114","8080")
 interfaces.children['Mommy'].inputs["activate"].connectedTo = "1"
 interfaces.children['Index'] = FIRELIB.LeftIndex.LeftIndex()
 interfaces.children['Index'].inputs["activate"].connectedTo = "1"
@@ -47,10 +47,10 @@ systems.inputs["activate"].connectedTo = "1"
 systems.children['Ratelim'] = FIRELIB.Ratelim.Ratelim(2,100)
 systems.children['Ratelim'].inputs["activate"].connectedTo = "1"
 
-systems.children['PCSVRecorder'] = FIRELIB.CSVRecorder.CSVRecorder(members,folder = '/TAPES_CSV_MANCHESTER/')
+systems.children['PCSVRecorder'] = FIRELIB.CSVRecorder.CSVRecorder(members,folder = '/TAPES_CSV_LESSON2/')
 systems.children['PCSVRecorder'].inputs["activate"].connectedTo = "1"
 
-systems.children['MCSVRecorder'] = FIRELIB.CSVRecorder.CSVRecorder(members,folder = '/TAPES_CSV_MANCHESTER/')
+systems.children['MCSVRecorder'] = FIRELIB.CSVRecorder.CSVRecorder(members,folder = '/TAPES_CSV_LESSON2/')
 systems.children['MCSVRecorder'].inputs["activate"].connectedTo = " MommyIndependant "
 
 systems.children['MommyMirror'] = FIRELIB.Mirror.Mirror()
