@@ -8,7 +8,7 @@ import Tools
 class Engine(QThread):
     """ This class is the engine of FIRE application during its execution."""
     
-    def __init__(self,interfaces,systems,channels,dt=0.02):
+    def __init__(self,interfaces,systems,channels,dt=0.05):
         QThread.__init__(self)
         self.Interfaces = interfaces
         self.Systems = systems
