@@ -1,7 +1,6 @@
 import zmq
 import pypot.robot
 from threading import Thread
-import netifaces
 import json
 import time
 import numpy as np
@@ -57,7 +56,7 @@ class listener(Thread):
 
 if __name__ == "__main__":
     ip = '0.0.0.0'
-    json_name = "legs.json"
+    json_name = "full_mommy.json"
     robot = pypot.robot.from_json(json_name)
     task = listener(ip,'8080')
     task.start()
