@@ -1,17 +1,17 @@
 {
 	"controllers": {
 		"upper_body": {
-			"port": "auto",
+			"port": "COM10",
 			"sync_read": true,
 			"attached_motors": ["l_arm", "r_arm","head","bust","abs"]
 		},
 		"lower_body": {
-			"port": "auto",
+			"port": "COM7",
 			"sync_read": true,
 			"attached_motors": ["l_leg","r_leg"]
 		},
         "hands": {
-			"port": "auto",
+			"port": "COM8",
 			"sync_read": true,
             "protocol":2,
 			"attached_motors": ["l_hand","r_hand"]
@@ -144,7 +144,7 @@
 		"l_ankle_y": {
 			"id": 23,
 			"type": "AX-18",
-			"orientation": "direct",
+			"orientation": "indirect",
 			"offset": 0,
 			"angle_limit": [-80,80]
 		},
@@ -178,8 +178,8 @@
 		},
 		"r_ankle_y": {
 			"id": 18,
-			"type": "AX-18",
-			"orientation": "indirect",
+			"type": "AX-12",
+			"orientation": "direct",
 			"offset": 0,
 			"angle_limit": [-90,90]
 		},
